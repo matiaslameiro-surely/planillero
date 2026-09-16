@@ -29,10 +29,12 @@
       "ts": "2026-09-16T13:28:08.897Z"
     },
     "cerrar": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-16T13:31:53.816Z"
     },
     "cerrada": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-16T13:31:53.872Z"
     }
   },
   "commits": {
@@ -48,9 +50,11 @@
       "bloqueantes": 0
     }
   ],
-  "pr": {},
+  "pr": {
+    "frontend": "https://github.com/matiaslameiro-surely/planillero-frontend/pull/1"
+  },
   "jira": {
-    "transicionadoA": null,
+    "transicionadoA": "10006",
     "creadoPorHarness": true
   }
 }
