@@ -136,6 +136,27 @@ En los dos casos el artefacto final es el mismo archivo con el mismo formato.
   hallazgos como entrada, e incrementá `iteracion`.
 - `medium` y `low` → no bloquean: van al cuerpo del PR para la revisión humana.
 
+**4.4 Hallazgos falsos**
+
+Un revisor se puede equivocar, y hay un modo de error que se repite: **corre sin acceso a red**, así
+que no puede comprobar si una versión, un paquete o una API existen, y tiende a reportar como
+inexistente lo que simplemente no conoce por ser posterior a su entrenamiento. Los hallazgos sobre
+disponibilidad de dependencias hay que verificarlos siempre antes de actuar.
+
+No aceptes ni descartes un hallazgo bloqueante por criterio propio: **reproducilo**. Corré el
+escenario concreto que el hallazgo describe, con las condiciones que plantea.
+
+- **Se reproduce** → es real. Volvé a la fase 3.
+- **No se reproduce** → escribí `05-revision-<repo>-<n>-refutacion.md` al lado de la revisión, con el
+  hallazgo citado, el comando exacto y su salida, y la causa probable del error. Recién entonces
+  seguís.
+
+Un hallazgo refutado **no se borra ni se edita**: la revisión original queda como está y la refutación
+va al lado. El cuerpo del PR menciona que hubo uno, para que la revisión humana pueda discrepar.
+
+Refutar tiene que costar más que obedecer: si no lográs reproducir el escenario pero tampoco podés
+demostrar que no ocurre, tratá el hallazgo como real.
+
 > **Tope duro:** si `iteracion` supera `flujo.maxIteracionesVerificacion`, **pará y preguntá**. Un
 > problema que no se resuelve en dos vueltas no se resuelve en diez: consume tokens hasta que alguien
 > mire la pantalla.

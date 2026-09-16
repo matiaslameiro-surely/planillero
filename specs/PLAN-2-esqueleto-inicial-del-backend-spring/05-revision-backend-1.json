@@ -1,0 +1,19 @@
+{
+  "verdict": "needs-attention",
+  "summary": "El esqueleto implementa el endpoint y sus pruebas, pero el proyecto no puede construirse desde un clon limpio con las versiones declaradas. Esto incumple el gate principal de Maven.",
+  "findings": [
+    {
+      "severity": "high",
+      "title": "El POM referencia una versión inexistente de Spring Boot",
+      "body": "La versión `4.1.1` de `spring-boot-starter-parent` no está disponible en Maven Central. Al ejecutar `./mvnw -B test` desde un clon limpio, Maven falla al resolver el POM padre antes de compilar o ejecutar los tests, por lo que tampoco puede verificarse `GET /salud`.",
+      "file": "pom.xml",
+      "line_start": 7,
+      "line_end": 7,
+      "confidence": 0.97,
+      "recommendation": "Usar una versión de Spring Boot publicada y compatible con Java 21, y comprobar `./mvnw -B test` con la caché local de Maven vacía."
+    }
+  ],
+  "next_steps": [
+    "Reemplazar la versión del parent por una versión publicada de Spring Boot y ejecutar nuevamente `./mvnw -B test` desde un entorno limpio."
+  ]
+}

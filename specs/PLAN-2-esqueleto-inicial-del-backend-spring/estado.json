@@ -6,7 +6,7 @@
   "alcance": [
     "backend"
   ],
-  "fase": "plan",
+  "fase": "cerrar",
   "fases": {
     "preparacion": {
       "estado": "ok",
@@ -17,13 +17,16 @@
       "ts": "2026-09-16T12:25:50.953Z"
     },
     "plan": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-16T12:48:30.368Z"
     },
     "implementar": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-16T12:52:40.720Z"
     },
     "verificar": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-16T12:54:55.884Z"
     },
     "cerrar": {
       "estado": "pendiente"
@@ -32,8 +35,21 @@
       "estado": "pendiente"
     }
   },
-  "commits": {},
-  "revisiones": [],
+  "commits": {
+    "backend": "84639a4"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backend",
+      "motor": "codex",
+      "motivo": null,
+      "verdict": "needs-attention",
+      "bloqueantes": 1,
+      "refutados": 1,
+      "nota": "El unico hallazgo bloqueante no se reprodujo: ver 05-revision-backend-1-refutacion.md"
+    }
+  ],
   "pr": {},
   "jira": {
     "transicionadoA": "10005",

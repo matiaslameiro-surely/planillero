@@ -103,6 +103,18 @@ function construirCuerpo({ cfg, estado, carpeta, nombreRepo, spec, dependeDe }) 
       lineas.push('', '### Hallazgos no bloqueantes', '');
       noBloqueantes.forEach((f) => lineas.push(`- **${f.severity}** · ${f.title} — \`${f.file}:${f.line_start}\``));
     }
+
+    // Un hallazgo refutado se declara en el PR: la revisión humana tiene que poder discrepar.
+    const refutaciones = readdirSync(carpeta).filter((n) => /-refutacion\.md$/.test(n));
+    if (refutaciones.length) {
+      lineas.push('', '### Hallazgos refutados', '');
+      lineas.push(
+        `La revisión marcó ${refutaciones.length} hallazgo(s) que no se reprodujeron. ` +
+        `La evidencia está en la carpeta de la spec:`
+      );
+      refutaciones.forEach((n) => lineas.push(`- \`${path.relative(RAIZ, path.join(carpeta, n)).replace(/\\/g, '/')}\``));
+      lineas.push('', 'Si no estás de acuerdo con alguna refutación, decilo en el PR.');
+    }
     lineas.push('');
   }
 
