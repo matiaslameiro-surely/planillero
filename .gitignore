@@ -2,6 +2,7 @@
 # Se clonan acá adentro pero son repos independientes. Ver README.md
 /backend/
 /frontend/
+/backoffice/
 
 # ─── Configuración local de cada máquina ─────────────────────────────
 # Todo lo *.local.* es tuyo y no se comparte: rutas, JAVA_HOME,

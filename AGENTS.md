@@ -13,14 +13,18 @@ El **harness** de Planillero: el andamiaje que toma tareas del Jira del proyecto
 de **desarrollo guiado por especificación (SDD)** y las cierra con un PR verificado.
 
 Acá **no vive código de producto**. Viven el protocolo, los scripts y las especificaciones. El código
-está en dos repos separados que se clonan adentro de esta carpeta:
+está en tres repos separados que se clonan adentro de esta carpeta:
 
-| Carpeta | Repo | Stack |
-|---|---|---|
-| `backend/` | `matiaslameiro-surely/planillero-backend` | Java + Spring Boot |
-| `frontend/` | `matiaslameiro-surely/planillero-frontend` | React Native + Expo |
+| Carpeta | Repo | Stack | Qué es |
+|---|---|---|---|
+| `backend/` | `…/planillero-backend` | Java + Spring Boot | La API. **Define el contrato** que consumen los otros dos |
+| `frontend/` | `…/planillero-frontend` | React Native + Expo | La aplicación móvil |
+| `backoffice/` | `…/planillero-backoffice` | Angular | El backoffice web |
 
-Las dos están en `.gitignore`: son repos independientes con su propio historial.
+Las tres están en `.gitignore`: son repos independientes con su propio historial.
+
+El alcance de una tarea puede ser cualquier combinación de los tres. Los repos y su orden salen de
+`workspace.json`, así que sumar uno nuevo no requiere tocar ningún script.
 
 ## Regla de oro: agnóstico de herramienta
 
@@ -92,8 +96,13 @@ está en el owner de la cuenta. Son infraestructura, no una mención en el produ
 clientes, legajos, sueldos ni registros reales, ni siquiera "de ejemplo". Si una spec llega con datos
 que parecen reales, eso es una pregunta abierta, no un detalle a copiar.
 
-**Ramas** — `PLAN-<n>-<slug>`, por ejemplo `PLAN-12-carga-de-planilla`. En una tarea full-stack, **la
-misma rama con el mismo nombre** en `backend/` y `frontend/`.
+**Ramas** — `PLAN-<n>-<slug>`, por ejemplo `PLAN-12-carga-de-planilla`. En una tarea que toca varios
+repos, **la misma rama con el mismo nombre en todos**.
+
+**Orden entre repos** — el backend va **siempre primero** porque es el que emite
+`03-contrato-api.md`, y `frontend` y `backoffice` lo consumen. Los dos clientes son independientes
+entre sí: ninguno espera al otro. Un cliente **nunca** inventa un endpoint que el contrato no
+declara; si necesita algo que no está, se vuelve al backend.
 
 **Commits** — `PLAN-<n>: <resumen en español>`. El prefijo hace que Jira enlace los commits solo.
 

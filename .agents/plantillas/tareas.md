@@ -2,21 +2,27 @@
 
 > Plantilla de la fase 2. Borrá estas citas al completarla.
 >
-> Checklist en **orden de dependencia**, no de importancia. Cada ítem con prefijo de repo.
-> Todo lo de `[backend]` va antes que lo de `[frontend]`: el contrato de API se define en el
-> backend y el frontend lo consume.
+> Checklist en **orden de dependencia**, no de importancia. Cada ítem con prefijo de repo
+> (`[backend]`, `[frontend]`, `[backoffice]`). Todo lo de `[backend]` va antes que lo de los
+> clientes: el contrato de API se define en el backend y ellos lo consumen. Entre clientes no hay
+> orden: son independientes.
 >
 > Marcá `[x]` a medida que se completan: es lo que permite retomar la tarea sin releer el diff.
 
 ## backend
 
 - [ ] `[backend]`
-- [ ] `[backend]` Emitir `03-contrato-api.md` *(obligatorio si el alcance es `ambos`)*
+- [ ] `[backend]` Emitir `03-contrato-api.md` *(obligatorio si el alcance incluye algún cliente)*
 
-## frontend
+## frontend *(app móvil)*
 
 - [ ] `[frontend]` Leer `03-contrato-api.md` antes de empezar
 - [ ] `[frontend]`
+
+## backoffice *(web)*
+
+- [ ] `[backoffice]` Leer `03-contrato-api.md` antes de empezar
+- [ ] `[backoffice]`
 
 ## Verificación
 

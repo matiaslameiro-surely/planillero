@@ -93,20 +93,25 @@ nuevo. Después escribí:
 **Roles:** Implementador backend y, después, Implementador frontend.
 
 1. **Crear las ramas**: `node .agents/scripts/ramas.mjs crear --tarea PLAN-12`. Crea
-   `PLAN-<n>-<slug>` desde la rama base en **cada repo del alcance**, con el mismo nombre en los dos.
+   `PLAN-<n>-<slug>` desde la rama base en **cada repo del alcance**, con el mismo nombre en todos.
 
-2. **Backend primero, nunca en paralelo.** Entradas del rol: `01-spec.md`, `02-plan.md`, su parte de
-   `04-tareas.md`. **Salida obligatoria si el alcance es `ambos`:** `03-contrato-api.md` con endpoints,
-   verbos, request y response de ejemplo, y códigos de error.
+2. **El backend primero, nunca en paralelo.** Entradas del rol: `01-spec.md`, `02-plan.md`, su parte
+   de `04-tareas.md`. **Salida obligatoria si el alcance incluye algún cliente:** `03-contrato-api.md`
+   con endpoints, verbos, request y response de ejemplo, y códigos de error.
 
-3. **Frontend después**, con `03-contrato-api.md` como entrada obligatoria. Este orden no es preferencia:
-   si el frontend va primero o en paralelo, inventa endpoints que después no existen, y el problema
-   aparece recién en integración.
+3. **Los clientes después** (`frontend`, `backoffice`), con `03-contrato-api.md` como entrada
+   obligatoria. Este orden no es preferencia: si un cliente va primero o en paralelo, inventa endpoints
+   que después no existen, y el problema aparece recién en integración.
+
+   **Los clientes son independientes entre sí**: ninguno espera al otro y el orden entre ellos no
+   importa. Lo que no puede pasar es que uno defina algo que el contrato no declara — si necesita algo
+   que no está, se vuelve al backend y se actualiza el contrato para todos.
 
 4. Commits con el formato `PLAN-<n>: <resumen>`. Registrá el SHA de cada uno en `estado.json`.
 
-Si el alcance es de un solo lado, se saltea el rol del otro. No hay caso especial que manejar: se itera
-sobre `estado.alcance`.
+El orden sale de `repos.<x>.orden` en `workspace.json`, y el repo que emite el contrato está marcado
+con `produceContratoApi`. Si el alcance es de un solo repo, se saltean los demás roles: no hay caso
+especial que manejar, se itera sobre `estado.alcance`.
 
 ---
 

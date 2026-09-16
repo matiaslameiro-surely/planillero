@@ -9,7 +9,7 @@
 
 import { existsSync, readdirSync, mkdirSync } from 'node:fs';
 import path from 'node:path';
-import { RAIZ, leerJson, escribirJson, slugificar, parsearArgs, emitir } from './lib/config.mjs';
+import { RAIZ, cargarConfig, leerJson, escribirJson, slugificar, parsearArgs, emitir } from './lib/config.mjs';
 
 const DIR_SPECS = path.join(RAIZ, 'specs');
 const FASES = ['preparacion', 'spec', 'plan', 'implementar', 'verificar', 'cerrar', 'cerrada'];
@@ -74,10 +74,14 @@ try {
     case 'crear': {
       const issue = (args.issue || '').toUpperCase();
       if (!/^[A-Z]+-\d+$/.test(issue)) throw new Error('--issue tiene que ser una clave tipo PLAN-12');
-      const alcance = String(args.alcance || 'backend,frontend')
+      // Los repos válidos salen de workspace.json: agregar uno nuevo no debe requerir tocar este script.
+      const reposValidos = Object.keys(cargarConfig().repos || {});
+      const alcance = String(args.alcance || reposValidos.join(','))
         .split(',').map((s) => s.trim()).filter(Boolean);
       for (const a of alcance) {
-        if (!['backend', 'frontend'].includes(a)) throw new Error(`Alcance inválido: "${a}"`);
+        if (!reposValidos.includes(a)) {
+          throw new Error(`Alcance inválido: "${a}". Repos disponibles: ${reposValidos.join(', ')}`);
+        }
       }
 
       const yaExiste = carpetaDeTarea(issue);

@@ -10,10 +10,10 @@
 
 ## Alcance
 
-**Repos que toca:** `backend` · `frontend` · `ambos`
+**Repos que toca:** cualquier combinación de `backend`, `frontend` (móvil) y `backoffice` (web)
 
-> Elegí exactamente uno. Determina en qué repos se crean ramas y sobre cuáles se itera
-> en el resto del flujo. Copialo también a `estado.json`.
+> Listá los que toque. Determina en qué repos se crean ramas y sobre cuáles se itera en el resto
+> del flujo. Copialo también a `estado.json`.
 
 ## Criterios de aceptación
 

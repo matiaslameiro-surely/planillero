@@ -12,9 +12,9 @@
     "slug": { "type": "string", "pattern": "^[a-z0-9-]+$" },
     "rama": { "type": "string", "minLength": 1 },
     "alcance": {
-      "description": "Qué repos toca la tarea. Sale de 01-spec.md y determina sobre qué se itera en el resto del flujo.",
+      "description": "Qué repos toca la tarea. Sale de 01-spec.md y determina sobre qué se itera en el resto del flujo. Los valores válidos son las claves de repos en workspace.json.",
       "type": "array",
-      "items": { "type": "string", "enum": ["backend", "frontend"] },
+      "items": { "type": "string", "enum": ["backend", "frontend", "backoffice"] },
       "minItems": 1,
       "uniqueItems": true
     },

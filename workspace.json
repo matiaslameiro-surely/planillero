@@ -27,12 +27,20 @@
     "repoHarness": "planillero"
   },
 
+  "$orden": [
+    "El campo 'orden' define en qué secuencia se implementan los repos de una tarea.",
+    "El backend va primero porque define el contrato de API; los clientes lo consumen.",
+    "Varios repos pueden compartir número: son independientes entre sí."
+  ],
+
   "repos": {
     "backend": {
       "ruta": "backend",
       "url": "https://github.com/matiaslameiro-surely/planillero-backend.git",
       "ramaBase": "main",
       "tipo": "spring-boot",
+      "orden": 1,
+      "produceContratoApi": true,
       "javaVersion": 21,
       "verificacion": {
         "maven": [
@@ -50,11 +58,28 @@
       "url": "https://github.com/matiaslameiro-surely/planillero-frontend.git",
       "ramaBase": "main",
       "tipo": "expo",
+      "orden": 2,
+      "descripcion": "Aplicación móvil (React Native + Expo)",
       "verificacion": {
         "npm": [
           { "nombre": "lint", "cmd": "npm run lint" },
           { "nombre": "tipos", "cmd": "npx tsc --noEmit" },
           { "nombre": "tests", "cmd": "npm test -- --watchAll=false", "opcional": true }
+        ]
+      }
+    },
+    "backoffice": {
+      "ruta": "backoffice",
+      "url": "https://github.com/matiaslameiro-surely/planillero-backoffice.git",
+      "ramaBase": "main",
+      "tipo": "angular",
+      "orden": 2,
+      "descripcion": "Backoffice web (Angular)",
+      "verificacion": {
+        "npm": [
+          { "nombre": "lint", "cmd": "npm run lint" },
+          { "nombre": "tipos", "cmd": "npx tsc -p tsconfig.app.json --noEmit" },
+          { "nombre": "tests", "cmd": "npm test -- --watch=false --browsers=ChromeHeadless", "opcional": true }
         ]
       }
     }

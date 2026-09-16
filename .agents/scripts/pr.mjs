@@ -170,13 +170,17 @@ try {
     );
   }
 
-  // Backend primero: su PR es el que el del frontend referencia.
-  const orden = ['backend', 'frontend'].filter((r) => (estado.alcance || []).includes(r));
+  // El orden sale de workspace.json, no de una lista fija: sumar un repo no debe tocar este script.
+  // El que produce el contrato de API va primero, y su PR es el que referencian los demás.
+  const orden = [...(estado.alcance || [])].sort(
+    (a, b) => (cfg.repos[a]?.orden ?? 99) - (cfg.repos[b]?.orden ?? 99)
+  );
+  const repoDelContrato = orden.find((r) => cfg.repos[r]?.produceContratoApi);
   const dirTmp = path.join(carpeta, '.tmp');
   mkdirSync(dirTmp, { recursive: true });
 
   const resultados = [];
-  let urlBackend = null;
+  let urlContrato = null;
 
   for (const nombreRepo of orden) {
     const repo = cfg.repos[nombreRepo];
@@ -186,7 +190,8 @@ try {
       continue;
     }
 
-    const dependeDe = nombreRepo === 'frontend' ? urlBackend : null;
+    // Todo repo que consume el contrato depende del que lo produce, no sólo uno en particular.
+    const dependeDe = nombreRepo !== repoDelContrato ? urlContrato : null;
     const cuerpo = construirCuerpo({ cfg, estado, carpeta, nombreRepo, spec, dependeDe });
     const archivoCuerpo = path.join(dirTmp, `pr-${nombreRepo}.md`);
     writeFileSync(archivoCuerpo, cuerpo, 'utf8');
@@ -197,27 +202,28 @@ try {
       resultados.push({ repo: nombreRepo, ok: true, simulado: true, repoGh, titulo,
         cuerpo: path.relative(RAIZ, archivoCuerpo) });
       // Para que el enlace entre PRs se pueda verificar sin crear nada de verdad.
-      if (nombreRepo === 'backend') urlBackend = `https://github.com/${repoGh}/pull/<simulado>`;
+      if (nombreRepo === repoDelContrato) urlContrato = `https://github.com/${repoGh}/pull/<simulado>`;
       continue;
     }
 
     const r = crearPr({ gh, repoGh, base: repo.ramaBase, rama: estado.rama, titulo,
       cuerpoArchivo: archivoCuerpo });
     resultados.push({ repo: nombreRepo, ...r, repoGh, titulo });
-    if (nombreRepo === 'backend' && r.ok) urlBackend = r.url;
+    if (nombreRepo === repoDelContrato && r.ok) urlContrato = r.url;
   }
 
-  // El enlace queda en los dos sentidos: el del backend también apunta al del frontend.
-  const prFrontend = resultados.find((r) => r.repo === 'frontend' && r.ok && r.url);
-  if (!args.simular && urlBackend && prFrontend) {
-    const repoGhBackend = resultados.find((r) => r.repo === 'backend').repoGh;
-    const nroBackend = urlBackend.match(/\/pull\/(\d+)/)?.[1];
-    if (nroBackend) {
-      const archivo = path.join(dirTmp, 'pr-backend.md');
+  // El enlace queda en los dos sentidos: el PR del contrato lista a todos los que dependen de él.
+  const dependientes = resultados.filter((r) => r.repo !== repoDelContrato && r.ok && r.url);
+  if (!args.simular && urlContrato && dependientes.length) {
+    const prContrato = resultados.find((r) => r.repo === repoDelContrato);
+    const nroContrato = urlContrato.match(/\/pull\/(\d+)/)?.[1];
+    if (nroContrato) {
+      const archivo = path.join(dirTmp, `pr-${repoDelContrato}.md`);
+      const lista = dependientes.map((d) => `- ${d.url} (${d.repo})`).join('\n');
       const cuerpo = readFileSync(archivo, 'utf8') +
-        `\n---\n\n**PR relacionado:** ${prFrontend.url} (frontend). Mergear este primero.\n`;
+        `\n---\n\n**PRs relacionados**, que dependen de este y hay que mergear después:\n\n${lista}\n`;
       writeFileSync(archivo, cuerpo, 'utf8');
-      correr(gh, ['pr', 'edit', nroBackend, '--repo', repoGhBackend, '--body-file', archivo]);
+      correr(gh, ['pr', 'edit', nroContrato, '--repo', prContrato.repoGh, '--body-file', archivo]);
     }
   }
 

@@ -6,12 +6,13 @@ Entorno de desarrollo asistido por IA para Planillero. Toma tareas de Jira, las 
 **Funciona con cualquier asistente de IA.** No hay nada acá atado a una herramienta puntual: cada uno
 usa la que prefiera y configura la suya localmente.
 
-Acá no hay código de producto. El código vive en dos repos que se clonan adentro de esta carpeta:
+Acá no hay código de producto. El código vive en tres repos que se clonan adentro de esta carpeta:
 
-| Carpeta | Repo | Stack |
-|---|---|---|
-| `backend/` | `planillero-backend` | Java + Spring Boot |
-| `frontend/` | `planillero-frontend` | React Native + Expo |
+| Carpeta | Repo | Stack | Qué es |
+|---|---|---|---|
+| `backend/` | `planillero-backend` | Java + Spring Boot | La API |
+| `frontend/` | `planillero-frontend` | React Native + Expo | App móvil |
+| `backoffice/` | `planillero-backoffice` | Angular | Backoffice web |
 
 ## Puesta en marcha
 
@@ -23,6 +24,7 @@ Acá no hay código de producto. El código vive en dos repos que se clonan aden
 | **JDK 21** | Compilar y testear el backend | `winget install EclipseAdoptium.Temurin.21.JDK` |
 | **GitHub CLI** | Crear los PRs | `winget install GitHub.cli`, después `gh auth login` |
 | **MCP de Atlassian** | Leer y actualizar Jira | Se configura en tu herramienta de IA |
+| **Chrome** | Correr los tests del backoffice (Karma, en modo headless) | Ya lo tenés si usás Chrome |
 
 En macOS o Linux, reemplazá `winget` por `brew install temurin@21 gh`.
 
@@ -33,10 +35,11 @@ git clone https://github.com/matiaslameiro-surely/planillero.git
 cd planillero
 
 git clone https://github.com/matiaslameiro-surely/planillero-backend.git  backend
-git clone https://github.com/matiaslameiro-surely/planillero-frontend.git frontend
+git clone https://github.com/matiaslameiro-surely/planillero-frontend.git  frontend
+git clone https://github.com/matiaslameiro-surely/planillero-backoffice.git backoffice
 ```
 
-`backend/` y `frontend/` están en `.gitignore`: son repos independientes, con su propio historial.
+Las tres están en `.gitignore`: son repos independientes, con su propio historial.
 
 ### 3. Configurar tu máquina
 
@@ -92,7 +95,7 @@ La regla que mantiene esto usable por todo el equipo:
 |---|---|
 | `AGENTS.md`, `.agents/`, `workspace.json`, `specs/` | `workspace.local.json` |
 | | `.claude/`, `.codex/`, `.cursor/`, `.gemini/`… |
-| | `backend/`, `frontend/` |
+| | `backend/`, `frontend/`, `backoffice/` |
 
 Antes de agregar algo a `workspace.json`, preguntate si vale para todo el equipo. Si es una ruta de tu
 máquina o una preferencia tuya, va en el local. `init.mjs` avisa si se te filtró algo personal al
@@ -116,7 +119,7 @@ Todos hablan JSON por stdout y usan sólo la librería estándar de Node: no hay
 
 ### El guardia de push
 
-`init.mjs` instala en `backend/` y `frontend/` un hook `pre-push` de git que **bloquea el push directo
+`init.mjs` instala en cada repo de producto un hook `pre-push` de git que **bloquea el push directo
 a `main`**. Es un hook de git y no de una herramienta de IA, así que protege igual a todo el equipo y
 también cuando pusheás a mano. Si alguna vez necesitás saltearlo a propósito: `git push --no-verify`.
 

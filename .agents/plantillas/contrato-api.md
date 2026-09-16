@@ -1,10 +1,11 @@
 # Contrato de API — <CLAVE>
 
-> Plantilla de la fase 3. **Lo escribe el backend, lo consume el frontend.**
-> Es obligatorio cuando el alcance es `ambos`, y es lo que permite implementar el frontend
-> sin tener el backend levantado.
+> Plantilla de la fase 3. **Lo escribe el backend, lo consumen todos los clientes** (móvil y backoffice).
+> Es obligatorio cuando el alcance incluye algún cliente, y es lo que permite implementarlos sin
+> tener el backend levantado.
 >
-> Si el frontend necesita algo que no está acá, **no lo inventa**: vuelve al backend.
+> Si un cliente necesita algo que no está acá, **no lo inventa**: vuelve al backend, y el contrato se
+> actualiza para todos.
 
 ## Endpoints
 
@@ -40,13 +41,13 @@
 
 ## Modelos compartidos
 
-> Los tipos que el frontend necesita declarar de su lado. Nombres y tipos exactos,
+> Los tipos que los clientes necesitan declarar de su lado. Nombres y tipos exactos,
 > para que no haya que deducirlos del JSON de ejemplo.
 
 ```ts
 ```
 
-## Notas para el frontend
+## Notas para los clientes
 
 > Todo lo que no se ve en la firma: paginación, formato de fechas, zona horaria,
 > unidades, qué campos pueden venir nulos, límites de tamaño.

@@ -29,30 +29,35 @@ tiene que salir de esta fase con preguntas `BLOQUEANTE`, no con supuestos disfra
 
 ## Implementador backend
 
-**Fase 3.** Implementa la parte de `backend/`.
+**Fase 3.** Implementa la parte de `backend/`, el repo que **produce** el contrato de API.
 
 - **Entrada:** `01-spec.md`, `02-plan.md`, su parte de `04-tareas.md`.
-- **Salida:** código, commits y —si el alcance es `ambos`— **`03-contrato-api.md`**.
+- **Salida:** código, commits y —si el alcance incluye algún cliente— **`03-contrato-api.md`**.
 - **Necesita:** lectura y escritura sobre `backend/`, y poder correr los gates.
 
-**Corre siempre antes que el frontend.** El contrato de API que emite es lo que permite que el frontend
-se implemente sin tener el backend levantado.
+**Corre siempre antes que los clientes.** El contrato de API que emite es lo que les permite
+implementarse sin tener el backend levantado.
 
 **Por qué conviene aislarlo:** un build o un test fallido de Java vuelca cientos de líneas de stack trace
 que no le sirven a nadie más.
 
 ---
 
-## Implementador frontend
+## Implementador de un cliente
 
-**Fase 3.** Implementa la parte de `frontend/`.
+**Fase 3.** Implementa la parte de un repo que **consume** la API: `frontend/` (móvil) o
+`backoffice/` (web). Es el mismo rol en los dos casos; lo que cambia es el stack.
 
 - **Entrada:** `01-spec.md`, `02-plan.md`, su parte de `04-tareas.md` y **`03-contrato-api.md`**.
 - **Salida:** código y commits.
-- **Necesita:** lectura y escritura sobre `frontend/`, y poder correr los gates.
+- **Necesita:** lectura y escritura sobre su repo, y poder correr los gates.
+
+**Corre siempre después del backend**, y **es independiente de los otros clientes**: no espera a que
+el móvil o el backoffice terminen, ni asume nada sobre lo que hicieron.
 
 **No inventa endpoints.** Si necesita algo que el contrato no cubre, eso es un hallazgo: se vuelve al
-backend, no se improvisa un endpoint que no existe.
+backend y se actualiza el contrato **para todos los clientes**, no se improvisa un endpoint que no
+existe ni se parchea sólo de un lado.
 
 ---
 
@@ -62,7 +67,8 @@ backend, no se improvisa un endpoint que no existe.
 
 - **Entrada:** el diff de la rama (`git diff <ramaBase>...HEAD`) y `01-spec.md`. **Nada más.**
 - **Salida:** un JSON que cumple `.agents/schemas/revision.schema.json`, guardado en
-  `specs/<tarea>/05-revision-<n>.json`.
+  `specs/<tarea>/05-revision-<repo>-<n>.json`. Se revisa **un repo por vez**: el diff de cada uno se
+  evalúa por separado.
 - **Necesita:** lectura del código y de git.
 - **No debe tener:** permiso de escritura, ni el razonamiento de quien implementó.
 
