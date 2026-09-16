@@ -1,0 +1,39 @@
+{
+  "ok": true,
+  "tarea": "PLAN-4",
+  "ts": "2026-09-16T20:15:56.860Z",
+  "repos": [
+    {
+      "repo": "backoffice",
+      "ok": true,
+      "herramienta": "npm",
+      "pasos": [
+        {
+          "nombre": "lint",
+          "cmd": "npm run lint",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 2647,
+          "salida": "\n> planillero-backoffice@0.1.0 lint\n> ng lint --max-warnings=0\n\n\nLinting \"planillero-backoffice\"...\n\nAll files pass linting."
+        },
+        {
+          "nombre": "tipos",
+          "cmd": "npm run build",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 2801,
+          "salida": "\n> planillero-backoffice@0.1.0 build\n> ng build\n\n❯ Building...\n✔ Building...\nInitial chunk files | Names         |  Raw size | Estimated transfer size\nchunk-APPI2UGH.js   | -             | 133.26 kB |                39.43 kB\nmain-T5DHRZE7.js    | main          |  85.76 kB |                21.84 kB\nstyles-5INURTSO.css | styles        |   0 bytes |                 0 bytes\n\n                    | Initial total | 219.03 kB |                61.26 kB\n\nLazy chunk files    | Names         |  Raw size | Estimated transfer size\nchunk-LCHK5SO3.js   | inicio        |   3.70 kB |                 1.40 kB\n\nApplication bundle generation complete. [1.687 seconds] - 2026-09-16T20:15:52.726Z\n\nOutput location: C:\\workspace\\git\\planillero\\backoffice\\dist\\planillero-backoffice"
+        },
+        {
+          "nombre": "tests",
+          "cmd": "npm test",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 4045,
+          "salida": "\n> planillero-backoffice@0.1.0 test\n> ng test\n\n❯ Building...\n✔ Building...\nApplication bundle generation complete. [1.133 seconds] - 2026-09-16T20:15:55.070Z\n\n\n\u001b[1m\u001b[30m\u001b[46m RUN \u001b[49m\u001b[39m\u001b[22m \u001b[36mv4.1.11 \u001b[39m\u001b[90mC:/workspace/git/planillero/backoffice\u001b[39m\n\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m1 passed\u001b[39m\u001b[22m\u001b[90m (1)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m5 passed\u001b[39m\u001b[22m\u001b[90m (5)\u001b[39m\n\u001b[2m   Start at \u001b[22m 17:15:55\n\u001b[2m   Duration \u001b[22m 1.42s\u001b[2m (transform 104ms, setup 325ms, import 65ms, tests 32ms, environment 746ms)\u001b[22m"
+        }
+      ],
+      "avisos": []
+    }
+  ]
+}

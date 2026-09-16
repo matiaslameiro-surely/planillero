@@ -24,7 +24,10 @@ Acá no hay código de producto. El código vive en tres repos que se clonan ade
 | **JDK 21** | Compilar y testear el backend | `winget install EclipseAdoptium.Temurin.21.JDK` |
 | **GitHub CLI** | Crear los PRs | `winget install GitHub.cli`, después `gh auth login` |
 | **MCP de Atlassian** | Leer y actualizar Jira | Se configura en tu herramienta de IA |
-| **Chrome** | Correr los tests del backoffice (Karma, en modo headless) | Ya lo tenés si usás Chrome |
+
+Node tiene que ser **22.22.3+ o 24.15+**: es el rango que declara Angular 22, el más estricto de los
+tres repos. Un Node 23, o un 22 o 24 anterior a esos, no puede construir el backoffice. El repo del
+backoffice lo fija en su `engines` y en un `.nvmrc`.
 
 En macOS o Linux, reemplazá `winget` por `brew install temurin@21 gh`.
 
