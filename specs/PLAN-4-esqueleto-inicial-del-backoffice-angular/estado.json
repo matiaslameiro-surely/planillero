@@ -63,5 +63,12 @@
   "jira": {
     "transicionadoA": "10006",
     "creadoPorHarness": true
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "Opus 5",
+    "ts": null,
+    "fin": null,
+    "nota": "Completado retroactivamente: la tarea es anterior a que el harness registrara este dato"
   }
 }

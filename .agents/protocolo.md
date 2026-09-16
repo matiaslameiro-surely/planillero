@@ -29,7 +29,10 @@ Reglas transversales, válidas en todas las fases:
    commitear que no son tuyos → **pará y preguntá**. Nunca ramifiques sobre trabajo ajeno.
 4. **¿Ya existe `specs/PLAN-<n>-*/`?** Entonces esto es una reanudación: leé `estado.json` y saltá
    directo a la fase que corresponda. No rehagas trabajo hecho.
-5. Crear la carpeta `specs/PLAN-<n>-<slug>/` y el `estado.json` inicial.
+5. Crear la carpeta `specs/PLAN-<n>-<slug>/` y el `estado.json` inicial. **Declará con qué modelo
+   estás trabajando**: `node .agents/scripts/estado.mjs crear --issue <clave> --titulo "…"
+   --alcance <repos> --modelo "<tu modelo>"`. La herramienta se detecta sola por el entorno, pero el
+   modelo no: si no lo declarás, el informe dice «no informado» en vez de inventarlo.
 6. Transicionar el issue a **En curso**. Si estaba sin asignar, autoasignárselo al usuario: así dos
    personas no toman la misma tarea.
 
