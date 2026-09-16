@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://planillero.local/schemas/revision.schema.json",
+  "title": "Resultado de una revisión independiente",
+  "description": "Contrato único de salida de la fase 4. Lo cumplen por igual los motores externos y el motor 'anfitriona'. Las CLAVES van en inglés porque es el formato que varios motores producen de forma nativa; el CONTENIDO (summary, title, body, recommendation, next_steps) va en español.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["verdict", "summary", "findings", "next_steps"],
+  "properties": {
+    "verdict": {
+      "description": "approve = se puede avanzar al cierre. needs-attention = hay algo que resolver.",
+      "type": "string",
+      "enum": ["approve", "needs-attention"]
+    },
+    "summary": {
+      "description": "Resumen en español, 1-3 oraciones, de qué se revisó y en qué estado está.",
+      "type": "string",
+      "minLength": 1
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "severity",
+          "title",
+          "body",
+          "file",
+          "line_start",
+          "line_end",
+          "confidence",
+          "recommendation"
+        ],
+        "properties": {
+          "severity": {
+            "description": "critical y high bloquean y mandan de vuelta a la fase 3. medium y low van al cuerpo del PR.",
+            "type": "string",
+            "enum": ["critical", "high", "medium", "low"]
+          },
+          "title": { "type": "string", "minLength": 1 },
+          "body": {
+            "description": "Qué está mal y por qué importa. Incluí el escenario concreto que falla.",
+            "type": "string",
+            "minLength": 1
+          },
+          "file": {
+            "description": "Ruta relativa a la raíz del repo revisado.",
+            "type": "string",
+            "minLength": 1
+          },
+          "line_start": { "type": "integer", "minimum": 1 },
+          "line_end": { "type": "integer", "minimum": 1 },
+          "confidence": {
+            "description": "0 a 1. Por debajo de 0.5 el hallazgo se reporta como sospecha, no como defecto.",
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "recommendation": { "type": "string" }
+        }
+      }
+    },
+    "next_steps": {
+      "description": "Acciones concretas en español, en orden de prioridad. Vacío si verdict es approve.",
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

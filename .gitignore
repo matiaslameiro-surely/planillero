@@ -1,0 +1,43 @@
+# ─── Repos de producto ───────────────────────────────────────────────
+# Se clonan acá adentro pero son repos independientes. Ver README.md
+/backend/
+/frontend/
+
+# ─── Configuración local de cada máquina ─────────────────────────────
+# Todo lo *.local.* es tuyo y no se comparte: rutas, JAVA_HOME,
+# y con qué motor de IA hacés la revisión.
+*.local.json
+*.local.jsonc
+.env
+.env.*
+!.env.example
+
+# ─── Capas de herramientas de IA ─────────────────────────────────────
+# El harness es agnóstico: nadie impone su herramienta al resto.
+# Cada uno genera la suya con `node .agents/scripts/init.mjs` y queda acá.
+.claude/
+.codex/
+.cursor/
+.gemini/
+.aider*
+.windsurf/
+.continue/
+.github/copilot-instructions.md
+CLAUDE.md
+GEMINI.md
+.mcp.json
+
+# ─── Estado de máquina del harness ───────────────────────────────────
+.agents/.cache/
+specs/**/.tmp/
+
+# ─── Sistema operativo y editores ────────────────────────────────────
+Thumbs.db
+Desktop.ini
+.DS_Store
+.vscode/
+.idea/
+
+# ─── Node ────────────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*

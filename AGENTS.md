@@ -1,0 +1,131 @@
+# AGENTS.md
+
+Instrucciones para cualquier asistente de IA que trabaje en este repositorio.
+Este archivo es la **fuente de verdad**. Si tu herramienta usa otro archivo (`CLAUDE.md`, `GEMINI.md`,
+`.github/copilot-instructions.md`), ese archivo debe limitarse a importar o apuntar a este.
+
+Todo se escribe en **español**: specs, planes, comentarios de código, mensajes de commit y descripciones
+de PR.
+
+## Qué es este repo
+
+El **harness** de Planillero: el andamiaje que toma tareas del Jira del proyecto, las lleva por un ciclo
+de **desarrollo guiado por especificación (SDD)** y las cierra con un PR verificado.
+
+Acá **no vive código de producto**. Viven el protocolo, los scripts y las especificaciones. El código
+está en dos repos separados que se clonan adentro de esta carpeta:
+
+| Carpeta | Repo | Stack |
+|---|---|---|
+| `backend/` | `matiaslameiro-surely/planillero-backend` | Java + Spring Boot |
+| `frontend/` | `matiaslameiro-surely/planillero-frontend` | React Native + Expo |
+
+Las dos están en `.gitignore`: son repos independientes con su propio historial.
+
+## Regla de oro: agnóstico de herramienta
+
+Lo van a usar varios desarrolladores, **cada uno con la IA que prefiera**. Por eso:
+
+> Se versiona **qué** hay que hacer. **Con qué IA** lo hace cada uno es configuración local.
+
+| Se versiona | Nunca se versiona |
+|---|---|
+| `AGENTS.md`, `.agents/`, `workspace.json`, `specs/` | `workspace.local.json` — tu `JAVA_HOME`, tu motor de revisión |
+| | `.claude/`, `.codex/`, `.cursor/`, `.gemini/`… — la capa de **cualquier** herramienta |
+| | `backend/`, `frontend/` — clones de los repos de producto |
+
+**Antes de agregar algo a `workspace.json`, preguntate si vale para todo el equipo.** Si es una ruta de
+tu máquina, una preferencia tuya o el nombre de un producto que usás vos, va en `workspace.local.json`.
+
+No crees en este repo archivos ni carpetas atados a una herramienta puntual. Si tu herramienta soporta
+comandos propios, generalos con `node .agents/scripts/init.mjs`: quedan en tu carpeta local, ya ignorada.
+
+## Cómo se dispara el trabajo
+
+**Cuando el usuario pida cualquiera de estas tres cosas, seguí `.agents/protocolo.md` de principio a fin,
+sin saltear fases:**
+
+| El usuario dice | Qué hacés |
+|---|---|
+| «agarrá la próxima tarea (y hacela)» | Corré `node .agents/scripts/cola.mjs`. Decile **qué tarea eligió y por qué** antes de arrancar |
+| «hacé PLAN-12» | Esa tarea puntual |
+| «hacé esto: \<descripción\>» | Creá la Tarea en Jira **pidiéndole confirmación primero**, y seguí el flujo normal con el issue creado |
+
+En los tres casos, a partir de la fase 1 el flujo es idéntico: lo único que cambia es cómo se obtiene el
+issue.
+
+## Las 5 fases, en una línea cada una
+
+El detalle completo, con artefactos y frenos, está en **`.agents/protocolo.md`**. Leelo antes de empezar.
+
+0. **Preparación** — elegir o crear el issue, validar entorno y que no haya cambios sin commitear.
+1. **Spec** — de issue a `01-spec.md`: alcance, criterios de aceptación, preguntas abiertas.
+2. **Plan** — `02-plan.md` (con Supuestos) y `04-tareas.md`.
+3. **Implementar** — ramas, código y commits. Backend antes que frontend.
+4. **Verificar** — gates determinísticos y revisión independiente.
+5. **Cierre** — push, PRs y transición en Jira. **Sólo con aprobación del usuario.**
+
+### Reglas que no se negocian
+
+- **El estado vive en disco, no en la conversación.** Cada fase arranca leyendo
+  `specs/<tarea>/estado.json` y los artefactos de la fase anterior. Así el trabajo se retoma después de
+  un corte de sesión. Registrá cada transición con `node .agents/scripts/estado.mjs`.
+- **Nunca commitees ni pushees a `main`** en ninguno de los tres repos. Siempre rama de tarea.
+- **Nunca pushees ni abras un PR sin que el usuario lo apruebe** en el checkpoint de cierre.
+- **Una pregunta `BLOQUEANTE` en la spec corta el flujo.** No se planifica sobre huecos: se comenta la
+  pregunta en el issue y se avisa al usuario.
+- **El revisor no escribe código.** Ver `.agents/roles.md`.
+- Si un working tree tiene cambios sin commitear que no son tuyos, **pará y preguntá**. Nunca ramifiques
+  sobre trabajo ajeno.
+
+## Convenciones
+
+**Ramas** — `PLAN-<n>-<slug>`, por ejemplo `PLAN-12-carga-de-planilla`. En una tarea full-stack, **la
+misma rama con el mismo nombre** en `backend/` y `frontend/`.
+
+**Commits** — `PLAN-<n>: <resumen en español>`. El prefijo hace que Jira enlace los commits solo.
+
+**Ramas base** — salen siempre de `workspace.json` → `repos.<x>.ramaBase`, **nunca** del default de git:
+esta máquina tiene `init.defaultbranch=master` y los repos usan `main`.
+
+**Specs** — una carpeta por tarea en `specs/PLAN-<n>-<slug>/`, con los archivos numerados que define el
+protocolo. Las plantillas están en `.agents/plantillas/`.
+
+## Comandos
+
+```bash
+node .agents/scripts/init.mjs        # valida el entorno y genera tu configuración local
+node .agents/scripts/init.mjs --check # sólo diagnostica, no escribe nada
+node .agents/scripts/cola.mjs        # qué tarea sigue y por qué (no ejecuta nada)
+node .agents/scripts/estado.mjs ...  # leer/escribir el estado de una tarea
+node .agents/scripts/ramas.mjs ...   # crear la rama de la tarea en los repos del alcance
+node .agents/scripts/verificar.mjs   # gates: compilar, tests, lint, tipos
+node .agents/scripts/revisar.mjs     # revisión independiente con el motor configurado
+node .agents/scripts/pr.mjs          # crear los PRs
+```
+
+Todo es Node y multiplataforma. No hace falta instalar dependencias: los scripts usan sólo la librería
+estándar.
+
+## La revisión
+
+La **política** es del equipo y está en `workspace.json`: toda tarea pasa por una revisión independiente
+antes del PR, y el resultado tiene que cumplir `.agents/schemas/revision.schema.json`.
+
+El **motor** lo elige cada uno en su `workspace.local.json` (`revision.motores`, una lista ordenada).
+Siempre existe el motor `anfitriona`, que significa «que revise la IA que ya está corriendo, con contexto
+limpio». Quien no configure nada usa ese y no queda bloqueado.
+
+Si te toca ser el revisor `anfitriona`: leé sólo el diff y la spec, **nunca** el razonamiento de quien
+implementó, y respondé únicamente con el JSON del schema.
+
+## Requisitos del entorno
+
+| Requisito | Para qué |
+|---|---|
+| Node 20+ | Los scripts del harness y el toolchain de Expo |
+| JDK 21 | Compilar y testear el backend. Se configura en `workspace.local.json`, porque varía por máquina |
+| `gh` (GitHub CLI) autenticado | Crear los PRs |
+| MCP de Atlassian | Leer y actualizar Jira |
+
+`node .agents/scripts/init.mjs --check` te dice cuáles faltan.

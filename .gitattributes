@@ -1,0 +1,26 @@
+# Los finales de línea se normalizan a LF dentro del repo, pase lo que pase en cada máquina.
+# Sin esto, una máquina Windows con core.autocrlf=true guarda CRLF y rompe los scripts al
+# clonarlos en macOS o Linux (el shebang queda con \r y el intérprete no se encuentra).
+* text=auto eol=lf
+
+# Archivos que SIEMPRE tienen que ser LF, incluso en el working copy de Windows:
+# son scripts que un intérprete POSIX ejecuta línea por línea.
+*.mjs      text eol=lf
+*.js       text eol=lf
+*.sh       text eol=lf
+mvnw       text eol=lf
+gradlew    text eol=lf
+
+# Archivos que SIEMPRE tienen que ser CRLF: los interpreta cmd.exe.
+*.cmd      text eol=crlf
+*.bat      text eol=crlf
+
+# Binarios: que git no los toque.
+*.png      binary
+*.jpg      binary
+*.jpeg     binary
+*.gif      binary
+*.ico      binary
+*.pdf      binary
+*.jar      binary
+*.keystore binary

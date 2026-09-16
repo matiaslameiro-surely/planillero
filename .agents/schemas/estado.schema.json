@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://planillero.local/schemas/estado.schema.json",
+  "title": "Estado de una tarea",
+  "description": "Máquina de estados de una tarea, en specs/<tarea>/estado.json. Es la fuente de verdad del avance: permite retomar el trabajo después de un corte de sesión. Se escribe con .agents/scripts/estado.mjs, nunca a mano.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["issue", "slug", "rama", "alcance", "fase", "fases"],
+  "properties": {
+    "issue": { "type": "string", "pattern": "^[A-Z]+-[0-9]+$" },
+    "titulo": { "type": "string" },
+    "slug": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "rama": { "type": "string", "minLength": 1 },
+    "alcance": {
+      "description": "Qué repos toca la tarea. Sale de 01-spec.md y determina sobre qué se itera en el resto del flujo.",
+      "type": "array",
+      "items": { "type": "string", "enum": ["backend", "frontend"] },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "fase": {
+      "type": "string",
+      "enum": ["preparacion", "spec", "plan", "implementar", "verificar", "cerrar", "cerrada"]
+    },
+    "fases": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "estado": { "type": "string", "enum": ["pendiente", "en_curso", "ok", "bloqueada"] },
+          "ts": { "type": "string" },
+          "archivos": { "type": "array", "items": { "type": "string" } },
+          "iteracion": { "type": "integer", "minimum": 0 },
+          "nota": { "type": "string" }
+        }
+      }
+    },
+    "commits": {
+      "description": "SHA del último commit por repo.",
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "revisiones": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "n": { "type": "integer", "minimum": 1 },
+          "repo": { "type": "string" },
+          "motor": { "type": "string" },
+          "motivo": { "type": ["string", "null"] },
+          "verdict": { "type": "string" },
+          "bloqueantes": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "pr": {
+      "type": "object",
+      "additionalProperties": { "type": ["string", "null"] }
+    },
+    "jira": {
+      "type": "object",
+      "properties": {
+        "transicionadoA": { "type": ["string", "null"] },
+        "creadoPorHarness": { "type": "boolean" }
+      }
+    }
+  }
+}

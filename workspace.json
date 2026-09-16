@@ -1,0 +1,80 @@
+{
+  "$comentario": [
+    "Política del equipo para el harness de Planillero. Se versiona: es igual para todos.",
+    "NO pongas acá nada personal (rutas de tu máquina, tu motor de IA, tokens):",
+    "eso va en workspace.local.json, que está en .gitignore. Ver AGENTS.md."
+  ],
+  "version": 1,
+  "idioma": "es",
+
+  "jira": {
+    "cloudId": "ece7dd3d-7484-4ca5-89b2-b443f061247a",
+    "proyecto": "PLAN",
+    "tipoTareaPorDefecto": "Tarea",
+    "$comentario": "Los IDs se resuelven dinámicamente; esto es sólo fallback y validación.",
+    "estados": {
+      "por_hacer": "10004",
+      "en_curso": "10005",
+      "en_revision": "10006",
+      "listo": "10007"
+    }
+  },
+
+  "github": {
+    "owner": "matiaslameiro-surely",
+    "repoHarness": "planillero"
+  },
+
+  "repos": {
+    "backend": {
+      "ruta": "backend",
+      "url": "https://github.com/matiaslameiro-surely/planillero-backend.git",
+      "ramaBase": "main",
+      "tipo": "spring-boot",
+      "javaVersion": 21,
+      "verificacion": {
+        "maven": [
+          { "nombre": "compilar", "cmd": "mvnw -B -q -DskipTests compile" },
+          { "nombre": "tests", "cmd": "mvnw -B test" }
+        ],
+        "gradle": [
+          { "nombre": "compilar", "cmd": "gradlew --console=plain -q compileJava" },
+          { "nombre": "tests", "cmd": "gradlew --console=plain test" }
+        ]
+      }
+    },
+    "frontend": {
+      "ruta": "frontend",
+      "url": "https://github.com/matiaslameiro-surely/planillero-frontend.git",
+      "ramaBase": "main",
+      "tipo": "expo",
+      "verificacion": {
+        "npm": [
+          { "nombre": "lint", "cmd": "npm run lint" },
+          { "nombre": "tipos", "cmd": "npx tsc --noEmit" },
+          { "nombre": "tests", "cmd": "npm test -- --watchAll=false", "opcional": true }
+        ]
+      }
+    }
+  },
+
+  "flujo": {
+    "$comentario": "Dónde frena el modo semi-autónomo. 'cierre' es obligatorio y no se puede sacar.",
+    "checkpoints": ["plan", "cierre"],
+    "maxIteracionesVerificacion": 2,
+    "limiteArchivosSinCheckpoint": 12,
+    "limiteTareasSinCheckpoint": 8,
+    "prefijoRama": "",
+    "prefijoCommit": ""
+  },
+
+  "revision": {
+    "$comentario": [
+      "POLÍTICA del equipo, no preferencia personal.",
+      "CON QUÉ motor la hace cada uno se configura en workspace.local.json → revision.motores."
+    ],
+    "obligatoria": true,
+    "schema": ".agents/schemas/revision.schema.json",
+    "severidadesQueBloquean": ["critical", "high"]
+  }
+}
