@@ -6,7 +6,7 @@
   "alcance": [
     "backend"
   ],
-  "fase": "cerrar",
+  "fase": "cerrada",
   "fases": {
     "preparacion": {
       "estado": "ok",
@@ -29,10 +29,12 @@
       "ts": "2026-09-16T12:54:55.884Z"
     },
     "cerrar": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-16T13:07:54.050Z"
     },
     "cerrada": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-16T13:07:54.104Z"
     }
   },
   "commits": {
@@ -50,9 +52,11 @@
       "nota": "El unico hallazgo bloqueante no se reprodujo: ver 05-revision-backend-1-refutacion.md"
     }
   ],
-  "pr": {},
+  "pr": {
+    "backend": "https://github.com/matiaslameiro-surely/planillero-backend/pull/1"
+  },
   "jira": {
-    "transicionadoA": "10005",
+    "transicionadoA": "10006",
     "creadoPorHarness": true
   }
 }
