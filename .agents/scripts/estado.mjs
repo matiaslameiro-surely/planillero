@@ -10,6 +10,7 @@
 import { existsSync, readdirSync, mkdirSync } from 'node:fs';
 import path from 'node:path';
 import { RAIZ, cargarConfig, leerJson, escribirJson, slugificar, parsearArgs, emitir } from './lib/config.mjs';
+import { identidad } from './lib/identidad.mjs';
 
 const DIR_SPECS = path.join(RAIZ, 'specs');
 const FASES = ['preparacion', 'spec', 'plan', 'implementar', 'verificar', 'cerrar', 'cerrada'];
@@ -108,6 +109,9 @@ try {
         revisiones: [],
         pr: {},
         jira: { transicionadoA: null, creadoPorHarness: Boolean(args['creado-por-harness']) },
+        // Quién resolvió la tarea. La herramienta se detecta sola; el modelo lo declara la IA
+        // con --modelo, porque no hay forma confiable de deducirlo del entorno.
+        ejecucion: { ...identidad({ modelo: args.modelo === true ? null : args.modelo }), fin: null },
       };
       estado.fases.preparacion = { estado: 'en_curso', ts: new Date().toISOString() };
       escribirJson(rutaEstado(carpeta), estado);
@@ -139,6 +143,10 @@ try {
       };
       // La fase activa es la primera que todavía no terminó.
       estado.fase = FASES.find((f) => estado.fases[f]?.estado !== 'ok') || 'cerrada';
+      // Al cerrarse se sella la hora de fin, que es lo que permite medir duración en el informe.
+      if (estado.fase === 'cerrada' && estado.ejecucion && !estado.ejecucion.fin) {
+        estado.ejecucion.fin = new Date().toISOString();
+      }
       escribirJson(rutaEstado(carpeta), estado);
 
       // Marcar una fase como ok dejando anteriores sin cerrar deja la fase activa mintiendo:

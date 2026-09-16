@@ -20,11 +20,14 @@ Acá no hay código de producto. El código vive en tres repos que se clonan ade
 
 | | Para qué | |
 |---|---|---|
-| **Node 20+** | Los scripts del harness y el toolchain de Expo | [nodejs.org](https://nodejs.org) |
+| **Node 22.22.3+ o 24.15+** | Los scripts del harness y los tres toolchains | [nodejs.org](https://nodejs.org) |
 | **JDK 21** | Compilar y testear el backend | `winget install EclipseAdoptium.Temurin.21.JDK` |
 | **GitHub CLI** | Crear los PRs | `winget install GitHub.cli`, después `gh auth login` |
 | **MCP de Atlassian** | Leer y actualizar Jira | Se configura en tu herramienta de IA |
-| **Chrome** | Correr los tests del backoffice (Karma, en modo headless) | Ya lo tenés si usás Chrome |
+
+Node tiene que ser **22.22.3+ o 24.15+**: es el rango que declara Angular 22, el más estricto de los
+tres repos. Un Node 23, o un 22 o 24 anterior a esos, no puede construir el backoffice. El repo del
+backoffice lo fija en su `engines` y en un `.nvmrc`.
 
 En macOS o Linux, reemplazá `winget` por `brew install temurin@21 gh`.
 
@@ -112,10 +115,21 @@ node .agents/scripts/ramas.mjs crear --tarea PLAN-12         # la misma rama en 
 node .agents/scripts/verificar.mjs --tarea PLAN-12           # compilar, tests, lint, tipos
 node .agents/scripts/revisar.mjs --tarea PLAN-12 --repo backend   # revisión independiente
 node .agents/scripts/pr.mjs --tarea PLAN-12 [--simular]      # crear los PRs
+node .agents/scripts/informe.mjs [--md|--json]               # qué se hizo, con qué IA y qué costó
 node .agents/scripts/guardia-push.mjs --instalar             # reinstalar el hook pre-push
 ```
 
 Todos hablan JSON por stdout y usan sólo la librería estándar de Node: no hay que instalar nada.
+
+### El registro de lo hecho
+
+Cada tarea deja su carpeta en `specs/PLAN-<n>-<slug>/` con la spec, el plan, las tareas, la
+verificación y las revisiones. El `estado.json` de esa carpeta guarda además **con qué IA se
+resolvió** —herramienta y modelo— y **qué motor la revisó**.
+
+`node .agents/scripts/informe.mjs` recorre todo eso y arma el análisis: qué tareas se hicieron, quién
+las implementó, quién las revisó, cuántos hallazgos hubo y cuánto tardaron. No hay archivo de bitácora
+aparte a propósito: un registro paralelo se desincroniza del estado real.
 
 ### El guardia de push
 

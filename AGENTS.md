@@ -74,6 +74,9 @@ El detalle completo, con artefactos y frenos, está en **`.agents/protocolo.md`*
 - **El estado vive en disco, no en la conversación.** Cada fase arranca leyendo
   `specs/<tarea>/estado.json` y los artefactos de la fase anterior. Así el trabajo se retoma después de
   un corte de sesión. Registrá cada transición con `node .agents/scripts/estado.mjs`.
+- **Declará con qué modelo trabajás** al crear la tarea (`--modelo "<tu modelo>"`). La herramienta se
+  detecta sola; el modelo no. Es lo que permite después comparar cómo rindió cada IA
+  (`node .agents/scripts/informe.mjs`). No lo adivines por otros: informá el tuyo.
 - **Nunca commitees ni pushees a `main`** en ninguno de los tres repos. Siempre rama de tarea.
 - **Nunca pushees ni abras un PR sin que el usuario lo apruebe** en el checkpoint de cierre.
 - **Una pregunta `BLOQUEANTE` en la spec corta el flujo.** No se planifica sobre huecos: se comenta la

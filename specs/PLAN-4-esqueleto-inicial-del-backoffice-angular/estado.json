@@ -1,0 +1,74 @@
+{
+  "issue": "PLAN-4",
+  "titulo": "Esqueleto inicial del backoffice (Angular)",
+  "slug": "esqueleto-inicial-del-backoffice-angular",
+  "rama": "PLAN-4-esqueleto-inicial-del-backoffice-angular",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-16T20:00:57.356Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-16T20:02:39.487Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-16T20:08:02.357Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-16T20:14:23.222Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-16T20:18:15.505Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-16T20:18:15.564Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-16T20:18:15.622Z"
+    }
+  },
+  "commits": {
+    "backoffice": "b0d47c2"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "codex",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "nota": "1 hallazgo low sobre el requisito de Node, correcto y corregido"
+    },
+    {
+      "n": 2,
+      "repo": "backoffice",
+      "motor": "codex",
+      "verdict": "approve",
+      "bloqueantes": 0
+    }
+  ],
+  "pr": {
+    "backoffice": "https://github.com/matiaslameiro-surely/planillero-backoffice/pull/1"
+  },
+  "jira": {
+    "transicionadoA": "10006",
+    "creadoPorHarness": true
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "Opus 5",
+    "ts": null,
+    "fin": null,
+    "nota": "Completado retroactivamente: la tarea es anterior a que el harness registrara este dato"
+  }
+}
