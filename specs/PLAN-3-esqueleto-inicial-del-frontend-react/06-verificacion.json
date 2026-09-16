@@ -1,0 +1,40 @@
+{
+  "ok": true,
+  "tarea": "PLAN-3",
+  "ts": "2026-09-16T13:26:10.767Z",
+  "repos": [
+    {
+      "repo": "frontend",
+      "ok": true,
+      "herramienta": "npm",
+      "pasos": [
+        {
+          "nombre": "lint",
+          "cmd": "npm run lint",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 1973,
+          "salida": "\n> planillero-frontend@0.1.0 lint\n> expo lint --max-warnings 0"
+        },
+        {
+          "nombre": "tipos",
+          "cmd": "npx tsc --noEmit",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 1262,
+          "salida": ""
+        },
+        {
+          "nombre": "tests",
+          "cmd": "npm test -- --watchAll=false",
+          "opcional": true,
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 1251,
+          "salida": "\n> planillero-frontend@0.1.0 test\n> jest --watchAll=false\n\nPASS src/api/cliente.test.ts\n  obtenerSalud\n    √ devuelve conectado cuando el backend responde ok (2 ms)\n    √ consulta la ruta /salud del backend\n    √ devuelve error cuando no hay conexión (1 ms)\n    √ devuelve error cuando el backend responde con un código de error\n    √ devuelve error cuando el backend responde un estado distinto de ok (1 ms)\n\nTest Suites: 1 passed, 1 total\nTests:       5 passed, 5 total\nSnapshots:   0 total\nTime:        0.506 s, estimated 1 s\nRan all test suites."
+        }
+      ],
+      "avisos": []
+    }
+  ]
+}

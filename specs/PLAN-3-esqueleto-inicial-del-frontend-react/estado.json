@@ -1,0 +1,56 @@
+{
+  "issue": "PLAN-3",
+  "titulo": "Esqueleto inicial del frontend (React Native + Expo)",
+  "slug": "esqueleto-inicial-del-frontend-react",
+  "rama": "PLAN-3-esqueleto-inicial-del-frontend-react",
+  "alcance": [
+    "frontend"
+  ],
+  "fase": "preparacion",
+  "fases": {
+    "preparacion": {
+      "estado": "en_curso",
+      "ts": "2026-09-16T13:15:16.937Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-16T13:18:57.146Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-16T13:18:57.204Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-16T13:27:32.129Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-16T13:28:08.897Z"
+    },
+    "cerrar": {
+      "estado": "pendiente"
+    },
+    "cerrada": {
+      "estado": "pendiente"
+    }
+  },
+  "commits": {
+    "frontend": "6074ceb"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "frontend",
+      "motor": "codex",
+      "motivo": null,
+      "verdict": "approve",
+      "bloqueantes": 0
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": true
+  }
+}
