@@ -94,15 +94,20 @@ protocolo. Las plantillas están en `.agents/plantillas/`.
 ## Comandos
 
 ```bash
-node .agents/scripts/init.mjs        # valida el entorno y genera tu configuración local
-node .agents/scripts/init.mjs --check # sólo diagnostica, no escribe nada
-node .agents/scripts/cola.mjs        # qué tarea sigue y por qué (no ejecuta nada)
-node .agents/scripts/estado.mjs ...  # leer/escribir el estado de una tarea
-node .agents/scripts/ramas.mjs ...   # crear la rama de la tarea en los repos del alcance
-node .agents/scripts/verificar.mjs   # gates: compilar, tests, lint, tipos
-node .agents/scripts/revisar.mjs     # revisión independiente con el motor configurado
-node .agents/scripts/pr.mjs          # crear los PRs
+node .agents/scripts/init.mjs [--check]                        # entorno + configuración local
+node .agents/scripts/cola.mjs consultar                        # el JQL a ejecutar con tu MCP de Jira
+node .agents/scripts/cola.mjs elegir --yo <accountId>          # qué tarea sigue y por qué
+node .agents/scripts/estado.mjs listar|crear|get|set|anotar    # estado de una tarea
+node .agents/scripts/ramas.mjs estado|crear --tarea PLAN-12    # ramas espejadas
+node .agents/scripts/verificar.mjs --tarea PLAN-12             # gates: compilar, tests, lint, tipos
+node .agents/scripts/revisar.mjs --tarea PLAN-12 --repo <r>    # revisión independiente
+node .agents/scripts/revisar.mjs --guardar --tarea PLAN-12 --repo <r> < revision.json
+node .agents/scripts/pr.mjs --tarea PLAN-12 [--simular]        # crear los PRs
 ```
+
+`cola.mjs` no consulta Jira por su cuenta: el acceso lo tenés vos (por MCP). El script emite el JQL y
+después aplica el criterio de selección sobre lo que la consulta devolvió, para que ese criterio sea
+determinístico y no dependa del ánimo del modelo.
 
 Todo es Node y multiplataforma. No hace falta instalar dependencias: los scripts usan sólo la librería
 estándar.

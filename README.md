@@ -101,16 +101,24 @@ archivo compartido.
 ## Comandos
 
 ```bash
-node .agents/scripts/init.mjs [--check] [--motores a,b]   # entorno y configuración local
-node .agents/scripts/cola.mjs consultar                   # qué consultar en Jira
-node .agents/scripts/cola.mjs elegir --yo <accountId>     # qué tarea sigue, y por qué
-node .agents/scripts/estado.mjs listar                    # tareas en curso y su fase
-node .agents/scripts/verificar.mjs --tarea PLAN-12        # compilar, tests, lint, tipos
-node .agents/scripts/revisar.mjs --tarea PLAN-12          # revisión independiente
-node .agents/scripts/pr.mjs --tarea PLAN-12               # crear los PRs
+node .agents/scripts/init.mjs [--check] [--motores a,b]      # entorno y configuración local
+node .agents/scripts/cola.mjs consultar                      # qué consultar en Jira
+node .agents/scripts/cola.mjs elegir --yo <accountId>        # qué tarea sigue, y por qué
+node .agents/scripts/estado.mjs listar                       # tareas en curso y su fase
+node .agents/scripts/ramas.mjs crear --tarea PLAN-12         # la misma rama en los repos del alcance
+node .agents/scripts/verificar.mjs --tarea PLAN-12           # compilar, tests, lint, tipos
+node .agents/scripts/revisar.mjs --tarea PLAN-12 --repo backend   # revisión independiente
+node .agents/scripts/pr.mjs --tarea PLAN-12 [--simular]      # crear los PRs
+node .agents/scripts/guardia-push.mjs --instalar             # reinstalar el hook pre-push
 ```
 
 Todos hablan JSON por stdout y usan sólo la librería estándar de Node: no hay que instalar nada.
+
+### El guardia de push
+
+`init.mjs` instala en `backend/` y `frontend/` un hook `pre-push` de git que **bloquea el push directo
+a `main`**. Es un hook de git y no de una herramienta de IA, así que protege igual a todo el equipo y
+también cuando pusheás a mano. Si alguna vez necesitás saltearlo a propósito: `git push --no-verify`.
 
 ## Documentación
 
