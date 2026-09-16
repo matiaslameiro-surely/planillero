@@ -11,6 +11,8 @@
     "cloudId": "ece7dd3d-7484-4ca5-89b2-b443f061247a",
     "proyecto": "PLAN",
     "tipoTareaPorDefecto": "Tarea",
+    "$sitio": "URL base del Jira, sin barra final (ej. https://miempresa.atlassian.net). Se usa para linkear el issue desde el PR; si queda en null, el PR muestra la clave sin link.",
+    "sitio": null,
     "$comentario": "Los IDs se resuelven dinámicamente; esto es sólo fallback y validación.",
     "estados": {
       "por_hacer": "10004",

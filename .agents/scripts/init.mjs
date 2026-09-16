@@ -184,6 +184,17 @@ function construirLocal(dx, motoresPedidos, existente) {
   return local;
 }
 
+/** Instala el hook pre-push en los repos clonados, delegando en guardia-push.mjs. */
+function instalarGuardias() {
+  const guardia = path.join(RAIZ, '.agents', 'scripts', 'guardia-push.mjs');
+  const r = ejecutar(process.execPath, [guardia, '--instalar']);
+  try {
+    return JSON.parse(r.salida).resultados;
+  } catch {
+    return [{ instalado: false, motivo: 'no se pudo instalar el guardia de push' }];
+  }
+}
+
 // ─── Main ─────────────────────────────────────────────────────────────────
 
 try {
@@ -191,6 +202,7 @@ try {
   const dx = diagnosticar(cfg);
 
   let escrito = null;
+  let guardias = null;
   if (!args.check) {
     const yaExiste = existsSync(RUTA_LOCAL);
     if (!yaExiste || args.forzar || args.motores) {
@@ -199,6 +211,10 @@ try {
       escribirJson(RUTA_LOCAL, local);
       escrito = path.relative(RAIZ, RUTA_LOCAL);
     }
+    // El guardia de push se instala solo: nadie tiene que enterarse de que existe para estar
+    // protegido. Es un hook de git, así que vale para cualquier herramienta y también para
+    // un push hecho a mano.
+    guardias = instalarGuardias();
   }
 
   const cfgFinal = cargarConfig();
@@ -214,6 +230,7 @@ try {
       cadenaConfigurada: cfgFinal.revision?.motores || ['anfitriona'],
     },
     configLocal: { ruta: path.relative(RAIZ, RUTA_LOCAL), existe: cfgFinal.$hayLocal, escritaAhora: escrito },
+    guardiaDePush: guardias,
     problemas: dx.problemas,
     avisos: dx.avisos,
   }, dx.problemas.length === 0 ? 0 : 1);
