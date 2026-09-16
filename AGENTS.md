@@ -4,8 +4,9 @@ Instrucciones para cualquier asistente de IA que trabaje en este repositorio.
 Este archivo es la **fuente de verdad**. Si tu herramienta usa otro archivo (`CLAUDE.md`, `GEMINI.md`,
 `.github/copilot-instructions.md`), ese archivo debe limitarse a importar o apuntar a este.
 
-Todo se escribe en **español**: specs, planes, comentarios de código, mensajes de commit y descripciones
-de PR.
+Specs, planes, comentarios de código (donde amerite), mensajes de commit y descripciones de PR se
+escriben en **español**. El **código** (clases, métodos, variables, tablas, etc.) se escribe en **inglés**,
+siguiendo las convenciones de estilo estándar de cada lenguaje y contexto (ver Convenciones).
 
 ## Qué es este repo
 
@@ -82,10 +83,19 @@ El detalle completo, con artefactos y frenos, está en **`.agents/protocolo.md`*
 - **Una pregunta `BLOQUEANTE` en la spec corta el flujo.** No se planifica sobre huecos: se comenta la
   pregunta en el issue y se avisa al usuario.
 - **El revisor no escribe código.** Ver `.agents/roles.md`.
+- **Tablero y proyecto de Jira:** Se trabaja **siempre y exclusivamente** sobre el tablero **Planillero** (proyecto `PLAN`) en Jira. Cualquier consulta, selección, creación o transición de tareas se realiza en este tablero.
 - Si un working tree tiene cambios sin commitear que no son tuyos, **pará y preguntá**. Nunca ramifiques
   sobre trabajo ajeno.
 
 ## Convenciones
+
+**Idioma y estilo de código** — Todo el código (nombres de clases, interfaces, métodos, funciones,
+variables, archivos fuente, tablas y columnas) se escribe en **inglés**. El nombre de variables y
+símbolos debe seguir el estilo estándar del contexto donde se usa (por ejemplo: `camelCase` para variables
+y métodos en Java y TypeScript, `PascalCase` para clases y componentes, `snake_case` para bases de datos
+y columnas SQL, `SCREAMING_SNAKE_CASE` para constantes). Por el contrario, los comentarios explicativos
+en el código (donde amerite explicar el qué o el por qué), la documentación conceptual, las specs, los
+planes, los mensajes de commit y las descripciones de PR se escriben siempre en **español**.
 
 **Nombre de la empresa** — no se nombra a la empresa en ningún lado: ni en paquetes, namespaces,
 dominios, títulos, textos de UI, comentarios ni datos. La única excepción son las direcciones de
