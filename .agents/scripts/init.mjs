@@ -6,59 +6,28 @@
 //   node .agents/scripts/init.mjs --motores codex,anfitriona   # fija tu cadena de revisión
 //   node .agents/scripts/init.mjs --forzar   # reescribe workspace.local.json aunque exista
 
-import { spawnSync } from 'node:child_process';
 import { existsSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import {
   RAIZ, RUTA_LOCAL, cargarConfig, escribirJson, leerJson,
   parsearArgs, emitir, esWindows,
 } from './lib/config.mjs';
+import { resolverBin, correr as ejecutar } from './lib/proceso.mjs';
 
 const args = parsearArgs(process.argv.slice(2));
 
 // ─── Utilidades de detección ──────────────────────────────────────────────
 
-/**
- * Ubicaciones habituales de herramientas que suelen no estar en el PATH de una terminal
- * abierta antes de instalarlas. Sin esto, recién instalar algo y diagnosticar da falso negativo.
- */
-const RUTAS_EXTRA = {
-  gh: esWindows
-    ? ['C:\\Program Files\\GitHub CLI\\gh.exe', 'C:\\Program Files (x86)\\GitHub CLI\\gh.exe']
-    : ['/usr/local/bin/gh', '/opt/homebrew/bin/gh'],
-};
-
-/** Busca un ejecutable en el PATH sin depender de `where`/`which`. */
-function buscarEnPath(nombre) {
-  const dirs = (process.env.PATH || '').split(path.delimiter).filter(Boolean);
-  const exts = esWindows
-    ? (process.env.PATHEXT || '.EXE;.CMD;.BAT').split(';').filter(Boolean)
-    : [''];
-  for (const dir of dirs) {
-    for (const ext of exts) {
-      const completo = path.join(dir, nombre + ext);
-      try {
-        if (existsSync(completo)) return completo;
-      } catch { /* dir inaccesible: seguimos */ }
-    }
-  }
-  for (const extra of RUTAS_EXTRA[nombre] || []) {
-    if (existsSync(extra)) return extra;
-  }
-  return null;
-}
+const buscarEnPath = (nombre) => resolverBin(nombre);
 
 /**
- * Corre un ejecutable y devuelve stdout+stderr juntos.
+ * Corre un ejecutable y devuelve stdout+stderr juntos, o null si no se pudo ejecutar.
  * Los dos flujos importan: `java -version`, por ejemplo, escribe en stderr aunque salga bien.
  */
 function correr(bin, argumentos, opciones = {}) {
-  const r = spawnSync(bin, argumentos, {
-    encoding: 'utf8', timeout: 15000, windowsHide: true, ...opciones,
-  });
+  const r = ejecutar(bin, argumentos, { timeout: 15000, ...opciones });
   if (r.error) return null;
-  const salida = `${r.stdout || ''}${r.stderr || ''}`.trim();
-  return salida || null;
+  return r.salida.trim() || null;
 }
 
 /** Ubicaciones habituales de un JDK, además de JAVA_HOME. */
