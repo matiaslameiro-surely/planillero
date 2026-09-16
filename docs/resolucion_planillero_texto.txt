@@ -1,0 +1,260 @@
+Normal: RESOLUCIÓN INTEGRADORA
+Title: PLANILLERO
+Subtitle: Co-diseño, arquitectura y prototipado de una plataforma de supervisión con IA
+Normal: Inteligencia Artificial para Programadores
+Normal: Módulo 1 · Unidad 4 · Actividades Prácticas N° 1 a 4
+Normal: Caso de estudio: digitalización del registro de visitas y supervisión de personas en campo
+Normal: Alumnos
+Normal: Federico Moron
+Normal: José Fernando Chamorro Goncalves
+Normal: Juan Ignacio Urrutia
+Normal: Matias Lameiro
+Normal: PROPUESTA FINAL. Una app móvil clara, nativa y offline-first; un centro web orientado a excepciones; un backend modular con mensajería selectiva; y una cadena de custodia verificable.
+Normal: Documento consolidado · Agosto de 2026
+Heading 1: Resumen ejecutivo
+Normal: Este documento resuelve en forma integrada las cuatro actividades prácticas de la Unidad 4 sobre un único caso: Planillero, plataforma institucional para reemplazar planillas de papel en visitas de supervisión de personas. La resolución conserva la continuidad del problema, los usuarios, la arquitectura y la experiencia; explicita qué propuso la IA, qué decidió el equipo y con qué criterio; y aporta evidencias visuales listas para evaluación.
+Normal: DECISIÓN RECTORA. Se adopta React Native para Planillero Móvil, Angular para Planillero Central y Spring Boot como monolito modular inicial. PostgreSQL + JSONB gestiona los datos transaccionales; un almacenamiento de objetos cifrado conserva evidencias; RabbitMQ se usa solo donde la entrega diferida aporta valor. PWA y microservicios quedan como opciones condicionadas, no como decisiones simultáneas.
+Heading 2: Resultado de la consolidación
+Normal: Las cuatro actividades oficiales están aplicadas de manera consistente al sistema Planillero.
+Normal: El alcance MVP se deriva de historias de usuario, casos de uso, MoSCoW y backlog existentes.
+Normal: La arquitectura inicial queda unificada y separa dominios lógicos sin imponer cinco despliegues independientes.
+Normal: La interfaz móvil muestra ruta, visita/formulario y perfil/equipo; el anexo web muestra el tablero del supervisor.
+Normal: La integridad probatoria se formula mediante controles concretos: doble referencia temporal, hash, firma/HMAC, auditoría, idempotencia, gestión de claves y retención.
+Heading 2: Contenido
+Normal: Actividad N° 1 — Co-diseñar con IA.
+Normal: Actividad N° 2 — Prompts iterativos y defensa de decisiones arquitectónicas.
+Normal: Actividad N° 3 — Prototipado de una app funcional con IA.
+Normal: Actividad N° 4 — Diseño de la interfaz de una app usando IA.
+Normal: Conclusiones, autoevaluación, fuentes y anexos visuales.
+Heading 1: 1. Actividad Práctica N° 1 — Co-diseñar con IA
+Normal: OBJETIVO. Analizar un problema funcional concreto, modelarlo con UML, consultar a un LLM sobre la arquitectura, prototipar la interfaz y documentar críticamente el diálogo humano–IA.
+Heading 2: 1.1 Problema funcional
+Normal: Los organismos que supervisan a personas todavía registran muchas visitas de campo en planillas de papel. Esto dificulta comprobar dónde y cuándo se realizó cada visita, identificar a la persona y compartir el estado con el centro de supervisión. Planillero digitaliza ese registro y permite trabajar aun sin conexión.
+Heading 2: 1.2 Usuarios y contexto
+Heading 2: 1.3 Alcance MVP y criterios de aceptación
+Normal: La priorización toma como base las historias Must, los casos de uso principales y las tareas de prioridad alta. Los requisitos de factibilidad e instalación se implementan como plantillas de formulario dentro del mismo motor, evitando convertir cada variante en un módulo aislado.
+Heading 2: 1.4 Casos de uso y modelo de dominio
+Normal: CU-01 Ver visitas pendientes y consultar su detalle precargado.
+Normal: CU-02 Registrar presencia mediante GPS, precisión y fecha/hora automáticos.
+Normal: CU-03 Identificar persona mediante DNI/rostro y gestionar el resultado pendiente o validado.
+Normal: CU-04 Completar, validar, firmar y cerrar un formulario según el tipo de visita.
+Normal: CU-05 Planificar hoja de ruta y monitorear el estado operativo de los operadores.
+Normal: CU-06 Gestionar alertas, evidencias, usuarios, plantillas y políticas.
+Caption: Figura 1. Modelo UML consolidado del dominio Planillero.
+Normal: Fuente: artefacto UML del proyecto, revisado contra las historias de usuario y casos de uso.
+Heading 2: 1.5 Consulta al LLM y decisión arquitectónica
+Normal: Prompt de arquitectura utilizado:
+Prompt: Actuá como arquitecto de software senior. Evaluá PLANILLERO para una agencia con 50 operadores de campo, 5 supervisores, tablets LTE, señal intermitente y dos servidores on-premise. Debe capturar GPS y fecha/hora, operar offline, identificar contra RENAPER, usar formularios tipificados, emitir alertas y conservar evidencia verificable. Compará monolito modular, microservicios y una alternativa híbrida. Indicá tecnologías concretas, costos operativos, riesgos, qué descartarías y qué condición justificaría revisar cada decisión.
+Normal: La IA recomendó comenzar con un monolito modular, separar el almacenamiento de archivos, usar SQLite/local storage cifrado en el móvil y reservar la mensajería para procesos que requieran entrega diferida. El equipo aceptó esa dirección y agregó controles de dominio que el modelo trató de forma insuficiente: idempotencia, doble referencia temporal, outbox, gestión de claves, auditoría append-only y estados explícitos para la validación biométrica.
+Caption: Figura 2. Arquitectura inicial consolidada: monolito modular y mensajería selectiva.
+Heading 2: 1.6 Reglas de integridad y cadena de custodia
+Normal: Registrar hora del dispositivo, hora de recepción del servidor, precisión GPS y eventual desfase; no usar la etiqueta “timestamp inmutable” sin describir su fuente.
+Normal: Calcular hash SHA-256 de cada objeto y proteger el manifiesto de la visita con firma digital o HMAC administrado por un servicio de claves.
+Normal: Conservar versión de evidencia, actor, dispositivo, visita, plantilla, algoritmo, clave/versión y eventos de acceso en una auditoría append-only.
+Normal: Usar identificadores generados en el cliente e idempotency keys en la sincronización; reenviar no duplica una visita ni reemplaza evidencia existente.
+Normal: Definir cifrado en tránsito y reposo, rotación de claves, retención, eliminación autorizada, verificación periódica y procedimiento ante una inconsistencia.
+Normal: Tratar biometría con minimización, base legal, permisos específicos, trazabilidad de acceso y estados pendiente/positivo/negativo/no disponible; la IA no decide consecuencias jurídicas.
+Heading 2: 1.7 Bitácora crítica del co-diseño
+Normal: REFLEXIÓN. La IA amplió y aceleró la exploración; el equipo convirtió opciones plausibles en decisiones defendibles. El valor del co-diseño no reside en aceptar una respuesta, sino en explicitar restricciones, contrastar alternativas y registrar por qué una sugerencia fue adoptada, condicionada o rechazada.
+Heading 1: 2. Actividad N° 2 — Prompts iterativos y defensa arquitectónica
+Normal: ADAPTACIÓN DE ESCENARIOS. Los ejemplos de clínica y streaming se trasladan al caso Planillero: una agencia con infraestructura limitada y una expansión a quince agencias en doce meses. Así se conserva la finalidad de comparar arquitecturas sin fragmentar el trabajo.
+Heading 2: 2.1 Escenario A — Una agencia, infraestructura limitada
+Prompt: CONTEXTO: PLANILLERO en una sola agencia. ~50 operadores de campo en tablets LTE React Native, ~5 supervisores en Angular, dos servidores on-premise y sin presupuesto cloud. Requisitos: GPS y hora automáticos; biometría RENAPER con latencia variable; formularios offline-first; alertas persistentes; evidencia verificable.
+PREGUNTA: ¿Qué arquitectura backend recomendarías: monolito modular, microservicios o híbrida? Indicá tecnologías, riesgos, costo operativo, manejo de RENAPER, persistencia y qué descartarías.
+Normal: Recomendación del asistente. Monolito modular Spring Boot, PostgreSQL, almacenamiento S3-compatible local y cola local cifrada en la app. El modelo desaconsejó cinco despliegues independientes por la escala y el equipo operativo.
+Normal: Evaluación humana. Se adopta el monolito modular, pero se rechaza depender solo de WebSockets para eventos críticos: la alerta se publica mediante outbox + RabbitMQ. RENAPER se integra con timeouts, circuit breaker y estado pendiente, sin bloquear el cierre local.
+Normal: DECISIÓN A. Un despliegue Spring Boot modular, PostgreSQL + object storage, RabbitMQ selectivo y sincronización offline idempotente. La complejidad se concentra en las garantías que el dominio exige, no en la cantidad de servicios.
+Heading 2: 2.2 Escenario B — Quince agencias en doce meses
+Prompt: NUEVA SITUACIÓN: 1 → 15 agencias en 3 provincias; 50 → 800 operadores; 200 → 5.000 registros/día con pico 8–9 h; SLA 99,9 %; equipo de 4 desarrolladores; residencia de datos sujeta a normativa local. El sistema actual es monolito modular Spring Boot + PostgreSQL + object storage + RabbitMQ selectivo.
+PREGUNTAS: ¿Cómo escalar sin big-bang? ¿Qué estrategia de multi-tenancy usarías? ¿Qué módulo extraerías primero? ¿Kubernetes, Swarm u otra opción? ¿Cambiarías RabbitMQ por Kafka? Definí umbrales de revisión.
+Normal: Recomendación del asistente. Patrón Strangler Fig, gateway delante del monolito, tenant en claims, aislamiento de datos por agencia, extracción progresiva de Biometría y Alertas, y eventual orquestación de contenedores.
+Normal: Evaluación humana. Se adopta la migración progresiva y se condiciona el multi-tenancy a la evaluación institucional de aislamiento, backups y reportes. Kafka y Kubernetes se rechazan por ahora: 5.000 registros/día no justifican su costo, y un equipo de cuatro personas debe priorizar observabilidad, recuperación y seguridad.
+Normal: DECISIÓN B. Extraer primero Biometría si su latencia o pico degrada el sistema; luego Alertas/Evidencia si requieren escalado o despliegue independiente. Mantener RabbitMQ hasta que throughput, retención o replay justifiquen otra plataforma. Orquestar solo cuando haya varios nodos y capacidad operativa sostenida.
+Heading 2: 2.3 Comparación y defensa de diferencias
+Heading 2: 2.4 Aprendizaje sobre prompts
+Normal: Un prompt arquitectónico mejora cuando incluye usuarios, concurrencia, picos, equipo, infraestructura, SLA, sensibilidad de datos e integraciones externas.
+Normal: Pedir alternativas, descartes y umbrales evita respuestas de catálogo y obliga al modelo a exponer trade-offs.
+Normal: La segunda iteración no debe cambiar solo el tono: debe agregar evidencia que modifique materialmente la recomendación.
+Normal: La decisión final debe pertenecer al equipo y conservar la trazabilidad entre propuesta, evaluación, riesgo y condición de revisión.
+Heading 1: 3. Actividad N° 3 — Prototipado de una app funcional con IA
+Normal: DOMINIO ELEGIDO. Supervisión de personas. La app móvil acompaña a operadores que realizan visitas con tablets institucionales y debe funcionar bajo condiciones físicas y de conectividad adversas.
+Heading 2: 3.1 Descripción inicial
+Prompt: Aplicación móvil para tablet Android 10” LTE institucional usada por operadores que realizan visitas de supervisión. Usuarios adultos, formación técnica media, trabajo en domicilios y centros de control, bajo sol, con señal irregular y a veces una mano ocupada. Debe mostrar agenda priorizada, formularios tipificados, GPS y hora automáticos, identificación DNI/rostro, firma y modo offline total. La UI debe tener alto contraste, targets grandes, columna única y estado permanente de conexión, GPS, batería y sincronización.
+Heading 2: 3.2 Exploración visual y criterio humano
+Normal: La exploración conceptual se realizó con prompts para Midjourney y la estructura se refinó con herramientas de diseño asistido. La IA tendió a generar tarjetas de apariencia consumer, layouts de dos columnas y campos libres. El equipo corrigió esas decisiones para responder al contexto real: fondo claro para lectura prolongada y exterior, encabezado institucional oscuro, color reservado a estados, controles grandes, orden lineal y confirmaciones explícitas.
+Heading 2: 3.3 Pantallas funcionales
+Normal: Se entregan tres pantallas mínimas coherentes con la consigna: inicio, funcionalidad principal y perfil/configuración. Las capturas completas se incluyen en el Anexo A para mantener la lectura narrativa de esta actividad.
+Normal: Inicio — Hoja de ruta: progreso del turno, pendientes, vencimientos, conexión y cola offline.
+Normal: Funcionalidad principal — Visita en curso: registro automático, identificación, formulario tipificado, firma y cierre idempotente.
+Normal: Perfil y equipo — Estado operativo: actas pendientes, GPS, conectividad, batería, almacenamiento, preferencias y seguridad.
+Heading 2: 3.4 Justificación visual y estructural
+Normal: Jerarquía: primero el estado del dispositivo, luego la urgencia de la tarea y finalmente la acción siguiente.
+Normal: Color: verde para verificado/completado, ámbar para pendiente o degradado y rojo para crítico; siempre acompañado por texto o icono.
+Normal: Tipografía: sans serif legible; monoespaciada únicamente para coordenadas, horas, identificadores y valores técnicos.
+Normal: Prevención: la acción irreversible aparece al final, requiere datos completos y explica qué ocurrirá si no hay señal.
+Normal: Accesibilidad: objetivos táctiles amplios, contraste suficiente, redundancia de color y lenguaje directo.
+Heading 2: 3.5 Guion breve de presentación
+Normal: Problema y usuarios: por qué la planilla no alcanza y en qué condiciones trabaja el operador.
+Normal: Proceso generativo: prompt inicial, alternativas visuales y errores detectados.
+Normal: Recorrido: hoja de ruta → visita → identificación/formulario → cierre → sincronización.
+Normal: Decisiones: offline visible, datos tipificados, biometría no ficticia y arquitectura ajustada a escala.
+Normal: Cierre crítico: qué aceleró la IA y qué debió decidir el equipo.
+Heading 1: 4. Actividad N° 4 — Diseño de la interfaz de una app usando IA
+Heading 2: 4.1 Identificación del problema y solución
+Normal: Planillero digitaliza las visitas de supervisión de personas. Registra ubicación y tiempo, guía la identificación y los formularios, permite firmar y conserva la información para sincronizarla de forma segura. El operador puede completar la tarea sin señal; el supervisor central recibe estados y alertas cuando vuelve la conexión.
+Heading 2: 4.2 Usuarios y funcionalidades clave
+Normal: Operador: consulta la ruta, inicia visitas, identifica, completa formularios, firma y controla pendientes.
+Normal: Supervisor central: planifica, reasigna, supervisa estados, reconoce alertas y consulta evidencias.
+Normal: Administrador: gestiona usuarios, roles, sesiones, plantillas y políticas institucionales.
+Normal: Funcionalidades principales: agenda/ruta, captura automática, identificación, formularios por tipo, offline-first, alertas y tablero central.
+Heading 2: 4.3 Prompt para generación visual
+Prompt: High-fidelity tablet UI for PLANILLERO MÓVIL, an app used by operators who supervise people during field visits. Light neutral body for outdoor readability, navy institutional header, large touch targets, single-column workflow, clear sans-serif typography. Show route progress, visit cards with text + icon status, GPS and timestamp confirmation, typed controls, guided DNI/face capture, visible encrypted offline queue, and unambiguous close-and-send action. Serious and trustworthy, no decorative gradients, no free-text fields by default, WCAG-aware contrast, portrait tablet.
+Heading 2: 4.4 Wireframe funcional
+Normal: Las tres pantallas móviles satisfacen las piezas exigidas por la consigna. El anexo agrega Planillero Central como cuarta evidencia complementaria, pero mantiene un único vocabulario de estados para evitar que la app móvil y el centro web parezcan productos distintos.
+Heading 2: 4.5 Justificación de decisiones
+Normal: Estilo visual: institucional y sobrio, con fondo claro para uso prolongado y navy como ancla de autoridad.
+Normal: Distribución: información de contexto antes que acción; cada pantalla responde qué ocurre, qué falta y qué debe hacerse.
+Normal: Experiencia: el usuario entiende si la evidencia quedó local, pendiente, enviada, validada o rechazada; esos estados nunca se infieren solo por color.
+Normal: Mejoras: se eliminaron placeholders, se evitó superponer texto sobre la cámara, se corrigió la inconsistencia PWA/React Native y se unificó el vocabulario móvil/central.
+Normal: RESPUESTA A LA CONSIGNA. El documento incluye problema y solución, usuarios, más de tres funcionalidades, prompt visual, tres wireframes funcionales, justificación crítica y presentación clara. El uso de prototipos HTML/capturas se considera equivalente funcional al frame de Figma AI y conserva la evidencia editable del proceso.
+Heading 1: 5. Resolución técnica final
+Heading 2: 5.1 Stack y responsabilidades
+Heading 2: 5.2 Estados comunes de negocio
+Heading 2: 5.3 Riesgos y mitigaciones
+Heading 2: 5.4 Definición de terminado para el práctico
+Normal: Las cuatro actividades están identificadas, resueltas y conectadas por el mismo caso.
+Normal: Los prompts incluyen contexto y permiten comparar la recomendación de IA con la decisión humana.
+Normal: Las tres capturas móviles son legibles, coherentes y no contienen placeholders ni solapamientos.
+Normal: El anexo central usa los mismos estados y aporta una vista real del supervisor.
+Normal: La arquitectura presenta una sola decisión inicial y registra alternativas con condiciones de revisión.
+Normal: La integridad probatoria se respalda mediante controles implementables y verificables.
+Heading 1: 6. Conclusiones y autoevaluación
+Normal: La resolución final transforma propuestas heterogéneas en un único producto defendible. La app móvil responde al contexto físico del operador y conserva el trabajo sin conectividad. El centro web prioriza excepciones y decisiones del supervisor. El backend adopta modularidad sin distribuir prematuramente la operación. La evidencia se trata como un ciclo de custodia y verificación, no como una etiqueta criptográfica.
+Normal: La principal lección sobre IA es metodológica: un modelo puede enumerar alternativas, redactar prompts, proponer componentes y acelerar prototipos, pero no conoce por sí solo la escala, la normativa, el hardware ni las consecuencias de una decisión institucional. El equipo agrega esos límites, discute contradicciones y conserva la responsabilidad sobre la solución.
+Heading 1: 7. Fuentes y artefactos del proyecto
+Normal: Actividades Prácticas M1 U4.pdf — consigna oficial de las cuatro actividades.
+Normal: Comparativa_y_Propuesta_Final_App_Planillero.docx — evaluación comparativa, decisión recomendada y plan de consolidación.
+Normal: Nacho - Big Pickle — cuatro actividades Markdown, prototipos HTML y capturas.
+Normal: Fer - DeepSeek — historias de usuario, casos de uso, MoSCoW, arquitectura, datos y proceso de co-diseño.
+Normal: Mati - Claude — entregable integral, requerimientos, backlog y tres wireframes móviles.
+Normal: Fer - Gemini — aportes de evidencia, PostgreSQL + JSONB y almacenamiento de objetos.
+Normal: Fede - Claude — prototipos HTML de Planillero Central y justificación de UX del supervisor.
+Normal: Criterio de uso: cuando existían versiones duplicadas, se priorizó el artefacto más completo y se contrastó con los restantes. Las referencias a RENAPER, SIGME, WORM y sellado temporal describen integraciones o controles propuestos; su disponibilidad jurídica y técnica debe validarse antes de una implementación real.
+Heading 1: Anexo A — Capturas móviles finales
+Normal: Las siguientes capturas corresponden al flujo consolidado de Planillero Móvil. Los nombres y documentos son demostrativos o se encuentran enmascarados.
+Caption: Figura A1. Inicio — hoja de ruta, vencimientos y cola offline visible.
+Caption: Figura A2. Funcionalidad principal — visita, evidencia, formulario y firma.
+Caption: Figura A3. Perfil y equipo — pendientes, conectividad y seguridad.
+Heading 1: Anexo B — Planillero Central
+Normal: El tablero web completa la experiencia del supervisor sin duplicar la lógica móvil. Su tarea principal es señalar excepciones: visitas próximas a vencer, operadores demorados, rutas sin asignar y acciones que requieren reconocimiento.
+Caption: Figura B1. Panel principal — métricas, progreso y estados de operadores.
+Normal: Los estados coinciden con Planillero Móvil y muestran última actualización.
+Normal: El color funciona como apoyo; cada estado conserva etiqueta textual.
+Normal: Las acciones se orientan a asignar, revisar rutas y atender desvíos.
+Normal: Seguridad complementaria: 2FA, sesiones activas, roles y auditoría de cambios.
+
+
+--- TABLAS ---
+
+Table 1:
+Deficiencia actual | Impacto operativo o probatorio | Respuesta de Planillero
+Registro manuscrito | Ilegibilidad, pérdida o alteración | Formulario digital tipificado e identificado de forma única
+Sin GPS ni hora verificable | No acredita presencia en el domicilio | Captura automática con precisión y doble referencia temporal
+Identidad no verificada | Riesgo de suplantación | DNI frente/dorso + rostro + cotejo RENAPER
+Trabajo sin señal | Carga tardía o pérdida de información | Base local cifrada, cola visible y sincronización idempotente
+Central sin visibilidad | Alertas tardías y supervisión reactiva | Tablero de estados, alertas y trazabilidad de acciones
+
+Table 2:
+Usuario | Necesidad principal | Contexto
+Operador | Ejecutar visitas y registrar evidencia sin ambigüedad | Tablet institucional; sol, guantes, una mano ocupada y señal irregular
+Supervisor central | Planificar rutas, detectar excepciones y responder a alertas | PC de oficina; conexión estable; supervisión simultánea
+Administrador | Gestionar usuarios, roles, plantillas y políticas | Entorno institucional controlado
+Persona controlada | Ser identificada y firmar cuando corresponda | No opera el sistema; sus datos requieren minimización y protección
+
+Table 3:
+ID | Capacidad MVP | Criterio de aceptación verificable
+MVP-01 | Agenda y hoja de ruta | El operador ve visitas asignadas, vencimientos, orden y progreso aun sin conectividad.
+MVP-02 | Inicio de visita | Al abrirla se registran latitud, longitud, precisión, hora del dispositivo e identificador único.
+MVP-03 | Identificación guiada | Se capturan DNI frente/dorso y rostro; offline queda pendiente, nunca se informa match ficticio.
+MVP-04 | Formularios tipificados | La plantilla cambia por tipo de trabajo, valida obligatorios y restringe texto libre a excepciones autorizadas.
+MVP-05 | Evidencia y firma | Fotos, croquis, adjuntos y firma quedan vinculados a visita, actor, dispositivo y versión de plantilla.
+MVP-06 | Offline-first | El cierre local no pierde datos; cada reintento conserva el mismo idempotency key y no duplica actas.
+MVP-07 | Alertas | Un resultado crítico crea una alerta persistente; si está offline se publica al recuperar conexión.
+MVP-08 | Planillero Central | El supervisor ve estado/progreso, reconoce alertas y consulta la evidencia de cada visita.
+MVP-09 | Seguridad | OIDC/OAuth2, RBAC, 2FA para roles sensibles, cifrado, auditoría y revocación de sesiones.
+MVP-10 | Integridad probatoria | La verificación detecta alteraciones, conserva trazas de acceso y aplica retención definida.
+
+Table 4:
+Tema | Sugerencia de IA | Decisión del equipo | Condición de revisión
+Backend | Monolito modular | Adoptado: un deploy con límites Visitas, Formularios, Identidad, Evidencia, Alertas y Administración | Extraer solo por carga, aislamiento o ciclo de despliegue medible
+Mensajería | Evitar broker o usarlo ampliamente | RabbitMQ selectivo + outbox para alertas, evidencia y ráfagas de sincronización | Revisar si colas/latencias muestran cuello de botella
+Cliente móvil | PWA o React Native | React Native offline-first por cámara, GPS, almacenamiento seguro y control del dispositivo | Spike de hardware para biometría; PWA solo si las APIs objetivo alcanzan
+Datos | SQL + archivos | PostgreSQL + JSONB versionado + object storage cifrado/WORM | Particionar/archivar según volumen y retención
+
+Table 5:
+Paso | Aporte de la IA | Intervención humana | Resultado
+Problema | Enumeró funciones y actores | Acotó el dominio a la visita y al centro de control | Relato único y evaluable
+Arquitectura | Comparó patrones conocidos | Aportó escala, equipo, hardware y normativa | Monolito modular, extraíble
+Datos | Propuso hash y object storage | Completó claves, auditoría, retención e idempotencia | Custodia verificable
+UX | Generó layouts y estilos | Priorizó sol, guantes, señal y prevención de error | Interfaz de campo y central coherentes
+Alcance | Sugirió funciones adicionales | Aplicó MoSCoW y backlog | MVP con aceptación
+
+Table 6:
+Dimensión | Escenario A | Escenario B | Justificación
+Patrón | Monolito modular | Strangler Fig hacia servicios selectivos | La escala no cambia los dominios, sí la necesidad de aislar carga y despliegue
+Datos | Esquema institucional único | Aislamiento por agencia sujeto a gobierno de datos | Aparecen jurisdicciones y políticas de acceso diferenciadas
+Mensajería | RabbitMQ selectivo | Más consumidores, sin Kafka automático | El volumen sigue siendo bajo; replay/streaming debe probar su necesidad
+Escalado | Vertical y réplica de respaldo | Horizontal en módulos extraídos | Biometría y evidencia tienen curvas distintas al núcleo transaccional
+Operación | docker compose / servicios del SO | Orquestador cuando haya varios nodos | La plataforma debe ser operable por el equipo real
+Riesgo | Acoplamiento si no se respetan límites | Complejidad distribuida y migración | Cada escenario acepta un costo diferente por una necesidad observable
+
+Table 7:
+Propuesta generativa | Evaluación | Corrección aplicada
+Dos columnas en tablet | Aumenta barrido visual y errores con una mano | Columna única con acción principal al final
+Texto libre por defecto | Genera informes ambiguos | Selectores y catálogos; excepción autorizada y trazable
+GPS oculto | Reduce confianza en la captura | Bloque visible con coordenadas, precisión y hora
+Biometría opcional | Debilita el flujo probatorio | Paso previo al cierre; estado pendiente si no hay red
+Dark mode completo | Menor legibilidad exterior/prolongada | Cuerpo claro, navy para jerarquía y color semántico
+
+Table 8:
+Pantalla | Componentes | Decisión de UX
+Hoja de ruta | Progreso, filtros, tarjetas, vencimientos, mapa, iniciar | Prioriza excepciones y hace visible la cola sin bloquear
+Visita en curso | GPS/hora, identidad, controles, firma, cierre | Ordena evidencia antes de la acción irreversible
+Perfil y equipo | Pendientes, conectividad, batería, almacenamiento, seguridad | Convierte el offline en un estado gestionable
+Planillero Central | Métricas, tabla de operadores, progreso, estados, asignación | Orienta al supervisor a lo que está fuera de SLA
+
+Table 9:
+Capa | Decisión inicial | Responsabilidad
+Móvil | React Native + base local cifrada | Captura de campo, cola offline, cámara/GPS, firma y estado del dispositivo
+Web | Angular SPA | Planificación, tablero, alertas, consulta y administración
+Backend | Spring Boot monolito modular | Reglas de dominio, APIs, integración, auditoría e idempotencia
+Datos | PostgreSQL + JSONB | Transacciones, respuestas versionadas, catálogos y estados
+Evidencia | Object storage cifrado/WORM | Fotos, documentos, croquis, firmas y manifiestos
+Eventos | Outbox + RabbitMQ selectivo | Alertas, procesamiento de evidencia y sincronizaciones en ráfaga
+Seguridad | OIDC/OAuth2, RBAC, 2FA, KMS | Identidad de usuarios, privilegios, claves, sesiones y trazabilidad
+
+Table 10:
+Objeto | Estados normalizados | Regla visible
+Visita | asignada · en ruta · en curso · cerrada local · sincronizada · observada | Móvil y central muestran el mismo término
+Evidencia | pendiente · cargando · recibida · verificada · inconsistente | Nunca usar “segura” sin resultado de verificación
+Biometría | pendiente · positiva · negativa · no disponible | Offline no equivale a identidad verificada
+Alerta | nueva · reconocida · en gestión · cerrada | Toda transición registra actor y hora
+Operador | sin asignar · sin iniciar · en campo · demorado · offline · turno completo | Color + texto + última actualización
+
+Table 11:
+Riesgo | Mitigación | Evidencia de control
+Alteración o sustitución de evidencia | Hash, manifiesto firmado/HMAC, WORM, auditoría y verificación periódica | Resultado de verificación y trazas exportables
+Duplicación por reintentos | ID cliente + idempotency key + restricción única | Mismo envío repetido produce la misma visita
+Caída o latencia RENAPER | Timeout, circuit breaker y estado pendiente | La visita se cierra localmente sin inventar un match
+Pérdida del dispositivo | Cifrado, PIN, sesión corta, revocación y borrado administrado | Dispositivo/usuario vinculados y auditados
+Sobrediseño distribuido | Monolito modular y umbrales de extracción | Decisión arquitectónica revisada por métricas
+Uso indebido de biometría | Minimización, permisos, retención y trazabilidad de acceso | Política aprobada y logs de consulta
+
+Table 12:
+Criterio | Sustento
+Claridad del problema y solución | Problema real, usuarios, alcance y propuesta verificable
+Precisión y creatividad de prompts | Prompts contextuales, iterativos, con métricas y descartes
+Coherencia y funcionalidad | Flujo móvil completo + tablero central + estados comunes
+Justificación crítica | Alternativa, beneficio, costo, riesgo y condición de revisión
+Presentación | Documento único, capturas, anexos y fuentes editables
+

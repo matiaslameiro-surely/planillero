@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagrama de Gantt - Proyecto Planillero (Jira PLAN)</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+  <style>
+    :root {
+      --primary: #1A365D;
+      --primary-light: #2B6CB0;
+      --bg: #F8FAFC;
+      --card: #FFFFFF;
+      --text: #1E293B;
+      --border: #E2E8F0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 24px;
+    }
+    .header {
+      background: var(--primary);
+      color: white;
+      padding: 24px 32px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    }
+    .header h1 { margin: 0 0 8px 0; font-size: 24px; }
+    .header p { margin: 0; opacity: 0.9; font-size: 14px; }
+    .badges {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      background: rgba(255,255,255,0.15);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .card h2 { margin-top: 0; font-size: 18px; color: var(--primary); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-top: 12px;
+    }
+    th, td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: #F1F5F9;
+      color: #475569;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+    tr:hover { background: #F8FAFC; }
+    .jira-key {
+      background: #E0E7FF;
+      color: #3730A3;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      text-decoration: none;
+      font-family: monospace;
+    }
+    .jira-key:hover { background: #C7D2FE; }
+    .tag-sprint {
+      background: #FEF3C7;
+      color: #92400E;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .user-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+    }
+    .avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #CBD5E1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #334155;
+    }
+    .gantt-chart-container {
+      position: relative;
+      height: 580px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Cronograma & Diagrama de Gantt - Planillero (Jira PLAN)</h1>
+    <p>Tablero Scrum de Jira: <code>https://surely-sa.atlassian.net/jira/software/projects/PLAN/boards/1</code></p>
+    <div class="badges">
+      <div class="badge">4 Desarrolladores Asignados</div>
+      <div class="badge">4 Sprints Programados</div>
+      <div class="badge">18 Tareas Activas en Tablero</div>
+      <div class="badge">Rotación Fullstack Equitativa</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Visualización Temporal de Sprints y Tareas (Gantt)</h2>
+    <div class="gantt-chart-container">
+      <canvas id="ganttChart"></canvas>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Matriz de Tareas Cargadas en Jira por Sprint y Desarrollador</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Clave Jira</th>
+          <th>Sprint</th>
+          <th>Tarea / Requerimiento</th>
+          <th>Responsable</th>
+          <th>Fecha Fin</th>
+          <th>Foco de Desarrollo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://surely-sa.atlassian.net/browse/PLAN-4" target="_blank" class="jira-key">PLAN-4</a></td>
+          <td><span class="tag-sprint">Sprint 1</span></td>
+          <td>Esqueleto inicial del backoffice (Angular)</td>
+          <td><span class="user-pill"><span class="avatar">FM</span> Federico Morón</span></td>
+          <td>2026-09-22</td>
+          <td>Frontend Web</td>
+        </tr>
+        <tr>
+          <td><a href="https://surely-sa.atlassian.net/browse/PLAN-5" target="_blank" class="jira-key">PLAN-5</a></td>
+          <td><span class="tag-sprint">Sprint 1</span></td>
+          <td>TASK-01: Persistencia PostgreSQL y Conexión Backend</td>
+          <td><span class="user-pill"><span class="avatar">FC</span> Fernando Chamorro</span></td>
+          <td>2026-09-22</td>
+          <td>Persistencia / BD</td>
+        </tr>
+        <tr>
+          <td><a href="https://surely-sa.atlassian.net/browse/PLAN-6" target="_blank" class="jira-key">PLAN-6</a></td>
+          <td><span class="tag-sprint">Sprint 1</span></td>
+          <td>TASK-03: Autenticación Centralizada (OIDC/JWT) y Control RBAC</td>
+          <td><span class="user-pill"><span class="avatar">JU</span> Juan Ignacio Urrutia</span></td>
+          <td>2026-09-22</td>
+          <td>Backend / Seguridad</td>
+        </tr>
+        <tr>
+          <td><a href="https://surely-sa.atlassian.net/browse/PLAN-3" target="_blank" class="jira-key">PLAN-3</a></td>
+          <td><span class="tag-sprint">Sprint 1</span></td>
+          <td>Esqueleto inicial del frontend (React Native + Expo)</td>
+          <td><span class="user-pill"><span class="avatar">ML</span> Matías Lameiro</span></td>
+          <td>2026-09-22</td>
+          <td>Frontend Móvil</td>
+        </tr>
+        <tr>
+          <td><a href="https://surely-sa.atlassian.net/browse/PLAN-2" target="_blank" class="jira-key">PLAN-2</a></td>
+          <td><span class="tag-sprint">Sprint 1</span></td>
+          <td>Esqueleto inicial del backend (Spring Boot)</td>
+          <td><span class="user-pill"><span class="avatar">ML</span> Matías Lameiro</span></td>
+          <td>2026-09-22</td>
+          <td>Backend Core</td>
+        </tr>
+
+        <tr>
+          <td><a href="https://surely-sa.atlassian.net/browse/PLAN-9" target="_blank" class="jira-key">PLAN-9</a></td>
+          <td><span class="tag-sprint">Sprint 2</span></td>
+          <td>TASK-04 + TASK-05: Agenda Offline e Inicio Visita con GPS</td>
+          <td><span class="user-pill"><span class="avatar">FM</span> Federico Morón</span></td>
+          <td>2026-09-28</td>
+          <td>Frontend Móvil</td>
+        </tr>
+        <tr>
+          <td><a href="https://surely-sa.atlassian.net/browse/PLAN-10" target="_blank" class="jira-key">PLAN-10</a></td>
+          <td><span class="tag-sprint">Sprint 2</span></td>
+          <td>TASK-08: Registro de Evidencias, Firma y Manifiesto HMAC</td>
+          <td><span class="user-pill"><span class="avatar">FC</span> Fernando Chamorro</span></td>
+          <td>2026-09-28</td>
+          <td>Backend / Cripto</td>
+        </tr>
+        <tr>
+          <td><a href="https://surely-sa.atlassian.net/browse/PLAN-8" target="_blank" class="jira-key">PLAN-8</a></td>
+          <td><span class="tag-sprint">Sprint 2</span></td>
+          <td>TASK-04 (Web): Asignación y Planificación de Rutas</td>
+          <td><span class="user-pill"><span class="avatar">JU</span> Juan Ignacio Urrutia</span></td>
+          <td>2026-09-28</td>
+          <td>Frontend Web</td>
+        </tr>
+        <tr>
+          <td><a href="https://surely-sa.atlassian.net/browse/PLAN-7" target="_blank" class="jira-key">PLAN-7</a></td>
+          <td><span class="tag-sprint">Sprint 2</span></td>
+          <td>TASK-07 (Backend): Motor Validación JSON Schema y JSONB</td>
+          <td><span class="user-pill"><span class="avatar">ML</span> Matías Lameiro</span></td>
+          <td>2026-09-28</td>
+          <td>Backend / BD</td>
+        </tr>
+
+        <tr>
+          <td><a href="https://surely-sa.atlassian.net/browse/PLAN-11" target="_blank" class="jira-key">PLAN-11</a></td>
+          <td><span class="tag-sprint">Sprint 3</span></td>
+          <td>TASK-12: Auditoría Inmutable Append-Only y Verificación</td>
+          <td><span class="user-pill"><span class="avatar">FM</span> Federico Morón</span></td>
+          <td>2026-10-04</td>
+          <td>Backend / Auditoría</td>
+        </tr>
+        <tr>
+          <td><a href="https://surely-sa.atlassian.net/browse/PLAN-12" target="_blank" class="jira-key">PLAN-12</a></td>
+          <td><span class="tag-sprint">Sprint 3</span></td>
+          <td>TASK-11: Tablero Central de Supervisión y Polling HTTP</td>
+          <td><span class="user-pill"><span class="avatar">FC</span> Fernando Chamorro</span></td>
+          <td>2026-10-04</td>
+          <td>Frontend Web</td>
+        </tr>
+        <tr>
+          <td><a href="https://surely-sa.atlassian.net/browse/PLAN-13" target="_blank" class="jira-key">PLAN-13</a></td>
+          <td><span class="tag-sprint">Sprint 3</span></td>
+          <td>TASK-07 (Móvil): Renderizador Dinámico de Formularios</td>
+          <td><span class="user-pill"><span class="avatar">JU</span> Juan Ignacio Urrutia</span></td>
+          <td>2026-10-04</td>
+          <td>Frontend Móvil</td>
+        </tr>
+        <tr>
+          <td><a href="https://surely-sa.atlassian.net/browse/PLAN-14" target="_blank" class="jira-key">PLAN-14</a></td>
+          <td><span class="tag-sprint">Sprint 3</span></td>
+          <td>TASK-09: Motor Sync Offline con Idempotency Keys</td>
+          <td><span class="user-pill"><span class="avatar">ML</span> Matías Lameiro</span></td>
+          <td>2026-10-04</td>
+          <td>Fullstack Sync</td>
+        </tr>
+
+        <tr>
+          <td><a href="https://surely-sa.atlassian.net/browse/PLAN-15" target="_blank" class="jira-key">PLAN-15</a></td>
+          <td><span class="tag-sprint">Sprint 4</span></td>
+          <td>TASK-02: Dockerización Integral del Ecosistema</td>
+          <td><span class="user-pill"><span class="avatar">FM</span> Federico Morón</span></td>
+          <td>2026-10-09</td>
+          <td>DevOps / Infra</td>
+        </tr>
+        <tr>
+          <td><a href="https://surely-sa.atlassian.net/browse/PLAN-16" target="_blank" class="jira-key">PLAN-16</a></td>
+          <td><span class="tag-sprint">Sprint 4</span></td>
+          <td>Auditoría UX Móvil: Evaluación Ergonómica de Campo</td>
+          <td><span class="user-pill"><span class="avatar">FC</span> Fernando Chamorro</span></td>
+          <td>2026-10-09</td>
+          <td>UX Móvil</td>
+        </tr>
+        <tr>
+          <td><a href="https://surely-sa.atlassian.net/browse/PLAN-17" target="_blank" class="jira-key">PLAN-17</a></td>
+          <td><span class="tag-sprint">Sprint 4</span></td>
+          <td>Ciberseguridad y Demo: Riesgos OWASP, Secretos y Video</td>
+          <td><span class="user-pill"><span class="avatar">JU</span> Juan Ignacio Urrutia</span></td>
+          <td>2026-10-09</td>
+          <td>Ciberseguridad / QA</td>
+        </tr>
+        <tr>
+          <td><a href="https://surely-sa.atlassian.net/browse/PLAN-18" target="_blank" class="jira-key">PLAN-18</a></td>
+          <td><span class="tag-sprint">Sprint 4</span></td>
+          <td>Auditoría UX/UI Web: Heurísticas de Nielsen en Angular</td>
+          <td><span class="user-pill"><span class="avatar">ML</span> Matías Lameiro</span></td>
+          <td>2026-10-09</td>
+          <td>UX/UI Web</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('ganttChart').getContext('2d');
+    const data = {
+      labels: [
+        'PLAN-4: Scaffolding Angular (Federico)',
+        'PLAN-5: Postgres & Flyway (Fernando)',
+        'PLAN-6: Security & JWT (Juan Ignacio)',
+        'PLAN-3: Scaffolding RN (Matías)',
+        'PLAN-9: Agenda & GPS (Federico)',
+        'PLAN-10: Evidencias & SHA-256 (Fernando)',
+        'PLAN-8: Asignación Rutas Web (Juan Ignacio)',
+        'PLAN-7: JSON Schema Backend (Matías)',
+        'PLAN-11: Auditoría Append-Only (Federico)',
+        'PLAN-12: Tablero Central Web (Fernando)',
+        'PLAN-13: Formulario Móvil (Juan Ignacio)',
+        'PLAN-14: Sync & Idempotencia (Matías)',
+        'PLAN-15: Docker Compose Final (Federico)',
+        'PLAN-16: Auditoría UX Móvil (Fernando)',
+        'PLAN-17: Seguridad & Video Demo (Juan Ignacio)',
+        'PLAN-18: Auditoría UX Web (Matías)'
+      ],
+      datasets: [{
+        label: 'Duración de Tarea',
+        data: [
+          [new Date('2026-09-17').getTime(), new Date('2026-09-22').getTime()],
+          [new Date('2026-09-17').getTime(), new Date('2026-09-22').getTime()],
+          [new Date('2026-09-17').getTime(), new Date('2026-09-22').getTime()],
+          [new Date('2026-09-17').getTime(), new Date('2026-09-22').getTime()],
+          [new Date('2026-09-23').getTime(), new Date('2026-09-28').getTime()],
+          [new Date('2026-09-23').getTime(), new Date('2026-09-28').getTime()],
+          [new Date('2026-09-23').getTime(), new Date('2026-09-28').getTime()],
+          [new Date('2026-09-23').getTime(), new Date('2026-09-28').getTime()],
+          [new Date('2026-09-29').getTime(), new Date('2026-10-04').getTime()],
+          [new Date('2026-09-29').getTime(), new Date('2026-10-04').getTime()],
+          [new Date('2026-09-29').getTime(), new Date('2026-10-04').getTime()],
+          [new Date('2026-09-29').getTime(), new Date('2026-10-04').getTime()],
+          [new Date('2026-10-05').getTime(), new Date('2026-10-09').getTime()],
+          [new Date('2026-10-05').getTime(), new Date('2026-10-09').getTime()],
+          [new Date('2026-10-05').getTime(), new Date('2026-10-09').getTime()],
+          [new Date('2026-10-05').getTime(), new Date('2026-10-09').getTime()]
+        ],
+        backgroundColor: [
+          '#3B82F6', '#10B981', '#F59E0B', '#8B5CF6',
+          '#3B82F6', '#10B981', '#F59E0B', '#8B5CF6',
+          '#3B82F6', '#10B981', '#F59E0B', '#8B5CF6',
+          '#3B82F6', '#10B981', '#F59E0B', '#8B5CF6'
+        ],
+        borderRadius: 6
+      }]
+    };
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: data,
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const start = new Date(context.raw[0]).toLocaleDateString();
+                const end = new Date(context.raw[1]).toLocaleDateString();
+                return `Vigencia: ${start} al ${end}`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            type: 'time',
+            time: { unit: 'day' },
+            min: new Date('2026-09-16').getTime(),
+            max: new Date('2026-10-10').getTime(),
+            grid: { color: '#E2E8F0' }
+          },
+          y: {
+            grid: { display: false }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
