@@ -136,7 +136,29 @@ try {
       // La fase activa es la primera que todavía no terminó.
       estado.fase = FASES.find((f) => estado.fases[f]?.estado !== 'ok') || 'cerrada';
       escribirJson(rutaEstado(carpeta), estado);
-      emitir({ ok: true, fase: estado.fase, fases: estado.fases });
+
+      // Marcar una fase como ok dejando anteriores sin cerrar deja la fase activa mintiendo:
+      // pasa a apuntar al hueco y no al avance real. No se bloquea —a veces se retoma trabajo
+      // ya hecho— pero se avisa, porque casi siempre es un paso salteado por distracción.
+      const pendientesPrevias =
+        nuevoEstado === 'ok'
+          ? FASES.slice(0, FASES.indexOf(fase)).filter((f) => estado.fases[f]?.estado !== 'ok')
+          : [];
+
+      emitir({
+        ok: true,
+        fase: estado.fase,
+        fases: estado.fases,
+        ...(pendientesPrevias.length
+          ? {
+              aviso:
+                `Marcaste "${fase}" como ok pero quedaron sin cerrar fases anteriores: ` +
+                `${pendientesPrevias.join(', ')}. Por eso la fase activa figura como ` +
+                `"${estado.fase}". Cerralas o revisá si te salteaste un paso.`,
+              pendientesPrevias,
+            }
+          : {}),
+      });
       break;
     }
 

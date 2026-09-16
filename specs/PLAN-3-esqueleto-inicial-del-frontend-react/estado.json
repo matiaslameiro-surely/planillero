@@ -6,11 +6,12 @@
   "alcance": [
     "frontend"
   ],
-  "fase": "preparacion",
+  "fase": "cerrada",
   "fases": {
     "preparacion": {
-      "estado": "en_curso",
-      "ts": "2026-09-16T13:15:16.937Z"
+      "estado": "ok",
+      "ts": "2026-09-16T13:32:23.122Z",
+      "nota": "Cerrada a posteriori: el issue se creo y transiciono, pero no se registro en su momento"
     },
     "spec": {
       "estado": "ok",
@@ -34,7 +35,7 @@
     },
     "cerrada": {
       "estado": "ok",
-      "ts": "2026-09-16T13:31:53.872Z"
+      "ts": "2026-09-16T13:32:23.057Z"
     }
   },
   "commits": {
