@@ -80,6 +80,18 @@ El detalle completo, con artefactos y frenos, está en **`.agents/protocolo.md`*
 
 ## Convenciones
 
+**Nombre de la empresa** — no se nombra a la empresa en ningún lado: ni en paquetes, namespaces,
+dominios, títulos, textos de UI, comentarios ni datos. La única excepción son las direcciones de
+correo, donde el dominio real es parte del dato. El paquete raíz del backend es `ar.com.planillero`,
+por producto y no por empresa.
+
+Las URLs de los repos (`github.com/matiaslameiro-surely/…`) son la excepción inevitable: el nombre
+está en el owner de la cuenta. Son infraestructura, no una mención en el producto.
+
+**Datos** — todo dato de ejemplo, fixture, seed o caso de prueba es **ficticio**. Nada de nombres de
+clientes, legajos, sueldos ni registros reales, ni siquiera "de ejemplo". Si una spec llega con datos
+que parecen reales, eso es una pregunta abierta, no un detalle a copiar.
+
 **Ramas** — `PLAN-<n>-<slug>`, por ejemplo `PLAN-12-carga-de-planilla`. En una tarea full-stack, **la
 misma rama con el mismo nombre** en `backend/` y `frontend/`.
 

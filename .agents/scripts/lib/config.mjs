@@ -79,18 +79,26 @@ export function reposDelAlcance(cfg, alcance) {
   });
 }
 
-/** Convierte un título de issue en un slug usable como nombre de rama. */
+/**
+ * Convierte un título de issue en un slug usable como nombre de rama.
+ * El recorte respeta las palabras: un nombre de rama vive en el historial para siempre,
+ * y "spring-boo" se lee como un error de tipeo.
+ */
 export function slugificar(texto, maxLargo = 40) {
-  return (
-    texto
-      .normalize('NFD')
-      .replace(/[̀-ͯ]/g, '') // saca tildes
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '')
-      .slice(0, maxLargo)
-      .replace(/-+$/g, '') || 'tarea'
-  );
+  const limpio = texto
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '') // saca tildes
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+  if (limpio.length <= maxLargo) return limpio || 'tarea';
+
+  const cortado = limpio.slice(0, maxLargo);
+  const ultimoGuion = cortado.lastIndexOf('-');
+  // Sólo cortamos por palabra si eso no deja el slug demasiado corto.
+  const final = ultimoGuion > maxLargo * 0.5 ? cortado.slice(0, ultimoGuion) : cortado;
+  return final.replace(/-+$/g, '') || 'tarea';
 }
 
 /** Parseo mínimo de argumentos: --clave valor, --bandera, y posicionales. */

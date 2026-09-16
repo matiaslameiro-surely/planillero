@@ -1,0 +1,42 @@
+{
+  "issue": "PLAN-2",
+  "titulo": "Esqueleto inicial del backend (Spring Boot)",
+  "slug": "esqueleto-inicial-del-backend-spring",
+  "rama": "PLAN-2-esqueleto-inicial-del-backend-spring",
+  "alcance": [
+    "backend"
+  ],
+  "fase": "plan",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-16T12:25:50.767Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-16T12:25:50.953Z"
+    },
+    "plan": {
+      "estado": "pendiente"
+    },
+    "implementar": {
+      "estado": "pendiente"
+    },
+    "verificar": {
+      "estado": "pendiente"
+    },
+    "cerrar": {
+      "estado": "pendiente"
+    },
+    "cerrada": {
+      "estado": "pendiente"
+    }
+  },
+  "commits": {},
+  "revisiones": [],
+  "pr": {},
+  "jira": {
+    "transicionadoA": "10005",
+    "creadoPorHarness": true
+  }
+}
