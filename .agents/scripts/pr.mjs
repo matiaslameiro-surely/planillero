@@ -27,16 +27,25 @@ function repoDeUrl(url) {
   return m ? `${m[1]}/${m[2]}` : null;
 }
 
-/** Los criterios de aceptación de la spec, como checklist para quien revise. */
+/**
+ * Los criterios de aceptación de la spec, como checklist para quien revise.
+ * Un criterio puede ocupar varias líneas: las de continuación se unen a la anterior, porque
+ * cortarlas deja el criterio a mitad de frase y sin la parte que lo hace verificable.
+ */
 function criteriosDeSpec(spec) {
   const seccion = spec.split(/^##\s+Criterios de aceptación\s*$/mi)[1];
   if (!seccion) return [];
-  return seccion
-    .split(/^##\s/m)[0]
-    .split('\n')
-    .map((l) => l.trim())
-    .filter((l) => /^\d+\.\s+\S/.test(l))
-    .map((l) => l.replace(/^\d+\.\s+/, ''));
+
+  const criterios = [];
+  for (const linea of seccion.split(/^##\s/m)[0].split('\n')) {
+    const texto = linea.trim();
+    if (/^\d+\.\s+\S/.test(texto)) {
+      criterios.push(texto.replace(/^\d+\.\s+/, ''));
+    } else if (texto && criterios.length > 0) {
+      criterios[criterios.length - 1] += ` ${texto}`;
+    }
+  }
+  return criterios;
 }
 
 /** La revisión más reciente de un repo: los archivos van numerados. */
