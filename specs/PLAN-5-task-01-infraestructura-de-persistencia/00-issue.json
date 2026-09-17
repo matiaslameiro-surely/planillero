@@ -1,0 +1,14 @@
+{
+  "key": "PLAN-5",
+  "summary": "TASK-01: Infraestructura de Persistencia PostgreSQL y Conexión Backend",
+  "issuetype": "Tarea",
+  "priority": "High",
+  "status": "En curso",
+  "created": "2026-09-16T17:13:39.098-0300",
+  "updated": "2026-09-16T17:18:21.936-0300",
+  "duedate": "2026-09-22",
+  "assignee": "Fernando Chamorro Goncalves",
+  "reporter": "Fernando Chamorro Goncalves",
+  "project": "PLAN",
+  "description": "Creación de la base de datos relacional institucional, definición del esquema base, migraciones con Flyway y conexión resiliente con Spring Data JPA.\n\nAlcance Fullstack:\n- Backend: Spring Data JPA, HikariCP, transaccionalidad, extensiones JSONB y endpoint de salud.\n- Base de Datos: PostgreSQL 16, esquemas lógicos (core, visitas, formularios, auditoria), migraciones Flyway V1__init_schema.sql.\n- Testing: Tests de integración con Testcontainers.\n\nEvaluación UX/UI:\n- Heurística 1 (Visibilidad del estado del sistema): Indicador visual de latencia y disponibilidad de la BD.\n\nEvaluación Ciberseguridad:\n- OWASP A05: Credenciales no expuestas, variables de entorno, conexión SSL/TLS obligatoria, usuario sin privilegios de superusuario."
+}
