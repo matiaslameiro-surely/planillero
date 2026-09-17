@@ -14,20 +14,20 @@ Lo que consumen `frontend` (app móvil) y `backoffice` (web). Lo emite el backen
 
 ## Flujo
 
-1. `POST /auth/login` con usuario y contraseña.
+1. `POST /api/v1/auth/login` con usuario y contraseña.
    - Si el usuario **no** tiene 2FA: responde tokens y termina.
    - Si lo tiene: responde `twoFactorRequired` + `challengeId` y hay que ir al paso 2.
-2. `POST /auth/verify-2fa` con el `challengeId` y el código TOTP de 6 dígitos → tokens. El desafío se
+2. `POST /api/v1/auth/verify-2fa` con el `challengeId` y el código TOTP de 6 dígitos → tokens. El desafío se
    canjea **una sola vez** y los intentos fallidos se cuentan: superado el umbral (5 por defecto en
    15 minutos) responde `429`.
 3. Las llamadas autenticadas llevan `Authorization: Bearer <accessToken>`.
-4. Cuando el access token expira (401), `POST /auth/refresh` con el `refreshToken` → par nuevo. El
+4. Cuando el access token expira (401), `POST /api/v1/auth/refresh` con el `refreshToken` → par nuevo. El
    refresh viejo queda revocado (rotación): hay que guardar el nuevo.
-5. `POST /auth/logout` con el `refreshToken` revoca la sesión.
+5. `POST /api/v1/auth/logout` con el `refreshToken` revoca la sesión.
 
 ## Endpoints
 
-### `POST /auth/login`
+### `POST /api/v1/auth/login`
 
 Público.
 
@@ -56,7 +56,7 @@ Response `429` (fuerza bruta):
 { "error": "too_many_attempts", "message": "Demasiados intentos fallidos. Probá de nuevo más tarde." }
 ```
 
-### `POST /auth/verify-2fa`
+### `POST /api/v1/auth/verify-2fa`
 
 Público. Request:
 ```json
@@ -76,7 +76,7 @@ Response `429` (fuerza bruta sobre el código):
 { "error": "too_many_attempts", "message": "Demasiados intentos fallidos. Probá de nuevo más tarde." }
 ```
 
-### `POST /auth/refresh`
+### `POST /api/v1/auth/refresh`
 
 Público. Request:
 ```json
@@ -87,11 +87,11 @@ Response `200`: `{ "accessToken": "<jwt>", "refreshToken": "<nuevo>" }`
 
 Response `401`: `{ "error": "invalid_refresh_token", "message": "..." }` (revocado, expirado o ya usado)
 
-### `POST /auth/logout`
+### `POST /api/v1/auth/logout`
 
 Público. Request: `{ "refreshToken": "<opaco>" }` → `204`. Idempotente.
 
-### `GET /auth/me`
+### `GET /api/v1/auth/me`
 
 Requiere Bearer. Response `200`:
 ```json
@@ -102,7 +102,7 @@ Requiere Bearer. Response `200`:
 
 Todos requieren Bearer.
 
-- `POST /auth/2fa/setup` → `200`:
+- `POST /api/v1/auth/2fa/setup` → `200`:
   ```json
   { "secret": "<base32>", "otpauthUri": "otpauth://totp/Planillero:admin.demo?secret=...&issuer=Planillero..." }
   ```
@@ -111,13 +111,13 @@ Todos requieren Bearer.
   ```json
   { "error": "two_factor_already_enabled", "message": "El segundo factor ya está habilitado..." }
   ```
-- `POST /auth/2fa/enable` con `{ "code": "123456" }` → `204`. Recién acá el login pide el código.
-- `POST /auth/2fa/disable` con `{ "code": "123456" }` → `204`. Idempotente si ya estaba apagado.
+- `POST /api/v1/auth/2fa/enable` con `{ "code": "123456" }` → `204`. Recién acá el login pide el código.
+- `POST /api/v1/auth/2fa/disable` con `{ "code": "123456" }` → `204`. Idempotente si ya estaba apagado.
 
 ### Endpoints de ejemplo por rol
 
-- `GET /roles/ejemplo-operador` — Bearer con rol `OPERATOR`, `SUPERVISOR` o `ADMINISTRATOR` → `200`.
-- `GET /roles/ejemplo-admin` — Bearer con rol `ADMINISTRATOR` → `200`; otro rol → `403`
+- `GET /api/v1/roles/ejemplo-operador` — Bearer con rol `OPERATOR`, `SUPERVISOR` o `ADMINISTRATOR` → `200`.
+- `GET /api/v1/roles/ejemplo-admin` — Bearer con rol `ADMINISTRATOR` → `200`; otro rol → `403`
 
   ```json
   { "error": "forbidden", "message": "El usuario no tiene permisos para este recurso." }
