@@ -1,0 +1,57 @@
+{
+  "issue": "PLAN-5",
+  "titulo": "TASK-01: Infraestructura de Persistencia PostgreSQL y Conexión Backend",
+  "slug": "task-01-infraestructura-de-persistencia",
+  "rama": "PLAN-5-task-01-infraestructura-de-persistencia",
+  "alcance": [
+    "backend"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-16T21:36:20.850Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-16T21:37:02.637Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-16T21:37:52.378Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-17T16:09:55.441Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-17T16:11:18.099Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-17T16:22:06.572Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-17T16:22:12.607Z"
+    }
+  },
+  "commits": {
+    "backend": "ebc36a41c7000e54c6a5f05194de1dc8108d8296"
+  },
+  "revisiones": [],
+  "pr": {
+    "backend": "https://github.com/matiaslameiro-surely/planillero-backend/pull/2"
+  },
+  "jira": {
+    "transicionadoA": "En revisión",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Antigravity",
+    "modelo": "Gemini 3.8 Flash",
+    "ts": "2026-09-16T21:36:06.106Z",
+    "fin": "2026-09-17T16:22:12.607Z"
+  }
+}
