@@ -25,8 +25,17 @@ Reglas transversales, válidas en todas las fases:
    - una descripción en texto → **pedí confirmación** y creá la Tarea en el proyecto `PLAN`.
 2. **Validar el entorno**: `node .agents/scripts/init.mjs --check`. Si falta algo que bloquea (JDK para
    una tarea de backend, `gh` para poder cerrar), decilo ahora y no al final.
-3. **Verificar que los working trees estén limpios** en los repos del alcance. Si hay cambios sin
-   commitear que no son tuyos → **pará y preguntá**. Nunca ramifiques sobre trabajo ajeno.
+3. **Poner los repos al día**: `node .agents/scripts/sincronizar.mjs`. Hace `fetch` de los tres, y en
+   los que estén limpios y sin trabajo propio vuelve a la rama base y hace `pull --ff-only`.
+
+   No es un trámite: **la fase 2 planifica explorando el código del árbol de trabajo**. Si otra
+   persona mergeó algo y tu copia está vieja, el plan se arma sobre una foto desactualizada y no se
+   nota hasta que aparece un conflicto o se duplica trabajo ya hecho.
+
+   El script **no integra tu trabajo por vos**: si hay cambios sin commitear o estás en una rama con
+   commits propios, trae lo remoto, te avisa y no toca nada. Si algo aparece en `requierenAtencion`,
+   **paralo y preguntá** antes de seguir: nunca ramifiques sobre trabajo ajeno ni sobre una base
+   vieja.
 4. **¿Ya existe `specs/PLAN-<n>-*/`?** Entonces esto es una reanudación: leé `estado.json` y saltá
    directo a la fase que corresponda. No rehagas trabajo hecho.
 5. Crear la carpeta `specs/PLAN-<n>-<slug>/` y el `estado.json` inicial. **Declará con qué modelo

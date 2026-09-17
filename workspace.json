@@ -6,7 +6,6 @@
   ],
   "version": 1,
   "idioma": "es",
-
   "jira": {
     "cloudId": "ece7dd3d-7484-4ca5-89b2-b443f061247a",
     "proyecto": "PLAN",
@@ -15,24 +14,22 @@
     "sitio": "https://surely-sa.atlassian.net",
     "$comentario": "Los IDs se resuelven dinámicamente; esto es sólo fallback y validación.",
     "estados": {
-      "por_hacer": "10004",
-      "en_curso": "10005",
-      "en_revision": "10006",
-      "listo": "10007"
-    }
+      "por_hacer": "11",
+      "en_curso": "21",
+      "en_revision": "31",
+      "finalizado": "41"
+    },
+    "$estados": "IDs de TRANSICION (no de estado), que es lo que recibe transitionJiraIssue. El estado final se llama \"Finalizado\". Se resuelven dinamicamente con listJiraIssueTransitions; esto es fallback y validacion."
   },
-
   "github": {
     "owner": "matiaslameiro-surely",
     "repoHarness": "planillero"
   },
-
   "$orden": [
     "El campo 'orden' define en qué secuencia se implementan los repos de una tarea.",
     "El backend va primero porque define el contrato de API; los clientes lo consumen.",
     "Varios repos pueden compartir número: son independientes entre sí."
   ],
-
   "repos": {
     "backend": {
       "ruta": "backend",
@@ -44,12 +41,24 @@
       "javaVersion": 21,
       "verificacion": {
         "maven": [
-          { "nombre": "compilar", "cmd": "mvnw -B -q -DskipTests compile" },
-          { "nombre": "tests", "cmd": "mvnw -B test" }
+          {
+            "nombre": "compilar",
+            "cmd": "mvnw -B -q -DskipTests compile"
+          },
+          {
+            "nombre": "tests",
+            "cmd": "mvnw -B test"
+          }
         ],
         "gradle": [
-          { "nombre": "compilar", "cmd": "gradlew --console=plain -q compileJava" },
-          { "nombre": "tests", "cmd": "gradlew --console=plain test" }
+          {
+            "nombre": "compilar",
+            "cmd": "gradlew --console=plain -q compileJava"
+          },
+          {
+            "nombre": "tests",
+            "cmd": "gradlew --console=plain test"
+          }
         ]
       }
     },
@@ -62,9 +71,19 @@
       "descripcion": "Aplicación móvil (React Native + Expo)",
       "verificacion": {
         "npm": [
-          { "nombre": "lint", "cmd": "npm run lint" },
-          { "nombre": "tipos", "cmd": "npx tsc --noEmit" },
-          { "nombre": "tests", "cmd": "npm test -- --watchAll=false", "opcional": true }
+          {
+            "nombre": "lint",
+            "cmd": "npm run lint"
+          },
+          {
+            "nombre": "tipos",
+            "cmd": "npx tsc --noEmit"
+          },
+          {
+            "nombre": "tests",
+            "cmd": "npm test -- --watchAll=false",
+            "opcional": true
+          }
         ]
       }
     },
@@ -78,24 +97,34 @@
       "$verificacion": "Angular 22 corre los tests con Vitest sobre jsdom, no con Karma: no hace falta ningún navegador instalado. El build hace de chequeo de tipos, porque además valida los templates, cosa que tsc solo no hace.",
       "verificacion": {
         "npm": [
-          { "nombre": "lint", "cmd": "npm run lint" },
-          { "nombre": "tipos", "cmd": "npm run build" },
-          { "nombre": "tests", "cmd": "npm test" }
+          {
+            "nombre": "lint",
+            "cmd": "npm run lint"
+          },
+          {
+            "nombre": "tipos",
+            "cmd": "npm run build"
+          },
+          {
+            "nombre": "tests",
+            "cmd": "npm test"
+          }
         ]
       }
     }
   },
-
   "flujo": {
     "$comentario": "Dónde frena el modo semi-autónomo. 'cierre' es obligatorio y no se puede sacar.",
-    "checkpoints": ["plan", "cierre"],
+    "checkpoints": [
+      "plan",
+      "cierre"
+    ],
     "maxIteracionesVerificacion": 2,
     "limiteArchivosSinCheckpoint": 12,
     "limiteTareasSinCheckpoint": 8,
     "prefijoRama": "",
     "prefijoCommit": ""
   },
-
   "revision": {
     "$comentario": [
       "POLÍTICA del equipo, no preferencia personal.",
@@ -103,6 +132,9 @@
     ],
     "obligatoria": true,
     "schema": ".agents/schemas/revision.schema.json",
-    "severidadesQueBloquean": ["critical", "high"]
+    "severidadesQueBloquean": [
+      "critical",
+      "high"
+    ]
   }
 }

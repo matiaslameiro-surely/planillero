@@ -37,7 +37,7 @@ Lo van a usar varios desarrolladores, **cada uno con la IA que prefiera**. Por e
 |---|---|
 | `AGENTS.md`, `.agents/`, `workspace.json`, `specs/` | `workspace.local.json` — tu `JAVA_HOME`, tu motor de revisión |
 | | `.claude/`, `.codex/`, `.cursor/`, `.gemini/`… — la capa de **cualquier** herramienta |
-| | `backend/`, `frontend/` — clones de los repos de producto |
+| | `backend/`, `frontend/`, `backoffice/` — clones de los repos de producto |
 
 **Antes de agregar algo a `workspace.json`, preguntate si vale para todo el equipo.** Si es una ruta de
 tu máquina, una preferencia tuya o el nombre de un producto que usás vos, va en `workspace.local.json`.
@@ -59,14 +59,22 @@ sin saltear fases:**
 En los tres casos, a partir de la fase 1 el flujo es idéntico: lo único que cambia es cómo se obtiene el
 issue.
 
+**Sólo se toman tareas del sprint activo.** Si no hay ninguna asignada a la persona en el sprint en
+curso, **avisá y preguntá**: no tomes una de un sprint futuro ni del backlog por tu cuenta, aunque sea
+la de mayor prioridad. Un sprint es un compromiso de qué entra y qué no.
+
+**Antes de arrancar, fijate si ya está hecha.** Mirá si existe `specs/<clave>-*/` y si su rama o su PR
+ya están mergeados. Una tarea puede volver a «Por hacer» porque alguien reorganizó el tablero, no
+porque haya que rehacerla.
+
 ## Las 5 fases, en una línea cada una
 
 El detalle completo, con artefactos y frenos, está en **`.agents/protocolo.md`**. Leelo antes de empezar.
 
-0. **Preparación** — elegir o crear el issue, validar entorno y que no haya cambios sin commitear.
+0. **Preparación** — elegir o crear el issue, validar entorno, **poner los repos al día** y verificar que no haya cambios sin commitear.
 1. **Spec** — de issue a `01-spec.md`: alcance, criterios de aceptación, preguntas abiertas.
 2. **Plan** — `02-plan.md` (con Supuestos) y `04-tareas.md`.
-3. **Implementar** — ramas, código y commits. Backend antes que frontend.
+3. **Implementar** — ramas, código y commits. El backend antes que los clientes.
 4. **Verificar** — gates determinísticos y revisión independiente.
 5. **Cierre** — push, PRs y transición en Jira. **Sólo con aprobación del usuario.**
 
@@ -78,6 +86,8 @@ El detalle completo, con artefactos y frenos, está en **`.agents/protocolo.md`*
 - **Declará con qué modelo trabajás** al crear la tarea (`--modelo "<tu modelo>"`). La herramienta se
   detecta sola; el modelo no. Es lo que permite después comparar cómo rindió cada IA
   (`node .agents/scripts/informe.mjs`). No lo adivines por otros: informá el tuyo.
+- **Empezá siempre con los repos al día.** `node .agents/scripts/sincronizar.mjs` antes de planificar
+  nada: se planifica leyendo el código del árbol de trabajo, y una copia vieja lleva a un plan viejo.
 - **Nunca commitees ni pushees a `main`** en ninguno de los tres repos. Siempre rama de tarea.
 - **Nunca pushees ni abras un PR sin que el usuario lo apruebe** en el checkpoint de cierre.
 - **Una pregunta `BLOQUEANTE` en la spec corta el flujo.** No se planifica sobre huecos: se comenta la
@@ -96,6 +106,12 @@ y métodos en Java y TypeScript, `PascalCase` para clases y componentes, `snake_
 y columnas SQL, `SCREAMING_SNAKE_CASE` para constantes). Por el contrario, los comentarios explicativos
 en el código (donde amerite explicar el qué o el por qué), la documentación conceptual, las specs, los
 planes, los mensajes de commit y las descripciones de PR se escriben siempre en **español**.
+
+> **Código anterior a esta convención.** Los tres esqueletos iniciales (PLAN-2, PLAN-3 y PLAN-4) se
+> escribieron con nombres en español: `SaludController`, `obtenerSalud()`, `salud.service.ts`,
+> `inicio.ts`, el endpoint `/salud`. Se decidió **aplicar la convención de acá en adelante** y no
+> renombrarlos. Si tocás uno de esos archivos por otro motivo, podés pasarlo a inglés en el mismo PR;
+> no abras un PR sólo para renombrar.
 
 **Nombre de la empresa** — no se nombra a la empresa en ningún lado: ni en paquetes, namespaces,
 dominios, títulos, textos de UI, comentarios ni datos. La única excepción son las direcciones de
@@ -131,6 +147,7 @@ protocolo. Las plantillas están en `.agents/plantillas/`.
 node .agents/scripts/init.mjs [--check]                        # entorno + configuración local
 node .agents/scripts/cola.mjs consultar                        # el JQL a ejecutar con tu MCP de Jira
 node .agents/scripts/cola.mjs elegir --yo <accountId>          # qué tarea sigue y por qué
+node .agents/scripts/sincronizar.mjs [--solo-revisar]          # poner los repos al dia (fase 0)
 node .agents/scripts/estado.mjs listar|crear|get|set|anotar    # estado de una tarea
 node .agents/scripts/ramas.mjs estado|crear --tarea PLAN-12    # ramas espejadas
 node .agents/scripts/verificar.mjs --tarea PLAN-12             # gates: compilar, tests, lint, tipos

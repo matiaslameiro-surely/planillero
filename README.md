@@ -110,6 +110,7 @@ archivo compartido.
 node .agents/scripts/init.mjs [--check] [--motores a,b]      # entorno y configuración local
 node .agents/scripts/cola.mjs consultar                      # qué consultar en Jira
 node .agents/scripts/cola.mjs elegir --yo <accountId>        # qué tarea sigue, y por qué
+node .agents/scripts/sincronizar.mjs [--solo-revisar]        # poner los repos al día antes de empezar
 node .agents/scripts/estado.mjs listar                       # tareas en curso y su fase
 node .agents/scripts/ramas.mjs crear --tarea PLAN-12         # la misma rama en los repos del alcance
 node .agents/scripts/verificar.mjs --tarea PLAN-12           # compilar, tests, lint, tipos
