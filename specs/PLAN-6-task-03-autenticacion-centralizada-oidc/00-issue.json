@@ -1,0 +1,15 @@
+{
+  "key": "PLAN-6",
+  "id": "10070",
+  "summary": "TASK-03: Autenticación Centralizada (OIDC/JWT) y Control RBAC",
+  "type": "Tarea",
+  "priority": "High",
+  "assignee": {
+    "accountId": "61d33c409ee70a0068541939",
+    "displayName": "Juan Ignacio Urrutia",
+    "email": "juan.urrutia@surely-sa.com.ar"
+  },
+  "components": [],
+  "labels": [],
+  "description": "Autenticación centralizada de usuarios, emisión y validación de tokens JWT, soporte 2FA y control de acceso basado en roles (Operador, Supervisor, Administrador).\n\nAlcance Fullstack:\n- Backend: Spring Security 6 con OAuth2 Resource Server/JWT, Refresh Tokens rotativos con revocación, RBAC con @PreAuthorize, endpoints 2FA (TOTP RFC 6238).\n- Frontend Móvil: Login de alto contraste, almacenamiento seguro en Keychain/Keystore hardware-backed, desbloqueo biométrico/PIN.\n- Frontend Web: Login administrativo con código 2FA, HttpInterceptor para token Bearer y guardas de navegación.\n- Base de Datos: Tablas usuarios, roles, usuario_roles, refresh_tokens con hashing.\n- Testing: Tests unitarios de hashing Argon2id/BCrypt, tests de expiración/revocación JWT y pruebas de integración 403 Forbidden.\n\nEvaluación UX/UI:\n- Heurística 8 (Diseño estético y minimalista): Login sobrio y teclado numérico optimizado.\n- Heurística 9 (Ayuda a reconocer errores): Mensajes claros sin revelar si falló usuario o password.\n\nEvaluación Ciberseguridad:\n- OWASP A07: Bloqueo progresivo ante fuerza bruta, hashing BCrypt factor 12, firma JWT con RS256/HS512."
+}

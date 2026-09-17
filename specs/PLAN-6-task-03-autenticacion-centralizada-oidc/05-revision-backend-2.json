@@ -1,0 +1,47 @@
+{
+  "verdict": "approve",
+  "summary": "Segunda revisión del diff de backend: los dos hallazgos bloqueantes de la ronda anterior quedaron resueltos — /auth/2fa/setup ahora responde 409 si el 2FA ya está habilitado y /auth/verify-2fa cuenta los intentos fallidos (429) y canjea el desafío una sola vez (jti + registro en memoria), con tests que cubren ambos caminos. No aparecieron defectos nuevos de severidad alta; quedan los hallazgos medium/low conocidos, que van al cuerpo del PR.",
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "El seed con credenciales conocidas es una migración común y se aplica en todos los entornos",
+      "body": "V2__auth_seed.sql es una migración Flyway normal, así que no queda atada al perfil de desarrollo: cualquier despliegue que corra las migraciones arranca con operador.demo/Operador123!, supervisor.demo/Supervisor123! y admin.demo/Admin123! —los tres habilitados, uno con rol ADMINISTRATOR— y las contraseñas están documentadas en el propio archivo. En local es cómodo; fuera de local son credenciales publicadas para una cuenta administradora.",
+      "file": "src/main/resources/db/migration/V2__auth_seed.sql",
+      "line_start": 1,
+      "line_end": 29,
+      "confidence": 0.8,
+      "recommendation": "Mover los usuarios de prueba a un location de Flyway sólo de desarrollo (perfil local en spring.flyway.locations) o a un seed idempotente que no corra en producción; si hace falta dejarlo, exigir cambio de contraseña en el primer ingreso."
+    },
+    {
+      "severity": "medium",
+      "title": "El control de fuerza bruta acumula memoria sin techo",
+      "body": "failures es un ConcurrentHashMap que sólo crece: recent() hace computeIfAbsent para cualquier clave que llegue a isBlocked o registerFailure, incluidas las de usuarios inexistentes, y nada elimina las entradas ni las claves que ya quedaron fuera de la ventana. El fix del 2FA reutiliza el mismo servicio con la clave 2fa:<usuario>, así que ahora también se crean entradas por ese camino. Escenario: un atacante que rota nombres de usuario en /auth/login deja una entrada por nombre probado, sin tocar la base y sin que lo frene el límite por usuario; con el tiempo es una vía de agotamiento de memoria del proceso (y el límite por cuenta tampoco frena el credential stuffing distribuido entre usuarios).",
+      "file": "src/main/java/ar/com/planillero/auth/LoginAttemptService.java",
+      "line_start": 48,
+      "line_end": 57,
+      "confidence": 0.75,
+      "recommendation": "Podar las claves sin intentos vigentes (barrido periódico o tamaño máximo con desalojo) y registrar el bloqueo por usuario y por IP de origen."
+    },
+    {
+      "severity": "low",
+      "title": "Un usuario deshabilitado conserva el access token hasta que expire",
+      "body": "La API es stateless y valida sólo la firma del JWT: deshabilitar un usuario (enabled=false) no corta las sesiones ya emitidas. El access token que ya estaba en manos del usuario sigue sirviendo hasta 15 minutos y GET /auth/me lo sigue aceptando (me() no mira enabled), aunque el login y el refresh sí lo rechacen. Lo mismo pasa con los roles: hasta que expire el token, el JWT sigue trayendo los roles anteriores. Está acotado por el TTL, por eso es bajo, pero conviene dejarlo anotado como decisión consciente.",
+      "file": "src/main/java/ar/com/planillero/auth/AuthService.java",
+      "line_start": 134,
+      "line_end": 138,
+      "confidence": 0.7,
+      "recommendation": "Aceptar la ventana del TTL y documentarla, o revalidar contra la base en /auth/me y en las operaciones sensibles."
+    },
+    {
+      "severity": "low",
+      "title": "El desafío de un solo uso se recuerda sólo dentro de una instancia",
+      "body": "TwoFactorChallengeStore guarda los jti canjeados en un mapa en memoria del proceso. Con una sola instancia alcanza y los identificadores se purgan al vencer el desafío (el mapa no crece), pero detrás de un balanceador con más de un backend el mismo challengeId podría canjearse una vez por instancia, porque cada una tiene su propio registro. Es la misma limitación que ya tiene el control de fuerza bruta y está declarada en el Javadoc; se anota para que quede como decisión explícita y no como sorpresa al escalar.",
+      "file": "src/main/java/ar/com/planillero/auth/TwoFactorChallengeStore.java",
+      "line_start": 24,
+      "line_end": 25,
+      "confidence": 0.6,
+      "recommendation": "Si la API pasa a correr con varias instancias, compartir el registro (por ejemplo Redis con TTL) o validar el canje contra la base."
+    }
+  ],
+  "next_steps": []
+}

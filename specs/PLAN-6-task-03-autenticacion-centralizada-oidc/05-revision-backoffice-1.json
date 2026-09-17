@@ -1,0 +1,27 @@
+{
+  "verdict": "approve",
+  "summary": "Revisé el diff del backoffice contra la spec: login con 2FA, interceptor que adjunta el Bearer y reintenta tras refrescar, guardas de navegación y el renombre a inglés están implementados y cubiertos por tests, con los gates en verde. Los hallazgos son de severidad media y baja, y quedan para el cuerpo del PR.",
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "Un error de red cierra la sesión del backoffice",
+      "body": "ensureSession() limpia la sesión ante cualquier error de GET /auth/me y refresh() hace lo mismo ante cualquier error de /auth/refresh: los dos catchError llaman a clearSession() sin mirar el status. El interceptor sólo refresca ante un 401, pero cuando el backend está caído o la petición expira, el error llega con status 0 (o 504) y el catchError igual borra el refresh token de localStorage. Escenario: el backoffice queda abierto en una notebook con red inestable; la primera petición que falle destruye la sesión y el usuario vuelve a /login, aunque el refresh token siguiera vigente y bastara reintentar. El criterio 10 pide redirigir al login cuando no se puede refrescar, no cuando no se pudo consultar.",
+      "file": "src/app/core/services/auth.service.ts",
+      "line_start": 101,
+      "line_end": 104,
+      "confidence": 0.85,
+      "recommendation": "Limpiar la sesión sólo ante un 401 (o ante un fallo del refresh); ante errores de red o timeout, conservar los tokens y propagar el error de conexión para que la vista lo muestre."
+    },
+    {
+      "severity": "low",
+      "title": "El login arma una sesión vacía si la respuesta no trae tokens",
+      "body": "En el map de login() los tokens se completan con `?? ''`: si el backend responde 200 sin accessToken o sin refreshToken (respuesta fuera del contrato), el servicio devuelve una sesión con cadenas vacías, startSession la guarda y el interceptor empieza a mandar 'Bearer ' vacío hasta que el refresh o el propio backend la rechacen. Es más barato detectar la respuesta inválida en el punto donde se parsea.",
+      "file": "src/app/core/services/auth.service.ts",
+      "line_start": 61,
+      "line_end": 67,
+      "confidence": 0.6,
+      "recommendation": "Si falta cualquiera de los dos tokens en una respuesta sin 2FA, lanzar un error explícito en lugar de completar con cadena vacía."
+    }
+  ],
+  "next_steps": []
+}

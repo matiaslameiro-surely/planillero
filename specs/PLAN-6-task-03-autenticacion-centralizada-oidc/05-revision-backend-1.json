@@ -1,0 +1,63 @@
+{
+  "verdict": "needs-attention",
+  "summary": "Revisé el diff de backend contra la spec: login, rotación de refresh tokens, RBAC y 2FA están implementados y los gates están en verde, pero encontré dos defectos de seguridad en el ciclo del segundo factor (re-enrolamiento sin código vigente y verificación sin límite de intentos) que conviene resolver antes del cierre.",
+  "findings": [
+    {
+      "severity": "high",
+      "title": "El re-enrolamiento de 2FA no pide el código vigente y desactiva el factor de la víctima",
+      "body": "POST /auth/2fa/setup no distingue si la cuenta ya tiene el segundo factor encendido: genera un secreto nuevo, lo guarda con setPendingTwoFactorSecret y deja twoFactorEnabled en true con el secreto cambiado (User.setPendingTwoFactorSecret pisa twoFactorSecret sin tocar el flag). Escenario: alguien que consigue una sesión válida (equipo compartido, token robado) llama a /auth/2fa/setup; desde ese momento el autenticador de la persona legítima deja de servir, porque el login pasa a exigir el código del secreto nuevo, que sólo conoce el atacante. Combinado con la contraseña —que el atacante ya necesita para llegar al segundo paso—, se queda con el control del factor y la víctima queda afuera. Es el único camino del diff que cambia el factor sin probar un código válido, y contradice el criterio 6, donde el 2FA se confirma verificando un código.",
+      "file": "src/main/java/ar/com/planillero/auth/AuthService.java",
+      "line_start": 118,
+      "line_end": 125,
+      "confidence": 0.8,
+      "recommendation": "Rechazar /auth/2fa/setup cuando twoFactorEnabled ya es true (400/409: el 2FA ya está habilitado) o exigir el código TOTP vigente para re-enrolar; que el flag sólo lo cambie /auth/2fa/enable tras verificar el código."
+    },
+    {
+      "severity": "high",
+      "title": "El código de 2FA se puede probar sin límite y el desafío se reutiliza",
+      "body": "verifyTwoFactor no pasa por LoginAttemptService: el código de 6 dígitos se puede adivinar tantas veces como se quiera durante la ventana de 5 minutos del desafío (challengeTokenTtl), y el mismo challengeId sigue sirviendo para pedir varios pares de tokens porque no se marca como usado ni se invalida tras un intento. Escenario: quien obtuvo la contraseña —justo el caso que el 2FA existe para frenar— pide el desafío con /auth/login y después recorre códigos hasta acertar; con ~10^6 combinaciones y sin freno, la barrera deja de ser práctica. El criterio 7 pide un control de fuerza bruta sobre el login, y /auth/verify-2fa es el segundo paso del login.",
+      "file": "src/main/java/ar/com/planillero/auth/AuthService.java",
+      "line_start": 87,
+      "line_end": 96,
+      "confidence": 0.85,
+      "recommendation": "Contar los intentos fallidos de /auth/verify-2fa con el mismo LoginAttemptService (por usuario y por desafío), devolver 429 al superar el umbral e invalidar el desafío; opcionalmente, emitir el desafío como token de un solo uso."
+    },
+    {
+      "severity": "medium",
+      "title": "El seed con credenciales conocidas es una migración común y se aplica en todos los entornos",
+      "body": "V2__auth_seed.sql es una migración Flyway normal, así que no queda atada al perfil de desarrollo: cualquier despliegue que corra las migraciones arranca con operador.demo/Operador123!, supervisor.demo/Supervisor123! y admin.demo/Admin123! —los tres habilitados, uno con rol ADMINISTRATOR— y las contraseñas están documentadas en el propio archivo. En local es cómodo; fuera de local son credenciales publicadas para una cuenta administradora.",
+      "file": "src/main/resources/db/migration/V2__auth_seed.sql",
+      "line_start": 1,
+      "line_end": 29,
+      "confidence": 0.8,
+      "recommendation": "Mover los usuarios de prueba a un location de Flyway sólo de desarrollo (perfil local en spring.flyway.locations) o a un seed idempotente que no corra en producción; si hace falta dejarlo, exigir cambio de contraseña en el primer ingreso."
+    },
+    {
+      "severity": "medium",
+      "title": "El control de fuerza bruta acumula memoria sin techo",
+      "body": "failures es un ConcurrentHashMap que sólo crece: recent() hace computeIfAbsent para cualquier clave que llegue a isBlocked o registerFailure, incluidas las de usuarios inexistentes, y nada elimina las entradas ni las claves que ya quedaron fuera de la ventana. Escenario: un atacante que rota nombres de usuario en /auth/login deja una entrada por nombre probado, sin tocar la base y sin que lo frene el límite por usuario; con el tiempo es una vía de agotamiento de memoria del proceso (y el límite por cuenta tampoco frena el credential stuffing distribuido entre usuarios).",
+      "file": "src/main/java/ar/com/planillero/auth/LoginAttemptService.java",
+      "line_start": 48,
+      "line_end": 57,
+      "confidence": 0.75,
+      "recommendation": "Podar las claves sin intentos vigentes (barrido periódico o tamaño máximo con desalojo) y registrar el bloqueo por usuario y por IP de origen."
+    },
+    {
+      "severity": "low",
+      "title": "Un usuario deshabilitado conserva el access token hasta que expire",
+      "body": "La API es stateless y valida sólo la firma del JWT: deshabilitar un usuario (enabled=false) no corta las sesiones ya emitidas. El access token que ya estaba en manos del usuario sigue sirviendo hasta 15 minutos y /auth/me lo acepta, aunque el login y el refresh sí lo rechacen. Lo mismo pasa con los roles: hasta que expire el token, el JWT sigue trayendo los roles anteriores. Está acotado por el TTL, por eso es bajo, pero conviene dejarlo anotado como decisión consciente.",
+      "file": "src/main/java/ar/com/planillero/auth/AuthService.java",
+      "line_start": 112,
+      "line_end": 116,
+      "confidence": 0.7,
+      "recommendation": "Aceptar la ventana del TTL y documentarla, o revalidar contra la base en /auth/me y en las operaciones sensibles."
+    }
+  ],
+  "next_steps": [
+    "Impedir que /auth/2fa/setup reemplace el secreto de una cuenta con 2FA ya habilitada, o exigir el código vigente para re-enrolar.",
+    "Aplicar el control de intentos a /auth/verify-2fa y hacer que el desafío sea de un solo uso.",
+    "Aislar el seed de usuarios de prueba para que no se ejecute fuera de desarrollo.",
+    "Acotar el crecimiento del mapa de intentos de LoginAttemptService.",
+    "Volver a correr los gates y pedir una nueva revisión después de los cambios."
+  ]
+}

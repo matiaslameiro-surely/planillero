@@ -1,0 +1,64 @@
+{
+  "issue": "PLAN-6",
+  "titulo": "TASK-03: Autenticación Centralizada (OIDC/JWT) y Control RBAC",
+  "slug": "task-03-autenticacion-centralizada-oidc",
+  "rama": "PLAN-6-task-03-autenticacion-centralizada-oidc",
+  "alcance": [
+    "backend",
+    "frontend",
+    "backoffice"
+  ],
+  "fase": "cerrar",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-16T22:34:14.527Z",
+      "nota": "Jira no transicionado: decisión del usuario (solo trabajo local por ahora)"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-16T22:36:09.553Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-16T22:59:35.408Z",
+      "nota": "Plan aprobado por el usuario con alcance backend+frontend+backoffice"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-16T23:40:00.336Z",
+      "nota": "Backend, frontend y backoffice implementados y commiteados"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-16T23:55:13.167Z",
+      "nota": "Gates en verde (24/13/18) y revision independiente sin bloqueantes: backend ronda 2 approve, frontend y backoffice approve"
+    },
+    "cerrar": {
+      "estado": "pendiente"
+    },
+    "cerrada": {
+      "estado": "pendiente"
+    }
+  },
+  "commits": {
+    "backend": "dfb0985,0d6ba6f"
+  },
+  "revisiones": [
+    "05-revision-backend-1.json:needs-attention",
+    "05-revision-backend-2.json:approve",
+    "05-revision-frontend-1.json:approve",
+    "05-revision-backoffice-1.json:approve"
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "big-pickle",
+    "ts": "2026-09-16T22:33:57.400Z",
+    "fin": null
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "verdict": "approve",
+  "summary": "Revisé el diff de la app móvil contra la spec: el login, el 2FA, el guardado en SecureStore y el refresh automático están implementados y cubiertos por tests, y los gates están en verde. Los hallazgos son de severidad media y baja, y quedan para el cuerpo del PR.",
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "Un error de red al arrancar borra la sesión guardada",
+      "body": "En el arranque, si hay tokens guardados, el proveedor llama a getMe() y ante cualquier error limpia los tokens y manda al login. getMe() usa requestWithAuth, que sólo intenta refrescar cuando la respuesta es 401; si el backend está caído o no hay conectividad, fetch falla con un TypeError que el catch trata igual: clearTokens() borra también el refresh token. Escenario: el operario abre la app en el campo sin señal, la sesión se destruye, y cuando vuelve la conexión tiene que volver a loguearse aunque el refresh token siguiera vigente (y con 2FA, además, necesita el código). El criterio 9 pide volver al login cuando no se puede refrescar, no cuando no se pudo consultar.",
+      "file": "src/auth/SessionContext.tsx",
+      "line_start": 69,
+      "line_end": 75,
+      "confidence": 0.85,
+      "recommendation": "Limpiar la sesión sólo si el error es un ApiError 401 (o si el refresh falló) y, ante un error de red o timeout, conservar los tokens y reintentar, mostrando el estado de error en la pantalla."
+    },
+    {
+      "severity": "low",
+      "title": "El login arma una sesión vacía si la respuesta no trae tokens",
+      "body": "login() completa con `?? ''` los dos campos que el contrato garantiza cuando twoFactorRequired es false: si el backend responde 200 sin accessToken o sin refreshToken, el cliente devuelve una sesión con cadenas vacías, se guarda como si fuera válida y la app queda en estado logueado hasta que la primera petición autenticada falla (viaja 'Bearer ' vacío). Es preferible fallar cerca del contrato que propagar un estado inválido.",
+      "file": "src/api/auth.ts",
+      "line_start": 48,
+      "line_end": 54,
+      "confidence": 0.6,
+      "recommendation": "Si falta cualquiera de los dos tokens en una respuesta sin 2FA, lanzar un error explícito en lugar de completar con cadena vacía."
+    }
+  ],
+  "next_steps": []
+}
