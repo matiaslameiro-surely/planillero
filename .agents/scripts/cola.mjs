@@ -49,7 +49,13 @@ function leerStdin() {
 function elegir(issues, miAccountId) {
   const abiertas = issues.filter((i) => i?.key);
   if (abiertas.length === 0) {
-    return { elegida: null, motivo: 'No hay tareas en "Por hacer" en el proyecto.', candidatas: [] };
+    return {
+      elegida: null,
+      motivo:
+        'No hay tareas en "Por hacer" en el sprint activo. No tomes una de un sprint futuro: ' +
+        'avisale al usuario y preguntá qué hacer.',
+      candidatas: [],
+    };
   }
 
   const mias = miAccountId
@@ -101,6 +107,9 @@ try {
   const proyecto = cfg.jira.proyecto;
 
   if (comando === 'consultar') {
+    // Sólo el sprint activo: una tarea de un sprint futuro no se toma aunque sea la de mayor
+    // prioridad. `openSprints()` son los sprints iniciados y no cerrados.
+    const filtroSprint = args['sin-sprint'] ? '' : ' AND sprint IN openSprints()';
     emitir({
       ok: true,
       instrucciones: [
@@ -108,11 +117,18 @@ try {
         'Pedí también tu propio accountId (atlassianUserInfo).',
         'Después pasá el resultado a: node .agents/scripts/cola.mjs elegir --yo <accountId>',
         'El JSON de entrada puede ser {"issues":[...]} o directamente el array de issues.',
+        'Si la consulta no devuelve nada, NO amplíes a sprints futuros por tu cuenta: avisá que no ' +
+          'hay tareas en el sprint activo y preguntá qué hacer.',
       ],
       cloudId: cfg.jira.cloudId,
-      jql: `project = ${proyecto} AND statusCategory = "To Do" ORDER BY priority DESC, created ASC`,
+      jql:
+        `project = ${proyecto} AND statusCategory = "To Do"${filtroSprint}` +
+        ' ORDER BY priority DESC, created ASC',
       campos: ['summary', 'status', 'priority', 'assignee', 'issuetype'],
       maxResults: 50,
+      nota: args['sin-sprint']
+        ? 'Filtro de sprint desactivado con --sin-sprint: incluye tareas de sprints futuros y del backlog.'
+        : 'Limitado al sprint activo. Usá --sin-sprint sólo si el proyecto no usa sprints.',
     });
   } else if (comando === 'elegir') {
     const crudo = await leerStdin();

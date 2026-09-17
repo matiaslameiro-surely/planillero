@@ -53,6 +53,14 @@ sin saltear fases:**
 | El usuario dice | Qué hacés |
 |---|---|
 | «agarrá la próxima tarea (y hacela)» | Corré `node .agents/scripts/cola.mjs`. Decile **qué tarea eligió y por qué** antes de arrancar |
+
+**Sólo se toman tareas del sprint activo.** Si no hay ninguna asignada a la persona en el sprint en
+curso, **avisá y preguntá**: no tomes una de un sprint futuro ni del backlog por tu cuenta, aunque sea
+la de mayor prioridad. Un sprint es un compromiso de qué entra y qué no.
+
+**Antes de arrancar, fijate si ya está hecha.** Mirá si existe `specs/<clave>-*/` y si su rama o su PR
+ya están mergeados. Una tarea puede volver a «Por hacer» porque alguien reorganizó el tablero, no
+porque haya que rehacerla.
 | «hacé PLAN-12» | Esa tarea puntual |
 | «hacé esto: \<descripción\>» | Creá la Tarea en Jira **pidiéndole confirmación primero**, y seguí el flujo normal con el issue creado |
 
@@ -96,6 +104,12 @@ y métodos en Java y TypeScript, `PascalCase` para clases y componentes, `snake_
 y columnas SQL, `SCREAMING_SNAKE_CASE` para constantes). Por el contrario, los comentarios explicativos
 en el código (donde amerite explicar el qué o el por qué), la documentación conceptual, las specs, los
 planes, los mensajes de commit y las descripciones de PR se escriben siempre en **español**.
+
+> **Código anterior a esta convención.** Los tres esqueletos iniciales (PLAN-2, PLAN-3 y PLAN-4) se
+> escribieron con nombres en español: `SaludController`, `obtenerSalud()`, `salud.service.ts`,
+> `inicio.ts`, el endpoint `/salud`. Se decidió **aplicar la convención de acá en adelante** y no
+> renombrarlos. Si tocás uno de esos archivos por otro motivo, podés pasarlo a inglés en el mismo PR;
+> no abras un PR sólo para renombrar.
 
 **Nombre de la empresa** — no se nombra a la empresa en ningún lado: ni en paquetes, namespaces,
 dominios, títulos, textos de UI, comentarios ni datos. La única excepción son las direcciones de
