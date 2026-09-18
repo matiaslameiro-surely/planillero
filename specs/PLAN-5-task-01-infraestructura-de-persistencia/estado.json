@@ -45,7 +45,7 @@
     "backend": "https://github.com/matiaslameiro-surely/planillero-backend/pull/2"
   },
   "jira": {
-    "transicionadoA": "En revisión",
+    "transicionadoA": "Finalizado",
     "creadoPorHarness": false
   },
   "ejecucion": {
