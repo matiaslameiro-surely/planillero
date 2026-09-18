@@ -1,0 +1,63 @@
+{
+  "issue": "PLAN-10",
+  "titulo": "TASK-08: Registro de Evidencias Digitales, Firma Digital y Manifiesto HMAC con SHA-256",
+  "slug": "task-08-registro-de-evidencias",
+  "rama": "PLAN-10-task-08-registro-de-evidencias",
+  "alcance": [
+    "backend",
+    "frontend",
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-18T17:11:44.646Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-18T17:12:44.439Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-18T17:14:46.869Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-18T17:36:17.539Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-18T17:39:28.340Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-18T17:43:00.445Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-18T17:42:57.540Z"
+    }
+  },
+  "commits": {
+    "backend": "bb6f5eb183b39b9da797f0b420da72532ff31a88",
+    "frontend": "23d1a84f4b80dd54e2a72ae425ceeaf7291be149",
+    "backoffice": "c16298b632813bd51bfb58f8640d6c7571a68991"
+  },
+  "revisiones": [],
+  "pr": {
+    "backend": "https://github.com/matiaslameiro-surely/planillero-backend/pull/4",
+    "frontend": "https://github.com/matiaslameiro-surely/planillero-frontend/pull/3",
+    "backoffice": "https://github.com/matiaslameiro-surely/planillero-backoffice/pull/3"
+  },
+  "jira": {
+    "transicionadoA": "En revisión",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Antigravity",
+    "modelo": "Gemini 3.8 Flash",
+    "ts": "2026-09-18T17:11:14.382Z",
+    "fin": "2026-09-18T17:43:00.445Z"
+  }
+}

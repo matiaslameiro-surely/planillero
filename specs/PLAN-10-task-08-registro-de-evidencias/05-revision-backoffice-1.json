@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "La implementación en el repositorio backoffice cumple satisfactoriamente con todos los criterios de aceptación de PLAN-10: incorpora el componente EvidenceViewer con ruta autenticada, galería de fotos periciales, visor detallado de firma ológrafa con ficha de custodia, panel del manifiesto criptográfico y botón de auditoría en tiempo real contra el backend.",
+  "findings": [],
+  "next_steps": []
+}

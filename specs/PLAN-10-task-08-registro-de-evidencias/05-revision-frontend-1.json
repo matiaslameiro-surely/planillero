@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "Se revisó la implementación del repositorio frontend para la tarea PLAN-10, incluyendo el soporte de subida multipart en client.ts, el cliente de evidencias y cálculo determinístico de SHA-256 en evidence.ts, el componente de firma ológrafa táctil SignaturePad.tsx y la pantalla de captura pericial [visitId].tsx. La solución cumple con todos los criterios de aceptación y heurísticas de UX especificadas, superando las validaciones de TypeScript, ESLint y pruebas unitarias.",
+  "findings": [],
+  "next_steps": []
+}

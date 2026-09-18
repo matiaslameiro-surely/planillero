@@ -1,0 +1,96 @@
+{
+  "ok": true,
+  "tarea": "PLAN-10",
+  "ts": "2026-09-18T17:37:00.474Z",
+  "repos": [
+    {
+      "repo": "backend",
+      "ok": true,
+      "herramienta": "maven",
+      "pasos": [
+        {
+          "nombre": "compilar",
+          "cmd": "mvnw -B -q -DskipTests compile",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 2753,
+          "salida": ""
+        },
+        {
+          "nombre": "tests",
+          "cmd": "mvnw -B test",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 21865,
+          "salida": "[…150 líneas omitidas…]\n\n2026-09-18T14:36:41.509-03:00  INFO 39516 --- [planillero-backend] [           main] a.c.p.health.HealthControllerTest        : Starting HealthControllerTest using Java 21.0.12.1 with PID 39516 (started by Surely Desarrollo in C:\\planillero\\backend)\n2026-09-18T14:36:41.509-03:00  INFO 39516 --- [planillero-backend] [           main] a.c.p.health.HealthControllerTest        : No active profile set, falling back to 1 default profile: \"default\"\n2026-09-18T14:36:42.019-03:00  INFO 39516 --- [planillero-backend] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''\n2026-09-18T14:36:42.019-03:00  INFO 39516 --- [planillero-backend] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''\n2026-09-18T14:36:42.022-03:00  INFO 39516 --- [planillero-backend] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms\n2026-09-18T14:36:42.144-03:00  INFO 39516 --- [planillero-backend] [           main] a.c.p.health.HealthControllerTest        : Started HealthControllerTest in 0.667 seconds (process running for 14.786)\n[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.865 s -- in ar.com.planillero.health.HealthControllerTest\n[INFO] Running ar.com.planillero.persistence.DatabaseIntegrationTest\n2026-09-18T14:36:42.301-03:00  INFO 39516 --- [planillero-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [ar.com.planillero.persistence.DatabaseIntegrationTest]: DatabaseIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.\n2026-09-18T14:36:42.325-03:00  INFO 39516 --- [planillero-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration ar.com.planillero.PlanilleroBackendApplication for test class ar.com.planillero.persistence.DatabaseIntegrationTest\n2026-09-18T14:36:42.327-03:00  INFO 39516 --- [planillero-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [ar.com.planillero.persistence.DatabaseIntegrationTest]: DatabaseIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.\n2026-09-18T14:36:42.327-03:00  INFO 39516 --- [planillero-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [ar.com.planillero.AbstractIntegrationTest]: AbstractIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.\n2026-09-18T14:36:42.334-03:00  INFO 39516 --- [planillero-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration ar.com.planillero.PlanilleroBackendApplication for test class ar.com.planillero.persistence.DatabaseIntegrationTest\n\n  .   ____          _            __ _ _\n /\\\\ / ___'_ __ _ _(_)_ __  __ _ \\ \\ \\ \\\n( ( )\\___ | '_ | '_| | '_ \\/ _` | \\ \\ \\ \\\n \\\\/  ___)| |_)| | | | | || (_| |  ) ) ) )\n  '  |____| .__|_| |_|_| |_\\__, | / / / /\n =========|_|==============|___/=/_/_/_/\n\n :: Spring Boot ::                (v4.1.1)\n\n2026-09-18T14:36:42.386-03:00  INFO 39516 --- [planillero-backend] [           main] a.c.p.p.DatabaseIntegrationTest          : Starting DatabaseIntegrationTest using Java 21.0.12.1 with PID 39516 (started by Surely Desarrollo in C:\\planillero\\backend)\n2026-09-18T14:36:42.386-03:00  INFO 39516 --- [planillero-backend] [           main] a.c.p.p.DatabaseIntegrationTest          : No active profile set, falling back to 1 default profile: \"default\"\n2026-09-18T14:36:42.676-03:00  INFO 39516 --- [planillero-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.\n2026-09-18T14:36:42.701-03:00  INFO 39516 --- [planillero-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 21 ms. Found 5 JPA repository interfaces.\n2026-09-18T14:36:42.995-03:00  INFO 39516 --- [planillero-backend] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://localhost:56109/test?loggerLevel=OFF (PostgreSQL 16.14)\n2026-09-18T14:36:43.036-03:00  INFO 39516 --- [planillero-backend] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 5 migrations (execution time 00:00.015s)\n2026-09-18T14:36:43.083-03:00  INFO 39516 --- [planillero-backend] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema \"public\": 4\n2026-09-18T14:36:43.085-03:00  INFO 39516 --- [planillero-backend] [           main] o.f.core.internal.command.DbMigrate      : Schema \"public\" is up to date. No migration necessary.\n2026-09-18T14:36:43.125-03:00  INFO 39516 --- [planillero-backend] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]\n2026-09-18T14:36:43.162-03:00  INFO 39516 --- [planillero-backend] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer\n2026-09-18T14:36:43.164-03:00  INFO 39516 --- [planillero-backend] [           main] com.zaxxer.hikari.HikariDataSource       : PlanilleroHikariPool - Starting...\n2026-09-18T14:36:43.184-03:00  INFO 39516 --- [planillero-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : PlanilleroHikariPool - Added connection org.postgresql.jdbc.PgConnection@486ee396\n2026-09-18T14:36:43.185-03:00  INFO 39516 --- [planillero-backend] [           main] com.zaxxer.hikari.HikariDataSource       : PlanilleroHikariPool - Start completed.\n2026-09-18T14:36:43.197-03:00  INFO 39516 --- [planillero-backend] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:\n\tDatabase JDBC URL [jdbc:postgresql://localhost:56109/test?loggerLevel=OFF]\n\tDatabase driver: PostgreSQL JDBC Driver\n\tDatabase dialect: PostgreSQLDialect\n\tDatabase version: 16.14\n\tDefault catalog/schema: test/public\n\tAutocommit mode: undefined/unknown\n\tIsolation level: READ_COMMITTED [default READ_COMMITTED]\n\tJDBC fetch size: none\n\tPool: DataSourceConnectionProvider\n\tMinimum pool size: undefined/unknown\n\tMaximum pool size: undefined/unknown\n2026-09-18T14:36:43.288-03:00  INFO 39516 --- [planillero-backend] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)\n2026-09-18T14:36:43.325-03:00  INFO 39516 --- [planillero-backend] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'\n2026-09-18T14:36:43.380-03:00  WARN 39516 --- [planillero-backend] [           main] ar.com.planillero.security.JwtConfig     : No hay claves JWT configuradas (app.jwt.private-key / app.jwt.public-key): se genera un par ef�mero para desarrollo. Los tokens dejan de ser v�lidos al reiniciar la aplicaci�n.\n2026-09-18T14:36:43.962-03:00  INFO 39516 --- [planillero-backend] [           main] a.c.p.p.DatabaseIntegrationTest          : Started DatabaseIntegrationTest in 1.621 seconds (process running for 16.605)\n[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.723 s -- in ar.com.planillero.persistence.DatabaseIntegrationTest\n[INFO] Running ar.com.planillero.PlanilleroBackendApplicationTests\n2026-09-18T14:36:44.024-03:00  INFO 39516 --- [planillero-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [ar.com.planillero.PlanilleroBackendApplicationTests]: PlanilleroBackendApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.\n2026-09-18T14:36:44.035-03:00  INFO 39516 --- [planillero-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration ar.com.planillero.PlanilleroBackendApplication for test class ar.com.planillero.PlanilleroBackendApplicationTests\n2026-09-18T14:36:44.036-03:00  INFO 39516 --- [planillero-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [ar.com.planillero.PlanilleroBackendApplicationTests]: PlanilleroBackendApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.\n2026-09-18T14:36:44.036-03:00  INFO 39516 --- [planillero-backend] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [ar.com.planillero.AbstractIntegrationTest]: AbstractIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.\n2026-09-18T14:36:44.043-03:00  INFO 39516 --- [planillero-backend] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration ar.com.planillero.PlanilleroBackendApplication for test class ar.com.planillero.PlanilleroBackendApplicationTests\n[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.027 s -- in ar.com.planillero.PlanilleroBackendApplicationTests\n[INFO] Running ar.com.planillero.security.PasswordEncoderTest\n[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.540 s -- in ar.com.planillero.security.PasswordEncoderTest\n[INFO] \n[INFO] Results:\n[INFO] \n[INFO] Tests run: 37, Failures: 0, Errors: 0, Skipped: 0\n[INFO] \n[INFO] ------------------------------------------------------------------------\n[INFO] BUILD SUCCESS\n[INFO] ------------------------------------------------------------------------\n[INFO] Total time:  20.357 s\n[INFO] Finished at: 2026-09-18T14:36:46-03:00\n[INFO] ------------------------------------------------------------------------\nMockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3\nWARNING: A Java agent has been loaded dynamically (C:\\Users\\Surely Desarrollo\\.m2\\repository\\net\\bytebuddy\\byte-buddy-agent\\1.18.11\\byte-buddy-agent-1.18.11.jar)\nWARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning\nWARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information\nWARNING: Dynamic loading of agents will be disallowed by default in a future release\nJava HotSpot(TM) 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended"
+        }
+      ],
+      "avisos": []
+    },
+    {
+      "repo": "frontend",
+      "ok": true,
+      "herramienta": "npm",
+      "pasos": [
+        {
+          "nombre": "lint",
+          "cmd": "npm run lint",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 2156,
+          "salida": "\n> planillero-frontend@0.1.0 lint\n> expo lint --max-warnings 0"
+        },
+        {
+          "nombre": "tipos",
+          "cmd": "npx tsc --noEmit",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 1648,
+          "salida": ""
+        },
+        {
+          "nombre": "tests",
+          "cmd": "npm test -- --watchAll=false",
+          "opcional": true,
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 1630,
+          "salida": "\n> planillero-frontend@0.1.0 test\n> jest --watchAll=false\n\nPASS src/api/__tests__/evidence.test.ts\nPASS src/api/client.test.ts\nPASS src/auth/tokenStore.test.ts\n\nTest Suites: 3 passed, 3 total\nTests:       18 passed, 18 total\nSnapshots:   0 total\nTime:        0.73 s, estimated 1 s\nRan all test suites."
+        }
+      ],
+      "avisos": []
+    },
+    {
+      "repo": "backoffice",
+      "ok": true,
+      "herramienta": "npm",
+      "pasos": [
+        {
+          "nombre": "lint",
+          "cmd": "npm run lint",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 2073,
+          "salida": "\n> planillero-backoffice@0.1.0 lint\n> ng lint --max-warnings=0\n\n\nLinting \"planillero-backoffice\"...\n\nAll files pass linting."
+        },
+        {
+          "nombre": "tipos",
+          "cmd": "npm run build",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 3013,
+          "salida": "\n> planillero-backoffice@0.1.0 build\n> ng build\n\n> Building...\n√ Building...\nInitial chunk files | Names           |  Raw size | Estimated transfer size\nmain-LAN3TO6Y.js    | main            | 269.42 kB |                74.21 kB\nstyles-IXKB4UU5.css | styles          | 438 bytes |               438 bytes\n\n                    | Initial total   | 269.86 kB |                74.64 kB\n\nLazy chunk files    | Names           |  Raw size | Estimated transfer size\nchunk-D7-h7zLP.js   | login           |  45.37 kB |                10.48 kB\nchunk-C2CIrbzm.js   | evidence-viewer |  13.85 kB |                 3.96 kB\nchunk-CTNtwISu.js   | home            |   4.28 kB |                 1.62 kB\n\nApplication bundle generation complete. [2.122 seconds] - 2026-09-18T17:36:56.617Z\n\nOutput location: C:\\planillero\\backoffice\\dist\\planillero-backoffice"
+        },
+        {
+          "nombre": "tests",
+          "cmd": "npm test",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 3773,
+          "salida": "\n> planillero-backoffice@0.1.0 test\n> ng test\n\n> Building...\n√ Building...\nApplication bundle generation complete. [1.149 seconds] - 2026-09-18T17:36:58.763Z\n\n\n\u001b[1m\u001b[30m\u001b[46m RUN \u001b[49m\u001b[39m\u001b[22m \u001b[36mv4.1.11 \u001b[39m\u001b[90mC:/planillero/backoffice\u001b[39m\n\n \u001b[32m✓\u001b[39m \u001b[30m\u001b[42m planillero-backoffice \u001b[49m\u001b[39m src/app/core/services/__tests__/evidence.service.spec.ts \u001b[2m(\u001b[22m\u001b[2m4 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 29\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m✓\u001b[39m \u001b[30m\u001b[42m planillero-backoffice \u001b[49m\u001b[39m src/app/core/services/__tests__/health.service.spec.ts \u001b[2m(\u001b[22m\u001b[2m5 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 30\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m✓\u001b[39m \u001b[30m\u001b[42m planillero-backoffice \u001b[49m\u001b[39m src/app/core/interceptors/__tests__/auth.interceptor.spec.ts \u001b[2m(\u001b[22m\u001b[2m4 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 32\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m✓\u001b[39m \u001b[30m\u001b[42m planillero-backoffice \u001b[49m\u001b[39m src/app/core/services/__tests__/auth.service.spec.ts \u001b[2m(\u001b[22m\u001b[2m9 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 49\u001b[2mms\u001b[22m\u001b[39m\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m4 passed\u001b[39m\u001b[22m\u001b[90m (4)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m22 passed\u001b[39m\u001b[22m\u001b[90m (22)\u001b[39m\n\u001b[2m   Start at \u001b[22m 14:36:58\n\u001b[2m   Duration \u001b[22m 1.43s\u001b[2m (transform 164ms, setup 1.40s, import 198ms, tests 140ms, environment 3.06s)\u001b[22m"
+        }
+      ],
+      "avisos": []
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "key": "PLAN-10",
+  "summary": "TASK-08: Registro de Evidencias Digitales, Firma Digital y Manifiesto HMAC con SHA-256",
+  "issuetype": "Tarea",
+  "priority": "High",
+  "status": "Por hacer",
+  "created": "2026-09-16T17:14:40.723-0300",
+  "updated": "2026-09-16T17:19:02.676-0300",
+  "duedate": "2026-09-28",
+  "assignee": "Fernando Chamorro Goncalves",
+  "reporter": "Fernando Chamorro Goncalves",
+  "project": "PLAN",
+  "description": "Captura de fotos periciales de ambiente/domicilio, firma ológrafa de las partes, generación del manifiesto criptográfico de la visita y vinculación con actor, dispositivo y hora.\n\nAlcance Fullstack:\n- Backend: Ingesta multipart/stream hacia MinIO (S3), cálculo de hash SHA-256 en streaming y firma del manifiesto JSON con HMAC.\n- Frontend Móvil: Captura fotográfica y componente de lienzo para firma táctil (react-native-signature-canvas) con hashing local previo.\n- Frontend Web: Visor de evidencias en el panel de supervisión con galería e inspección de trazo de firma.\n- Base de Datos: Tablas evidencias y manifiestos_visita con estados de verificación.\n- Testing: Tests de cálculo de hash SHA-256 frente a vectores conocidos, detección de manipulación de binarios e integración con MinIO.\n\nEvaluación UX/UI:\n- Heurística 3 (Control y libertad): Botón de limpiar y reintentar firma, miniaturas de fotos antes de aceptar.\n- Heurística 8 (Minimalismo): Pantalla de firma limpia maximizando área útil de trazo.\n\nEvaluación Ciberseguridad:\n- Cadena de custodia con SHA-256 y almacenamiento WORM que impide sobreescrituras.\n- OWASP A04: Archivos almacenados con nombres UUID aleatorios evitando enumeración."
+}
