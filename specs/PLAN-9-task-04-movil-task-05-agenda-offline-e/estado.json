@@ -73,7 +73,7 @@
     "frontend": "https://github.com/matiaslameiro-surely/planillero-frontend/pull/4"
   },
   "jira": {
-    "transicionadoA": "31",
+    "transicionadoA": "Finalizado",
     "creadoPorHarness": false
   },
   "ejecucion": {
@@ -82,5 +82,5 @@
     "ts": "2026-09-18T17:29:08.143Z",
     "fin": "2026-09-18T20:41:16.880Z"
   },
-  "etapa2": "PRs creados (backend #7, frontend #4); PLAN-9 en En revisión; pendiente prueba manual en development build"
+  "etapa2": "PRs mergeados por Juan Ignacio (backend #7, frontend #4); Jira Finalizado. Pendiente, sin registrar: prueba manual en development build con un Android real"
 }
