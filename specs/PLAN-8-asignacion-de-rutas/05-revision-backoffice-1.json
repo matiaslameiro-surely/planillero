@@ -1,0 +1,17 @@
+{
+  "verdict": "approve",
+  "summary": "Revisé el diff del backoffice de PLAN-8 frente a la spec (página de planificación, guarda de supervisores, pantalla de acceso denegado, ruta, mapa Leaflet y tests). La separación grilla propia/mapa, la guarda por rol y la cobertura de tests son correctas y cumplen los criterios 7 y 8. Queda un ajuste coordinado con el backend: el filtro de estado 'Asignada' hoy no puede devolver datos.",
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "El filtro de estado 'Asignada' se ofrece pero nunca devuelve datos",
+      "body": "La lista ESTADOS incluye la opción 'ASSIGNED' ('Asignada'), pero el backend (hallazgo medium del repo backend) nunca persiste ese status: toda visita asignada sigue siendo PENDING. El usuario que filtra por 'Asignada' ve siempre 'No hay visitas con los filtros actuales', lo que parece un bug de UI.",
+      "file": "src/app/pages/planificacion/planificacion.ts",
+      "line_start": 30,
+      "line_end": 30,
+      "confidence": 0.75,
+      "recommendation": "Coordinar con la decisión del backend sobre ASSIGNED: si el backend lo persiste, queda como está; si no, sacar la opción 'Asignada' y dejar los estados que el contrato efectivamente produce (PENDING, COMPLETED, CANCELLED)."
+    }
+  ],
+  "next_steps": []
+}

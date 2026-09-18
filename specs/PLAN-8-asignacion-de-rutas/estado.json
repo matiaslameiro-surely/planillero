@@ -1,0 +1,62 @@
+{
+  "issue": "PLAN-8",
+  "titulo": "TASK-04 (Web): Módulo de Asignación y Planificación de Rutas en Angular",
+  "slug": "asignacion-de-rutas",
+  "rama": "PLAN-8-asignacion-de-rutas",
+  "alcance": [
+    "backend",
+    "backoffice"
+  ],
+  "fase": "cerrar",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-18T17:24:54.727Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-18T17:25:49.144Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-18T17:30:23.213Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-18T18:16:15.687Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-18T18:18:06.135Z",
+      "nota": "gates verdes y revisión doble aprobada (backend it.2 y backoffice it.1)"
+    },
+    "cerrar": {
+      "estado": "pendiente"
+    },
+    "cerrada": {
+      "estado": "pendiente"
+    }
+  },
+  "commits": {
+    "backend": [
+      "26e91cc",
+      "b99e7c8",
+      "cc4393f"
+    ],
+    "backoffice": [
+      "52f2938"
+    ]
+  },
+  "revisiones": [],
+  "pr": {},
+  "jira": {
+    "transicionadoA": "En curso",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "opencode",
+    "modelo": "big-pickle",
+    "ts": "2026-09-18T17:24:26.094Z",
+    "fin": null
+  }
+}

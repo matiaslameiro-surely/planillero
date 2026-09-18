@@ -1,0 +1,15 @@
+{
+  "key": "PLAN-8",
+  "id": "10072",
+  "summary": "TASK-04 (Web): Módulo de Asignación y Planificación de Rutas en Angular",
+  "type": "Tarea",
+  "priority": "High",
+  "assignee": {
+    "accountId": "61d33c409ee70a0068541939",
+    "displayName": "Juan Ignacio Urrutia",
+    "email": "juan.urrutia@surely-sa.com.ar"
+  },
+  "components": [],
+  "labels": [],
+  "description": "Módulo de planificación para supervisores en Angular: asignación de visitas a operadores, selector de fechas, filtros por estado y mapa básico de distribución.\n\nAlcance Fullstack:\n- Frontend Web: Pantalla de asignación en Angular con grilla reactiva, filtros multicriterio y mapa de rutas.\n- Backend: Endpoints REST GET /api/v1/operadores/{id}/hoja-de-ruta y POST /api/v1/visitas/asignar con ordenamiento por urgencia.\n- Base de Datos: Tablas hojas_de_ruta y visitas indexadas.\n- Testing: Tests unitarios de componentes Angular y tests de endpoints REST.\n\nEvaluación UX/UI:\n- Heurística 7 (Flexibilidad y eficiencia): Acciones rápidas de reasignación y filtros dinámicos.\n\nEvaluación Ciberseguridad:\n- OWASP A01 (Broken Access Control): Control de acceso horizontal (el supervisor solo asigna en su jurisdicción)."
+}

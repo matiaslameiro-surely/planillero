@@ -1,0 +1,31 @@
+{
+  "verdict": "needs-attention",
+  "summary": "Revisé el diff del backend de PLAN-8 frente a la spec (planea módulo planning, migración V4, ApiException y tests de integración). La arquitectura de jurisdicción y el manejo de reasignación/orden por urgencia son correctos y están bien cubiertos por pruebas, pero la combinación de filtros operatorId+date de GET /visits ignora al operador y el estado ASSIGNED nunca se persiste.",
+  "findings": [
+    {
+      "severity": "high",
+      "title": "El filtro `operatorId + date` de GET /visits ignora al operador",
+      "body": "En restrictToRouteSheets (líneas 152-160) el criterio se resuelve con `date != null ? findByRouteDate(date) : findByOperatorId(operatorId)`. Cuando llegan date y operatorId juntos (la combinación explícita del criterio 4 y la que usa la grilla del backoffice), se descarta el operador y se devuelve toda visita con hoja de ruta ese día en la zona. Escenario: dos operadores de ZONA_NORTE con hojas el mismo día; el supervisor filtra por operador A y ve también las visitas de B. El test filtrosDeVisitas no lo detecta porque ese día sólo existe una hoja.",
+      "file": "src/main/java/ar/com/planillero/planning/PlanningService.java",
+      "line_start": 152,
+      "line_end": 160,
+      "confidence": 0.9,
+      "recommendation": "Agregar `findByOperatorIdAndRouteDate(UUID, LocalDate)` a RouteSheetRepository y resolver las hojas en restrictToRouteSheets según la combinación: operatorId+date → findByOperatorIdAndRouteDate; operatorId solo → findByOperatorId; date solo → findByRouteDate. Sumar una aserción de integración donde dos operadores tengan hojas el mismo día y el filtro operatorId+date devuelva sólo las del operador pedido."
+    },
+    {
+      "severity": "medium",
+      "title": "El estado ASSIGNED se declara pero nunca se persiste",
+      "body": "El enum VisitStatus define ASSIGNED pero assign() inserta la RouteSheet y deja visit.status intacto (PENDING). Ninguna visita llega jamás con status ASSIGNED, por lo que GET /visits?status=ASSIGNED y el filtro 'Asignada' del backoffice siempre devuelven vacío, y una visita ya asignada sigue figurando como PENDING para el móvil (PLAN-9).",
+      "file": "src/main/java/ar/com/planillero/planning/PlanningService.java",
+      "line_start": 144,
+      "line_end": 144,
+      "confidence": 0.7,
+      "recommendation": "En assign(), sobre las visitas asignables, persistir el status ASSIGNED (y contemplar la vuelta a PENDING si en el futuro hay desasignación, o derivarlo de la hoja y documentarlo). Coordinar con el backoffice para que el filtro 'Asignada' no muestre una opción que nunca devuelve datos."
+    }
+  ],
+  "next_steps": [
+    "Corregir restrictToRouteSheets para que operatorId+date acote al operador (agregar findByOperatorIdAndRouteDate) y cubrirlo con un test de integración.",
+    "Decidir la semántica de ASSIGNED: persistirlo en assign() o derivarlo, y alinear el filtro 'Asignada' del backoffice con la decisión.",
+    "Re-correr los gates y volver a revisar el repo."
+  ]
+}
