@@ -1,0 +1,11 @@
+{
+  "key": "PLAN-7",
+  "id": "10071",
+  "summary": "TASK-07 (Backend): Motor de Validación JSON Schema y Columnas JSONB",
+  "status": "Por hacer",
+  "assignee": "Matías Lameiro",
+  "priority": "High",
+  "issuetype": "Tarea",
+  "url": "https://surely-sa.atlassian.net/browse/PLAN-7",
+  "description": "Motor dinámico de validación JSON Schema para formularios tipificados en Spring Boot y almacenamiento transaccional en columnas PostgreSQL JSONB.\n\nAlcance Fullstack:\n- Backend: Motor de validación JSON Schema, endpoints GET /api/v1/plantillas y POST /api/v1/visitas/{id}/formulario.\n- Base de Datos: Tabla plantillas_formulario y columna respuestas_json JSONB en tabla visitas con índices GIN.\n- Testing: Tests unitarios de validación de payloads contra JSON Schema.\n\nEvaluación UX/UI:\n- Heurística 4 (Consistencia y estándares): Homogeneidad de tipos de campos y reglas.\n\nEvaluación Ciberseguridad:\n- OWASP A03 (Injection): Parámetros tipificados JPA/Hibernate, prevención de inyecciones SQL en JSONB y versionado inmutable de plantillas."
+}

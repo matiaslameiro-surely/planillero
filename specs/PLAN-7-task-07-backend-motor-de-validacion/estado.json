@@ -1,0 +1,73 @@
+{
+  "issue": "PLAN-7",
+  "titulo": "TASK-07 (Backend): Motor de Validación JSON Schema y Columnas JSONB",
+  "slug": "task-07-backend-motor-de-validacion",
+  "rama": "PLAN-7-task-07-backend-motor-de-validacion",
+  "alcance": [
+    "backend"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-18T17:31:32.279Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-18T17:31:32.342Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-18T17:36:28.116Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-18T18:29:51.289Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-18T18:30:52.165Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-18T18:58:39.302Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-18T18:58:39.353Z"
+    }
+  },
+  "commits": {
+    "backend": "bc4fb37,a67e64e,1099e65,796ef44,b89200b"
+  },
+  "revisiones": [
+    {
+      "repo": "backend",
+      "n": 1,
+      "motor": "codex",
+      "archivo": "05-revision-backend-1.json",
+      "veredicto": "needs-attention"
+    },
+    {
+      "repo": "backend",
+      "n": 2,
+      "motor": "codex",
+      "archivo": "05-revision-backend-2.json",
+      "veredicto": "approve"
+    }
+  ],
+  "pr": {
+    "backend": "https://github.com/matiaslameiro-surely/planillero-backend/pull/5"
+  },
+  "jira": {
+    "transicionadoA": "En revisión",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "Claude Opus 5",
+    "ts": "2026-09-18T17:29:58.370Z",
+    "fin": "2026-09-18T18:58:39.302Z"
+  },
+  "iteracion": "1"
+}

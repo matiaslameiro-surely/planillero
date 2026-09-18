@@ -1,0 +1,17 @@
+{
+  "verdict": "approve",
+  "summary": "La implementación cubre los criterios principales de catálogo, validación acumulada, persistencia JSONB, seguridad de acceso e inmutabilidad. No encontré defectos que deban frenar el merge; queda un caso borde en la construcción de rutas JSON Pointer.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "Las rutas JSON Pointer no escapan nombres de propiedades especiales",
+      "body": "Al reportar errores `required` o `additionalProperties`, el código concatena el nombre de propiedad a la ruta sin aplicar el escape RFC 6901. Por ejemplo, si una plantilla válida define la propiedad `codigo/serie` y el payload la omite, se devolvería `/codigo/serie`, que identifica dos niveles anidados y no el campo literal `codigo/serie`; el cliente no podrá asociar correctamente la violación.",
+      "file": "src/main/java/ar/com/planillero/forms/FormSchemaValidator.java",
+      "line_start": 107,
+      "line_end": 109,
+      "confidence": 0.93,
+      "recommendation": "Escapar `~` como `~0` y `/` como `~1` al incorporar `property` a una ruta JSON Pointer."
+    }
+  ],
+  "next_steps": []
+}

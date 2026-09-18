@@ -1,0 +1,30 @@
+{
+  "verdict": "needs-attention",
+  "summary": "La implementación cubre el flujo principal de validación y persistencia, pero acepta explícitamente versiones inactivas al enviar un formulario, en contradicción con el criterio de aceptación. También queda posible modificar la descripción de una plantilla ya publicada pese a la regla de inmutabilidad declarada.",
+  "findings": [
+    {
+      "severity": "high",
+      "title": "Se aceptan versiones inactivas al enviar formularios",
+      "body": "Si una plantilla se desactiva y el cliente envía explícitamente su `templateVersion`, el servicio la busca sin filtrar por `active` y valida/persiste el formulario. Por ejemplo, el seed contiene `mantenimiento-general` v1 inactiva: un POST con `templateKey: \"mantenimiento-general\"` y `templateVersion: 1` sería aceptado si cumple el schema. El criterio 8 exige que una referencia a una plantilla inactiva responda 400 con un código distinto del de errores de campos.",
+      "file": "src/main/java/ar/com/planillero/forms/FormTemplateService.java",
+      "line_start": 54,
+      "line_end": 63,
+      "confidence": 0.99,
+      "recommendation": "Al resolver una versión explícita para envío, verificar también que esté activa y responder `400 template_not_found` (o el código estable elegido para plantilla no disponible) si no lo está."
+    },
+    {
+      "severity": "medium",
+      "title": "La restricción de inmutabilidad permite editar la descripción publicada",
+      "body": "El trigger protege schema, clave, versión, nombre y fecha, pero omite `description`. Una actualización directa como `update forms.form_templates set description = '...' where id = ...` tiene éxito aunque cambie la plantilla publicada en el lugar. Esto contradice la documentación que indica que la única mutación permitida es `active` y deja que el catálogo mostrado a clientes cambie para una versión histórica.",
+      "file": "src/main/resources/db/migration/V4__forms_schema.sql",
+      "line_start": 53,
+      "line_end": 62,
+      "confidence": 0.97,
+      "recommendation": "Incluir `description` en la comparación del trigger, manteniendo como única excepción permitida el cambio de `active`."
+    }
+  ],
+  "next_steps": [
+    "Rechazar envíos que indiquen una versión inactiva de plantilla y agregar una prueba de integración para ese caso.",
+    "Extender el trigger de inmutabilidad para bloquear cambios de `description` y cubrirlo con una prueba de base de datos."
+  ]
+}
