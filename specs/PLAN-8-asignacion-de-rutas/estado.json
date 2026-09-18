@@ -7,7 +7,7 @@
     "backend",
     "backoffice"
   ],
-  "fase": "cerrar",
+  "fase": "cerrada",
   "fases": {
     "preparacion": {
       "estado": "ok",
@@ -31,7 +31,9 @@
       "nota": "gates verdes y revisión doble aprobada (backend it.2 y backoffice it.1)"
     },
     "cerrar": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-18T19:11:14.130Z",
+      "nota": "PRs creados y Jira transicionado a En revisión (31). Espera merge externo."
     },
     "cerrada": {
       "estado": "pendiente"
@@ -41,22 +43,27 @@
     "backend": [
       "26e91cc",
       "b99e7c8",
-      "cc4393f"
+      "cc4393f",
+      "4f2f270"
     ],
     "backoffice": [
-      "52f2938"
+      "52f2938",
+      "879bddf"
     ]
   },
   "revisiones": [],
-  "pr": {},
+  "pr": {
+    "backend": "https://github.com/matiaslameiro-surely/planillero-backend/pull/6",
+    "backoffice": "https://github.com/matiaslameiro-surely/planillero-backoffice/pull/4"
+  },
   "jira": {
-    "transicionadoA": "En curso",
+    "transicionadoA": "En revisión",
     "creadoPorHarness": false
   },
   "ejecucion": {
     "herramienta": "opencode",
     "modelo": "big-pickle",
     "ts": "2026-09-18T17:24:26.094Z",
-    "fin": null
+    "fin": "2026-09-18T19:11:14.131Z"
   }
 }
