@@ -51,7 +51,7 @@
     "backoffice": "https://github.com/matiaslameiro-surely/planillero-backoffice/pull/3"
   },
   "jira": {
-    "transicionadoA": "En revisión",
+    "transicionadoA": "Finalizado",
     "creadoPorHarness": false
   },
   "ejecucion": {
