@@ -15,6 +15,7 @@ const SENIALES = [
   { herramienta: 'Gemini CLI', vars: ['GEMINI_CLI', 'GEMINI_SESSION_ID'] },
   { herramienta: 'Aider', vars: ['AIDER_MODEL'] },
   { herramienta: 'GitHub Copilot', vars: ['COPILOT_AGENT_ID'] },
+  { herramienta: 'opencode', vars: ['OPENCODE'] },
 ];
 
 /** Detecta la herramienta anfitriona, o null si no se reconoce ninguna. */
