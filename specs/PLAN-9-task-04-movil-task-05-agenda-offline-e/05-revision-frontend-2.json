@@ -1,0 +1,51 @@
+{
+  "verdict": "approve",
+  "summary": "Se revisó el diff del frontend contra la spec: agenda en SQLite cifrada como única fuente de la pantalla, sincronización con conexión, inicio de visita con GPS y bloque no editable con semáforo. Los 126 tests, el lint y los tipos pasan y cubren los criterios 8 a 12 en lo verificable sin dispositivo; no hay defectos bloqueantes.",
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "El SQL de la agenda sólo se verificó con dobles de la base",
+      "body": "agendaRepository ejecuta sentencias como INSERT ... ON CONFLICT DO UPDATE con excluded y DELETE ... NOT IN (?), y agendaSchema usa PRAGMA user_version. Los tests usan un doble de SQLiteDatabase que registra las sentencias, así que un error de sintaxis o de semántica SQL no lo detecta ningún test. Sólo se vería en un development build.",
+      "file": "src/agenda/agendaRepository.ts",
+      "line_start": 78,
+      "line_end": 118,
+      "confidence": 0.6,
+      "recommendation": "Hacer la prueba manual en un development build antes del merge: sincronizar, reabrir la app, reasignar una visita desde el backoffice y confirmar que desaparece, y que las iniciadas conservan su ubicación."
+    },
+    {
+      "severity": "low",
+      "title": "La fecha 'de hoy' se fija al montar la pantalla",
+      "body": "AgendaScreen calcula localDateString() una sola vez con useMemo. Si la app queda abierta pasada la medianoche, sigue mostrando y sincronizando la agenda del día anterior hasta que se vuelva a montar.",
+      "file": "src/app/agenda.tsx",
+      "line_start": 44,
+      "line_end": 44,
+      "confidence": 0.6,
+      "recommendation": "Recalcular la fecha cuando la app vuelve a primer plano (AppState) o al sincronizar."
+    },
+    {
+      "severity": "low",
+      "title": "La base local y su clave quedan en el dispositivo al cerrar sesión",
+      "body": "DatabaseProvider cierra la conexión al salir, pero el archivo SQLite y su clave en el almacén seguro se conservan. Otro operador no puede abrirlos (cada uno tiene su clave y su archivo), pero los datos del anterior siguen en el equipo. Es la decisión pendiente que dejó anotada la etapa 1.",
+      "file": "src/db/DatabaseProvider.tsx",
+      "line_start": 40,
+      "line_end": 76,
+      "confidence": 0.5,
+      "recommendation": "Decidir con el equipo si el cierre de sesión conserva la agenda para uso offline o borra base y clave (deleteEncryptionKey ya existe para eso)."
+    },
+    {
+      "severity": "low",
+      "title": "DatabaseProvider y la pantalla de agenda no tienen tests automáticos",
+      "body": "El proveedor (apertura, cierre al salir, error) y la composición de la pantalla sólo se comprueban a mano. La lógica de fondo sí está cubierta en useAgenda, startVisit, VisitCard y el repositorio.",
+      "file": "src/app/agenda.tsx",
+      "line_start": 1,
+      "line_end": 1,
+      "confidence": 0.5,
+      "recommendation": "Cubrirlo en la prueba manual del development build; agregar un test del proveedor si aparece un bug ahí."
+    }
+  ],
+  "next_steps": [
+    "Prueba manual en un development build: agenda offline, inicio con GPS y rechazo de ubicación simulada.",
+    "Decidir qué pasa con la base local al cerrar sesión.",
+    "Recalcular la fecha de hoy al volver a primer plano."
+  ]
+}

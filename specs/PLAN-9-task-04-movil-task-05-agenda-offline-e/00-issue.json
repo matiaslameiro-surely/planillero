@@ -1,0 +1,13 @@
+{
+  "key": "PLAN-9",
+  "url": "https://surely-sa.atlassian.net/browse/PLAN-9",
+  "summary": "TASK-04 (Móvil) + TASK-05: Agenda Offline e Inicio de Visita con GPS y Timestamps",
+  "issuetype": "Tarea",
+  "priority": "High",
+  "status": "En curso",
+  "assignee": "Federico Morón",
+  "reporter": "Fernando Chamorro Goncalves",
+  "created": "2026-09-16T17:14:29.904-0300",
+  "sprint": "Sprint 2 (id 68)",
+  "description": "Módulo móvil para consulta de hoja de ruta offline en SQLite y acreditación fehaciente de presencia física mediante geolocalización nativa, semáforo de precisión y doble timestamp.\n\nAlcance Fullstack:\n- Frontend Móvil: Pantalla Hoja de Ruta en React Native con SQLite offline. Al presionar 'Iniciar Visita', captura nativa de coordenadas GPS, radio de precisión (semáforo verde <15m, amarillo 15-50m, rojo >50m) y hora de inicio.\n- Backend: Endpoint POST /api/v1/visitas/{id}/iniciar, cálculo de desfase temporal (drift_seconds) entre dispositivo y servidor NTP.\n- Base de Datos: Campos de latitud, longitud, precisión y timestamps en tabla visitas.\n- Testing: Tests unitarios de drift temporal, mocks del proveedor de localización en React Native y pruebas sin conexión.\n\nEvaluación UX/UI:\n- Heurística 1 (Visibilidad del estado): Indicador permanente de modo offline y batería.\n- Heurística 2 (Coincidencia con el mundo real): Coordenadas legibles con semáforo de precisión.\n- Heurística 7 (Ergonomía): Botones táctiles grandes (>48x48 dp) para uso bajo sol y con guantes.\n\nEvaluación Ciberseguridad:\n- Cifrado en reposo local con SQLCipher.\n- Detección de Mock Locations (ubicaciones simuladas en Android) para prevenir fraudes de presencia."
+}

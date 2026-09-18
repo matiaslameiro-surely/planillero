@@ -1,0 +1,51 @@
+{
+  "verdict": "approve",
+  "summary": "Se revisó el diff del frontend de la etapa 1 contra la spec: semáforo de precisión, captura de ubicación con rechazo de ubicación simulada, barra de estado y apertura de la base SQLCipher con clave en el almacén seguro. Cubre lo que promete la etapa 1 y no hay defectos bloqueantes; quedan observaciones menores.",
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "El hook useDeviceStatus no tiene tests",
+      "body": "La lógica de conectividad, batería y GPS (en particular el valor -1 de batería, el orden isInternetReachable ?? isConnected ?? true y la reconsulta al volver a primer plano) sólo se cubre indirectamente: el test de DeviceStatusBar recibe los datos por props. Un cambio en esa lógica no lo detectaría ningún test.",
+      "file": "src/status/useDeviceStatus.ts",
+      "line_start": 30,
+      "line_end": 67,
+      "confidence": 0.7,
+      "recommendation": "Agregar un test del hook con expo-network, expo-battery y expo-location mockeados, cubriendo batería -1, red sin validar y reconsulta del GPS en AppState 'active'."
+    },
+    {
+      "severity": "low",
+      "title": "captureLocation puede tardar mucho si no hay fix",
+      "body": "getCurrentPositionAsync no recibe un tiempo máximo. Sin cielo abierto o en interiores la promesa puede quedar pendiente bastante tiempo, y el operador vería el botón de Iniciar Visita colgado sin explicación. El código 'no_fix' existe pero sólo se alcanza si el proveedor lanza un error.",
+      "file": "src/visit/location.ts",
+      "line_start": 52,
+      "line_end": 56,
+      "confidence": 0.5,
+      "recommendation": "Envolver la captura en un timeout propio (por ejemplo 15 s) que lance LocationError con código no_fix, y probarlo con temporizadores falsos."
+    },
+    {
+      "severity": "low",
+      "title": "deleteEncryptionKey queda sin uso",
+      "body": "La función se exporta pero nada la llama todavía. Al cerrar sesión la clave y el archivo de la base del operador se conservan, que puede ser lo deseado para el uso offline, pero es una decisión que no está escrita en la spec.",
+      "file": "src/db/encryptionKey.ts",
+      "line_start": 58,
+      "line_end": 61,
+      "confidence": 0.6,
+      "recommendation": "Decidir en la etapa 2 si el cierre de sesión conserva o borra la base local, y dejarlo asentado en la spec."
+    },
+    {
+      "severity": "low",
+      "title": "Cambios en package-lock.json más amplios que las dependencias nuevas",
+      "body": "El lock cambia unas 109 líneas con 43 eliminaciones. Parte de eso puede ser ruido de npm al resolver las dependencias nuevas, y conviene confirmar que no se movieron versiones de dependencias ya existentes.",
+      "file": "package-lock.json",
+      "line_start": 1,
+      "line_end": 1,
+      "confidence": 0.4,
+      "recommendation": "Comparar el lock contra main y confirmar que sólo se agregaron los paquetes de expo-battery, expo-crypto, expo-location, expo-network y expo-sqlite."
+    }
+  ],
+  "next_steps": [
+    "Agregar tests del hook useDeviceStatus.",
+    "Agregar un timeout a la captura de ubicación.",
+    "Probar en un development build con una app de ubicación simulada y confirmar que el archivo SQLite no se abre con un cliente SQLite común."
+  ]
+}

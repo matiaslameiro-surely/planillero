@@ -1,0 +1,85 @@
+{
+  "issue": "PLAN-9",
+  "titulo": "TASK-04 (Móvil) + TASK-05: Agenda Offline e Inicio de Visita con GPS y Timestamps",
+  "slug": "task-04-movil-task-05-agenda-offline-e",
+  "rama": "PLAN-9-task-04-movil-task-05-agenda-offline-e",
+  "alcance": [
+    "backend",
+    "frontend"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-18T17:29:26.380Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-18T17:47:10.412Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-18T17:53:12.397Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-18T17:59:37.477Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-18T20:25:10.120Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-18T20:41:16.878Z"
+    },
+    "cerrada": {
+      "estado": "pendiente"
+    }
+  },
+  "commits": {
+    "frontend": "8a2d6b1",
+    "backend": "0e80603"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "frontend",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0
+    },
+    {
+      "n": 1,
+      "repo": "backend",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0
+    },
+    {
+      "n": 2,
+      "repo": "frontend",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0
+    }
+  ],
+  "pr": {
+    "backend": "https://github.com/matiaslameiro-surely/planillero-backend/pull/7",
+    "frontend": "https://github.com/matiaslameiro-surely/planillero-frontend/pull/4"
+  },
+  "jira": {
+    "transicionadoA": "31",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "Claude Sonnet 5",
+    "ts": "2026-09-18T17:29:08.143Z",
+    "fin": "2026-09-18T20:41:16.880Z"
+  },
+  "etapa2": "PRs creados (backend #7, frontend #4); PLAN-9 en En revisión; pendiente prueba manual en development build"
+}

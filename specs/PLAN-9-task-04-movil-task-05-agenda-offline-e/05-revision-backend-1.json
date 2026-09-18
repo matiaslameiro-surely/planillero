@@ -1,0 +1,40 @@
+{
+  "verdict": "approve",
+  "summary": "Se revisó el diff del backend contra la spec: migración V8, inicio de visita con bloqueo de fila, cálculo del desfase con Clock inyectable, agenda del operador y el bloqueo de reasignación de visitas IN_PROGRESS. Cubre los criterios 1 a 7, los 67 tests pasan contra PostgreSQL real y no hay defectos bloqueantes; quedan observaciones menores.",
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "Hueco de numeración en las migraciones (V5 y V6 no están en main)",
+      "body": "main tiene V1 a V4, V7 (PLAN-8) y ahora V8, pero PLAN-7 (PR abierto) aporta V5 y V6. En una base nueva Flyway aplica todo en orden y no hay problema. En una base que ya aplicó V7 y V8, al mergear PLAN-7 Flyway falla la validación con 'Detected resolved migration not applied to database: 5' salvo que se habilite outOfOrder.",
+      "file": "src/main/resources/db/migration/V8__visit_start.sql",
+      "line_start": 1,
+      "line_end": 1,
+      "confidence": 0.6,
+      "recommendation": "Coordinar el orden de merge con PLAN-7 o habilitar spring.flyway.out-of-order en los entornos con datos. No se resuelve dentro de PLAN-9."
+    },
+    {
+      "severity": "low",
+      "title": "assign no bloquea la fila de la visita y puede pisar un inicio simultáneo",
+      "body": "PlanningService.assign lee la visita sin bloqueo y le escribe status ASSIGNED. Si un supervisor reasigna en el mismo instante en que el operador inicia, la lectura previa al inicio puede sobrescribir el IN_PROGRESS recién confirmado. El chequeo agregado en esta tarea cierra el caso secuencial, no esta carrera.",
+      "file": "src/main/java/ar/com/planillero/planning/PlanningService.java",
+      "line_start": 116,
+      "line_end": 134,
+      "confidence": 0.5,
+      "recommendation": "Leer las visitas de assign con PESSIMISTIC_WRITE (por ejemplo un findAllByIdForUpdate). Ventana muy chica; queda documentado en el contrato."
+    },
+    {
+      "severity": "low",
+      "title": "Se puede iniciar una visita desde una hoja de ruta de cualquier fecha",
+      "body": "El control de acceso sólo exige que la visita figure en alguna hoja del operador, sin mirar la fecha. Un operador podría iniciar hoy una visita agendada para otro día. Es una decisión explícita de la spec (pregunta abierta NO-BLOQUEANTE), y el desfase se registra igual.",
+      "file": "src/main/java/ar/com/planillero/planning/VisitStartService.java",
+      "line_start": 49,
+      "line_end": 56,
+      "confidence": 0.4,
+      "recommendation": "Si el negocio lo pide, restringir a la fecha de la hoja o a un rango razonable alrededor de hoy."
+    }
+  ],
+  "next_steps": [
+    "Coordinar con PLAN-7 el orden de merge de las migraciones V5/V6 frente a V7/V8.",
+    "Evaluar bloquear la fila en assign si el tablero del supervisor va a reasignar con frecuencia."
+  ]
+}
