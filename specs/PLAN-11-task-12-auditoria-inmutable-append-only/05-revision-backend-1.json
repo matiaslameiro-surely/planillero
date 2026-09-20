@@ -1,0 +1,51 @@
+{
+  "verdict": "needs-attention",
+  "summary": "Se revisó el diff de PLAN-11/TASK-12 en el repo backend (interceptor @AuditLog, AuditChainService, tabla audit.audit_logs con trigger append-only, endpoints /audit/logs y /audit/verify, enmascarado) contra 01-spec.md. Los tests de integración corren y pasan (Testcontainers + Postgres real), pero se encontró un defecto concreto que rompe el criterio de aceptación 1/5/6 para el evento de asignación de visita, además de un riesgo de diseño no probado en la interacción @Transactional/@Around.",
+  "findings": [
+    {
+      "severity": "high",
+      "title": "VISIT_ASSIGNED audita el operador, no la visita: rompe la verificación por visita",
+      "body": "PlanningService.assign() usaba @AuditLog(entityType=ROUTE_ASSIGNMENT) sin entityIdParam explícito (default 0 = operatorId), así que la fila de auditoría quedaba con entity_id=operatorId. GET /audit/verify?visitId=... (que filtra por entityId) nunca incluía el evento de asignación de esa visita.",
+      "file": "src/main/java/ar/com/planillero/planning/PlanningService.java",
+      "line_start": 111,
+      "line_end": 113,
+      "confidence": 0.85,
+      "recommendation": "Emitir el evento de auditoría por cada visita asignada, con su propio UUID como entityId."
+    },
+    {
+      "severity": "medium",
+      "title": "Orden no especificado entre el aspecto @Around y @Transactional: atomicidad de la auditoría no garantizada",
+      "body": "AuditAspect (sin @Order) llama a chainService.append() (a su vez @Transactional) después de joinPoint.proceed(). Ni el advisor de @Transactional ni el de AuditAspect declaran @Order, ambos caen en LOWEST_PRECEDENCE por defecto: Spring no garantiza si la escritura de auditoría queda dentro o fuera de la transacción del método de negocio para las 4 mutaciones que siguen usando @AuditLog (start, submit, saveEvidence, createAndSignManifest).",
+      "file": "src/main/java/ar/com/planillero/audit/AuditAspect.java",
+      "line_start": 41,
+      "line_end": 59,
+      "confidence": 0.5,
+      "recommendation": "Fijar explícitamente el orden de los advisors, y agregar un test que fuerce un fallo en append() para confirmar atomicidad."
+    },
+    {
+      "severity": "low",
+      "title": "El lock pesimista sobre 'la última fila' no serializa la primera escritura de la cadena",
+      "body": "findFirstByOrderByCreatedAtDesc() con PESSIMISTIC_WRITE no bloquea nada cuando la tabla está vacía: dos transacciones concurrentes podrían leer Optional.empty() a la vez y generar dos filas 'primeras' con el mismo hash_previo (GENESIS).",
+      "file": "src/main/java/ar/com/planillero/audit/AuditLogRepository.java",
+      "line_start": 24,
+      "line_end": 33,
+      "confidence": 0.4,
+      "recommendation": "Documentar la limitación o mitigarla con un advisory lock de Postgres no atado a una fila existente."
+    },
+    {
+      "severity": "low",
+      "title": "payload se persiste como text, no como JSONB, divergiendo del texto literal del criterio 1",
+      "body": "El criterio 1 pide 'JSONB'; la migración usa 'text' a propósito (documentado en el código) para que el hash no dependa de la normalización que haría JSONB. Es una decisión defendible, pero no está mencionada fuera de los comentarios de código.",
+      "file": "src/main/resources/db/migration/V11__audit_log_schema.sql",
+      "line_start": 15,
+      "line_end": 26,
+      "confidence": 0.55,
+      "recommendation": "Dejarlo explícito en la spec o el PR como decisión deliberada."
+    }
+  ],
+  "next_steps": [
+    "Resuelto: assign() ya no usa @AuditLog; llama directamente a AuditChainService una vez por visita afectada (entityType=VISIT, entityId=visita), con usuario/IP/dispositivo extraídos a un AuditRequestContext compartido con AuditAspect. Test de regresión agregado (assigningAVisitAuditsTheVisitNotTheOperator).",
+    "No resuelto (medium, no bloqueante): el orden @Around/@Transactional de las 4 mutaciones que siguen con @AuditLog queda documentado como limitación conocida para revisión humana, no se fuerza @Order sin poder verificarlo empíricamente en este ciclo.",
+    "No resuelto (low, no bloqueante): carrera en el primer insert de la cadena vacía, y uso de text en vez de jsonb para el payload — documentados, quedan para el cuerpo del PR."
+  ]
+}

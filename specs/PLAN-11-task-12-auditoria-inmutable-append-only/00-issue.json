@@ -1,0 +1,14 @@
+{
+  "key": "PLAN-11",
+  "summary": "TASK-12: Auditoría Inmutable Append-Only y Verificación de Cadena de Custodia",
+  "issuetype": "Tarea",
+  "priority": "High",
+  "status": "Por hacer",
+  "assignee": {
+    "accountId": "712020:3be96757-16a9-4a18-9fec-e730ba9c71b7",
+    "displayName": "Federico Morón",
+    "emailAddress": "federico.moron@surely-sa.com.ar"
+  },
+  "description": "Registro inmutable de cada acción sobre el sistema, verificación de alteraciones y trazabilidad legal exigible.\n\nAlcance Fullstack:\n- Backend: Interceptor AOP (@AuditLog) que captura método, usuario, IP, dispositivo y deltas JSONB. Encadenamiento criptográfico con hash previo: hash_actual = SHA256(id + timestamp + payload + hash_previo).\n- Frontend Web: Módulo de Consulta de Auditoría y botón 'Auditar Integridad de Visita' que valida el encadenamiento de hashes.\n- Frontend Móvil: Registro local de trazas de eventos que se envían al sincronizar.\n- Base de Datos: Tabla auditoria_logs con reglas PostgreSQL que rechazan cualquier UPDATE o DELETE.\n- Testing: Tests de intento de modificación de registros y validación de alerta ante ruptura de cadena.\n\nEvaluación UX/UI:\n- Heurística 10 (Ayuda y documentación): Tooltips contextuales en códigos técnicos de auditoría.\n- Heurística 6 (Reconocimiento): Filtros prearmados y códigos de color semánticos.\n\nEvaluación Ciberseguridad:\n- OWASP A09 (Security Logging and Monitoring): Logs inmutables append-only y enmascaramiento automático de datos sensibles.",
+  "webUrl": "https://surely-sa.atlassian.net/browse/PLAN-11"
+}

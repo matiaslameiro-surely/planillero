@@ -1,0 +1,31 @@
+{
+  "verdict": "needs-attention",
+  "summary": "Se revisó el diff origin/main...HEAD del backoffice (guard, servicio, modelo y pantalla de Auditoría) contra 01-spec.md. El control de acceso (guard + ruta) está correcto y replica fielmente el patrón de supervisor.guard.ts, con tests que cubren los tres casos. No se hallaron bugs críticos de seguridad ni de signals/HTTP, pero la pantalla no expone filtro por rango de fechas ni paginación, pese a que el endpoint de auditoría (AC4) y el propio AuditService sí los soportan.",
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "Falta filtro por rango de fechas en la pantalla de Auditoría",
+      "body": "El criterio de aceptación 4 exige que el endpoint de auditoría sea filtrable por tipo de evento, usuario y rango de fechas, y el AC6 pide que el módulo del backoffice tenga una 'tabla filtrable de eventos'. AuditService.getLogs() y AuditLogFilters ya soportan 'from'/'to' (audit.service.ts líneas 15-30, audit.model.ts líneas 25-31), pero auditoria.html sólo ofrece inputs para 'Tipo de evento' y 'Usuario' (líneas 62-80); no hay ningún campo de fecha desde/hasta. En un caso de auditoría real (p. ej. reconstruir lo actuado en un rango de fechas para una disputa legal) el administrador no tiene forma de acotar por fecha desde la UI, aun cuando el backend lo permite.",
+      "file": "src/app/pages/auditoria/auditoria.html",
+      "line_start": 62,
+      "line_end": 80,
+      "confidence": 0.85,
+      "recommendation": "Agregar dos campos de fecha (desde/hasta) conectados a signals 'fromFilter'/'toFilter' que se envíen en AuditService.getLogs(), reutilizando el mismo patrón de (change) + reload() que ya usan eventType y username."
+    },
+    {
+      "severity": "medium",
+      "title": "No hay controles de paginación: sólo se ve la primera página (20 filas)",
+      "body": "AuditService.getLogs() siempre pide page=0 y size=20 (audit.service.ts líneas 33-34) y AuditLogPage trae totalElements/totalPages (audit.model.ts líneas 13-19), pero Auditoria (auditoria.ts, método reload(), líneas 78-95) nunca envía 'page' ni ofrece botones de siguiente/anterior en auditoria.html. Si hay más de 20 eventos para los filtros elegidos, el administrador no tiene manera de ver el resto desde la pantalla, lo que contradice el propósito de un endpoint 'paginado' (AC4) pensado para reconstruir trazabilidad legal completa.",
+      "file": "src/app/pages/auditoria/auditoria.ts",
+      "line_start": 78,
+      "line_end": 95,
+      "confidence": 0.85,
+      "recommendation": "Agregar un signal de página actual, mostrar totalPages/totalElements en la UI y botones para avanzar/retroceder que llamen a reload() con el page correspondiente."
+    }
+  ],
+  "next_steps": [
+    "Agregar campos de fecha desde/hasta en auditoria.html y auditoria.ts, conectados a AuditService.getLogs({from, to}).",
+    "Agregar controles de paginación (siguiente/anterior o número de página) usando los campos totalPages/totalElements ya presentes en AuditLogPage.",
+    "Re-ejecutar los tests de auditoria.spec.ts y audit.service.spec.ts tras el cambio para cubrir los nuevos filtros/paginación."
+  ]
+}

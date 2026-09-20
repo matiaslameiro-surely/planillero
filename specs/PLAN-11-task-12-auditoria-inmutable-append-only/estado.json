@@ -1,0 +1,54 @@
+{
+  "issue": "PLAN-11",
+  "titulo": "TASK-12: Auditoría Inmutable Append-Only y Verificación de Cadena de Custodia",
+  "slug": "task-12-auditoria-inmutable-append-only",
+  "rama": "PLAN-11-task-12-auditoria-inmutable-append-only",
+  "alcance": [
+    "backend",
+    "frontend",
+    "backoffice"
+  ],
+  "fase": "cerrar",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-20T20:16:52.882Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-20T20:18:12.289Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-20T20:22:42.727Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-20T22:25:15.415Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-20T22:25:15.537Z",
+      "nota": "gates en verde en los 3 repos (backend 104 tests, frontend 129 tests, backoffice 53 tests); fix incidental de fecha hardcodeada en planificacion.spec.ts (PLAN-8, no relacionado con esta tarea)"
+    },
+    "cerrar": {
+      "estado": "pendiente"
+    },
+    "cerrada": {
+      "estado": "pendiente"
+    }
+  },
+  "commits": {},
+  "revisiones": [],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "Claude Sonnet 5",
+    "ts": "2026-09-20T20:16:28.430Z",
+    "fin": null
+  }
+}

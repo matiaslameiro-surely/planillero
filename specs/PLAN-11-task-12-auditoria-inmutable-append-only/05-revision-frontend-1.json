@@ -1,0 +1,41 @@
+{
+  "verdict": "needs-attention",
+  "summary": "Se revisó el diff de frontend/ (auditRepository.ts, agendaSchema.ts, startVisit.ts, evidence/[visitId].tsx) contra 01-spec.md. La migración SQLite, el repositorio de trazas y el hecho de que no se transmite nada son correctos, pero el diff sólo cubre 2 de los 3 eventos que exige el criterio 8 y usa el reloj del dispositivo en vez del timestamp autoritativo del servidor ya disponible para el inicio de visita.",
+  "findings": [
+    {
+      "severity": "high",
+      "title": "Falta el evento de 'avance de formulario' exigido por el criterio de aceptación 8",
+      "body": "El criterio 8 de 01-spec.md pide explícitamente tres eventos operativos: inicio, avance de formulario y evidencia capturada. El diff sólo agrega llamadas a insertTrace para VISIT_STARTED (src/visit/startVisit.ts) y EVIDENCE_SAVED (src/app/evidence/[visitId].tsx). No hay ningún call site que registre progreso o guardado de formulario, ni tampoco una pantalla de formulario en el repo (no existe src/app/form* ni similar) que pudiera instrumentarse.",
+      "file": "src/audit/auditRepository.ts",
+      "line_start": 1,
+      "line_end": 58,
+      "confidence": 0.75,
+      "recommendation": "Confirmar si la pantalla de formulario de visita existe en otro repo/tarea aún no mergeada; si no existe, dejar constancia explícita de que el evento de avance de formulario queda pendiente hasta que exista esa pantalla."
+    },
+    {
+      "severity": "medium",
+      "title": "La traza VISIT_STARTED usa el reloj del dispositivo en vez del timestamp autoritativo del servidor",
+      "body": "insertTrace registraba el evento con occurred_at generado con new Date().toISOString(), pese a que StartVisitResponse ya trae startedAtServer.",
+      "file": "src/visit/startVisit.ts",
+      "line_start": 81,
+      "line_end": 89,
+      "confidence": 0.55,
+      "recommendation": "Usar response.startedAtServer como occurredAt de la traza VISIT_STARTED."
+    },
+    {
+      "severity": "low",
+      "title": "La traza de evidencia se pierde silenciosamente si la base local no está en estado 'ready'",
+      "body": "Si database.status no es 'ready', insertTrace no se llama y no queda ningún registro ni log de que el evento no se persistió.",
+      "file": "src/app/evidence/[visitId].tsx",
+      "line_start": 122,
+      "line_end": 131,
+      "confidence": 0.4,
+      "recommendation": "Loguear los casos en que la traza no pudo persistirse."
+    }
+  ],
+  "next_steps": [
+    "Confirmado: no existe la pantalla de formulario móvil (TASK-07 Móvil / PLAN-13, sin implementar). Se corrigió 01-spec.md (criterio 8 y 'Fuera de alcance') para acotar el evento de avance de formulario a esa tarea futura, en vez de dejarlo implícito.",
+    "Resuelto: insertTrace ahora acepta un occurredAt opcional; startVisit.ts pasa response.startedAtServer.",
+    "Resuelto: se agregó console.warn cuando la traza de evidencia no se puede persistir (catch y estado de base no listo)."
+  ]
+}
