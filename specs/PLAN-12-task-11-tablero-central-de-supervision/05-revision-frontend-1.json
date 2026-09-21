@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "La implementación en el cliente móvil frontend cumple con los requerimientos de PLAN-12: integración de telemetría de batería, conectividad y GPS mediante hook useHeartbeat, despacho periódico a /api/v1/supervision/heartbeat, manejo tolerante a fallas y cobertura de tests unitarios.",
+  "findings": [],
+  "next_steps": []
+}

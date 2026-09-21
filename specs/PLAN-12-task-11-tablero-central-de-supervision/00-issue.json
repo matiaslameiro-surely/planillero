@@ -1,0 +1,12 @@
+{
+  "key": "PLAN-12",
+  "summary": "TASK-11: Tablero Central de Supervisión, Mapa Operativo y Monitoreo de Excepciones",
+  "issuetype": "Tarea",
+  "priority": "High",
+  "status": "En curso",
+  "assignee": "Fernando Chamorro Goncalves",
+  "reporter": "Fernando Chamorro Goncalves",
+  "created": "2026-09-16T17:15:12.042-0300",
+  "duedate": "2026-10-04",
+  "description": "Tablero web para el supervisor central (Planillero Central) enfocado en la detección de excepciones, seguimiento de SLAs y visualización global del turno operativo mediante Polling HTTP.\n\nAlcance Fullstack:\n- Frontend Web: Pantalla principal de supervisión en Angular (KPIs, grilla reactiva de operadores con estados en_campo, demorado, offline, turno_completo, y mapa interactivo con Leaflet/OSM). Mecanismo de polling HTTP periódico (30s/60s) y botón manual 'Actualizar ahora'.\n- Backend: Endpoints analíticos GET /api/v1/supervision/tablero-resumen y operadores/estado optimizados.\n- Frontend Móvil: Envío periódico de latido (Heartbeat/Ping) con estado de batería y conectividad.\n- Base de Datos: Índices compuestos en visitas y operador_turnos.\n- Testing: Tests de componentes Angular y pruebas de carga sobre endpoints analíticos.\n\nEvaluación UX/UI:\n- Heurística 8 (Minimalismo): Foco visual en operadores fuera de SLA mediante tarjetas destacadas.\n- Heurística 4 (Consistencia y estándares): Vocabulario idéntico al móvil (en ruta, en curso, cerrada local, sincronizada, observada).\n\nEvaluación Ciberseguridad:\n- OWASP A01: Filtro multi-tenant por agencia o jurisdicción.\n- Sanitización estricta contra XSS al renderizar texto de observaciones."
+}

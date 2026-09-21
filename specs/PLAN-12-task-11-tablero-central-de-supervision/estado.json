@@ -1,0 +1,63 @@
+{
+  "issue": "PLAN-12",
+  "titulo": "TASK-11: Tablero Central de Supervisión, Mapa Operativo y Monitoreo de Excepciones",
+  "slug": "task-11-tablero-central-de-supervision",
+  "rama": "PLAN-12-task-11-tablero-central-de-supervision",
+  "alcance": [
+    "backend",
+    "frontend",
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-21T12:53:46.415Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-21T12:55:43.753Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-21T12:56:41.005Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-21T13:20:38.841Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-21T13:29:50.543Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-21T14:12:45.562Z",
+      "nota": "PRs creados y tarea enviada a revisión"
+    },
+    "cerrada": {
+      "estado": "pendiente"
+    }
+  },
+  "commits": {
+    "backend": "b9d992c30e66f4ecdb4007fc6573c69beac82d1b",
+    "frontend": "ad59eed908fdeb8dbb0de9f4a6828c9bcd8bbd65",
+    "backoffice": "9b7f2bda1df16b8d31f325a83a263caa10be7973"
+  },
+  "revisiones": [],
+  "pr": {
+    "backend": "https://github.com/matiaslameiro-surely/planillero-backend/pull/10",
+    "frontend": "https://github.com/matiaslameiro-surely/planillero-frontend/pull/7",
+    "backoffice": "https://github.com/matiaslameiro-surely/planillero-backoffice/pull/7"
+  },
+  "jira": {
+    "transicionadoA": "En revisión",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.8 Flash",
+    "ts": "2026-09-21T12:53:37.488Z",
+    "fin": "2026-09-21T14:12:45.562Z"
+  }
+}
