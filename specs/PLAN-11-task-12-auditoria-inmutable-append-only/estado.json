@@ -8,7 +8,7 @@
     "frontend",
     "backoffice"
   ],
-  "fase": "cerrar",
+  "fase": "cerrada",
   "fases": {
     "preparacion": {
       "estado": "ok",
@@ -32,23 +32,59 @@
       "nota": "gates en verde en los 3 repos (backend 104 tests, frontend 129 tests, backoffice 53 tests); fix incidental de fecha hardcodeada en planificacion.spec.ts (PLAN-8, no relacionado con esta tarea)"
     },
     "cerrar": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-21T11:22:56.000Z"
     },
     "cerrada": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-21T11:22:56.131Z"
     }
   },
-  "commits": {},
-  "revisiones": [],
-  "pr": {},
+  "commits": {
+    "backend": "8be955f",
+    "frontend": "6767346",
+    "backoffice": "6803424"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backend",
+      "motor": "anfitriona",
+      "motivo": null,
+      "verdict": "needs-attention",
+      "bloqueantes": 1
+    },
+    {
+      "n": 1,
+      "repo": "frontend",
+      "motor": "anfitriona",
+      "motivo": null,
+      "verdict": "needs-attention",
+      "bloqueantes": 1
+    },
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": null,
+      "verdict": "needs-attention",
+      "bloqueantes": 0
+    }
+  ],
+  "pr": {
+    "backend": "https://github.com/matiaslameiro-surely/planillero-backend/pull/8",
+    "frontend": "https://github.com/matiaslameiro-surely/planillero-frontend/pull/5",
+    "backoffice": "https://github.com/matiaslameiro-surely/planillero-backoffice/pull/5"
+  },
   "jira": {
-    "transicionadoA": null,
+    "transicionadoA": "En revisión",
     "creadoPorHarness": false
   },
   "ejecucion": {
     "herramienta": "Claude Code",
     "modelo": "Claude Sonnet 5",
     "ts": "2026-09-20T20:16:28.430Z",
-    "fin": null
-  }
+    "fin": "2026-09-21T11:22:56.001Z"
+  },
+  "cierre": {}
 }
