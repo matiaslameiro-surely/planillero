@@ -8,7 +8,7 @@
     "frontend",
     "backoffice"
   ],
-  "fase": "cerrar",
+  "fase": "cerrada",
   "fases": {
     "preparacion": {
       "estado": "ok",
@@ -32,7 +32,8 @@
       "iteracion": 2
     },
     "cerrar": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-21T13:19:46.862Z"
     },
     "cerrada": {
       "estado": "pendiente"
@@ -43,20 +44,65 @@
     "frontend": "cfe6e20",
     "backoffice": "7f21761"
   },
-  "revisiones": [],
+  "revisiones": [
+    {
+      "repo": "backend",
+      "motor": "codex",
+      "verdict": "needs-attention",
+      "archivo": "05-revision-backend-1.json",
+      "bloqueantes": 1
+    },
+    {
+      "repo": "frontend",
+      "motor": "codex",
+      "verdict": "needs-attention",
+      "archivo": "05-revision-frontend-1.json",
+      "bloqueantes": 2
+    },
+    {
+      "repo": "backoffice",
+      "motor": "codex",
+      "verdict": "approve",
+      "archivo": "05-revision-backoffice-1.json",
+      "bloqueantes": 0
+    },
+    {
+      "repo": "backend",
+      "motor": "codex",
+      "verdict": "needs-attention",
+      "archivo": "05-revision-backend-2.json",
+      "bloqueantes": 1
+    },
+    {
+      "repo": "frontend",
+      "motor": "anfitriona",
+      "verdict": "approve",
+      "archivo": "05-revision-frontend-2.json",
+      "bloqueantes": 0,
+      "motivo": "sin_cuota"
+    },
+    {
+      "repo": "backend",
+      "motor": "anfitriona",
+      "verdict": "approve",
+      "archivo": "05-revision-backend-3.json",
+      "bloqueantes": 0,
+      "motivo": "sin_cuota"
+    }
+  ],
   "pr": {
     "backend": "https://github.com/matiaslameiro-surely/planillero-backend/pull/9",
     "frontend": "https://github.com/matiaslameiro-surely/planillero-frontend/pull/6",
     "backoffice": "https://github.com/matiaslameiro-surely/planillero-backoffice/pull/6"
   },
   "jira": {
-    "transicionadoA": null,
+    "transicionadoA": "En revisión",
     "creadoPorHarness": false
   },
   "ejecucion": {
     "herramienta": "Claude Code",
     "modelo": "Claude Opus 5",
     "ts": "2026-09-21T11:47:20.220Z",
-    "fin": null
+    "fin": "2026-09-21T13:19:46.862Z"
   }
 }
