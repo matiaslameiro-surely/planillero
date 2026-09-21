@@ -1,0 +1,41 @@
+{
+  "verdict": "needs-attention",
+  "summary": "La implementación cubre el flujo principal de idempotencia, pero deja claves reservadas de forma permanente ante fallos entre la reserva y el cierre. Además, la validación de UUIDv4 no cumple completamente el contrato para la clave del lote ni para los identificadores de operación.",
+  "findings": [
+    {
+      "severity": "high",
+      "title": "Una caída deja el lote bloqueado para siempre con la misma clave",
+      "body": "La reserva se confirma en una transacción independiente antes de procesar las operaciones. Si el proceso cae después de esa reserva —o falla la base al ejecutar `complete`— no se ejecuta `release` y la fila queda `IN_PROGRESS` sin vencimiento ni recuperación. Por ejemplo, si el servidor se reinicia tras guardar una o más operaciones pero antes de persistir la respuesta, todo reintento del móvil con el mismo `Idempotency-Key` recibe `409 idempotency_key_in_progress` indefinidamente y la cola no puede completar el lote.",
+      "file": "src/main/java/ar/com/planillero/sync/SyncService.java",
+      "line_start": 83,
+      "line_end": 93,
+      "confidence": 0.96,
+      "recommendation": "Implementar recuperación segura de reservas abandonadas, por ejemplo mediante una concesión con vencimiento y toma atómica de una clave vencida; cubrir también cualquier fallo de `complete` y agregar pruebas de reinicio/fallo entre reserva, operaciones y cierre."
+    },
+    {
+      "severity": "medium",
+      "title": "Los identificadores de operación no se validan como UUIDv4",
+      "body": "`clientOperationId` sólo exige que exista. Jackson acepta UUID de cualquier versión, por lo que una operación con `clientOperationId` versión 1 o 3 se procesa y puede quedar guardada, pese a que el contrato exige UUIDv4. Esto permite que clientes con generadores no aleatorios incumplan la garantía y el formato acordado.",
+      "file": "src/main/java/ar/com/planillero/sync/dto/SyncOperationRequest.java",
+      "line_start": 21,
+      "line_end": 25,
+      "confidence": 0.99,
+      "recommendation": "Agregar una validación específica que compruebe versión 4 y variante RFC 4122 para `clientOperationId`, y devolver el resultado de error por operación sin abortar las demás."
+    },
+    {
+      "severity": "medium",
+      "title": "La clave de lote acepta UUID con variante no RFC 4122",
+      "body": "La comprobación sólo revisa `key.version() == 4`. Un valor como `00000000-0000-4000-0000-000000000000` tiene versión 4 para Java, pero variante 0, por lo que no es un UUIDv4 válido. El endpoint lo acepta en vez de responder `idempotency_key_invalid`, incumpliendo la validación requerida y admitiendo claves no generadas bajo la semántica de UUIDv4.",
+      "file": "src/main/java/ar/com/planillero/sync/SyncController.java",
+      "line_start": 74,
+      "line_end": 78,
+      "confidence": 0.98,
+      "recommendation": "Además de la versión, validar que `key.variant() == 2` antes de aceptar el header y sumar un test con un UUID de versión 4 pero variante inválida."
+    }
+  ],
+  "next_steps": [
+    "Corregir la recuperación de claves `IN_PROGRESS` abandonadas y probar interrupciones entre reserva, aplicación y persistencia de la respuesta.",
+    "Validar estrictamente UUIDv4 y variante RFC 4122 tanto para `Idempotency-Key` como para `clientOperationId`.",
+    "Agregar pruebas de regresión para reservas abandonadas y UUID con versión o variante inválidas."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "verdict": "needs-attention",
+  "summary": "La implementación cubre el flujo de sincronización e idempotencia, pero permite procesar un cuerpo distinto con una clave de idempotencia ya reservada y vencida. Esto incumple la garantía explícita de reutilización de clave y debe resolverse antes del merge.",
+  "findings": [
+    {
+      "severity": "high",
+      "title": "Una clave vencida acepta y procesa un cuerpo distinto",
+      "body": "Si un envío con la clave K queda en estado IN_PROGRESS por más de dos minutos —por ejemplo, porque el proceso cae tras reservarla— y luego llega un lote distinto con la misma K del mismo usuario, se intenta tomar la reserva antes de comparar requestHash. takeOverAbandoned reemplaza request_hash y process ejecuta las operaciones del segundo lote, cuando el criterio exige responder 409 idempotency_key_reused y no procesar nada para cualquier clave ya usada con cuerpo diferente.",
+      "file": "src/main/java/ar/com/planillero/sync/IdempotencyService.java",
+      "line_start": 121,
+      "line_end": 123,
+      "confidence": 0.99,
+      "recommendation": "Comparar primero userId y requestHash de la fila existente; sólo permitir retomar una reserva abandonada si ambos coinciden. La toma de la reserva no debe reescribir la huella para una clave existente con otro cuerpo."
+    }
+  ],
+  "next_steps": [
+    "Corregir la recuperación de reservas abandonadas para rechazar con idempotency_key_reused cualquier hash distinto antes de tomar la reserva.",
+    "Agregar una prueba de integración que deje una clave IN_PROGRESS vencida y verifique que un cuerpo distinto con esa misma clave responde 409 sin escribir formularios."
+  ]
+}

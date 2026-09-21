@@ -1,0 +1,62 @@
+{
+  "issue": "PLAN-14",
+  "titulo": "TASK-09: Motor de Sincronizacion Offline-First con Garantia de Idempotencia",
+  "slug": "task-09-motor-de-sincronizacion-offline",
+  "rama": "PLAN-14-task-09-motor-de-sincronizacion-offline",
+  "alcance": [
+    "backend",
+    "frontend",
+    "backoffice"
+  ],
+  "fase": "cerrar",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-21T11:47:42.617Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-21T11:49:19.018Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-21T12:08:28.556Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-21T12:32:46.324Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-21T13:00:20.762Z",
+      "iteracion": 2
+    },
+    "cerrar": {
+      "estado": "pendiente"
+    },
+    "cerrada": {
+      "estado": "pendiente"
+    }
+  },
+  "commits": {
+    "backend": "1d6f3e5",
+    "frontend": "cfe6e20",
+    "backoffice": "7f21761"
+  },
+  "revisiones": [],
+  "pr": {
+    "backend": "https://github.com/matiaslameiro-surely/planillero-backend/pull/9",
+    "frontend": "https://github.com/matiaslameiro-surely/planillero-frontend/pull/6",
+    "backoffice": "https://github.com/matiaslameiro-surely/planillero-backoffice/pull/6"
+  },
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "Claude Opus 5",
+    "ts": "2026-09-21T11:47:20.220Z",
+    "fin": null
+  }
+}

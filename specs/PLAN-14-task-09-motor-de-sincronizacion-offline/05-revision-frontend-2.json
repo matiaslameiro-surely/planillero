@@ -1,0 +1,37 @@
+{
+  "verdict": "approve",
+  "summary": "Se revisó la cola de sincronización offline del móvil: esquema local, repositorio de la cola, worker de despacho, hook y componentes. El mecanismo de no duplicación es consistente con la spec (identificador de operación generado al encolar, clave de lote persistida antes de enviar) y los fallos de red conservan la cola. No se encontraron defectos bloqueantes; quedan tres observaciones sobre casos en que la cola avanza más tarde de lo necesario.",
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "Encolar con conexión no dispara ningún envío",
+      "body": "El despacho se dispara al montar el hook y al pasar `online` de falso a verdadero. Si el operador está conectado y encola un acta con `enqueueVisitForm`, nada la envía: queda pendiente hasta que la red se corte y vuelva, o hasta que la pantalla se remonte. El caso es el normal con buena señal, no el excepcional. Hoy no se nota porque la pantalla que encola llega con PLAN-13, pero quien la escriba tiene que saber que debe llamar a `dispatch()` a mano.",
+      "file": "src/sync/useSyncQueue.ts",
+      "line_start": 96,
+      "line_end": 104,
+      "confidence": 0.88,
+      "recommendation": "Exponer el disparo junto al encolado (por ejemplo, una función que encole y despache) o documentar en `enqueueVisitForm` que quien encola debe llamar a `dispatch()` si hay conexión."
+    },
+    {
+      "severity": "low",
+      "title": "Un lote archivado por agotar intentos frena el encadenado",
+      "body": "Cuando el lote en curso supera `MAX_ATTEMPTS`, `dispatchQueue` lo archiva y devuelve `sent: 0`. El ciclo de `dispatch` corta ante `sent === 0`, así que los lotes siguientes de la misma cola no se intentan en ese despacho aunque haya conexión y operaciones válidas esperando. Avanzan recién en el próximo disparo.",
+      "file": "src/sync/syncWorker.ts",
+      "line_start": 57,
+      "line_end": 67,
+      "confidence": 0.82,
+      "recommendation": "Distinguir «no había nada para enviar» de «se archivó un lote» en el resultado, para que el ciclo pueda seguir con el lote siguiente en el segundo caso."
+    },
+    {
+      "severity": "low",
+      "title": "La confirmación de cola vacía no aparece si el despacho gana al primer conteo",
+      "body": "`justCleared` sólo se activa si `previous.current > 0`, y ese contador arranca en 0. Si la pantalla monta con conexión y el despacho vacía la cola antes de que termine el primer `reload`, el conteo pasa directo a 0 sin haber registrado un valor previo y el operador nunca ve el «Todo sincronizado» de sus actas pendientes.",
+      "file": "src/sync/useSyncQueue.ts",
+      "line_start": 64,
+      "line_end": 80,
+      "confidence": 0.7,
+      "recommendation": "Registrar el conteo inicial antes de lanzar el primer despacho, o derivar la confirmación de lo que informa `DispatchResult.settled` en vez de la diferencia entre conteos."
+    }
+  ],
+  "next_steps": []
+}

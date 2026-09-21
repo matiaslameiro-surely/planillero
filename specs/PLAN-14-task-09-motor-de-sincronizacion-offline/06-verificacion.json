@@ -1,0 +1,96 @@
+{
+  "ok": true,
+  "tarea": "PLAN-14",
+  "ts": "2026-09-21T13:00:15.317Z",
+  "repos": [
+    {
+      "repo": "backend",
+      "ok": true,
+      "herramienta": "maven",
+      "pasos": [
+        {
+          "nombre": "compilar",
+          "cmd": "mvnw -B -q -DskipTests compile",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 2740,
+          "salida": ""
+        },
+        {
+          "nombre": "tests",
+          "cmd": "mvnw -B test",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 225273,
+          "salida": "[…1236 líneas omitidas…]\n[INFO] Tests run: 112, Failures: 0, Errors: 0, Skipped: 0\n[INFO] \n[INFO] ------------------------------------------------------------------------\n[INFO] BUILD SUCCESS\n[INFO] ------------------------------------------------------------------------\n[INFO] Total time:  03:43 min\n[INFO] Finished at: 2026-09-21T09:59:57-03:00\n[INFO] ------------------------------------------------------------------------\nMockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3\nOpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended\nWARNING: A Java agent has been loaded dynamically (C:\\Users\\Surely Desarrollo\\.m2\\repository\\net\\bytebuddy\\byte-buddy-agent\\1.18.11\\byte-buddy-agent-1.18.11.jar)\nWARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning\nWARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information\nWARNING: Dynamic loading of agents will be disallowed by default in a future release\nMockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3\nOpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended\nWARNING: A Java agent has been loaded dynamically (C:\\Users\\Surely Desarrollo\\.m2\\repository\\net\\bytebuddy\\byte-buddy-agent\\1.18.11\\byte-buddy-agent-1.18.11.jar)\nWARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning\nWARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information\nWARNING: Dynamic loading of agents will be disallowed by default in a future release\nMockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3\nOpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended\nWARNING: A Java agent has been loaded dynamically (C:\\Users\\Surely Desarrollo\\.m2\\repository\\net\\bytebuddy\\byte-buddy-agent\\1.18.11\\byte-buddy-agent-1.18.11.jar)\nWARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning\nWARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information\nWARNING: Dynamic loading of agents will be disallowed by default in a future release\nMockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3\nWARNING: A Java agent has been loaded dynamically (C:\\Users\\Surely Desarrollo\\.m2\\repository\\net\\bytebuddy\\byte-buddy-agent\\1.18.11\\byte-buddy-agent-1.18.11.jar)\nWARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning\nWARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information\nWARNING: Dynamic loading of agents will be disallowed by default in a future release\nOpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended\nMockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3\nOpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended\nWARNING: A Java agent has been loaded dynamically (C:\\Users\\Surely Desarrollo\\.m2\\repository\\net\\bytebuddy\\byte-buddy-agent\\1.18.11\\byte-buddy-agent-1.18.11.jar)\nWARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning\nWARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information\nWARNING: Dynamic loading of agents will be disallowed by default in a future release\nMockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3\nWARNING: A Java agent has been loaded dynamically (C:\\Users\\Surely Desarrollo\\.m2\\repository\\net\\bytebuddy\\byte-buddy-agent\\1.18.11\\byte-buddy-agent-1.18.11.jar)\nWARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning\nWARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information\nWARNING: Dynamic loading of agents will be disallowed by default in a future release\nOpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended\nMockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3\nWARNING: A Java agent has been loaded dynamically (C:\\Users\\Surely Desarrollo\\.m2\\repository\\net\\bytebuddy\\byte-buddy-agent\\1.18.11\\byte-buddy-agent-1.18.11.jar)\nWARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning\nWARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information\nWARNING: Dynamic loading of agents will be disallowed by default in a future release\nOpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended\nMockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3\nWARNING: A Java agent has been loaded dynamically (C:\\Users\\Surely Desarrollo\\.m2\\repository\\net\\bytebuddy\\byte-buddy-agent\\1.18.11\\byte-buddy-agent-1.18.11.jar)\nWARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning\nWARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information\nWARNING: Dynamic loading of agents will be disallowed by default in a future release\nOpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended\nMockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3\nOpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended\nWARNING: A Java agent has been loaded dynamically (C:\\Users\\Surely Desarrollo\\.m2\\repository\\net\\bytebuddy\\byte-buddy-agent\\1.18.11\\byte-buddy-agent-1.18.11.jar)\nWARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning\nWARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information\nWARNING: Dynamic loading of agents will be disallowed by default in a future release\nMockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3\nWARNING: A Java agent has been loaded dynamically (C:\\Users\\Surely Desarrollo\\.m2\\repository\\net\\bytebuddy\\byte-buddy-agent\\1.18.11\\byte-buddy-agent-1.18.11.jar)\nWARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning\nWARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information\nWARNING: Dynamic loading of agents will be disallowed by default in a future release\nOpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended\nMockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3\nWARNING: A Java agent has been loaded dynamically (C:\\Users\\Surely Desarrollo\\.m2\\repository\\net\\bytebuddy\\byte-buddy-agent\\1.18.11\\byte-buddy-agent-1.18.11.jar)\nWARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning\nWARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information\nWARNING: Dynamic loading of agents will be disallowed by default in a future release\nOpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended\nMockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3\nWARNING: A Java agent has been loaded dynamically (C:\\Users\\Surely Desarrollo\\.m2\\repository\\net\\bytebuddy\\byte-buddy-agent\\1.18.11\\byte-buddy-agent-1.18.11.jar)\nWARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning\nWARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information\nWARNING: Dynamic loading of agents will be disallowed by default in a future release\nOpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended"
+        }
+      ],
+      "avisos": []
+    },
+    {
+      "repo": "frontend",
+      "ok": true,
+      "herramienta": "npm",
+      "pasos": [
+        {
+          "nombre": "lint",
+          "cmd": "npm run lint",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 1985,
+          "salida": "\n> planillero-frontend@0.1.0 lint\n> expo lint --max-warnings 0"
+        },
+        {
+          "nombre": "tipos",
+          "cmd": "npx tsc --noEmit",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 1744,
+          "salida": ""
+        },
+        {
+          "nombre": "tests",
+          "cmd": "npm test -- --watchAll=false",
+          "opcional": true,
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 3787,
+          "salida": "\n> planillero-frontend@0.1.0 test\n> jest --watchAll=false\n\nPASS src/api/client.test.ts\nPASS src/api/__tests__/evidence.test.ts\nPASS src/sync/syncWorker.test.ts\nPASS src/sync/syncQueue.test.ts\nPASS src/agenda/agendaRepository.test.ts\nPASS src/api/visits.test.ts\nPASS src/visit/location.test.ts\nPASS src/agenda/useAgenda.test.tsx\nPASS src/sync/signOutGuard.test.ts\nPASS src/components/SyncQueueBanner.test.tsx\nPASS src/status/useDeviceStatus.test.tsx\nPASS src/db/database.test.ts\nPASS src/components/LocationSummary.test.tsx\nPASS src/components/DeviceStatusBar.test.tsx\nPASS src/agenda/date.test.ts\nPASS src/db/encryptionKey.test.ts\nPASS src/visit/accuracy.test.ts\nPASS src/components/VisitCard.test.tsx\nPASS src/visit/startVisit.test.ts\nPASS src/auth/tokenStore.test.ts\nPASS src/sync/useSyncQueue.test.tsx\n\nTest Suites: 21 passed, 21 total\nTests:       173 passed, 173 total\nSnapshots:   0 total\nTime:        3.055 s\nRan all test suites."
+        }
+      ],
+      "avisos": []
+    },
+    {
+      "repo": "backoffice",
+      "ok": true,
+      "herramienta": "npm",
+      "pasos": [
+        {
+          "nombre": "lint",
+          "cmd": "npm run lint",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 1823,
+          "salida": "\n> planillero-backoffice@0.1.0 lint\n> ng lint --max-warnings=0\n\n\nLinting \"planillero-backoffice\"...\n\nAll files pass linting."
+        },
+        {
+          "nombre": "tipos",
+          "cmd": "npm run build",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 2935,
+          "salida": "\n> planillero-backoffice@0.1.0 build\n> ng build\n\n❯ Building...\n✔ Building...\nInitial chunk files | Names           |  Raw size | Estimated transfer size\nmain-WMAVRYKQ.js    | main            | 269.99 kB |                74.41 kB\nstyles-LKC44D2S.css | styles          |  11.53 kB |                 2.49 kB\n\n                    | Initial total   | 281.51 kB |                76.90 kB\n\nLazy chunk files    | Names           |  Raw size | Estimated transfer size\nchunk-DlaIKgAD.js   | planificacion   | 165.57 kB |                42.20 kB\nchunk-DGmFrtzw.js   | login           |  45.37 kB |                10.49 kB\nchunk-A_PIzpW-.js   | evidence-viewer |  13.85 kB |                 3.95 kB\nchunk-1EBMtDQz.js   | home            |   4.74 kB |                 1.76 kB\nchunk-BrHSQbdf.js   | access-denied   | 926 bytes |               926 bytes\n\nApplication bundle generation complete. [2.127 seconds] - 2026-09-21T13:00:09.630Z\n\nOutput location: C:\\workspace\\git\\planillero\\backoffice\\dist\\planillero-backoffice\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'leaflet' used by 'src/app/pages/planificacion/route-map/route-map.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m"
+        },
+        {
+          "nombre": "tests",
+          "cmd": "npm test",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 5597,
+          "salida": "\n> planillero-backoffice@0.1.0 test\n> ng test\n\n❯ Building...\n✔ Building...\nApplication bundle generation complete. [1.435 seconds] - 2026-09-21T13:00:11.960Z\n\n\n\u001b[1m\u001b[30m\u001b[46m RUN \u001b[49m\u001b[39m\u001b[22m \u001b[36mv4.1.11 \u001b[39m\u001b[90mC:/workspace/git/planillero/backoffice\u001b[39m\n\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m8 passed\u001b[39m\u001b[22m\u001b[90m (8)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m44 passed\u001b[39m\u001b[22m\u001b[90m (44)\u001b[39m\n\u001b[2m   Start at \u001b[22m 10:00:12\n\u001b[2m   Duration \u001b[22m 3.02s\u001b[2m (transform 1.15s, setup 5.13s, import 1.39s, tests 754ms, environment 12.30s)\u001b[22m"
+        }
+      ],
+      "avisos": []
+    }
+  ]
+}

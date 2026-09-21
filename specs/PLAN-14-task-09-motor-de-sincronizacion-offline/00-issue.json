@@ -1,0 +1,12 @@
+{
+  "key": "PLAN-14",
+  "id": "10078",
+  "summary": "TASK-09: Motor de Sincronización Offline-First con Garantía de Idempotencia",
+  "status": "Por hacer",
+  "assignee": "Matías Lameiro",
+  "priority": "High",
+  "issuetype": "Tarea",
+  "url": "https://surely-sa.atlassian.net/browse/PLAN-14",
+  "updated": "2026-09-16T17:19:33.509-0300",
+  "description": "Persistencia local segura, cola de sincronización visible y reintentos sin duplicación de registros judiciales mediante Idempotency Keys.\n\nAlcance Fullstack:\n- Backend: Endpoint POST /api/v1/sincronizacion/lote con interceptor de Idempotency-Key (UUIDv4) que devuelve 200 OK con respuesta cacheada ante reintentos sin reinsertar registros.\n- Frontend Móvil: Cola de sincronización en SQLite con worker en background que despacha la cola automáticamente al detectar red.\n- Frontend Web: Indicador visual en grilla de visitas si un acta fue sincronizada en modo diferido.\n- Base de Datos: Tabla idempotency_keys y restricción UNIQUE(idempotency_key) en tabla visitas.\n- Testing: Tests de concurrencia de 20 hilos simultáneos con la misma clave y simulación de cortes de red.\n\nEvaluación UX/UI:\n- Heurística 1 (Visibilidad del estado): Widget en tablet 'Cola de sincronización: X actas pendientes' con animación y check verde.\n- Heurística 5 (Prevención de errores): Advertencia antes del logout si hay actas pendientes.\n\nEvaluación Ciberseguridad:\n- Prevención estricta de actas duplicadas en expedientes legales y cifrado local con SQLCipher."
+}

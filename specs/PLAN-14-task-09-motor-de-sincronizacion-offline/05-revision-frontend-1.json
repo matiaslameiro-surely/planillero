@@ -1,0 +1,41 @@
+{
+  "verdict": "needs-attention",
+  "summary": "La cola local y el manejo de idempotencia están bien encaminados, pero el despacho deja operaciones pendientes sin reintentar en escenarios normales y puede marcar como fallidas actas válidas tras cortes de red. También falta que la confirmación de cola vacía desaparezca luego de mostrarse.",
+  "findings": [
+    {
+      "severity": "high",
+      "title": "El worker procesa un solo lote y deja el resto de la cola detenido",
+      "body": "Si hay 51 o más actas pendientes cuando vuelve la conectividad, `dispatchQueue` envía como máximo las primeras 50. Tras recibir una respuesta exitosa, `reload()` actualiza los contadores, pero el efecto no vuelve a llamar a `dispatch()` porque sus dependencias no cambiaron. La acta 51 queda pendiente hasta que la app se remonte o cambie nuevamente el estado de red, aunque el dispositivo siga conectado.",
+      "file": "src/sync/useSyncQueue.ts",
+      "line_start": 96,
+      "line_end": 101,
+      "confidence": 0.96,
+      "recommendation": "Después de un despacho exitoso, continuar despachando lotes mientras queden pendientes y haya conexión, con un único ciclo protegido por el cerrojo `running`."
+    },
+    {
+      "severity": "high",
+      "title": "Los cortes de red terminan agotando y descartando reintentos válidos",
+      "body": "`assignBatchKey` incrementa `attempts` antes de cada envío, incluidos los que fallan por red o timeout. Después de cinco cortes de conectividad, el siguiente despacho encuentra `attempts >= MAX_ATTEMPTS` y marca toda la operación como `failed`, sin enviarla. Esto contradice la garantía de que un fallo de red conserve la operación como `pending`; una jornada con cobertura intermitente puede archivar actas perfectamente válidas sin que el backend las haya rechazado.",
+      "file": "src/sync/syncWorker.ts",
+      "line_start": 65,
+      "line_end": 74,
+      "confidence": 0.98,
+      "recommendation": "Separar los intentos de rechazo definitivo de los intentos de transporte, o no aplicar el límite a errores de red/5xx. Mantener la misma clave de lote en esos reintentos."
+    },
+    {
+      "severity": "medium",
+      "title": "La confirmación de cola vacía queda visible indefinidamente",
+      "body": "Al pasar de pendientes a cero, `reload` establece `justCleared` en `true`, pero no existe ningún camino que lo vuelva a `false`. Por ejemplo, tras sincronizar una sola acta y permanecer en Agenda, el banner «Todo sincronizado» sigue ocupando lugar hasta desmontar el componente, en vez de confirmar temporalmente y desaparecer cuando ya no hay pendientes.",
+      "file": "src/sync/useSyncQueue.ts",
+      "line_start": 64,
+      "line_end": 71,
+      "confidence": 0.99,
+      "recommendation": "Programar el restablecimiento de `justCleared` tras un intervalo breve y limpiar el temporizador al desmontar; también reiniciarlo cuando se agreguen nuevas pendientes."
+    }
+  ],
+  "next_steps": [
+    "Hacer que el despacho encadene todos los lotes pendientes mientras haya red, sin ejecutar dos ciclos concurrentes.",
+    "Corregir la contabilidad de reintentos para que una falla de red o del servidor no vuelva fallida una acta válida.",
+    "Restablecer temporalmente el estado `justCleared` para que el indicador de cola vacía desaparezca."
+  ]
+}

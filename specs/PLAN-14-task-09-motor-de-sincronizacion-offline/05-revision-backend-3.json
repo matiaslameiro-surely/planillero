@@ -1,0 +1,37 @@
+{
+  "verdict": "approve",
+  "summary": "Se revisó el endpoint de sincronización por lote, el núcleo de idempotencia y la migración. Las dos garantías de la spec están sostenidas por restricciones de la base (clave primaria de la clave de lote, índice único del identificador de operación) y no por comprobaciones en memoria, y la recuperación de reservas abandonadas ya no habilita una clave para un cuerpo distinto. No se encontraron defectos bloqueantes; quedan tres observaciones de operación.",
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "La tabla de claves de idempotencia sólo crece",
+      "body": "Cada envío deja una fila en `sync.idempotency_keys` y nada las borra. Con un lote por operador y por sincronización, la tabla crece de forma indefinida: al año son cientos de miles de filas que ya no protegen de nada, porque ningún cliente reintenta un lote de hace meses. La migración deja el índice por `created_at` preparado, pero la purga no existe.",
+      "file": "src/main/resources/db/migration/V11__sync_idempotency.sql",
+      "line_start": 33,
+      "line_end": 48,
+      "confidence": 0.95,
+      "recommendation": "Agregar una tarea periódica que borre las claves cerradas más viejas que una ventana de retención (por ejemplo, 7 días), y dejar esa ventana explícita junto al plazo de la reserva."
+    },
+    {
+      "severity": "low",
+      "title": "El vencimiento de la reserva mezcla el reloj de la aplicación con el de la base",
+      "body": "`created_at` lo escribe la aplicación en el `insert` de JPA, pero las filas que crea cualquier otro camino usan el `default now()` de PostgreSQL, y la comparación de vencimiento se hace con `clock.instant()`. Si el reloj del servidor de aplicación se corriera respecto del de la base, una reserva podría considerarse vencida antes de tiempo (dos envíos legítimos solapados) o no vencer cuando debería.",
+      "file": "src/main/java/ar/com/planillero/sync/IdempotencyService.java",
+      "line_start": 152,
+      "line_end": 155,
+      "confidence": 0.6,
+      "recommendation": "Resolver el vencimiento enteramente en la base (`created_at < now() - interval`) para que un solo reloj decida."
+    },
+    {
+      "severity": "low",
+      "title": "`release` borra cualquier reserva en curso con esa clave, sin comprobar de quién es",
+      "body": "Si el procesamiento de un lote superara el plazo de la reserva, otro envío podría retomarla; al fallar el primero, su `release` borraría la reserva del segundo, que quedaría procesando sin fila. El escenario pide un lote de más de dos minutos que además termine en excepción, así que hoy es teórico, pero el borrado no comprueba que la reserva siga siendo la propia.",
+      "file": "src/main/java/ar/com/planillero/sync/IdempotencyService.java",
+      "line_start": 107,
+      "line_end": 113,
+      "confidence": 0.55,
+      "recommendation": "Condicionar el borrado a que el usuario y la huella coincidan con los del envío que la reservó."
+    }
+  ],
+  "next_steps": []
+}
