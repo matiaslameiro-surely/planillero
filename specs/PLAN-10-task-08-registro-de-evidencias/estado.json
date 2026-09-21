@@ -44,7 +44,32 @@
     "frontend": "23d1a84f4b80dd54e2a72ae425ceeaf7291be149",
     "backoffice": "c16298b632813bd51bfb58f8640d6c7571a68991"
   },
-  "revisiones": [],
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backend",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0
+    },
+    {
+      "n": 1,
+      "repo": "frontend",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0
+    },
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0
+    }
+  ],
   "pr": {
     "backend": "https://github.com/matiaslameiro-surely/planillero-backend/pull/4",
     "frontend": "https://github.com/matiaslameiro-surely/planillero-frontend/pull/3",

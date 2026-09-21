@@ -44,7 +44,32 @@
     "frontend": "ad59eed908fdeb8dbb0de9f4a6828c9bcd8bbd65",
     "backoffice": "9b7f2bda1df16b8d31f325a83a263caa10be7973"
   },
-  "revisiones": [],
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backend",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0
+    },
+    {
+      "n": 1,
+      "repo": "frontend",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0
+    },
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0
+    }
+  ],
   "pr": {
     "backend": "https://github.com/matiaslameiro-surely/planillero-backend/pull/10",
     "frontend": "https://github.com/matiaslameiro-surely/planillero-frontend/pull/7",
@@ -55,7 +80,7 @@
     "creadoPorHarness": false
   },
   "ejecucion": {
-    "herramienta": null,
+    "herramienta": "Antigravity",
     "modelo": "Gemini 3.8 Flash",
     "ts": "2026-09-21T12:53:37.488Z",
     "fin": "2026-09-21T14:12:45.562Z"

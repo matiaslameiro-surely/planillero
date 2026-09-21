@@ -40,7 +40,16 @@
   "commits": {
     "backend": "ebc36a41c7000e54c6a5f05194de1dc8108d8296"
   },
-  "revisiones": [],
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backend",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0
+    }
+  ],
   "pr": {
     "backend": "https://github.com/matiaslameiro-surely/planillero-backend/pull/2"
   },
