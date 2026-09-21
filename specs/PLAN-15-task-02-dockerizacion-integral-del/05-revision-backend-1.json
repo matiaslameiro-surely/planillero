@@ -1,0 +1,57 @@
+{
+  "verdict": "approve",
+  "summary": "Dockerfile multi-stage, compose integral y script de verificación revisados contra la spec: cumplen los criterios 1-5, 7, 11 y 12 y se ejecutaron de punta a punta. Sin hallazgos críticos ni altos. Revisión del motor anfitrión hecha por la misma sesión que implementó, por lo que no es independiente en sentido estricto.",
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "La imagen de MinIO fijada es de septiembre de 2025 y la edición community dejó de mantenerse",
+      "body": "minio/minio ya no se publica en Docker Hub y el tag fijado (RELEASE.2025-09-07) no recibirá parches de seguridad. Es un componente desactualizado desde el primer día (OWASP A06) en un servicio que guardará evidencias periciales. Hoy no lo usa el backend (STORAGE_TYPE=local), así que el riesgo es latente.",
+      "file": "docker-compose.yml",
+      "line_start": 43,
+      "line_end": 43,
+      "confidence": 0.6,
+      "recommendation": "Antes de cablear el backend a S3, decidir si se sigue con MinIO (fork mantenido o edición comercial) o con otro almacenamiento compatible. Mientras tanto, el tag es configurable con MINIO_IMAGE."
+    },
+    {
+      "severity": "low",
+      "title": "El .env.example trae una clave HMAC funcional y el compose la acepta sin avisar",
+      "body": "Si alguien copia .env.example a .env y lo usa en un servidor compartido, los manifiestos de evidencia quedan firmados con una clave pública del repositorio. Los puertos se publican sólo en 127.0.0.1, lo que reduce el riesgo, pero el compose no lo impide.",
+      "file": ".env.example",
+      "line_start": 27,
+      "line_end": 27,
+      "confidence": 0.5,
+      "recommendation": "Documentar en el propio .env.example cómo generar una clave (por ejemplo `openssl rand -hex 32`) o hacer que el backend rechace el valor de ejemplo fuera del perfil de desarrollo."
+    },
+    {
+      "severity": "low",
+      "title": "El cambio de nombre de proyecto y volumen deja huérfanos los datos del Postgres de desarrollo anterior",
+      "body": "El compose viejo usaba el nombre de carpeta como proyecto (volumen backend_planillero-pgdata) y `container_name: planillero-postgres`. Con `name: planillero` el volumen pasa a llamarse planillero_planillero-pgdata: quien tenía datos locales los ve desaparecer al levantar el compose nuevo, sin aviso.",
+      "file": "docker-compose.yml",
+      "line_start": 12,
+      "line_end": 12,
+      "confidence": 0.7,
+      "recommendation": "Mencionarlo en el README (los datos de desarrollo son descartables, pero conviene decirlo) o migrar el volumen a mano si importara."
+    },
+    {
+      "severity": "low",
+      "title": "La caché de dependencias Maven no queda en una capa de la imagen",
+      "body": "Con `--mount=type=cache` el resultado de `dependency:go-offline` vive en la caché de BuildKit y no en la capa. En un runner de CI efímero la caché arranca vacía en cada ejecución y las dependencias se bajan siempre, aunque el pom no cambie.",
+      "file": "Dockerfile",
+      "line_start": 12,
+      "line_end": 12,
+      "confidence": 0.5,
+      "recommendation": "Está bien para desarrollo local. Para CI, exportar/importar la caché (`--cache-to`/`--cache-from`) o quitar el mount y aceptar una capa más pesada."
+    },
+    {
+      "severity": "low",
+      "title": "Con KEEP_UP=1 el entorno queda con el backend detenido",
+      "body": "El último paso del script detiene el backend para probar la página 502; si se usa KEEP_UP=1 para inspeccionar a mano, el mensaje dice que el entorno 'queda levantado' pero el backend está caído.",
+      "file": "scripts/verify-compose.sh",
+      "line_start": 116,
+      "line_end": 116,
+      "confidence": 0.7,
+      "recommendation": "Volver a levantar el backend al final (`compose start backend`) cuando KEEP_UP=1, o aclarar el mensaje."
+    }
+  ],
+  "next_steps": []
+}
