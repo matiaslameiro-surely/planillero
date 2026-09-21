@@ -41,9 +41,9 @@
     }
   },
   "commits": {
-    "backend": "8be955f",
+    "backend": "7b46dbf",
     "frontend": "6767346",
-    "backoffice": "6803424"
+    "backoffice": "1b3e8e2"
   },
   "revisiones": [
     {
@@ -86,5 +86,7 @@
     "ts": "2026-09-20T20:16:28.430Z",
     "fin": "2026-09-21T11:22:56.001Z"
   },
-  "cierre": {}
+  "cierre": {
+    "correccionesRevision": "Revisión de Sprint 3 (Fernando Chamorro): backoffice con cambios solicitados y backend con observaciones menores. Corregido y pusheado a las ramas de los PRs existentes (backoffice 1b3e8e2, backend 7b46dbf). Verificación: backoffice 57 tests, lint y build en verde; backend 108 tests en verde. Comentado en PR backoffice #5 y en Jira. Pendiente: nueva revisión de Fernando antes del merge conjunto."
+  }
 }
