@@ -104,5 +104,8 @@
     "modelo": "Claude Opus 5",
     "ts": "2026-09-21T11:47:20.220Z",
     "fin": "2026-09-21T13:19:46.862Z"
+  },
+  "seguimiento": {
+    "revisionHumana": "Colisiones con PLAN-11 resueltas: backend V11->V12, movil esquema paso 2->3, backoffice conflicto de comentario. Derivado a PLAN-22: la carga diferida no queda auditada."
   }
 }

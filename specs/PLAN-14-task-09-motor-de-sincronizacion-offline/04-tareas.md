@@ -5,7 +5,7 @@ En orden de dependencia. El backend va completo antes de tocar los clientes: emi
 
 ## Backend
 
-- [ ] `[backend]` Migración `V11__sync_idempotency.sql`: esquema `sync`, tabla
+- [ ] `[backend]` Migración `V12__sync_idempotency.sql`: esquema `sync`, tabla
       `sync.idempotency_keys`, y en `visits.visits` las columnas `sync_operation_id` (con `UNIQUE`),
       `synced_deferred` y `synced_at`.
 - [ ] `[backend]` Entidad `IdempotencyKey`, su repositorio y el enum de estado.
@@ -26,7 +26,7 @@ En orden de dependencia. El backend va completo antes de tocar los clientes: emi
 
 ## Frontend (móvil)
 
-- [ ] `[frontend]` `agendaSchema.ts`: paso `version < 2` con la tabla `sync_queue`.
+- [ ] `[frontend]` `agendaSchema.ts`: paso `version < 3` con la tabla `sync_queue`.
 - [ ] `[frontend]` `syncQueue.ts` + tests: encolar, contar, listar pendientes, marcar resultado,
       asignar y conservar el `batch_key`.
 - [ ] `[frontend]` `api/sync.ts`: `postSyncBatch` con el header `Idempotency-Key`.

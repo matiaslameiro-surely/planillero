@@ -49,7 +49,7 @@ El backoffice sólo consume un campo nuevo del endpoint de visitas y agrega una 
 
 | Archivo | Qué hace |
 |---|---|
-| `src/main/resources/db/migration/V11__sync_idempotency.sql` | `schema sync`; tabla `sync.idempotency_keys`; en `visits.visits`: `sync_operation_id uuid UNIQUE`, `synced_deferred boolean not null default false`, `synced_at timestamptz` |
+| `src/main/resources/db/migration/V12__sync_idempotency.sql` | `schema sync`; tabla `sync.idempotency_keys`; en `visits.visits`: `sync_operation_id uuid UNIQUE`, `synced_deferred boolean not null default false`, `synced_at timestamptz` |
 
 **Crear — tests**
 
@@ -72,7 +72,7 @@ El backoffice sólo consume un campo nuevo del endpoint de visitas y agrega una 
 
 | Archivo | Qué es |
 |---|---|
-| `src/db/agendaSchema.ts` | **Modificar**: paso `version < 2` que crea `sync_queue`. Mismo mecanismo de `PRAGMA user_version` |
+| `src/db/agendaSchema.ts` | **Modificar**: paso `version < 3` que crea `sync_queue`. Mismo mecanismo de `PRAGMA user_version` |
 | `src/sync/syncQueue.ts` | **Crear**: encolar, contar pendientes, listar pendientes, marcar resultado |
 | `src/sync/syncQueue.test.ts` | **Crear** |
 | `src/api/sync.ts` | **Crear**: `postSyncBatch(idempotencyKey, operations)` |
@@ -160,6 +160,11 @@ Body:    { "operations": [ { "clientOperationId": "<uuid v4>",
 `GET /api/v1/visits` suma por visita: `syncedDeferred: boolean`, `syncedAt: string | null`.
 
 ## Supuestos
+
+> **Se cumplió** (2026-09-21, durante la revisión humana). PLAN-11 se mergeó primero y se quedó con
+> la `V11` y con el paso 2 del esquema local del móvil. La migración pasó a `V12` y la cola al paso
+> 3. Se deja el supuesto tal como se escribió, con la corrección al lado: sirve para ver qué se
+> anticipó y qué pasó de verdad.
 
 - `RIESGO` — **La próxima migración libre es `V11`.** PLAN-12 y PLAN-13 están en el mismo sprint y
   recién se toman; si alguna sube una `V11` antes que esta tarea, Flyway falla al arrancar. Flyway
