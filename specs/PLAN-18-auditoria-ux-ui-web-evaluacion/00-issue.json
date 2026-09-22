@@ -1,0 +1,14 @@
+{
+  "key": "PLAN-18",
+  "id": "10082",
+  "tipo": "Tarea",
+  "titulo": "Auditoría UX/UI Web: Evaluación Heurísticas de Nielsen en Backoffice Angular",
+  "estadoAlTomarla": "Por hacer",
+  "prioridad": "Medium",
+  "asignada": "Matías Lameiro",
+  "reporta": "Fernando Chamorro Goncalves",
+  "sprint": "Sprint 4 - Cierre y Demo",
+  "vence": "2026-10-09",
+  "descripcion": "Autoevaluación de experiencia de usuario orientada al supervisor central en entorno web de escritorio (Planillero Central) según Sección 5 de la rúbrica.\n\nEntregables:\n- Evaluación contra al menos 5 de las 10 Heurísticas de Nielsen (Visibilidad de estado, Consistencia, Prevención de errores, Reconocimiento sobre recuerdo, Diseño estético y minimalista con foco en excepciones).\n- Verificación de legibilidad y paleta institucional en pantallas de 1080p+ de oficina.\n- Documentación de observaciones y evidencias en el informe final de entrega.",
+  "url": "https://surely-sa.atlassian.net/browse/PLAN-18"
+}

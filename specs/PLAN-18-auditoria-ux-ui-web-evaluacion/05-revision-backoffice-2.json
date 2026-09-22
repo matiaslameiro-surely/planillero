@@ -1,0 +1,52 @@
+{
+  "verdict": "needs-attention",
+  "summary": "Los seis hallazgos de la primera revisión están efectivamente resueltos: el recuento del resumen ejecutivo ahora cierra en 36 (Crítica 1 / Alta 10 / Media 16 / Baja 9), el ratio de #1268bd es 5,61:1, las cinco citas corridas apuntan ahora a la línea exacta, H22 se reescribió sobre lo verificable y los metadatos de §8.3 se ajustaron a 11 px / #fff1f2 / 14 px. Los quince ratios de la tabla y los gates del backoffice dan verde. Quedan tres defectos introducidos o no propagados por las correcciones —H28 sigue diciendo «19 de los 58» contra el 21/59 nuevo de §8.2, y la matriz de cobertura nueva contradice a §4 y §6 en tres celdas— ninguno bloqueante.",
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "La corrección de §8.2 no se propagó a H28: el hallazgo sigue diciendo «19 de los 58 textos»",
+      "body": "La sección 8.2 se corrigió a 59 pares evaluados y «21 (36 %)» textos por debajo de 12 px, pero el primer renglón de H28 —el hallazgo de severidad alta que explica ese mismo número— quedó con los valores viejos. En la misma sección, a 37 líneas de distancia, el informe afirma dos cantidades distintas para la misma medición.\n\nComando y salida:\n\n    $ grep -n 'Pares texto/fondo\\|Textos por debajo\\|19 de los 58' docs/auditoria-ux-ui.md\n    483:| Pares texto/fondo evaluados | 59 |\n    485:| Textos por debajo de 12 px | 21 (36 %) |\n    520:19 de los 58 textos evaluados bajan de 12 px, y la concentración está justo en la pantalla de decisión\n\nLos porcentajes nuevos de §8.2 sí cierran (15/59 = 25,4 % → «25 %»; 21/59 = 35,6 % → «36 %»), así que el dato correcto es 21 de 59 y el que quedó sin actualizar es el de H28. Importa porque es exactamente la clase de incoherencia interna que motivó el hallazgo `high` de la primera pasada: un lector que verifique el número del hallazgo alto contra la tabla de su propia sección encuentra otra vez dos cifras que no cierran, y esta vez en el hallazgo que la sección 10 lista como prioritario.",
+      "file": "docs/auditoria-ux-ui.md",
+      "line_start": 519,
+      "line_end": 520,
+      "confidence": 1,
+      "recommendation": "Cambiar el primer renglón de H28 a «21 de los 59 textos evaluados bajan de 12 px». El título «Un tercio de la interfaz…» sigue siendo correcto (35,6 %)."
+    },
+    {
+      "severity": "medium",
+      "title": "La matriz de cobertura nueva contradice a §4 y §6 en tres hallazgos transversales (H8 en P7, H17 en P5 y P6, H7 en P3 y P8)",
+      "body": "La matriz de §2 cierra bien el criterio de aceptación 3 en general —las 40 celdas están decididas y las asignaciones de H1–H5, H6, H9–H16, H18–H26 coinciden una por una con la columna «Pantalla» de la tabla de la sección 10—, pero tres hallazgos transversales quedaron mal repartidos y la matriz termina diciendo lo contrario de la sección de origen:\n\n1. **H8 falta en P7**, y §4 lo afirma explícitamente:\n\n       $ sed -n '104p;255p' docs/auditoria-ux-ui.md\n       | P7 expediente | ✓ | H6, H7, H9, H11 | H14, H16 | H17, H18 | ✓ |\n       | P7 expediente | *nada* | — |\n\n   La tabla de la sección 10 lo registra como `P3–P8` y la propia tabla de H8 lista a P7 entre las pantallas sin regreso; la matriz lo omite en la columna de consistencia.\n\n2. **H17 falta en P5 y P6**, aunque está declarado «transversal» y aparece en las otras cinco filas:\n\n       $ sed -n '102,103p' docs/auditoria-ux-ui.md\n       | P5 auditoría | ✓ | H6, H8, H9 | ✓ | H19, H20, H22 | ✓ |\n       | P6 evidencias | H4 | H6, H7, H8, H9, H11 | H15 | H18, H20, H21 | H24 |\n\n   `app/app.html:1` es `<router-outlet />` para las ocho rutas por igual. La única exclusión justificada en la lista de lectura es la de P1 («quien no inició sesión no debe ver el menú»); para P5 y P6 no se da ninguna.\n\n3. **H7 sólo figura en P4, P6 y P7**, cuando el recuento de §4 alcanza también a P3 y a P8:\n\n       $ grep -rn variables src/app --include=*.scss\n       src/app/pages/auditoria/auditoria.scss:1:@use '../../styles/variables' as *;\n       src/app/pages/home/home.scss:1:@use '../../styles/variables' as *;\n       src/app/pages/login/login.scss:1:@use '../../styles/variables' as *;\n       src/app/pages/planificacion/planificacion.scss:1:@use '../../styles/variables' as *;\n\n       $ grep -rn \"RouteMap\" src/app/pages/planificacion/planificacion.ts\n       13:import { RouteMap } from './route-map/route-map';\n       59:  imports: [RouterLink, RouteMap],\n\n   `access-denied.scss` (P8) y `route-map.scss` —que se renderiza dentro de planificación, P3— son dos de las seis hojas que §4 enumera como no importadoras de los tokens, así que esas dos pantallas también tienen superficie de H7.\n\nImporta porque la matriz es justamente el artefacto que se agregó para cerrar el criterio 3, y su valor es ser el índice confiable de «dónde miro cada cosa». Si contradice a la sección que la alimenta, el lector tiene que volver a verificar a mano lo que la matriz vino a resumir.",
+      "file": "docs/auditoria-ux-ui.md",
+      "line_start": 97,
+      "line_end": 105,
+      "confidence": 0.9,
+      "recommendation": "Agregar `H8` a la celda P7/§4, `H17` a las celdas P5/§6 y P6/§6, y `H7` a P3/§4 y P8/§4. Si alguna exclusión es deliberada, decirlo en la lista de lectura de abajo, como ya se hace con P1."
+    },
+    {
+      "severity": "low",
+      "title": "La lista que justifica los `✓` de la matriz nombra a P6 en estética, pero esa celda no es un `✓`",
+      "body": "El bloque «Lectura de los `✓` y el `—`, que son afirmaciones y no huecos» dice:\n\n    $ sed -n '121p' docs/auditoria-ux-ui.md\n    - **P3 y P6 en estética** aparecen en la sección 7 como aciertos deliberados.\n\n    $ sed -n '103p' docs/auditoria-ux-ui.md\n    | P6 evidencias | H4 | H6, H7, H8, H9, H11 | H15 | H18, H20, H21 | H24 |\n\nLa celda P6 / §7 contiene `H24`, no `✓`, así que esa fila no necesita justificación de `✓`. Lo que sí es cierto —y es probablemente lo que se quiso decir— es que los tres aciertos de §7 se reparten entre P4 (panel de excepciones), P3 (columna «Sincronización») y P6 (filas de evidencia alterada), y que P4 y P6 tienen además hallazgos. Dicho como está, sugiere que P6 salió limpio de la heurística 8 cuando la matriz de arriba dice lo contrario.\n\nEn la misma lista, el `✓` de P2 en prevención de errores es el único que no recibe ninguna línea de justificación (los de visibilidad sí están respaldados por la lista P1–P8 de §3).",
+      "file": "docs/auditoria-ux-ui.md",
+      "line_start": 121,
+      "line_end": 121,
+      "confidence": 0.9,
+      "recommendation": "Reescribir la línea como «P3 en estética aparece en la sección 7 como acierto deliberado (P4 y P6 también tienen aciertos citados ahí, además de sus hallazgos)» y agregar una línea para el `✓` de P2 en prevención."
+    },
+    {
+      "severity": "low",
+      "title": "La fila «Etiquetas del expediente» dice 14 px pero cita la línea que no declara el tamaño",
+      "body": "La corrección del tamaño es correcta, pero quedó citando la regla del color, no la que fija los 14 px:\n\n    $ sed -n '504p' docs/auditoria-ux-ui.md\n    | Etiquetas del expediente | `#718096` | `#ffffff` | 14 px | **4,02:1** | 4,5:1 | `app/pages/expediente/expediente.component.ts:82` |\n\n    $ sed -n '81,82p' src/app/pages/expediente/expediente.component.ts\n    `.visit-details dl { display: grid; grid-template-columns: 180px 1fr; gap: 8px 16px; margin: 0; font-size: 14px; }`,\n    `.visit-details dt { color: #718096; font-weight: 500; }`,\n\nEl `font-size: 14px` está en `:81` (el `dl`) y el `dt` de `:82` lo hereda. Para las dos filas de evidencia el informe sí resolvió esto bien —H29 agrega la cita del contenedor, `evidence-viewer.scss:21`—, así que acá queda una inconsistencia de criterio. No cambia ningún veredicto: el par sigue incumpliendo AA con 4,02:1, verificado con la fórmula WCAG 2.1.",
+      "file": "docs/auditoria-ux-ui.md",
+      "line_start": 504,
+      "line_end": 504,
+      "confidence": 0.9,
+      "recommendation": "Citar `app/pages/expediente/expediente.component.ts:81-82`, igual que se hizo con el contenedor de la tabla de diagnóstico en H29."
+    }
+  ],
+  "next_steps": [
+    "Actualizar el primer renglón de H28 a «21 de los 59 textos evaluados» para que cierre con la tabla de §8.2.",
+    "Completar la matriz de §2: `H8` en P7, `H17` en P5 y P6, `H7` en P3 y P8 — o justificar cada exclusión como se hace con P1.",
+    "Corregir la línea de lectura sobre «P3 y P6 en estética» y justificar el `✓` de P2 en prevención.",
+    "Extender la cita de «Etiquetas del expediente» a `expediente.component.ts:81-82`."
+  ]
+}

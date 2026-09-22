@@ -1,0 +1,54 @@
+{
+  "issue": "PLAN-18",
+  "titulo": "Auditoria UX/UI Web: Evaluacion Heuristicas de Nielsen en Backoffice Angular",
+  "slug": "auditoria-ux-ui-web-evaluacion",
+  "rama": "PLAN-18-auditoria-ux-ui-web-evaluacion",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrar",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-22T12:12:45.646Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-22T12:13:55.726Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-22T12:16:04.272Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-22T12:41:33.497Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-22T12:47:34.595Z"
+    },
+    "cerrar": {
+      "estado": "pendiente"
+    },
+    "cerrada": {
+      "estado": "pendiente"
+    }
+  },
+  "commits": {
+    "backoffice": "b3a43f5,57ed9fd,839cee6"
+  },
+  "revisiones": [],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "Claude Opus 5",
+    "ts": "2026-09-22T12:12:15.803Z",
+    "fin": null
+  },
+  "iteracion": "2"
+}

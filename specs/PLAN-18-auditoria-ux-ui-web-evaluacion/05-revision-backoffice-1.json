@@ -1,0 +1,74 @@
+{
+  "verdict": "needs-attention",
+  "summary": "El informe es sólido: las 5 heurísticas tienen sección y veredicto, los 12 ratios de contraste de la sección 8.3 que recalculé con la fórmula WCAG 2.1 dan exactamente los valores publicados, y los IDs H1–H36 no tienen duplicados ni huecos. Pero el resumen ejecutivo declara 33 hallazgos (8 altas, 8 bajas) cuando la tabla de la sección 10 tiene 36 (10 altas, 9 bajas), lo que incumple el criterio de aceptación 7. Además el ratio del color de reemplazo propuesto para el hallazgo crítico está mal calculado y hay unas cinco citas `archivo:línea` corridas.",
+  "findings": [
+    {
+      "severity": "high",
+      "title": "El recuento del resumen ejecutivo no coincide con la tabla de hallazgos (33 vs. 36)",
+      "body": "La sección 1 afirma «Se registran **33 hallazgos**» con la tabla Crítica 1 / Alta 8 / Media 16 / Baja 8. El recuento real de la tabla de la sección 10 es 36: Crítica 1, Alta 10, Media 16, Baja 9.\n\nComando y salida:\n\n    $ awk 'NR>=583 && NR<=619' docs/auditoria-ux-ui.md | awk -F'|' '{print $3}' | sort | uniq -c\n          1  **Crítica**\n         10  Alta\n          9  Baja\n         16  Media\n\n    $ awk 'NR>=584 && NR<=619' docs/auditoria-ux-ui.md | grep -o '`H[0-9]*`' | tr -d '`' | sed 's/H//' | sort -n | tr '\\n' ' '\n    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36\n\n    $ grep -o '^\\*\\*`H[0-9]*`' docs/auditoria-ux-ui.md | grep -o 'H[0-9]*' | sed 's/H//' | sort -n | tr '\\n' ' '\n    1 2 3 ... 36\n\nIDs: 36 en la tabla y 36 encabezados de hallazgo, sin duplicados ni huecos — o sea que lo correcto son 36 y lo equivocado es el resumen. Altas: H1, H2, H6, H7, H12, H17, H18, H23, H28, H29 = 10 (el informe dice 8). Bajas: H5, H10, H11, H16, H21, H22, H26, H32, H36 = 9 (el informe dice 8).\n\nImporta porque el criterio de aceptación 7 exige explícitamente que el resumen ejecutivo lleve «el conteo de hallazgos por severidad», y es el primer dato que va a leer quien reciba el informe y el que se cita en el informe final de entrega. Un informe de auditoría cuya primera tabla no cierra con su propio cuerpo pierde credibilidad completa, aunque el resto sea correcto.",
+      "file": "docs/auditoria-ux-ui.md",
+      "line_start": 11,
+      "line_end": 20,
+      "confidence": 1,
+      "recommendation": "Corregir la sección 1 a 36 hallazgos, con Crítica 1 / Alta 10 / Media 16 / Baja 9. Conviene además dejar una nota de verificación al pie del informe con el comando de recuento, para que la coherencia sea reproducible cuando se agreguen hallazgos."
+    },
+    {
+      "severity": "medium",
+      "title": "El ratio del color de reemplazo propuesto en el hallazgo crítico está mal: #1268bd da 5,61:1, no 4,73:1",
+      "body": "H27 (la única severidad crítica) recomienda: «Con `#1268bd` el ratio sube a 4,73:1 conservando el mismo matiz.» El valor real es 5,61:1.\n\nCálculo (fórmula WCAG 2.1, luminancia relativa con corrección sRGB, contraste = (L1+0.05)/(L2+0.05)), corrido sobre todos los pares de la sección 8.3:\n\n    $ node wcag.mjs\n      3.53  #ffffff / #208aef  (informe: 3,53) OK\n      3.53  #208aef / #ffffff  (informe: 3,53) OK\n      1.82  #ffffff / #a0c4e8  (informe: 1,82) OK\n      2.56  #94a3b8 / #ffffff  (informe: 2,56) OK\n      3.30  #16a34a / #ffffff  (informe: 3,30) OK\n      3.76  #ef4444 / #ffffff  (informe: 3,76) OK\n      3.95  #808080 / #ffffff  (informe: 3,95) OK\n      4.02  #718096 / #ffffff  (informe: 4,02) OK\n      3.83  #718096 / #f7fafc  (informe: 3,83) OK\n      4.13  #e53e3e / #ffffff  (informe: 4,13) OK\n      4.76  #64748b / #ffffff  (informe: 4,76) OK\n      5.61  #1268bd / #ffffff  (informe: 4,73) <-- MAL\n\nLos doce ratios tabulados están perfectos, y los umbrales están bien asignados: todos los pares listados son de texto normal (el mayor es 16 px, por debajo de los 24 px / 18,66 px con peso ≥700 que habilitarían el umbral de 3:1), así que 4,5:1 es el mínimo correcto en las catorce filas. Los totales de 8.2 también cierran: 14 filas en la tabla de 8.3, 14/58 = 24 %, 19/58 = 33 %.\n\nLa recomendación sigue siendo válida —#1268bd supera el umbral de 4,5:1 con holgura—, pero el número publicado es falso y aparece en el hallazgo crítico, que es el que alguien va a implementar sin recalcular. Un lector que verifique el único dato accionable del informe y lo encuentre mal va a dudar de los otros cincuenta y siete.",
+      "file": "docs/auditoria-ux-ui.md",
+      "line_start": 466,
+      "line_end": 467,
+      "confidence": 1,
+      "recommendation": "Corregir a «Con `#1268bd` el ratio sube a 5,61:1». Si se prefiere un azul más cercano al original que apenas supere el umbral, recalcular el candidato con el mismo script antes de publicarlo."
+    },
+    {
+      "severity": "medium",
+      "title": "Cinco citas `archivo:línea` apuntan a líneas que no dicen lo que el hallazgo afirma",
+      "body": "El informe declara en §2 que «Toda afirmación de este informe se sostiene sobre una cita `archivo:línea`», así que la exactitud de las citas es la afirmación central del entregable. Verifiqué una muestra de unas 40 citas con `sed -n` sobre `backoffice/src/`. La gran mayoría es correcta (verifiqué H1, H2, H3, H5, H6, H7, H8, H9, H10, H12, H15, H17, H18, H19, H22, H23, H28, H29, H30, H31, H33, H34, H35, H36 y los positivos de §3, §5, §7 y §9.2: todas exactas). Cinco no lo son:\n\n1. §8.3, fila «Botón secundario (ghost)» cita `app/pages/home/home.scss:107-110`:\n\n       $ sed -n '107,116p' src/app/pages/home/home.scss\n           &:disabled {\n             opacity: 0.6;\n             cursor: default;\n           }\n\n           &--ghost {\n             background-color: transparent;\n             border: 1px solid $color-border;\n             color: $color-primary;\n           }\n\n   El ghost está en 112-116; 107-110 es otra regla (`:disabled`).\n\n2. H25 dice «imprime la URL de la API (`:35`)»:\n\n       $ sed -n '31p;35p' src/app/pages/home/home.html\n           <p class=\"home__url\">{{ apiUrl }}</p>\n           <a class=\"home__link\" routerLink=\"/planificacion\">Planificación de rutas</a>\n\n   La URL está en :31; :35 es un enlace de navegación. En el mismo hallazgo, «los accesos a su trabajo real quedan debajo, como enlaces sueltos (`:39-46`)» — los enlaces están en 34-41, y 43-55 es el bloque de botones.\n\n3. H21 dice «en la tabla de diagnóstico trunca a 16 caracteres con puntos suspensivos (`:86-87`)»:\n\n       $ sed -n '80,81p;86,87p' src/app/pages/evidence-viewer/evidence-viewer.html\n           <code class=\"hash-cell\">{{ ev.sha256Expected.substring(0, 16) }}...</code>\n           <code class=\"hash-cell\">{{ ev.sha256Actual.substring(0, 16) }}...</code>\n                 }\n               </div>\n\n   El truncado está en 80-81; 86-87 son cierres de bloque.\n\n4. H11 ubica «Auditando...» en `evidence-viewer.html:31`:\n\n       $ sed -n '31p;33p' src/app/pages/evidence-viewer/evidence-viewer.html\n             [disabled]=\"verifying() || !manifest()\"\n             {{ verifying() ? 'Auditando...' : 'Verificar Integridad Criptográfica' }}\n\n   Está en :33.\n\n5. H14 dice «El atributo HTML sí está bien puesto (`app/forms/fields/field-text.component.ts:23`)»:\n\n       $ sed -n '23,24p' src/app/forms/fields/field-text.component.ts\n             (blur)=\"blurEvent.emit()\"\n             [readonly]=\"readonly()\"\n\n   El atributo está en :24.\n\nNinguno invalida el hallazgo al que pertenece —el hecho afirmado existe en el archivo citado, a pocas líneas— pero un informe que promete citas exactas y falla en una de cada ocho obliga a quien lo lea a verificar todas.",
+      "file": "docs/auditoria-ux-ui.md",
+      "line_start": 444,
+      "line_end": 444,
+      "confidence": 0.95,
+      "recommendation": "Corregir las cinco citas (home.scss:112-116, home.html:31 y 34-41, evidence-viewer.html:80-81 y :33, field-text.component.ts:24) y pasar el resto del informe por una verificación mecánica que extraiga cada `archivo:línea` y confirme que el rango existe, antes de cerrar la tarea."
+    },
+    {
+      "severity": "medium",
+      "title": "Dos heurísticas declaran «cumple parcialmente» sin decir sobre qué pantallas se verificó",
+      "body": "El criterio de aceptación 3 exige que «ninguna heurística se declara «cumple» sin decir sobre qué pantallas se verificó», y que las ocho pantallas aparezcan evaluadas bajo las cinco heurísticas.\n\nSólo §3 (visibilidad del estado) cumple esto de forma explícita: tiene una lista P1 a P8, una línea por pantalla, cada una con su cita. Las otras cuatro secciones no:\n\n- §5 «Prevención de errores», veredicto «cumple parcialmente»: los tres puntos de «Lo que está bien resuelto» citan sólo P5 y P3, y los hallazgos son P3, P6 y P7. P1 (login, que tiene un formulario de credenciales), P2, P4 y P8 no aparecen ni en el positivo ni en el negativo.\n- §7 «Diseño estético y minimalista», veredicto «cumple parcialmente»: los positivos citan P4 y P6, los hallazgos P4, P6 y P2. P1, P3, P5, P7 y P8 no figuran.\n- §4 y §6 se apoyan en hallazgos marcados «transversal», lo cual es defendible, pero no dicen qué pantallas se inspeccionaron para llegar a ese «transversal».\n\nNo es un error de hecho: es una laguna de trazabilidad que deja sin respaldo explícito la parte del criterio 3 que pide que ninguna pantalla quede sin revisar. Con el material que el informe ya tiene, cerrarla es barato.",
+      "file": "docs/auditoria-ux-ui.md",
+      "line_start": 234,
+      "line_end": 237,
+      "confidence": 0.8,
+      "recommendation": "Agregar una matriz de cobertura de 8 pantallas x 5 heurísticas en §2 o en §10, con una marca por celda (cumple / hallazgo Hn / no aplica y por qué), o replicar en §4 a §7 el bloque «se verificó pantalla por pantalla» que §3 ya tiene."
+    },
+    {
+      "severity": "low",
+      "title": "Tres tamaños de fuente y un color de fondo de la sección 8.3 no se corresponden con el CSS citado",
+      "body": "Los ratios están todos bien calculados, pero tres de los metadatos que los acompañan no salen del código citado (no cambian ningún veredicto AA: los tres pares siguen incumpliendo):\n\n1. Filas «Evidencia intacta» y «Evidencia alterada», columna Tamaño = 12 px. Las clases citadas no declaran tamaño; lo hereda el contenedor:\n\n       $ sed -n '21p' src/app/pages/evidence-viewer/evidence-viewer.scss\n       .table-header,.table-row{display:grid;grid-template-columns:1fr 2fr 2fr 1fr;padding:6px 10px;font-size:11px;align-items:center}\n\n   Son 11 px, no 12. Además, esto sumaría dos textos más al recuento de «19 textos por debajo de 12 px» de §8.2.\n\n2. Fila «Evidencia alterada», columna Fondo = `#ffffff`. La fila alterada tiene fondo propio:\n\n       $ sed -n '24p' src/app/pages/evidence-viewer/evidence-viewer.scss\n       .row-tampered{background:#fff1f2}\n\n   El propio informe lo señala en §7 como un acierto. El ratio real de `#ef4444` sobre `#fff1f2` es 3,43:1, no 3,76:1 (peor, no mejor).\n\n3. Fila «Etiquetas del expediente», columna Tamaño = 16 px:\n\n       $ sed -n '81,82p' src/app/pages/expediente/expediente.component.ts\n       `.visit-details dl { display: grid; grid-template-columns: 180px 1fr; gap: 8px 16px; margin: 0; font-size: 14px; }`,\n       `.visit-details dt { color: #718096; font-weight: 500; }`,\n\n   El `dl` fija 14 px y el `dt` lo hereda.\n\nLa limitación 2 de §12 anticipa que los valores heredados podrían diferir, pero acá el valor heredado está declarado en el mismo archivo y a una línea de distancia de lo citado.",
+      "file": "docs/auditoria-ux-ui.md",
+      "line_start": 448,
+      "line_end": 454,
+      "confidence": 0.9,
+      "recommendation": "Ajustar las tres filas a 11 px, fondo `#fff1f2` con ratio 3,43:1, y 14 px respectivamente, y revisar si el recuento de textos bajo 12 px de §8.2 (19 de 58) cambia con los dos textos de la tabla de diagnóstico."
+    },
+    {
+      "severity": "low",
+      "title": "H22 afirma que el `title` del badge lleva el código del evento, cuando lleva su descripción",
+      "body": "H22 dice «El código ya está disponible en el `title` del badge y en el desplegable de filtro (`:50`), así que la columna lleva dos veces la misma información». El `title` no contiene el código:\n\n    $ sed -n '111,117p' src/app/pages/auditoria/auditoria.html\n                  <span\n                    class=\"auditoria__badge auditoria__badge--{{ eventTone(log.eventType) }}\"\n                    [title]=\"eventDescription(log.eventType)\"\n                    tabindex=\"0\">\n                    {{ eventLabel(log.eventType) }}\n                  </span>\n                  <code class=\"auditoria__code\">{{ log.eventType }}</code>\n\n    $ sed -n '50p' src/app/pages/auditoria/auditoria.html\n            (change)=\"onEventTypeChange($event)\"\n\nEl `title` es `eventDescription(...)`, una descripción en prosa, no el código crudo. El hallazgo en sí se sostiene —la etiqueta legible y el código crudo sí conviven en la misma celda, líneas 115 y 117—, pero el argumento de que el código ya está disponible en el `title` es falso. La cita `:50` apunta al `(change)` del `<select>`, no a la enumeración de opciones.",
+      "file": "docs/auditoria-ux-ui.md",
+      "line_start": 358,
+      "line_end": 362,
+      "confidence": 0.9,
+      "recommendation": "Reescribir la justificación de H22 apoyándose sólo en lo verificable (etiqueta y código crudo en la misma celda, `auditoria.html:115` y `:117`) y quitar o corregir la afirmación sobre el `title`."
+    }
+  ],
+  "next_steps": [
+    "Corregir el recuento del resumen ejecutivo a 36 hallazgos (Crítica 1 / Alta 10 / Media 16 / Baja 9); es lo único que bloquea el avance.",
+    "Corregir el ratio de #1268bd en la recomendación de H27: 5,61:1, no 4,73:1.",
+    "Corregir las cinco citas corridas (home.scss:112-116, home.html:31 y 34-41, evidence-viewer.html:80-81 y :33, field-text.component.ts:24) y pasar el resto del informe por una verificación mecánica de rangos.",
+    "Agregar una matriz de cobertura 8 pantallas x 5 heurísticas para cerrar el criterio de aceptación 3 en §4 a §7.",
+    "Ajustar los metadatos de tamaño y fondo de las tres filas observadas en §8.3 y revisar el recuento de textos bajo 12 px de §8.2.",
+    "Corregir la justificación de H22 sobre el contenido del atributo `title`."
+  ]
+}
