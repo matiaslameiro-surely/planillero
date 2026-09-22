@@ -6,7 +6,7 @@
   "alcance": [
     "backoffice"
   ],
-  "fase": "cerrar",
+  "fase": "cerrada",
   "fases": {
     "preparacion": {
       "estado": "ok",
@@ -29,11 +29,12 @@
       "ts": "2026-09-22T12:47:34.595Z"
     },
     "cerrar": {
-      "estado": "en_curso",
-      "ts": "2026-09-22T12:56:18.437Z"
+      "estado": "ok",
+      "ts": "2026-09-22T12:58:42.948Z"
     },
     "cerrada": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-22T12:58:43.014Z"
     }
   },
   "commits": {
@@ -59,16 +60,18 @@
       "bloqueantes": 0
     }
   ],
-  "pr": {},
+  "pr": {
+    "backoffice": "https://github.com/matiaslameiro-surely/planillero-backoffice/pull/11"
+  },
   "jira": {
-    "transicionadoA": null,
+    "transicionadoA": "En revisión",
     "creadoPorHarness": false
   },
   "ejecucion": {
     "herramienta": "Claude Code",
     "modelo": "Claude Opus 5",
     "ts": "2026-09-22T12:12:15.803Z",
-    "fin": null
+    "fin": "2026-09-22T12:58:42.949Z"
   },
   "iteracion": "2"
 }
