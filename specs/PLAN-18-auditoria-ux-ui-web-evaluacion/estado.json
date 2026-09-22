@@ -29,7 +29,8 @@
       "ts": "2026-09-22T12:47:34.595Z"
     },
     "cerrar": {
-      "estado": "pendiente"
+      "estado": "en_curso",
+      "ts": "2026-09-22T12:56:18.437Z"
     },
     "cerrada": {
       "estado": "pendiente"
@@ -38,7 +39,26 @@
   "commits": {
     "backoffice": "b3a43f5,57ed9fd,839cee6"
   },
-  "revisiones": [],
+  "revisiones": [
+    {
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "sin_cuota",
+      "ronda": 1,
+      "verdict": "needs-attention",
+      "archivo": "05-revision-backoffice-1.json",
+      "bloqueantes": 1
+    },
+    {
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "sin_cuota",
+      "ronda": 2,
+      "verdict": "needs-attention",
+      "archivo": "05-revision-backoffice-2.json",
+      "bloqueantes": 0
+    }
+  ],
   "pr": {},
   "jira": {
     "transicionadoA": null,
