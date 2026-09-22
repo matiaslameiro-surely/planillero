@@ -1,0 +1,40 @@
+{
+  "ok": true,
+  "tarea": "PLAN-16",
+  "ts": "2026-09-22T11:41:34.310Z",
+  "repos": [
+    {
+      "repo": "frontend",
+      "ok": true,
+      "herramienta": "npm",
+      "pasos": [
+        {
+          "nombre": "lint",
+          "cmd": "npm run lint",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 7908,
+          "salida": "\n> planillero-frontend@0.1.0 lint\n> expo lint --max-warnings 0"
+        },
+        {
+          "nombre": "tipos",
+          "cmd": "npx tsc --noEmit",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 8463,
+          "salida": ""
+        },
+        {
+          "nombre": "tests",
+          "cmd": "npm test -- --watchAll=false",
+          "opcional": true,
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 20276,
+          "salida": "\n> planillero-frontend@0.1.0 test\n> jest --watchAll=false\n\nPASS src/sync/signOutGuard.test.ts\nPASS src/api/client.test.ts\nPASS src/components/DeviceStatusBar.test.tsx (5.102 s)\nPASS src/components/SyncQueueBanner.test.tsx (5.095 s)\nPASS src/api/visits.test.ts\nPASS src/status/useDeviceStatus.test.tsx\nPASS src/visit/location.test.ts\nPASS src/db/encryptionKey.test.ts\nPASS src/db/database.test.ts\nPASS src/sync/useSyncQueue.test.tsx (6.776 s)\nPASS src/sync/syncQueue.test.ts\nPASS src/api/__tests__/evidence.test.ts (6.635 s)\nPASS src/agenda/date.test.ts\nPASS src/agenda/agendaRepository.test.ts\nPASS src/visit/accuracy.test.ts\nPASS src/constants/layout.test.ts\nPASS src/audit/auditRepository.test.ts\nPASS src/sync/syncWorker.test.ts (6.763 s)\nPASS src/auth/tokenStore.test.ts\nPASS src/components/LocationSummary.test.tsx (7.083 s)\nPASS src/components/VisitCard.test.tsx (6.921 s)\nPASS src/status/useHeartbeat.test.tsx (6.15 s)\nPASS src/visit/startVisit.test.ts (8.132 s)\nPASS src/components/__tests__/ergonomics.test.tsx (10.506 s)\nPASS src/agenda/useAgenda.test.tsx (14.446 s)\n\nTest Suites: 25 passed, 25 total\nTests:       190 passed, 190 total\nSnapshots:   0 total\nTime:        17.475 s\nRan all test suites."
+        }
+      ],
+      "avisos": []
+    }
+  ]
+}

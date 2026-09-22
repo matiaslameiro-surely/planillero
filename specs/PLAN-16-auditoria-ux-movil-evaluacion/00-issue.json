@@ -1,0 +1,14 @@
+{
+  "key": "PLAN-16",
+  "summary": "Auditoría UX Móvil: Evaluación Ergonómica de Campo y Heurísticas de Nielsen",
+  "issuetype": "Tarea",
+  "priority": "Medium",
+  "status": "Por hacer",
+  "created": "2026-09-16T17:15:59.450-0300",
+  "updated": "2026-09-16T17:19:48.364-0300",
+  "duedate": "2026-10-09",
+  "assignee": "Fernando Chamorro Goncalves",
+  "reporter": "Fernando Chamorro Goncalves",
+  "project": "PLAN",
+  "description": "Evaluación de UX/UI orientada al operador de campo en tablet institucional Android de 10'' según la rúbrica del curso (Sección 5).\n\nEntregables:\n- Validación contra las Heurísticas de Nielsen (Visibilidad de estado offline/online, coincidencia con el mundo real, prevención de errores con semáforo GPS, reconocimiento sobre recuerdo).\n- Evaluación ergonómica para el público objetivo: targets táctiles >48x48 dp, contraste WCAG bajo luz solar directa, usabilidad con una sola mano y guantes.\n- Registro de pruebas con usuario real y reporte de feedback en el informe final."
+}

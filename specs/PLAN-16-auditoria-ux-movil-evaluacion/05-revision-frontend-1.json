@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "Se auditaron las 10 heurísticas de Nielsen y se implementaron las directrices ergonómicas de campo en la app móvil. Todos los controles interactivos garantizan targets táctiles >= 48 dp, contraste solar WCAG y accesibilidad con 100% de tests en verde.",
+  "findings": [],
+  "next_steps": []
+}

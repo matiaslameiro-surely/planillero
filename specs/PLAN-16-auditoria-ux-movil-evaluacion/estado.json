@@ -1,0 +1,53 @@
+{
+  "issue": "PLAN-16",
+  "titulo": "Auditoría UX Móvil: Evaluación Ergonómica de Campo y Heurísticas de Nielsen",
+  "slug": "auditoria-ux-movil-evaluacion",
+  "rama": "PLAN-16-auditoria-ux-movil-evaluacion",
+  "alcance": [
+    "frontend"
+  ],
+  "fase": "cerrar",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-22T11:29:10.574Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-22T11:31:24.696Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-22T11:31:55.579Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-22T11:40:48.389Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-22T11:42:11.815Z"
+    },
+    "cerrar": {
+      "estado": "pendiente"
+    },
+    "cerrada": {
+      "estado": "pendiente"
+    }
+  },
+  "commits": {
+    "frontend": "673670929bd9a4aca67aed5dbff759406711f85e"
+  },
+  "revisiones": [],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.8 Flash",
+    "ts": "2026-09-22T11:28:45.870Z",
+    "fin": null
+  }
+}
