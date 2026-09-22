@@ -6,7 +6,7 @@
   "alcance": [
     "frontend"
   ],
-  "fase": "cerrar",
+  "fase": "cerrada",
   "fases": {
     "preparacion": {
       "estado": "ok",
@@ -29,25 +29,29 @@
       "ts": "2026-09-22T11:42:11.815Z"
     },
     "cerrar": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-22T11:48:48.822Z"
     },
     "cerrada": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-22T11:48:58.237Z"
     }
   },
   "commits": {
     "frontend": "673670929bd9a4aca67aed5dbff759406711f85e"
   },
   "revisiones": [],
-  "pr": {},
+  "pr": {
+    "frontend": "https://github.com/matiaslameiro-surely/planillero-frontend/pull/11"
+  },
   "jira": {
-    "transicionadoA": null,
+    "transicionadoA": "En revisión",
     "creadoPorHarness": false
   },
   "ejecucion": {
     "herramienta": null,
     "modelo": "Gemini 3.8 Flash",
     "ts": "2026-09-22T11:28:45.870Z",
-    "fin": null
+    "fin": "2026-09-22T11:48:48.823Z"
   }
 }
