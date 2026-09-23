@@ -6,7 +6,7 @@
   "alcance": [
     "harness"
   ],
-  "fase": "verificar",
+  "fase": "cerrar",
   "fases": {
     "preparacion": {
       "estado": "ok",
@@ -27,9 +27,9 @@
       "ts": "2026-09-23T18:48:01.845Z"
     },
     "verificar": {
-      "estado": "en_curso",
-      "ts": "2026-09-23T18:49:30.441Z",
-      "nota": "Ronda 1: 1 hallazgo medium (regex sin escapar), reproducido y corregido",
+      "estado": "ok",
+      "ts": "2026-09-23T18:50:25.552Z",
+      "nota": "Ronda 1: 1 medium (regex), reproducido y corregido. Ronda 2: approve. Motor anfitriona: codex sin cuota hasta 2026-10-15",
       "iteracion": 2
     },
     "cerrar": {
@@ -40,7 +40,7 @@
     }
   },
   "commits": {
-    "harness": "c7c9b4d"
+    "harness": "c7c9b4d, bacdc2f, 8e433cb"
   },
   "revisiones": [
     {
@@ -53,6 +53,17 @@
       "archivo": "05-revision-harness-1.json",
       "sha": "c7c9b4db82fe46751974acf2f991ca60b3e0bed6",
       "ts": "2026-09-23T18:49:22.625Z"
+    },
+    {
+      "n": 2,
+      "repo": "harness",
+      "motor": "anfitriona",
+      "motivo": "codex sin cuota hasta el 2026-10-15",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-harness-2.json",
+      "sha": "8e433cb1ac2d5013748c1f9b3f78fad0179a8ff4",
+      "ts": "2026-09-23T18:50:15.223Z"
     }
   ],
   "pr": {},

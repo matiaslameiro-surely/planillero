@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "El código final registra la revisión con n entero, motor, motivo y SHA desde los dos caminos de éxito, no duplica entradas al registrar dos veces el mismo archivo y el cuerpo del PR advierte cuando el contenido cambió después de la revisión. Los estados viejos siguen generando cuerpos válidos. Sin hallazgos.",
+  "findings": [],
+  "next_steps": []
+}
