@@ -1,0 +1,58 @@
+{
+  "issue": "PLAN-35",
+  "titulo": "Frontend: el lint falla en main por import/no-unresolved de 'ajv-formats'",
+  "slug": "frontend-el-lint-falla-en-main-por",
+  "rama": "PLAN-35-frontend-el-lint-falla-en-main-por",
+  "alcance": [
+    "frontend"
+  ],
+  "fase": "cerrar",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:13:16.134Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:13:16.335Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:13:23.611Z",
+      "nota": "Checkpoint del plan: el usuario aprobó el enfoque (--no-cache) el 23/09 tras ver el diagnóstico"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:15:14.507Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:16:02.478Z"
+    },
+    "cerrar": {
+      "estado": "pendiente"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:21:22.592Z"
+    }
+  },
+  "commits": {
+    "frontend": "042f74e"
+  },
+  "revisiones": [],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "Claude Opus 5.5 (claude-opus-5-5)",
+    "ts": "2026-09-23T11:36:58.913Z",
+    "fin": null
+  },
+  "prs": {
+    "frontend": "https://github.com/matiaslameiro-surely/planillero-frontend/pull/13"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "ok": true,
+  "tarea": "PLAN-35",
+  "ts": "2026-09-23T12:15:42.729Z",
+  "repos": [
+    {
+      "repo": "frontend",
+      "ok": true,
+      "herramienta": "npm",
+      "pasos": [
+        {
+          "nombre": "lint",
+          "cmd": "npm run lint",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 8198,
+          "salida": "\n> planillero-frontend@0.1.0 lint\n> expo lint --max-warnings 0 --no-cache"
+        },
+        {
+          "nombre": "tipos",
+          "cmd": "npx tsc --noEmit",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 5783,
+          "salida": ""
+        },
+        {
+          "nombre": "tests",
+          "cmd": "npm test -- --watchAll=false",
+          "opcional": true,
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 14037,
+          "salida": "\n> planillero-frontend@0.1.0 test\n> jest --watchAll=false\n\nPASS src/constants/layout.test.ts\nPASS src/status/useHeartbeat.test.tsx\nPASS src/sync/syncQueue.test.ts\nPASS src/sync/signOutGuard.test.ts\nPASS src/sync/syncWorker.test.ts\nPASS src/agenda/agendaRepository.test.ts\nPASS src/status/useDeviceStatus.test.tsx\nPASS src/api/__tests__/evidence.test.ts\nPASS src/api/visits.test.ts\nPASS src/api/client.test.ts\nPASS src/components/DeviceStatusBar.test.tsx\nPASS src/components/SyncQueueBanner.test.tsx\nPASS src/components/LocationSummary.test.tsx\nPASS src/db/encryptionKey.test.ts\nPASS src/components/VisitCard.test.tsx\nPASS src/db/database.test.ts\nPASS src/visit/accuracy.test.ts\nPASS src/agenda/date.test.ts\nPASS src/audit/auditRepository.test.ts\nPASS src/visit/startVisit.test.ts\nPASS src/auth/tokenStore.test.ts\nPASS src/visit/location.test.ts\nPASS src/sync/useSyncQueue.test.tsx (5.236 s)\nPASS src/components/__tests__/ergonomics.test.tsx (6.228 s)\nPASS src/agenda/useAgenda.test.tsx (9.044 s)\n\nTest Suites: 25 passed, 25 total\nTests:       190 passed, 190 total\nSnapshots:   0 total\nTime:        11.094 s, estimated 27 s\nRan all test suites."
+        }
+      ],
+      "avisos": []
+    }
+  ]
+}

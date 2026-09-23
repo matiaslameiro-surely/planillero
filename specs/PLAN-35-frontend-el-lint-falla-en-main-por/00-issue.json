@@ -1,0 +1,11 @@
+{
+  "key": "PLAN-35",
+  "summary": "Frontend: el lint falla en main por import/no-unresolved de 'ajv-formats'",
+  "type": "Tarea",
+  "priority": "Medium",
+  "assignee": "Federico Morón",
+  "sprint": "Sprint 5 - Fix de bugs",
+  "url": "https://surely-sa.atlassian.net/browse/PLAN-35",
+  "descripcion": "El gate lint del frontend falla sobre main: src/forms/validation.ts 2:24 error Unable to resolve path to module 'ajv-formats' import/no-unresolved. El paquete está instalado (ajv-formats 3.0.1) y tsc --noEmit compila; el problema es la resolución de la regla de ESLint. Posibles arreglos: resolver de TypeScript de eslint-plugin-import, o ajustar la regla sólo para ese módulo.",
+  "criteriosDeAceptacion": ["npm run lint pasa en main sin desactivar la regla globalmente."]
+}

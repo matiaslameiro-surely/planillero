@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "Revisión del diff contra 01-spec.md: el script lint agrega --no-cache y el README explica el motivo. Cubre los cinco criterios: gates en verde, la prueba con caché envenenada (06-verificacion-cache-envenenada.md) muestra que el script viejo repite el error fantasma y el nuevo no, y eslint.config.js no cambia, así que import/no-unresolved sigue activa. La hizo la misma sesión que implementó (motor anfitriona sin motores externos), por lo que no es independiente en sentido estricto; el diff es de dos líneas.",
+  "findings": [],
+  "next_steps": []
+}
