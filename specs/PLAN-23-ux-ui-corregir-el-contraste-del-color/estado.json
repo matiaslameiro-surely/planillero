@@ -1,0 +1,67 @@
+{
+  "issue": "PLAN-23",
+  "titulo": "UX/UI: corregir el contraste del color primario, el idioma del documento y los acentos de la grilla",
+  "slug": "ux-ui-corregir-el-contraste-del-color",
+  "rama": "PLAN-23-ux-ui-corregir-el-contraste-del-color",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:07:04.882Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:07:28.824Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:08:05.364Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:12:39.830Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:14:39.890Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:20:00.231Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:20:00.282Z"
+    }
+  },
+  "commits": {
+    "backoffice": "6065e07"
+  },
+  "revisiones": [
+    {
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "sin_cuota",
+      "ronda": 1,
+      "verdict": "approve",
+      "archivo": "05-revision-backoffice-1.json",
+      "bloqueantes": 0
+    }
+  ],
+  "pr": {
+    "backoffice": "https://github.com/matiaslameiro-surely/planillero-backoffice/pull/12"
+  },
+  "jira": {
+    "transicionadoA": "En revisión",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "Claude Opus 5",
+    "ts": "2026-09-23T12:06:36.928Z",
+    "fin": "2026-09-23T12:20:00.231Z"
+  }
+}

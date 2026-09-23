@@ -1,0 +1,13 @@
+{
+  "key": "PLAN-23",
+  "id": "10087",
+  "summary": "UX/UI: corregir el contraste del color primario, el idioma del documento y los acentos de la grilla",
+  "status": "Por hacer",
+  "priority": "High",
+  "issuetype": "Tarea",
+  "assignee": "Matías Lameiro",
+  "url": "https://surely-sa.atlassian.net/browse/PLAN-23",
+  "origen": "auditoría UX/UI de PLAN-18 (docs/auditoria-ux-ui.md en el backoffice, PR #11)",
+  "hallazgos": ["H27 (critical)", "H9", "H10"],
+  "descripcion": "Tres correcciones de una línea cada una, detectadas por la auditoría UX/UI de PLAN-18. Riesgo cero y verificación trivial: conviene hacerlas juntas en una sola rama.\n\n1. Color primario institucional — hallazgo H27: $color-primary: #208aef (src/app/styles/_variables.scss:6) da 3,53:1 con texto blanco encima, por debajo del mínimo WCAG AA de 4,5:1. Con #1268bd el ratio sube a 5,61:1 conservando el mismo matiz.\n\n2. Idioma declarado — hallazgo H9: src/index.html:2 declara <html lang=\"en\"> con el 100% de la interfaz en español.\n\n3. Acentos en la grilla de visitas — hallazgo H10: src/app/pages/planificacion/planificacion.html:74, :75 y :78 dicen «Codigo», «Direccion» y «Sincronizacion»."
+}

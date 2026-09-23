@@ -1,0 +1,17 @@
+{
+  "verdict": "approve",
+  "summary": "El diff cumple los cuatro criterios de aceptación verificables desde el código: el nuevo $color-primary: #1268bd da 5,61:1 sobre blanco (calculado con la fórmula de luminancia relativa de WCAG 2.1), conserva el matiz azul (H 209,3° → 209,8°), index.html declara lang=\"es\" y los cuatro encabezados de la grilla quedaron acentuados. Se revisaron los 16 usos de $color-primary en el backoffice y ninguno queda por debajo del umbral con el valor nuevo. El único señalamiento es de documentación y no bloquea.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "El informe de auditoría sigue citando el hex viejo como valor vigente",
+      "body": "docs/auditoria-ux-ui.md menciona #208aef en cinco lugares (líneas 37, 232, 496, 497 y 515) y lo presenta en tiempo presente como el token oficial actual: «app/styles/_variables.scss:6 define $color-primary: #208aef». Tras este cambio esa afirmación es falsa: el token vive ahora en la línea 8 y vale #1268bd. Escenario concreto: alguien que abra el informe para chequear el estado del contraste concluye que H27 sigue abierto, o copia #208aef como color institucional a una pantalla nueva y reintroduce el 3,53:1. Es discutible si corresponde tocarlo —un informe de auditoría es una foto fechada de un estado pasado, y la spec no lo incluye en el alcance— pero, si se deja como está, conviene que el PR lo diga explícitamente o que el informe lleve una nota de «resuelto en PLAN-23».",
+      "file": "docs/auditoria-ux-ui.md",
+      "line_start": 515,
+      "line_end": 515,
+      "confidence": 0.75,
+      "recommendation": "Agregar en H27 del informe una línea de cierre («Resuelto en PLAN-23: el token pasó a #1268bd, 5,61:1») o, si se prefiere mantener el informe congelado como registro histórico, dejar constancia de esa decisión en el cuerpo del PR."
+    }
+  ],
+  "next_steps": []
+}

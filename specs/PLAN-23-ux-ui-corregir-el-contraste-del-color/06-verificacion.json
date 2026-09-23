@@ -1,0 +1,39 @@
+{
+  "ok": true,
+  "tarea": "PLAN-23",
+  "ts": "2026-09-23T12:12:20.261Z",
+  "repos": [
+    {
+      "repo": "backoffice",
+      "ok": true,
+      "herramienta": "npm",
+      "pasos": [
+        {
+          "nombre": "lint",
+          "cmd": "npm run lint",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 4495,
+          "salida": "\n> planillero-backoffice@0.1.0 lint\n> ng lint --max-warnings=0\n\n\nLinting \"planillero-backoffice\"...\n\nAll files pass linting."
+        },
+        {
+          "nombre": "tipos",
+          "cmd": "npm run build",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 4262,
+          "salida": "\n> planillero-backoffice@0.1.0 build\n> ng build\n\n❯ Building...\n✔ Building...\nInitial chunk files | Names                |  Raw size | Estimated transfer size\nmain-LDDY4FK7.js    | main                 | 284.31 kB |                77.94 kB\nstyles-LKC44D2S.css | styles               |  11.53 kB |                 2.49 kB\n\n                    | Initial total        | 295.84 kB |                80.43 kB\n\nLazy chunk files    | Names                |  Raw size | Estimated transfer size\nchunk-C2tX4LLW.js   | expediente-component | 160.83 kB |                41.37 kB\nchunk-Dz37Gfbn.js   | -                    | 149.60 kB |                37.71 kB\nchunk-D4GkJazR.js   | -                    |  48.23 kB |                10.22 kB\nchunk-BOjS5gV1.js   | supervision          |  19.50 kB |                 5.58 kB\nchunk-0ayGvFZH.js   | planificacion        |  16.69 kB |                 4.76 kB\nchunk-Cx9cEsA3.js   | evidence-viewer      |  13.84 kB |                 3.95 kB\nchunk-BkFrVx4n.js   | auditoria            |  12.81 kB |                 3.79 kB\nchunk-DyLwDD5z.js   | login                |   5.56 kB |                 1.87 kB\nchunk-CYz9cdBu.js   | home                 |   5.04 kB |                 1.85 kB\nchunk-C0X802Ff.js   | access-denied        | 927 bytes |               927 bytes\n\nApplication bundle generation complete. [3.225 seconds] - 2026-09-23T12:12:13.378Z\n\nOutput location: C:\\workspace\\git\\planillero\\backoffice\\dist\\planillero-backoffice\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'leaflet' used by 'src/app/pages/planificacion/route-map/route-map.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m\n\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'ajv' used by 'src/app/forms/validation.service.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m\n\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'ajv-formats' used by 'src/app/forms/validation.service.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m"
+        },
+        {
+          "nombre": "tests",
+          "cmd": "npm test",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 6722,
+          "salida": "\n> planillero-backoffice@0.1.0 test\n> ng test\n\n❯ Building...\n✔ Building...\nApplication bundle generation complete. [1.649 seconds] - 2026-09-23T12:12:15.893Z\n\n\n\u001b[1m\u001b[30m\u001b[46m RUN \u001b[49m\u001b[39m\u001b[22m \u001b[36mv4.1.11 \u001b[39m\u001b[90mC:/workspace/git/planillero/backoffice\u001b[39m\n\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m13 passed\u001b[39m\u001b[22m\u001b[90m (13)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m67 passed\u001b[39m\u001b[22m\u001b[90m (67)\u001b[39m\n\u001b[2m   Start at \u001b[22m 09:12:16\n\u001b[2m   Duration \u001b[22m 3.73s\u001b[2m (transform 2.99s, setup 7.71s, import 4.05s, tests 1.95s, environment 24.79s)\u001b[22m"
+        }
+      ],
+      "avisos": []
+    }
+  ]
+}
