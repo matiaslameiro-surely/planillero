@@ -6,7 +6,7 @@
   "alcance": [
     "harness"
   ],
-  "fase": "cerrar",
+  "fase": "cerrada",
   "fases": {
     "preparacion": {
       "estado": "ok",
@@ -33,10 +33,12 @@
       "iteracion": 2
     },
     "cerrar": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-23T18:53:19.112Z"
     },
     "cerrada": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-23T18:53:19.178Z"
     }
   },
   "commits": {
@@ -66,15 +68,17 @@
       "ts": "2026-09-23T18:50:15.223Z"
     }
   ],
-  "pr": {},
+  "pr": {
+    "harness": "https://github.com/matiaslameiro-surely/planillero/pull/1"
+  },
   "jira": {
-    "transicionadoA": "En curso",
+    "transicionadoA": "En revisión",
     "creadoPorHarness": false
   },
   "ejecucion": {
     "herramienta": "Claude Code",
     "modelo": "claude-opus-5 (fases 0-2), claude-sonnet-5 (desde la fase 3)",
     "ts": "2026-09-23T18:39:53.016Z",
-    "fin": null
+    "fin": "2026-09-23T18:53:19.113Z"
   }
 }
