@@ -30,7 +30,9 @@ El alcance de una tarea puede ser cualquier combinación de los tres. Los repos 
 **El propio harness también es un repo del alcance** (`harness`, ruta `.`): una tarea puede tocar los
 scripts, el protocolo o las plantillas. Se trabaja igual que en los otros: rama `PLAN-<n>-<slug>`, commits
 con el prefijo, revisión independiente y PR contra `main`. Sus artefactos (`specs/`) viajan en esa misma
-rama. No tiene gates propios: `verificar.mjs` responde `sin_gates`.
+rama. No tiene gates propios: `verificar.mjs` responde `sin_gates`, ni guardia de push: las specs de las
+tareas de producto se siguen subiendo directo a `main`. Como `sincronizar.mjs` también lo revisa, specs
+sin commitear de una tarea anterior lo dejan en `requierenAtencion`: es esperable, resolvelo antes de seguir.
 
 ## Regla de oro: agnóstico de herramienta
 

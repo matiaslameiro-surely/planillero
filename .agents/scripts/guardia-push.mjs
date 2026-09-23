@@ -38,6 +38,13 @@ function instalar() {
   const cfg = cargarConfig();
   const resultados = [];
   for (const [nombre, repo] of Object.entries(cfg.repos || {})) {
+    // El harness no lleva guardia: el equipo sube ahí las specs de cada tarea de producto directo a
+    // `main`, y bloquearlo cambiaría cómo trabaja todo el mundo. Si algún día las specs pasan por PR,
+    // se decide aparte.
+    if (repo.tipo === 'harness') {
+      resultados.push({ repo: nombre, instalado: false, motivo: 'el harness no lleva guardia de push (las specs se suben directo a main)' });
+      continue;
+    }
     const dirGit = path.join(RAIZ, repo.ruta, '.git');
     if (!existsSync(dirGit)) {
       resultados.push({ repo: nombre, instalado: false, motivo: 'no está clonado' });
