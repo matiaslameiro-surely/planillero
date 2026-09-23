@@ -1,0 +1,15 @@
+{
+  "key": "PLAN-39",
+  "tipo": "Tarea",
+  "prioridad": "Medium",
+  "estado": "Por hacer",
+  "asignada": "Fernando Chamorro Goncalves",
+  "reporter": "Matías Lameiro",
+  "titulo": "Tres hojas de estilo de componente exceden el presupuesto de 4 kB del build",
+  "url": "https://surely-sa.atlassian.net/browse/PLAN-39",
+  "description": "El build del backoffice termina en verde, pero emite tres avisos de presupuesto. Medido sobre \nmain\n en el commit \nc38c798\n (después de mergear PLAN-25, PLAN-27 y PLAN-29): Archivo Excede por Total src/app/pages/supervision/supervision.scss 1,43 kB 5,43 kB src/app/pages/evidence-viewer/evidence-viewer.scss 946 B 4,95 kB src/app/pages/planificacion/planificacion.scss 36 B 4,04 kB Ninguno es culpa de una sola tarea: el presupuesto de 4 kB por hoja de componente se fijó cuando las pantallas eran esqueletos, y las tres crecieron con trabajo legítimo (supervisión con PLAN-12 y PLAN-30, el visor con PLAN-10, planificación con PLAN-27 más los tokens de PLAN-25). Lo que hay que decidir es la política, no limpiar 36 bytes: o el presupuesto de \nangular.json\n sube a un valor que refleje lo que hoy pesan las pantallas reales, o se extrae lo común —el patrón de modal, que hoy está duplicado entre el visor y la confirmación de planificación— a estilos compartidos. La segunda opción quita duplicación de verdad; la primera es un renglón de configuración. Criterios de aceptación El build no emite ningún aviso de presupuesto. Si se resuelve subiendo el presupuesto, el valor nuevo queda justificado en un comentario de \nangular.json\n: de qué pantalla salió y por qué ese número. Si se resuelve extrayendo estilos, el modal del visor y el de la confirmación de planificación comparten la misma base y se ven igual que antes. Los gates del backoffice quedan en verde. Detectado al revisar los PR #16 (PLAN-25) y #15 (PLAN-29).",
+  "seleccion": {
+    "motivo": "Es la única asignada a Fernando Chamorro Goncalves en el sprint activo.",
+    "jql": "project = PLAN AND statusCategory = \"To Do\" AND sprint IN openSprints() ORDER BY priority DESC, created ASC"
+  }
+}
