@@ -1,0 +1,55 @@
+{
+  "issue": "PLAN-22",
+  "titulo": "Auditar la carga de formulario que llega por sincronización diferida",
+  "slug": "auditar-la-carga-de-formulario-que",
+  "rama": "PLAN-22-auditar-la-carga-de-formulario-que",
+  "alcance": [
+    "backend"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-23T10:52:29.053Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-23T10:54:28.913Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-23T10:56:04.171Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-23T11:04:07.498Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-23T11:17:30.875Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-23T11:32:44.389Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-23T11:32:52.921Z"
+    }
+  },
+  "commits": {
+    "backend": "e2ea371ca945019a152ebb5b8caa332e3ac0dd19"
+  },
+  "revisiones": [],
+  "pr": {},
+  "jira": {
+    "transicionadoA": "Finalizado",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.8 Flash",
+    "ts": "2026-09-23T10:51:51.991Z",
+    "fin": "2026-09-23T11:32:44.390Z"
+  }
+}

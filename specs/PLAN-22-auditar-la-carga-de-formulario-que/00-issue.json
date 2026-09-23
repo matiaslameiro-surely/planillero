@@ -1,0 +1,14 @@
+{
+  "key": "PLAN-22",
+  "summary": "Auditar la carga de formulario que llega por sincronización diferida",
+  "issuetype": "Tarea",
+  "priority": "Medium",
+  "status": "Por hacer",
+  "assignee": {
+    "accountId": "624b08e6f813eb00692c670f",
+    "displayName": "Fernando Chamorro Goncalves",
+    "emailAddress": "fernando.chamorro@surely-sa.com.ar"
+  },
+  "description": "Agujero de integración entre PLAN-11 (auditoría inmutable) y PLAN-14 (sincronización offline), detectado al integrar ambas ramas. PLAN-11 anotó con @AuditLog(eventType = \"FORM_SUBMITTED\", entityType = \"VISIT\") el método VisitFormService.submit(), que es la carga del formulario EN LÍNEA. La carga DIFERIDA —VisitFormService.submitDeferred(), la que aplica cada operación del lote de POST /api/v1/sync/batch— no está auditada. Consecuencia: las actas que el operador carga sin señal y que llegan después por la cola de sincronización no dejan traza en audit.audit_logs. Como el trabajo de campo ocurre justamente donde no hay cobertura, la parte que falta auditar puede ser la mayoría de las actas del expediente. Ninguna de las dos revisiones independientes podía verlo: cada una miró su propia rama, y el problema sólo existe con las dos juntas. Alcance: backend. Decisión de diseño a tomar en la spec: NO alcanza con poner @AuditLog en submitDeferred. Ese método también devuelve el camino \"ya aplicada\" (DUPLICATE), y anotarlo registraría una entrada de auditoría por cada reintento del dispositivo: en el expediente se verían N cargas donde hubo una sola. La auditoría tiene que registrarse únicamente cuando la operación se aplica de verdad. Hay precedente de llamar al servicio de auditoría a mano en PlanningService.assign(), que audita una fila por visita en vez de usar la anotación. Criterios de aceptación propuestos: Una operación del lote que se aplica deja exactamente una entrada en audit.audit_logs, con el usuario y la visita correctos. Un reintento de esa misma operación (resultado DUPLICATE) NO agrega ninguna entrada nueva. Una operación que falla (FAILED) no deja entrada. La cadena de custodia de la auditoría sigue verificando correctamente después de un lote. Origen: revisión humana de PLAN-14 (PRs planillero-backend#9, planillero-frontend#6, planillero-backoffice#6).",
+  "webUrl": "https://surely-sa.atlassian.net/browse/PLAN-22"
+}
