@@ -1,0 +1,59 @@
+{
+  "issue": "PLAN-28",
+  "titulo": "Unificar los tokens de diseño del backoffice y exponerlos como custom properties CSS",
+  "slug": "unificar-los-tokens-de-diseno-del",
+  "rama": "PLAN-28-unificar-los-tokens-de-diseno-del",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-23T13:06:03.028Z",
+      "nota": "PLAN-25 mergeado (e156b42). Repos al día; re-análisis completo sobre main nuevo (también entraron PLAN-26, 27, 30)."
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-23T18:23:08.677Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-23T18:38:01.423Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-23T18:54:22.796Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-23T19:01:41.055Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-23T19:10:26.695Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-23T19:10:26.779Z"
+    }
+  },
+  "commits": {},
+  "revisiones": [
+    {
+      "repo": "backoffice",
+      "motor": "anfitriona"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": "En revisión",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "opencode",
+    "modelo": "big-pickle",
+    "ts": "2026-09-23T13:05:33.373Z",
+    "fin": "2026-09-23T19:10:26.780Z"
+  }
+}

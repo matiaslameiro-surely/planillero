@@ -1,0 +1,361 @@
+{
+  "key": "PLAN-28",
+  "fields": {
+    "summary": "Unificar los tokens de diseño del backoffice y exponerlos como custom properties CSS",
+    "status": {
+      "name": "En curso"
+    },
+    "assignee": {
+      "accountId": "61d33c409ee70a0068541939",
+      "displayName": "Juan Ignacio Urrutia"
+    },
+    "priority": {
+      "name": "Medium"
+    },
+    "issuetype": {
+      "name": "Tarea"
+    },
+    "sprint": {
+      "name": "Sprint 5 - Fix de bugs",
+      "state": "active"
+    },
+    "reporter": {
+      "displayName": "Matías Lameiro"
+    },
+    "description": {
+      "type": "doc",
+      "version": 1,
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Detectado por la auditoría UX/UI de PLAN-18 (hallazgos H6 y H7). Consistencia y estándares fue la heurística con el peor resultado del informe, y es la que explica que el backoffice se sienta como seis productos distintos con el mismo login."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "El dato duro (H7)",
+              "marks": [{ "type": "em" }]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Existe un archivo de tokens, "
+            },
+            {
+              "type": "text",
+              "text": "src/app/styles/_variables.scss",
+              "marks": [{ "type": "code" }]
+            },
+            {
+              "type": "text",
+              "text": ", cuyo propio comentario declara la regla: «Todo color, espaciado o radio sale de acá: nada se escribe a mano en los componentes»."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Sólo cuatro de las diez hojas de estilo lo importan",
+              "marks": [{ "type": "em" }]
+            },
+            {
+              "type": "text",
+              "text": ": "
+            },
+            {
+              "type": "text",
+              "text": "home",
+              "marks": [{ "type": "code" }]
+            },
+            {
+              "type": "text",
+              "text": ", "
+            },
+            {
+              "type": "text",
+              "text": "login",
+              "marks": [{ "type": "code" }]
+            },
+            {
+              "type": "text",
+              "text": ", "
+            },
+            {
+              "type": "text",
+              "text": "planificacion",
+              "marks": [{ "type": "code" }]
+            },
+            {
+              "type": "text",
+              "text": " y "
+            },
+            {
+              "type": "text",
+              "text": "auditoria",
+              "marks": [{ "type": "code" }]
+            },
+            {
+              "type": "text",
+              "text": ". No lo importan "
+            },
+            {
+              "type": "text",
+              "text": "supervision.scss",
+              "marks": [{ "type": "code" }]
+            },
+            {
+              "type": "text",
+              "text": ", "
+            },
+            {
+              "type": "text",
+              "text": "evidence-viewer.scss",
+              "marks": [{ "type": "code" }]
+            },
+            {
+              "type": "text",
+              "text": ", "
+            },
+            {
+              "type": "text",
+              "text": "access-denied.scss",
+              "marks": [{ "type": "code" }]
+            },
+            {
+              "type": "text",
+              "text": ", "
+            },
+            {
+              "type": "text",
+              "text": "supervision-map.scss",
+              "marks": [{ "type": "code" }]
+            },
+            {
+              "type": "text",
+              "text": ", "
+            },
+            {
+              "type": "text",
+              "text": "route-map.scss",
+              "marks": [{ "type": "code" }]
+            },
+            {
+              "type": "text",
+              "text": " ni "
+            },
+            {
+              "type": "text",
+              "text": "app.scss",
+              "marks": [{ "type": "code" }]
+            },
+            {
+              "type": "text",
+              "text": ". Tampoco pueden hacerlo los seis componentes que llevan los estilos embebidos en el "
+            },
+            {
+              "type": "text",
+              "text": ".ts",
+              "marks": [{ "type": "code" }]
+            },
+            {
+              "type": "text",
+              "text": " (los cinco campos de formulario y "
+            },
+            {
+              "type": "text",
+              "text": "dynamic-form",
+              "marks": [{ "type": "code" }]
+            },
+            {
+              "type": "text",
+              "text": "), porque una variable SCSS de otro archivo no les llega."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Un sistema de diseño que gobierna menos de la mitad de la interfaz no es un sistema de diseño."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "La consecuencia visible (H6)",
+              "marks": [{ "type": "em" }]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "El mismo rol visual, «acción primaria», está pintado de cuatro colores distintos según en qué tarea se escribió la pantalla:"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "#208aef — botones de login y home (el token oficial)" }] }]
+            },
+            {
+              "type": "listItem",
+              "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "#0284c7 — botón de refresco del tablero" }] }]
+            },
+            {
+              "type": "listItem",
+              "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "#2563eb — botón de verificación y enlaces del visor" }] }]
+            },
+            {
+              "type": "listItem",
+              "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "#2b6cb0 — botón de envío de los formularios dinámicos" }] }]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Lo mismo con los grises de texto secundario, que siguen tres escalas ajenas entre sí: "
+            },
+            {
+              "type": "text",
+              "text": "#718096",
+              "marks": [{ "type": "code" }]
+            },
+            {
+              "type": "text",
+              "text": " (tipo Chakra), "
+            },
+            {
+              "type": "text",
+              "text": "#64748b",
+              "marks": [{ "type": "code" }]
+            },
+            {
+              "type": "text",
+              "text": " y "
+            },
+            {
+              "type": "text",
+              "text": "#94a3b8",
+              "marks": [{ "type": "code" }]
+            },
+            {
+              "type": "text",
+              "text": " (tipo Tailwind slate) y "
+            },
+            {
+              "type": "text",
+              "text": "#4b5563",
+              "marks": [{ "type": "code" }]
+            },
+            {
+              "type": "text",
+              "text": "."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Como muestra de hasta dónde llega la divergencia: de los seis tokens declarados, "
+            },
+            {
+              "type": "text",
+              "text": "$color-info",
+              "marks": [{ "type": "code" }]
+            },
+            {
+              "type": "text",
+              "text": " ("
+            },
+            {
+              "type": "text",
+              "text": "#6c3fc5",
+              "marks": [{ "type": "code" }]
+            },
+            {
+              "type": "text",
+              "text": ") no se usa en ninguna pantalla, mientras que el violeta que sí se ve —el KPI de cumplimiento de SLA— usa otro valor escrito a mano ("
+            },
+            {
+              "type": "text",
+              "text": "#7c3aed",
+              "marks": [{ "type": "code" }]
+            },
+            {
+              "type": "text",
+              "text": ")."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Criterios de aceptación",
+              "marks": [{ "type": "em" }]
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Una sola escala de color, definida en un único lugar y expuesta como custom properties CSS, para que los componentes con estilos embebidos también la consuman." }] }]
+            },
+            {
+              "type": "listItem",
+              "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Ningún color hexadecimal escrito a mano en componentes ni en hojas de página." }] }]
+            },
+            {
+              "type": "listItem",
+              "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "La escala resultante cumple WCAG AA en todos sus pares de uso (coordinar con PLAN-25, que mide lo mismo)." }] }]
+            },
+            {
+              "type": "listItem",
+              "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Los gates del backoffice quedan en verde." }] }]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Esta tarea cierra de raíz varios hallazgos de contraste, porque los grises que incumplen son consecuencia directa de la divergencia."
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
