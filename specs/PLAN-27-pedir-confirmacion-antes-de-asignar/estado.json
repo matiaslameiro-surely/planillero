@@ -42,7 +42,8 @@
   },
   "revisiones": [],
   "pr": {
-    "backoffice": "https://github.com/matiaslameiro-surely/planillero-backoffice/pull/18"
+    "backoffice": "https://github.com/matiaslameiro-surely/planillero-backoffice/pull/18",
+    "backofficeMerge": "e9c9a4e (mergeado a main)"
   },
   "jira": {
     "transicionadoA": "En revisión",
@@ -54,5 +55,5 @@
     "ts": "2026-09-23T13:05:12.033Z",
     "fin": "2026-09-23T14:15:59.843Z"
   },
-  "revisionHumana": "PR #18: CHANGES_REQUESTED de federicomoron-surely; los 2 cambios pedidos aplicados en 76958a3"
+  "revisionHumana": "PR #18 APROBADO por federicomoron-surely (76958a3); sin comentarios inline pendientes"
 }
