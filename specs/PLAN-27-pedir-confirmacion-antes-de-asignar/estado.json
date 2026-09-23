@@ -38,7 +38,7 @@
     }
   },
   "commits": {
-    "backoffice": "c7e4cde,52dfb2c"
+    "backoffice": "c7e4cde,52dfb2c,76958a3"
   },
   "revisiones": [],
   "pr": {
@@ -53,5 +53,6 @@
     "modelo": "Claude Opus 5",
     "ts": "2026-09-23T13:05:12.033Z",
     "fin": "2026-09-23T14:15:59.843Z"
-  }
+  },
+  "revisionHumana": "PR #18: CHANGES_REQUESTED de federicomoron-surely; los 2 cambios pedidos aplicados en 76958a3"
 }
