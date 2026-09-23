@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "La implementación cubre fielmente los criterios de aceptación y los 10 hallazgos de auditoría UX/UI en backoffice. Se resolvieron la frescura y el estado obsoleto en supervisión, la jerarquía pericial en evidencias, la caducidad del feedback en planificación, la limpieza de URL en home y la elasticidad en expediente y pantallas amplias.",
+  "findings": [],
+  "next_steps": []
+}

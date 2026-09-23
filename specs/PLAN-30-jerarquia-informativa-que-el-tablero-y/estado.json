@@ -1,0 +1,57 @@
+{
+  "issue": "PLAN-30",
+  "titulo": "Jerarquía informativa: que el tablero y el visor muestren primero lo que exige acción",
+  "slug": "jerarquia-informativa-que-el-tablero-y",
+  "rama": "PLAN-30-jerarquia-informativa-que-el-tablero-y",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-23T13:06:46.815Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-23T13:08:50.745Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-23T13:10:12.031Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-23T13:20:29.668Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-23T13:22:05.230Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-23T13:27:50.630Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-23T13:27:59.947Z"
+    }
+  },
+  "commits": {
+    "backoffice": "89093b1db743fe6e577a3fc8c05ebecff8e9f0d5"
+  },
+  "revisiones": [],
+  "pr": {
+    "backoffice": "https://github.com/matiaslameiro-surely/planillero-backoffice/pull/17"
+  },
+  "jira": {
+    "transicionadoA": "En revisión",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.8 Flash",
+    "ts": "2026-09-23T13:06:36.256Z",
+    "fin": "2026-09-23T13:27:50.631Z"
+  }
+}
