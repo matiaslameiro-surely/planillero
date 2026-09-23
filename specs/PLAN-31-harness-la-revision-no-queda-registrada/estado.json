@@ -69,7 +69,12 @@
     }
   ],
   "pr": {
-    "harness": "https://github.com/matiaslameiro-surely/planillero/pull/1"
+    "harness": "https://github.com/matiaslameiro-surely/planillero/pull/1",
+    "atendido": {
+      "revision": "federicomoron-surely CHANGES_REQUESTED",
+      "cambio": "guardia-push.mjs saltea tipo harness (opcion A)",
+      "commit": "8259ca9"
+    }
   },
   "jira": {
     "transicionadoA": "En revisión",
