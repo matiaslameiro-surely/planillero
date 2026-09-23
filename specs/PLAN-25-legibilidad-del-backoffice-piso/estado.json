@@ -1,0 +1,58 @@
+{
+  "issue": "PLAN-25",
+  "titulo": "Legibilidad del backoffice: piso tipográfico de 12 px y escala de grises que cumpla WCAG AA",
+  "slug": "legibilidad-del-backoffice-piso",
+  "rama": "PLAN-25-legibilidad-del-backoffice-piso",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrar",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:54:50.664Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:54:50.831Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:56:12.372Z",
+      "nota": "Plan aprobado por el usuario el 23/09"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:59:14.877Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:59:43.032Z"
+    },
+    "cerrar": {
+      "estado": "pendiente"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-23T13:01:51.113Z"
+    }
+  },
+  "commits": {
+    "backoffice": "bb51c6a"
+  },
+  "revisiones": [],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "Claude Opus 5.5 (claude-opus-5-5)",
+    "ts": "2026-09-23T12:52:29.732Z",
+    "fin": null
+  },
+  "prs": {
+    "backoffice": "https://github.com/matiaslameiro-surely/planillero-backoffice/pull/16"
+  }
+}

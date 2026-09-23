@@ -1,0 +1,27 @@
+{
+  "verdict": "approve",
+  "summary": "Revisión del diff contra 01-spec.md, que cubre los 6 criterios. No queda texto por debajo de 12 px, y los badges y estados van a 13 px. El escaneo WCAG pasa de 28 reglas bajo 4,5:1 a 6, todas justificadas en 06-verificacion-contraste.md: 3 fondos que el script no resuelve y 3 KPI que son texto grande. «Intacta» y «alterada» llevan ✓/✗ además del color. Se sacó la opacity sobre texto y los tokens nuevos tienen su contraste anotado. Gates en verde: lint, tipos y 67 tests. No hay conflictos de merge con PLAN-29 ni PLAN-24. La revisión la hizo la misma sesión que implementó (motor anfitriona sin motores externos), así que no es independiente.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "Los estilos inline de formularios y expediente repiten el valor del token en lugar de usarlo",
+      "body": "Los componentes con styles inline (dynamic-form, los cinco field-* y expediente) no pueden importar _variables.scss, así que usan #5b6778 y #c0392b literales con un comentario que nombra el token. Si el token cambia, estos valores no se actualizan solos.",
+      "file": "src/app/forms/fields/field-text.component.ts",
+      "line_start": 35,
+      "line_end": 47,
+      "confidence": 0.95,
+      "recommendation": "En PLAN-28, mover esos estilos a archivos .scss o exponer los tokens como variables CSS, que es justamente el objetivo de esa tarea."
+    },
+    {
+      "severity": "low",
+      "title": "Los KPI de Supervisión cumplen AA para texto grande, con poco margen",
+      "body": "El valor del KPI «Demorado» (#d97706) da 3,19:1: cumple el 3:1 de texto grande (1,3 rem en negrita), pero con poco margen. Quedó fuera de alcance a propósito para no ampliar el diff.",
+      "file": "src/app/pages/supervision/supervision.scss",
+      "line_start": 72,
+      "line_end": 74,
+      "confidence": 0.9,
+      "recommendation": "Oscurecerlo (#b45309 da 5,02:1) cuando se unifique la paleta en PLAN-28."
+    }
+  ],
+  "next_steps": []
+}
