@@ -1,0 +1,18 @@
+{
+  "key": "PLAN-29",
+  "summary": "Capa común de traducción: dejar de mostrar estados y códigos crudos del backend al supervisor",
+  "type": "Tarea",
+  "priority": "Medium",
+  "assignee": "Federico Morón",
+  "sprint": "Sprint 5 - Fix de bugs",
+  "url": "https://surely-sa.atlassian.net/browse/PLAN-29",
+  "origen": "Auditoría UX/UI de PLAN-18, hallazgos H18 a H22",
+  "criteriosDeAceptacion": [
+    "Una única fuente de traducción de estados, urgencias y tipos, consumida por todas las pantallas.",
+    "Ninguna pantalla muestra un identificador crudo del backend como texto principal.",
+    "Las fechas se formatean de manera uniforme en toda la aplicación.",
+    "Las visitas se identifican por su código; los UUID quedan como dato secundario.",
+    "Los hashes se truncan en las vistas de lista, con el valor completo disponible bajo demanda.",
+    "Los gates del backoffice quedan en verde."
+  ]
+}

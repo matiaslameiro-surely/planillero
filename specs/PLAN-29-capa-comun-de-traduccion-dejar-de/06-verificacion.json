@@ -1,0 +1,39 @@
+{
+  "ok": true,
+  "tarea": "PLAN-29",
+  "ts": "2026-09-23T12:35:27.340Z",
+  "repos": [
+    {
+      "repo": "backoffice",
+      "ok": true,
+      "herramienta": "npm",
+      "pasos": [
+        {
+          "nombre": "lint",
+          "cmd": "npm run lint",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 3227,
+          "salida": "\n> planillero-backoffice@0.1.0 lint\n> ng lint --max-warnings=0\n\n\nLinting \"planillero-backoffice\"...\n\nAll files pass linting.\n\nNode.js version v25.9.0 detected.\nPrior to version 27, odd numbered Node.js versions will not enter LTS status and should not be used for production. For more information, please see https://nodejs.org/en/about/previous-releases/."
+        },
+        {
+          "nombre": "tipos",
+          "cmd": "npm run build",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 10814,
+          "salida": "\n> planillero-backoffice@0.1.0 build\n> ng build\n\n❯ Building...\n✔ Building...\nInitial chunk files | Names                |  Raw size | Estimated transfer size\nmain-LXNXPEXS.js    | main                 | 283.87 kB |                77.77 kB\nstyles-LKC44D2S.css | styles               |  11.53 kB |                 2.49 kB\n\n                    | Initial total        | 295.39 kB |                80.26 kB\n\nLazy chunk files    | Names                |  Raw size | Estimated transfer size\nchunk-CY6B187-.js   | expediente-component | 160.84 kB |                41.46 kB\nchunk-jcoGEq1B.js   | -                    | 149.60 kB |                37.70 kB\nchunk-CGKKCsRn.js   | -                    |  48.25 kB |                10.23 kB\nchunk-iUhd5GtD.js   | supervision          |  19.41 kB |                 5.57 kB\nchunk-KJsw4Jj3.js   | planificacion        |  16.87 kB |                 4.85 kB\nchunk-C8nr6LBY.js   | evidence-viewer      |  14.64 kB |                 4.19 kB\nchunk-CkOJ_Q2E.js   | auditoria            |  13.10 kB |                 3.89 kB\nchunk-DInZ_Yb5.js   | login                |   5.56 kB |                 1.87 kB\nchunk-GW8QE75u.js   | home                 |   5.04 kB |                 1.86 kB\nchunk-oz97bDmm.js   | -                    |   1.66 kB |               719 bytes\nchunk-Ce7axvyQ.js   | access-denied        | 926 bytes |               926 bytes\nchunk-BU5oAJGL.js   | -                    | 330 bytes |               330 bytes\n\nApplication bundle generation complete. [8.314 seconds] - 2026-09-23T12:35:09.174Z\n\nOutput location: C:\\Users\\Personal\\Proyectos\\planillero\\backoffice\\dist\\planillero-backoffice\n\nNode.js version v25.9.0 detected.\nPrior to version 27, odd numbered Node.js versions will not enter LTS status and should not be used for production. For more information, please see https://nodejs.org/en/about/previous-releases/.\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'ajv' used by 'src/app/forms/validation.service.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m\n\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'ajv-formats' used by 'src/app/forms/validation.service.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m\n\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'leaflet' used by 'src/app/pages/planificacion/route-map/route-map.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m"
+        },
+        {
+          "nombre": "tests",
+          "cmd": "npm test",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 17829,
+          "salida": "\n> planillero-backoffice@0.1.0 test\n> ng test\n\n❯ Building...\n✔ Building...\nApplication bundle generation complete. [7.316 seconds] - 2026-09-23T12:35:19.316Z\n\n\n\u001b[1m\u001b[30m\u001b[46m RUN \u001b[49m\u001b[39m\u001b[22m \u001b[36mv4.1.11 \u001b[39m\u001b[90mC:/Users/Personal/Proyectos/planillero/backoffice\u001b[39m\n\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m14 passed\u001b[39m\u001b[22m\u001b[90m (14)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m79 passed\u001b[39m\u001b[22m\u001b[90m (79)\u001b[39m\n\u001b[2m   Start at \u001b[22m 09:35:19\n\u001b[2m   Duration \u001b[22m 7.09s\u001b[2m (transform 2.43s, setup 17.96s, import 4.42s, tests 4.50s, environment 42.03s)\u001b[22m\n\nNode.js version v25.9.0 detected.\nPrior to version 27, odd numbered Node.js versions will not enter LTS status and should not be used for production. For more information, please see https://nodejs.org/en/about/previous-releases/.\n(node:23544) Warning: `--localstorage-file` was provided without a valid path\n(Use `node --trace-warnings ...` to show where the warning was created)\n(node:3508) Warning: `--localstorage-file` was provided without a valid path\n(Use `node --trace-warnings ...` to show where the warning was created)"
+        }
+      ],
+      "avisos": []
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "verdict": "approve",
+  "summary": "Revisión del diff contra 01-spec.md, que cubre los 8 criterios. Hay una fuente única de etiquetas con fallback al código, y los pipes se usan en las 5 pantallas. Las fechas quedan en dd/MM/yyyy HH:mm y dd/MM/yyyy, el visor se titula con el código (con fallback al UUID abreviado si la llamada falla), y los hashes y UUID se abrevian con el valor completo en el title. La bitácora ya no muestra el código crudo. Gates en verde: lint, tipos y 79 tests. Una búsqueda en los templates no encontró interpolaciones crudas de estados, tipos ni fechas. La revisión la hizo la misma sesión que implementó (motor anfitriona sin motores externos), así que no es independiente en sentido estricto.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "El título del visor trae el formulario completo sólo para leer el código",
+      "body": "EvidenceViewer llama a GET /visitas/{id}/formulario, que devuelve la visita con el esquema y las respuestas del formulario, sólo para mostrar visit.code. Es una respuesta más pesada que lo necesario. Para un OPERATOR el endpoint responde 403 y el título cae al UUID abreviado, que es lo previsto; el interceptor sólo actúa ante 401.",
+      "file": "src/app/pages/evidence-viewer/evidence-viewer.ts",
+      "line_start": 53,
+      "line_end": 60,
+      "confidence": 0.9,
+      "recommendation": "Si molesta, que el endpoint de evidencias o de manifiesto devuelva también el código de la visita, o que haya un GET /visitas/{id} liviano. No bloquea."
+    },
+    {
+      "severity": "low",
+      "title": "Auditoría sigue identificando la visita por UUID (abreviado), no por código",
+      "body": "El criterio de la tarea pide identificar las visitas por su código. En la bitácora el backend sólo manda entityId, así que se muestra el UUID abreviado con el valor completo en el tooltip. Está documentado como fuera de alcance en la spec.",
+      "file": "src/app/pages/auditoria/auditoria.html",
+      "line_start": 119,
+      "line_end": 122,
+      "confidence": 0.95,
+      "recommendation": "En una tarea aparte, que el backend incluya el código de la visita en AuditLogEntry cuando entityType es VISIT."
+    }
+  ],
+  "next_steps": []
+}
