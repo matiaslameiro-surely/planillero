@@ -58,19 +58,64 @@ function ultimaRevision(carpeta, repo) {
   return { revision: leerJson(ruta), archivo: archivos.at(-1) };
 }
 
-function motorDeRevision(estado, repo) {
-  const r = [...(estado.revisiones || [])].reverse().find((x) => x.repo === repo);
-  return r?.motor ?? 'desconocido';
+/**
+ * La entrada de `estado.json` que corresponde a la revisión que se va a publicar. Se cruza por
+ * `archivo` para no atribuirle a una revisión el motor de otra; las entradas cargadas a mano antes de
+ * que existiera ese campo no lo tienen, y para ellas vale la última del repo, como siempre.
+ */
+function entradaDeRevision(estado, repo, archivo) {
+  const delRepo = (estado.revisiones || []).filter((x) => x.repo === repo);
+  return delRepo.findLast((x) => x.archivo === archivo) ?? delRepo.at(-1) ?? null;
+}
+
+/**
+ * ¿Los hallazgos de la revisión describen el código que se está por publicar?
+ *
+ * Se compara el commit sobre el que corrió la revisión contra el HEAD de la rama. Lo que importa es si
+ * cambió el contenido, no el SHA: en el repo del harness los propios artefactos de la tarea (la revisión
+ * misma, `estado.json`) se commitean en la rama, y contarlos dejaría toda revisión «vieja» por definición.
+ *
+ * Devuelve `null` cuando no se puede saber (entradas sin SHA, de antes de este registro): el cuerpo se
+ * arma como siempre en vez de advertir de algo que no se comprobó.
+ */
+function estadoDeVigencia(dir, sha, { ignorarSpecs }) {
+  if (!sha) return null;
+  const git = (args) => {
+    const r = correr('git', args, { cwd: dir });
+    // Sólo stdout: `salida` mezcla stderr, y una advertencia de git se leería como un archivo cambiado.
+    return r.status === 0 ? (r.stdout || '').trim() : null;
+  };
+  const head = git(['rev-parse', 'HEAD']);
+  if (!head) return null;
+  if (head === sha) return { vigente: true, sha, head };
+
+  const pathspec = ['--', '.', ...(ignorarSpecs ? [':(exclude)specs'] : [])];
+  const archivos = git(['diff', '--name-only', sha, 'HEAD', ...pathspec]);
+  // Si git no conoce el SHA (rama reescrita) no se puede afirmar que sigue vigente: se advierte.
+  if (archivos === null) return { vigente: false, sha, head, motivo: 'sha_desconocido' };
+  const commits = Number(git(['rev-list', '--count', `${sha}..HEAD`]));
+  const cambiados = archivos ? archivos.split('\n').length : 0;
+  return {
+    vigente: cambiados === 0, sha, head,
+    commits: Number.isFinite(commits) ? commits : null, archivosCambiados: cambiados,
+  };
 }
 
 function construirCuerpo({ cfg, estado, carpeta, nombreRepo, spec, dependeDe }) {
+  const repoCfg = cfg.repos[nombreRepo];
   // Sin sitio configurado no inventamos una URL: mejor la clave sin link que un link roto.
   const sitio = cfg.jira?.sitio?.replace(/\/+$/, '') || null;
   const issue = estado.issue;
   const criterios = criteriosDeSpec(spec);
   const rev = ultimaRevision(carpeta, nombreRepo);
   const verificacion = leerJson(path.join(carpeta, '06-verificacion.json'));
-  const motor = motorDeRevision(estado, nombreRepo);
+  const entrada = entradaDeRevision(estado, nombreRepo, rev?.archivo);
+  const motor = entrada?.motor ?? 'desconocido';
+  // ruta "." es el repo del harness: sus artefactos de tarea (specs/) viajan en la misma rama.
+  const vigencia = estadoDeVigencia(path.join(RAIZ, repoCfg.ruta), entrada?.sha, {
+    ignorarSpecs: repoCfg.ruta === '.',
+  });
+  const revisionVieja = vigencia?.vigente === false;
 
   const lineas = [];
   lineas.push(sitio ? `**Issue:** [${issue}](${sitio}/browse/${issue})` : `**Issue:** ${issue}`);
@@ -107,9 +152,23 @@ function construirCuerpo({ cfg, estado, carpeta, nombreRepo, spec, dependeDe }) 
         'de modelo). Conviene mirar el diff con algo más de atención.'
       );
     }
+    if (revisionVieja) {
+      const corta = vigencia.sha.slice(0, 7);
+      const detalle = vigencia.motivo === 'sha_desconocido'
+        ? `sobre el commit \`${corta}\`, que ya no está en el historial de la rama`
+        : `sobre el commit \`${corta}\` y desde entonces la rama cambió ` +
+          `(${vigencia.archivosCambiados} archivo(s) en ${vigencia.commits ?? '?'} commit(s))`;
+      lineas.push(
+        '',
+        `> ⚠️ **Esta revisión es anterior al último cambio de la rama:** corrió ${detalle}. ` +
+        'Lo que sigue describe el código de ese momento y **puede estar ya corregido**.'
+      );
+    }
     const noBloqueantes = (rev.revision.findings || []).filter((f) => ['medium', 'low'].includes(f.severity));
     if (noBloqueantes.length) {
-      lineas.push('', '### Hallazgos no bloqueantes', '');
+      lineas.push('', revisionVieja
+        ? '### Hallazgos no bloqueantes de la revisión (pueden estar corregidos)'
+        : '### Hallazgos no bloqueantes', '');
       noBloqueantes.forEach((f) => lineas.push(`- **${f.severity}** · ${f.title} — \`${f.file}:${f.line_start}\``));
     }
 

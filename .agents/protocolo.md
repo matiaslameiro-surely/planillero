@@ -148,6 +148,12 @@ por el campo `motor`, nunca por el exit code:**
 
 En los dos casos el artefacto final es el mismo archivo con el mismo formato.
 
+**La revisión se registra sola.** Tanto el motor externo como `--guardar` agregan una entrada a
+`revisiones` en `estado.json` (`n`, `repo`, `motor`, `motivo`, `verdict`, `bloqueantes`, `archivo`, `sha`,
+`ts`). No hay que escribirla a mano: de ahí sale el motor que nombra el PR y lo que mide `informe.mjs`.
+`sha` es el commit sobre el que corrió la revisión, y es lo que permite saber en la fase 5 si sus hallazgos
+siguen vigentes. Con `--guardar` podés pasar `--motivo "<por qué anfitriona>"` para dejarlo asentado.
+
 **4.3 Qué hacer con los hallazgos**
 - Severidad en `revision.severidadesQueBloquean` (`critical`, `high`) → volvé a la fase 3 con esos
   hallazgos como entrada, e incrementá `iteracion`.
@@ -190,6 +196,10 @@ demostrar que no ocurre, tratá el hallazgo como real.
    `node .agents/scripts/pr.mjs --tarea PLAN-12`.
    - El cuerpo de cada PR lleva: link al issue, resumen de la spec, criterios de aceptación como
      checklist, hallazgos `medium`/`low`, y **qué motor hizo la revisión**.
+   - Si la revisión es **anterior al último cambio** de la rama (corrió sobre un commit y desde entonces
+     cambió el contenido), `pr.mjs` sigue listando sus hallazgos pero los encabeza con una advertencia:
+     pueden estar ya corregidos. No los des por vigentes ni los borres a mano: si querés que el PR los
+     presente como vigentes, corré la revisión de nuevo sobre el código final.
    - Si el alcance es `ambos`: el PR del frontend lleva `Depende de: <URL del PR de backend>`, y después
      se actualiza el del backend con el link inverso.
 3. **Preguntá de nuevo:** PRs creados, con sus URLs. ¿Transicionar el issue a **En revisión**?

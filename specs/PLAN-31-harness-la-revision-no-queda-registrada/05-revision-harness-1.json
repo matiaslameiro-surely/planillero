@@ -1,0 +1,19 @@
+{
+  "verdict": "needs-attention",
+  "summary": "El cambio cubre los dos defectos del issue y mantiene la compatibilidad con estados viejos, pero la extracción del número de revisión en registrarRevisionEnEstado usa una expresión regular sin escapar y no funciona.",
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "La regex que extrae el número de la revisión no está escapada y siempre da null",
+      "body": "En registrarRevisionEnEstado la expresión es /-(d+).json$/ en lugar de /-(\\d+)\\.json$/. Con un archivo 05-revision-harness-1.json no matchea: n queda en null en toda entrada registrada. Incumple el criterio de aceptación 1 (la entrada debe tener n) y deja sin sentido la afirmación de que entrada y archivo se cruzan por n. El registro no se rompe porque la deduplicación y pr.mjs usan archivo, y por eso no salta ningún error.",
+      "file": ".agents/scripts/lib/revision.mjs",
+      "line_start": 76,
+      "line_end": 76,
+      "confidence": 0.98,
+      "recommendation": "Escapar la expresión: /-(\\d+)\\.json$/. Verificar con --guardar que n queda como entero."
+    }
+  ],
+  "next_steps": [
+    "Corregir la regex de registrarRevisionEnEstado y verificar con --guardar que n queda como entero."
+  ]
+}

@@ -31,6 +31,19 @@
     "Varios repos pueden compartir número: son independientes entre sí."
   ],
   "repos": {
+    "harness": {
+      "$comentario": [
+        "El propio repo del harness es un repo mas del alcance: una tarea puede tocar los scripts,",
+        "el protocolo o las plantillas. Va con orden 0 porque no depende de ningun contrato de API,",
+        "y sin bloque de verificacion porque no tiene toolchain propio (los gates dan 'sin_gates')."
+      ],
+      "ruta": ".",
+      "url": "https://github.com/matiaslameiro-surely/planillero.git",
+      "ramaBase": "main",
+      "tipo": "harness",
+      "orden": 0,
+      "descripcion": "El andamiaje SDD: protocolo, scripts, plantillas y specs"
+    },
     "backend": {
       "ruta": "backend",
       "url": "https://github.com/matiaslameiro-surely/planillero-backend.git",

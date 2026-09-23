@@ -1,0 +1,89 @@
+{
+  "issue": "PLAN-31",
+  "titulo": "Harness: la revision no queda registrada en estado.json y el cuerpo del PR puede listar hallazgos ya corregidos",
+  "slug": "harness-la-revision-no-queda-registrada",
+  "rama": "PLAN-31-harness-la-revision-no-queda-registrada",
+  "alcance": [
+    "harness"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-23T18:40:12.115Z",
+      "nota": "Rama creada desde origin/main; harness sumado a workspace.json como repo"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-23T18:40:52.309Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-23T18:45:53.322Z",
+      "nota": "Aprobado por el usuario en el checkpoint"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-23T18:48:01.845Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-23T18:50:25.552Z",
+      "nota": "Ronda 1: 1 medium (regex), reproducido y corregido. Ronda 2: approve. Motor anfitriona: codex sin cuota hasta 2026-10-15",
+      "iteracion": 2
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-23T18:53:19.112Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-23T18:53:19.178Z"
+    }
+  },
+  "commits": {
+    "harness": "c7c9b4d, bacdc2f, 8e433cb"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "harness",
+      "motor": "anfitriona",
+      "motivo": "codex sin cuota hasta el 2026-10-15",
+      "verdict": "needs-attention",
+      "bloqueantes": 0,
+      "archivo": "05-revision-harness-1.json",
+      "sha": "c7c9b4db82fe46751974acf2f991ca60b3e0bed6",
+      "ts": "2026-09-23T18:49:22.625Z"
+    },
+    {
+      "n": 2,
+      "repo": "harness",
+      "motor": "anfitriona",
+      "motivo": "codex sin cuota hasta el 2026-10-15",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-harness-2.json",
+      "sha": "8e433cb1ac2d5013748c1f9b3f78fad0179a8ff4",
+      "ts": "2026-09-23T18:50:15.223Z"
+    }
+  ],
+  "pr": {
+    "harness": "https://github.com/matiaslameiro-surely/planillero/pull/1",
+    "atendido": {
+      "revision": "federicomoron-surely CHANGES_REQUESTED",
+      "cambio": "guardia-push.mjs saltea tipo harness (opcion A)",
+      "commit": "8259ca9"
+    }
+  },
+  "jira": {
+    "transicionadoA": "En revisión",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "claude-opus-5 (fases 0-2), claude-sonnet-5 (desde la fase 3)",
+    "ts": "2026-09-23T18:39:53.016Z",
+    "fin": "2026-09-23T18:53:19.113Z"
+  }
+}

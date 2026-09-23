@@ -17,7 +17,9 @@ import {
   RAIZ, RUTA_CACHE, cargarConfig, leerJson, escribirJson, parsearArgs, emitir,
 } from './lib/config.mjs';
 import { lanzar, matarArbol } from './lib/proceso.mjs';
-import { validarRevision, construirPrompt, recortarDiff, hallazgosBloqueantes } from './lib/revision.mjs';
+import {
+  validarRevision, construirPrompt, recortarDiff, hallazgosBloqueantes, registrarRevisionEnEstado,
+} from './lib/revision.mjs';
 
 const RUTA_ESQUEMA = path.join(RAIZ, '.agents', 'schemas', 'revision.schema.json');
 const ARCHIVO_CACHE = path.join(RUTA_CACHE, 'motores.json');
@@ -195,6 +197,11 @@ function git(dir, args) {
   return r.status === 0 ? (r.stdout || '') : null;
 }
 
+/** El commit sobre el que corre la revisión: sin él no se puede saber si los hallazgos siguen vigentes. */
+function shaDeHead(dir) {
+  return git(dir, ['rev-parse', 'HEAD'])?.trim() || null;
+}
+
 function carpetaDeTarea(issue) {
   const dirSpecs = path.join(RAIZ, 'specs');
   if (!existsSync(dirSpecs)) return null;
@@ -237,10 +244,16 @@ async function main() {
     }
     const destino = siguienteArchivoRevision(carpeta, nombreRepo);
     escribirJson(destino, revision);
+    const bloqueantes = hallazgosBloqueantes(revision, cfg.revision.severidadesQueBloquean).length;
+    const registrada = registrarRevisionEnEstado({
+      carpeta, repo: nombreRepo, archivo: destino, motor: 'anfitriona',
+      motivo: typeof args.motivo === 'string' ? args.motivo : null,
+      revision, bloqueantes, sha: shaDeHead(repoDir),
+    });
     return emitir({
       ok: true, motor: 'anfitriona', guardado: path.relative(RAIZ, destino),
-      bloqueantes: hallazgosBloqueantes(revision, cfg.revision.severidadesQueBloquean).length,
-      revision,
+      bloqueantes, registrada, revision,
+      ...(registrada ? {} : { aviso: 'La tarea no tiene estado.json: la revisión se guardó pero no quedó registrada.' }),
     });
   }
 
@@ -317,12 +330,16 @@ async function main() {
     const usoPct = revisarUsoAlto(motor, r.eventos);
     const destino = siguienteArchivoRevision(carpeta, nombreRepo);
     escribirJson(destino, revision);
+    const bloqueantes = hallazgosBloqueantes(revision, cfg.revision.severidadesQueBloquean).length;
+    const registrada = registrarRevisionEnEstado({
+      carpeta, repo: nombreRepo, archivo: destino, motor, motivo: null,
+      revision, bloqueantes, sha: shaDeHead(repoDir),
+    });
     return emitir({
       ok: true, motor, motivo: null, intentos,
       archivo: path.relative(RAIZ, destino),
       diffRecortado: recortado, usoPct,
-      bloqueantes: hallazgosBloqueantes(revision, cfg.revision.severidadesQueBloquean).length,
-      revision,
+      bloqueantes, registrada, revision,
     });
   }
 
