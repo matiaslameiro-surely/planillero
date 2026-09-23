@@ -82,7 +82,8 @@ function estadoDeVigencia(dir, sha, { ignorarSpecs }) {
   if (!sha) return null;
   const git = (args) => {
     const r = correr('git', args, { cwd: dir });
-    return r.status === 0 ? r.salida.trim() : null;
+    // Sólo stdout: `salida` mezcla stderr, y una advertencia de git se leería como un archivo cambiado.
+    return r.status === 0 ? (r.stdout || '').trim() : null;
   };
   const head = git(['rev-parse', 'HEAD']);
   if (!head) return null;
