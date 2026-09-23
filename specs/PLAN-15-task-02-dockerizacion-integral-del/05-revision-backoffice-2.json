@@ -1,0 +1,17 @@
+{
+  "verdict": "approve",
+  "summary": "Revisión con contexto limpio de Dockerfile, nginx.conf, páginas de error y configuración `docker` de Angular contra los criterios 6 a 10. Cumple: multi-stage, NGINX sin privilegios, headers de seguridad con `always`, páginas 404/502/503 propias, proxy en mismo origen con resolución DNS dinámica y CSP coherente con los tiles de OpenStreetMap que usa el código.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "Headers de seguridad duplicados en /api cuando se mergee PLAN-17",
+      "body": "NGINX agrega CSP, HSTS y X-Frame-Options a todas las respuestas, incluidas las proxyadas. PLAN-17 (backend #13) hace que Spring también los emita, así que las respuestas de /api llevarían cada header dos veces. En JSON no tiene efecto práctico, pero `X-Frame-Options: DENY, DENY` es inválido y ensucia la auditoría. Ya estaba anotado como low en la revisión anterior.",
+      "file": "docker/nginx.conf",
+      "line_start": 69,
+      "line_end": 82,
+      "confidence": 0.8,
+      "recommendation": "Después de mergear PLAN-17, agregar `proxy_hide_header` para esos headers en los location del proxy, o dejar que los emita uno solo de los dos."
+    }
+  ],
+  "next_steps": []
+}

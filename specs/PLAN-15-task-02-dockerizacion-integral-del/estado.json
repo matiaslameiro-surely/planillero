@@ -1,0 +1,68 @@
+{
+  "issue": "PLAN-15",
+  "titulo": "TASK-02: Dockerización Integral del Ecosistema y Orquestación de Entornos",
+  "slug": "task-02-dockerizacion-integral-del",
+  "rama": "PLAN-15-task-02-dockerizacion-integral-del",
+  "alcance": [
+    "backend",
+    "backoffice",
+    "frontend"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-21T20:24:52.252Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-21T20:24:52.423Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-21T20:55:02.185Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-21T22:02:59.503Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-21T22:11:11.598Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-21T22:22:16.386Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-21T22:22:16.453Z"
+    }
+  },
+  "commits": {
+    "backend": "3bdc2629678782f9a4f9e61929476949c34b092a",
+    "backoffice": "b324f029e8cbbb16bcb2d8d71833dc6dcfc237cd",
+    "frontend": "474279235d31dcc14b7781f303c0db972ab7296a",
+    "backoffice_2": "c581bf9df23be0184b492195587a7fb84e93e013"
+  },
+  "revisiones": [],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "Claude Sonnet 5",
+    "ts": "2026-09-21T20:23:14.473Z",
+    "fin": "2026-09-21T22:22:16.387Z"
+  },
+  "nota": {
+    "checkpoint_plan": "Esperando aprobación del plan (22 archivos > límite 12; supuestos RIESGO). Jira sin leer por bloqueo de IP del MCP: spec basada en docs/BACKLOG_PLANILLERO.md; transición a En curso pendiente."
+  },
+  "prs": {
+    "backend": "https://github.com/matiaslameiro-surely/planillero-backend/pull/12",
+    "backoffice": "https://github.com/matiaslameiro-surely/planillero-backoffice/pull/9",
+    "frontend": "https://github.com/matiaslameiro-surely/planillero-frontend/pull/9"
+  }
+}

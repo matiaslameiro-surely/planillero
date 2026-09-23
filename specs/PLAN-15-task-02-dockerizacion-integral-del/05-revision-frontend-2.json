@@ -1,0 +1,30 @@
+{
+  "verdict": "needs-attention",
+  "summary": "Revisión con contexto limpio (sesión distinta de la que implementó) de Dockerfile.apk y build-apk.sh contra el criterio 13. El APK se construye, pero muy probablemente no pueda hablar con un backend por HTTP, que es justo el uso que documenta el README.",
+  "findings": [
+    {
+      "severity": "high",
+      "title": "El APK de release bloquea HTTP en claro y no llegaría al backend en http://IP:8080",
+      "body": "El Dockerfile compila con `assembleRelease`. En los proyectos que genera `expo prebuild`, `android:usesCleartextTraffic=\"true\"` está sólo en el manifest de debug. En release, con targetSdk ≥ 28, Android bloquea el tráfico HTTP sin TLS. El README y el script indican `sh scripts/build-apk.sh http://192.168.0.10:8080`, y el compose sirve el backend por HTTP, así que el login en la tablet fallaría con «Network request failed». `app.json` no configura `expo-build-properties` ni ningún plugin que lo habilite. La verificación de la tarea comprobó que el APK se genera (124 MB), no que se instale y hable con el backend.",
+      "file": "docker/Dockerfile.apk",
+      "line_start": 56,
+      "line_end": 59,
+      "confidence": 0.75,
+      "recommendation": "Para un APK de prueba, compilar con `assembleDebug` (ya permite HTTP en claro), o agregar el plugin `expo-build-properties` con `android.usesCleartextTraffic: true`. Validar instalando el APK en un emulador o tablet y haciendo login contra el compose."
+    },
+    {
+      "severity": "medium",
+      "title": "JAVA_HOME fijado a amd64: el build falla en hosts arm64",
+      "body": "Ya estaba en la revisión anterior y sigue sin resolver. En un Mac con Apple Silicon la imagen base se baja como arm64, y ni `java-17-openjdk-amd64` ni las herramientas nativas del SDK existen para esa arquitectura.",
+      "file": "docker/Dockerfile.apk",
+      "line_start": 17,
+      "line_end": 20,
+      "confidence": 0.7,
+      "recommendation": "`FROM --platform=linux/amd64 node:24-bookworm-slim AS build` y una nota en el README sobre la emulación."
+    }
+  ],
+  "next_steps": [
+    "Hacer que el APK de prueba acepte HTTP (assembleDebug o expo-build-properties) y probarlo instalado contra el compose.",
+    "Fijar --platform=linux/amd64 en el Dockerfile.apk."
+  ]
+}

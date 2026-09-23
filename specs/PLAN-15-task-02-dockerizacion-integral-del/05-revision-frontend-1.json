@@ -1,0 +1,47 @@
+{
+  "verdict": "approve",
+  "summary": "Dockerfile.apk y build-apk.sh revisados contra la spec (criterio 13): se ejecutó un build real que produjo un APK de 124 MB con la URL del backend dentro. Sin hallazgos críticos ni altos. El lint del frontend falla en 2 archivos de PLAN-13 que este diff no toca (ver 06-verificacion-frontend-lint-preexistente.md). Revisión del motor anfitrión hecha por la misma sesión que implementó, por lo que no es independiente en sentido estricto.",
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "El Dockerfile del APK asume una arquitectura amd64 y falla probablemente en hosts arm64",
+      "body": "JAVA_HOME apunta a `java-17-openjdk-amd64`, y las herramientas nativas del Android SDK (aapt2, NDK) para Linux sólo existen para x86_64. En un Mac con Apple Silicon, `docker build` usa por defecto la imagen arm64 de node y el build fallaría. No se probó en arm64: se verificó sólo en amd64.",
+      "file": "docker/Dockerfile.apk",
+      "line_start": 17,
+      "line_end": 20,
+      "confidence": 0.6,
+      "recommendation": "Fijar la plataforma con `FROM --platform=linux/amd64 node:24-bookworm-slim` (Docker la emula en Apple Silicon) y aclararlo en el README."
+    },
+    {
+      "severity": "low",
+      "title": "El zip de las herramientas del Android SDK se descarga sin verificar su checksum",
+      "body": "El Dockerfile hace `curl` a dl.google.com y descomprime sin comparar un SHA-256. Si la descarga se corrompe o se intercepta, el build usaría binarios no verificados (OWASP A08).",
+      "file": "docker/Dockerfile.apk",
+      "line_start": 34,
+      "line_end": 34,
+      "confidence": 0.6,
+      "recommendation": "Agregar `echo \"<sha256>  /tmp/cmdline-tools.zip\" | sha256sum -c -` con el hash publicado por Google para la versión fijada."
+    },
+    {
+      "severity": "low",
+      "title": "El build compila las cuatro ABIs y tarda unos 43 minutos",
+      "body": "Las tablets objetivo son Android modernas (arm64-v8a) y el APK resultante pesa 124 MB por incluir arm64-v8a, armeabi-v7a, x86 y x86_64. Es el grueso del tiempo de compilación C++.",
+      "file": "docker/Dockerfile.apk",
+      "line_start": 58,
+      "line_end": 58,
+      "confidence": 0.8,
+      "recommendation": "Agregar un ARG opcional (por ejemplo ANDROID_ARCHS=arm64-v8a) que pase `-PreactNativeArchitectures` a Gradle, para builds de prueba mucho más cortos."
+    },
+    {
+      "severity": "low",
+      "title": "El APK sale firmado con la clave de debug",
+      "body": "Es lo que genera `expo prebuild` sin configuración de firma. Sirve para instalar en equipos de prueba, no para publicar ni para distribuir a usuarios. Está documentado en el Dockerfile, el script y el README.",
+      "file": "docker/Dockerfile.apk",
+      "line_start": 58,
+      "line_end": 58,
+      "confidence": 0.9,
+      "recommendation": "Sin acción en esta tarea (el keystore de release está fuera de alcance); requiere una tarea propia antes de distribuir."
+    }
+  ],
+  "next_steps": []
+}

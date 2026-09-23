@@ -1,0 +1,57 @@
+{
+  "verdict": "approve",
+  "summary": "Dockerfile, nginx.conf, páginas de error y configuración de build `docker` revisados contra la spec: cumplen los criterios 6-10 (salvo el 503, que no se puede probar de punta a punta) y se verificaron ejecutando el entorno. Sin hallazgos críticos ni altos. Revisión del motor anfitrión hecha por la misma sesión que implementó, por lo que no es independiente en sentido estricto.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "El resolver de DNS está fijo a 127.0.0.11, el DNS interno de Docker",
+      "body": "Fuera de Docker Compose (por ejemplo Kubernetes) esa dirección no resuelve, y como `proxy_pass` usa una variable, cada petición a /api, /salud y /health devolvería 502. Hoy el único destino es Compose, así que no falla, pero la imagen no es portable.",
+      "file": "docker/nginx.conf",
+      "line_start": 54,
+      "line_end": 54,
+      "confidence": 0.7,
+      "recommendation": "Si se va a desplegar fuera de Compose, pasar el resolver y el host del backend por variables usando el mecanismo de plantillas de la imagen nginx-unprivileged (/etc/nginx/templates)."
+    },
+    {
+      "severity": "low",
+      "title": "Posibles headers de seguridad duplicados en las respuestas proxyadas de la API",
+      "body": "NGINX agrega X-Frame-Options, X-Content-Type-Options y HSTS a todo, y el backend (Spring Security) suele emitir los suyos. Un X-Frame-Options repetido con el mismo valor puede interpretarse como inválido en algunos navegadores. No se verificó contra el backend real.",
+      "file": "docker/nginx.conf",
+      "line_start": 69,
+      "line_end": 72,
+      "confidence": 0.4,
+      "recommendation": "Comprobar con `curl -i` sobre /api/... y, si hay duplicados, usar `proxy_hide_header` para esos headers en los location del proxy."
+    },
+    {
+      "severity": "low",
+      "title": "`expires 1y` también alcanza a archivos sin hash en el nombre",
+      "body": "La regla de estáticos cachea por un año todo lo que tiene extensión, incluido favicon.ico, que no lleva hash. Un cambio de favicon tardaría hasta un año en verse en navegadores que ya lo cachearon.",
+      "file": "docker/nginx.conf",
+      "line_start": 89,
+      "line_end": 89,
+      "confidence": 0.6,
+      "recommendation": "Limitar el año de caché a los bundles con hash (`*-XXXXXXXX.js|css`) y dar una caché corta al resto."
+    },
+    {
+      "severity": "low",
+      "title": "La CSP permite estilos inline (`style-src 'unsafe-inline'`)",
+      "body": "Angular inyecta <style> por componente en tiempo de ejecución y Leaflet aplica estilos inline, por lo que sin esto la interfaz se rompe. Es una concesión conocida que debilita la CSP frente a inyección de estilos.",
+      "file": "docker/nginx.conf",
+      "line_start": 34,
+      "line_end": 34,
+      "confidence": 0.5,
+      "recommendation": "Evaluar CSP con nonce (`ngCspNonce`) cuando el backoffice deje de depender de estilos inline."
+    },
+    {
+      "severity": "low",
+      "title": "El límite de 25 MB de cuerpo es una suposición sin contrastar con el backend",
+      "body": "client_max_body_size 25m se eligió pensando en fotos y actas, pero el límite real de subida lo define el backend (multipart de Spring). Si el backend acepta menos, el tope de NGINX no tiene efecto; si acepta más, NGINX rechaza con 413 antes de que llegue.",
+      "file": "docker/nginx.conf",
+      "line_start": 57,
+      "line_end": 57,
+      "confidence": 0.5,
+      "recommendation": "Alinear con `spring.servlet.multipart.max-file-size` / `max-request-size` del backend."
+    }
+  ],
+  "next_steps": []
+}

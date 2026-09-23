@@ -1,0 +1,10 @@
+{
+  "key": "PLAN-15",
+  "summary": "TASK-02: Dockerización Integral del Ecosistema y Orquestación de Entornos",
+  "issueType": "Tarea",
+  "status": "Por hacer",
+  "assignee": "Federico Morón",
+  "url": "https://surely-sa.atlassian.net/browse/PLAN-15",
+  "description": "Dockerizar todo el proyecto para el MVP (Backend Spring Boot, Frontend Web Angular, servicios PostgreSQL y MinIO) en un entorno reproducible y aislado.\n\nAlcance Fullstack:\n- Backend: Dockerfile multi-stage build para Spring Boot (Java 21 Distroless/Alpine).\n- Frontend: Dockerfile multi-stage para Angular compilado y servido por NGINX Alpine con Gzip y headers de seguridad.\n- Docker Compose: docker-compose.yml integrando PostgreSQL con volúmenes persistentes, MinIO y red interna planillero-net.\n- Testing: Script de healthcheck automatizado que levanta el compose y valida estado healthy con curl.\n\nEvaluación UX/UI:\n- Heurística 5 y 9: Páginas de error HTTP 404, 502 y 503 personalizadas y amigables en NGINX.\n\nEvaluación Ciberseguridad:\n- OWASP A06: Contenedores ejecutados como non-root; archivo .env estrictamente ignorado en git; CSP, HSTS, X-Frame-Options: DENY.",
+  "$nota": "Leído de Jira recién en la fase 3, después de la aprobación del plan (antes el MCP bloqueaba por IP). Coincide con la spec salvo que la descripción del issue NO menciona el APK de la app móvil; sí lo menciona docs/BACKLOG_PLANILLERO.md (TAREA 02). El plan se aprobó con el APK incluido."
+}
