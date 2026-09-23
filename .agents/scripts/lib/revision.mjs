@@ -73,7 +73,7 @@ export function registrarRevisionEnEstado({ carpeta, repo, archivo, motor, motiv
   const estado = leerJson(rutaEstado);
   if (!estado) return null;
 
-  const n = Number(path.basename(archivo).match(/-(d+).json$/)?.[1]);
+  const n = Number(path.basename(archivo).match(/-(\d+)\.json$/)?.[1]);
   const entrada = {
     n: Number.isInteger(n) ? n : null,
     repo,

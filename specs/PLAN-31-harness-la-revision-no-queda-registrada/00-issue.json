@@ -1,0 +1,14 @@
+{
+  "key": "PLAN-31",
+  "id": "10095",
+  "tipo": "Tarea",
+  "prioridad": "Low",
+  "estado": "Por hacer",
+  "asignada": "Matías Lameiro",
+  "titulo": "Harness: la revisión no queda registrada en estado.json y el cuerpo del PR puede listar hallazgos ya corregidos",
+  "url": "https://surely-sa.atlassian.net/browse/PLAN-31",
+  "seleccion": {
+    "motivo": "Es la única asignada a vos en el sprint activo.",
+    "jql": "project = PLAN AND statusCategory = \"To Do\" AND sprint IN openSprints() ORDER BY priority DESC, created ASC"
+  }
+}
