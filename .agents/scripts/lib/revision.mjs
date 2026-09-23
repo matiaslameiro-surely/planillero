@@ -2,6 +2,8 @@
 // Separado de revisar.mjs para poder probarlo solo.
 
 import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import { leerJson, escribirJson } from './config.mjs';
 
 /**
  * Validación estructural contra revision.schema.json.
@@ -49,6 +51,45 @@ export function validarRevision(obj) {
 
 export function hallazgosBloqueantes(revision, severidades) {
   return (revision?.findings || []).filter((f) => severidades.includes(f.severity));
+}
+
+/**
+ * Deja constancia en `estado.json` de una revisión ya guardada. Es el único lugar que conoce la forma
+ * de la entrada: `revisar.mjs` lo llama desde sus dos caminos de éxito (motor externo y `--guardar`),
+ * y `pr.mjs` e `informe.mjs` la leen. Que el registro viva acá y no repetido en cada camino es lo que
+ * evita que un camino nuevo lo vuelva a olvidar.
+ *
+ * `sha` es el commit sobre el que corrió la revisión: permite saber después si los hallazgos siguen
+ * describiendo el código o describen una foto vieja.
+ *
+ * La `n` sale del nombre del archivo (`05-revision-<repo>-<n>.json`), así entrada y archivo se cruzan.
+ * Registrar dos veces el mismo archivo reemplaza la entrada en vez de duplicarla.
+ *
+ * Devuelve la entrada, o `null` si la tarea no tiene `estado.json`: registrar es un efecto deseable
+ * de guardar la revisión, no la razón de hacerlo, así que su ausencia no rompe el comando.
+ */
+export function registrarRevisionEnEstado({ carpeta, repo, archivo, motor, motivo = null, revision, bloqueantes, sha = null }) {
+  const rutaEstado = path.join(carpeta, 'estado.json');
+  const estado = leerJson(rutaEstado);
+  if (!estado) return null;
+
+  const n = Number(path.basename(archivo).match(/-(d+).json$/)?.[1]);
+  const entrada = {
+    n: Number.isInteger(n) ? n : null,
+    repo,
+    motor,
+    motivo,
+    verdict: revision.verdict,
+    bloqueantes,
+    archivo: path.basename(archivo),
+    sha,
+    ts: new Date().toISOString(),
+  };
+
+  const previas = (estado.revisiones || []).filter((r) => !(r.repo === repo && r.archivo === entrada.archivo));
+  estado.revisiones = [...previas, entrada];
+  escribirJson(rutaEstado, estado);
+  return entrada;
 }
 
 const MAX_DIFF = 200_000; // más que esto no mejora la revisión y sí arruina el contexto

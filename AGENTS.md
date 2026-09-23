@@ -27,6 +27,11 @@ Las tres están en `.gitignore`: son repos independientes con su propio historia
 El alcance de una tarea puede ser cualquier combinación de los tres. Los repos y su orden salen de
 `workspace.json`, así que sumar uno nuevo no requiere tocar ningún script.
 
+**El propio harness también es un repo del alcance** (`harness`, ruta `.`): una tarea puede tocar los
+scripts, el protocolo o las plantillas. Se trabaja igual que en los otros: rama `PLAN-<n>-<slug>`, commits
+con el prefijo, revisión independiente y PR contra `main`. Sus artefactos (`specs/`) viajan en esa misma
+rama. No tiene gates propios: `verificar.mjs` responde `sin_gates`.
+
 ## Regla de oro: agnóstico de herramienta
 
 Lo van a usar varios desarrolladores, **cada uno con la IA que prefiera**. Por eso:
