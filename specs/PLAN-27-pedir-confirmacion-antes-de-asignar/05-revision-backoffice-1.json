@@ -1,0 +1,72 @@
+{
+  "verdict": "needs-attention",
+  "summary": "Los cinco criterios de aceptación están cubiertos: no queda ningún camino hacia `assign()` que saltee la confirmación, el desplegable arranca vacío con ambos botones deshabilitados, el `min` y la advertencia de fecha pasada están, y el modal de evidencias gana foco inicial, trampa de Tab, Escape y retorno de foco vía la nueva directiva `FocusTrap`. Hay una prueba que compara fecha local contra fecha UTC y va a poner el gate en rojo parte del día, y el retorno de foco de la confirmación se pierde al confirmar porque el botón disparador queda deshabilitado justo antes de destruirse el diálogo.",
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "El test del `min` compara la fecha local del componente contra la fecha UTC y falla todas las noches",
+      "body": "`minDate` se calcula con `todayIso()`, que usa el reloj local (`getFullYear/getMonth/getDate`). El test lo compara contra `new Date().toISOString().slice(0, 10)`, que es la fecha en UTC. En la zona de trabajo (America/Buenos_Aires, UTC-3) entre las 21:00 y las 23:59 locales el UTC ya es el día siguiente, así que `getAttribute('min')` devuelve `2026-09-23` y el esperado es `2026-09-24`: el test falla. No es azar, es una ventana fija de tres horas por día, y no hay TZ fijada en la config de test (no existe vitest.config ni `TZ` en package.json/angular.json), así que depende del reloj de quien corra el gate. Además el test asegura lo contrario de lo que el criterio 3 pide: verifica el piso en UTC, no en el día del supervisor.",
+      "file": "src/app/pages/planificacion/planificacion.spec.ts",
+      "line_start": 255,
+      "line_end": 259,
+      "confidence": 0.92,
+      "recommendation": "Comparar contra la misma fecha local que usa el componente (recrear el `YYYY-MM-DD` con `getFullYear`/`getMonth`/`getDate`, o congelar el reloj con `vi.setSystemTime()` y afirmar un valor fijo). Congelarlo además hace determinístico el par de tests de fecha pasada/fecha de hoy."
+    },
+    {
+      "severity": "medium",
+      "title": "Al confirmar la asignación el foco no vuelve al botón que abrió el diálogo: se pierde en el `body`",
+      "body": "`confirmAssignment()` pone `pendingAssignment` en `null` y acto seguido `assign()` hace `assigning.set(true)`, todo en el mismo tick. En la detección de cambios siguiente el template se actualiza en orden de documento: primero el botón «Asignar seleccionadas» (línea 59 de planificacion.html) y el «Asignar» de la fila (línea 121) pasan a `disabled` porque dependen de `assigning()`, y recién después se destruye el bloque `@if (pendingAssignment())`. Cuando corre `ngOnDestroy` de `FocusTrap`, `previouslyFocused` ya es un botón deshabilitado y `focus()` es un no-op: el foco cae al `body`. Escenario concreto: un supervisor que navega con teclado marca visitas, abre la confirmación con Enter sobre «Asignar seleccionadas (3)», confirma, y al terminar la llamada queda con el foco al principio del documento, teniendo que tabular toda la pantalla de nuevo. Por Cancelar el retorno sí funciona (ahí `assigning()` sigue en false), y por eso los tests no lo detectan. El criterio 4 habla sólo del visor de evidencias, así que no incumple un criterio explícito, pero es la misma clase de defecto de foco que la tarea vino a arreglar.",
+      "file": "src/app/shared/directives/focus-trap.ts",
+      "line_start": 71,
+      "line_end": 73,
+      "confidence": 0.7,
+      "recommendation": "En `ngOnDestroy`, restaurar el foco de forma diferida y verificando que el elemento siga siendo enfocable (por ejemplo, comprobar que sigue conectado y no `disabled` antes de llamar a `focus()`, y si no lo está, caer a un contenedor razonable de la pantalla). Agregar un test que confirme la asignación y afirme dónde quedó `document.activeElement`."
+    },
+    {
+      "severity": "low",
+      "title": "El test de Escape del visor no prueba «desde cualquier punto de su contenido»",
+      "body": "El test se llama «Escape cierra el modal desde cualquier punto de su contenido», pero dispara el `keydown` sobre `document.activeElement`, que en ese momento es el propio `.close-btn` del encabezado —el elemento con `data-focus-initial`—. Es decir, prueba Escape desde un hijo directo del header, no desde un descendiente profundo del contenido, que es justo el escenario del hallazgo H15 (el modal se abre desde una tarjeta de atrás y el foco puede estar en cualquier parte). El burbujeo hace que funcione igual, pero el test no cubre lo que su nombre promete.",
+      "file": "src/app/pages/evidence-viewer/evidence-viewer.spec.ts",
+      "line_start": 80,
+      "line_end": 89,
+      "confidence": 0.8,
+      "recommendation": "Disparar el `keydown` desde un nodo profundo del panel (por ejemplo `.evidence-metadata-panel code` o el `img`) para que el test verifique realmente el burbujeo desde el contenido."
+    },
+    {
+      "severity": "low",
+      "title": "`[disabled]=\"assigning()\"` en el botón «Asignar» del diálogo es código muerto",
+      "body": "El diálogo se cierra (`pendingAssignment` a `null`) en la misma llamada en que `assigning()` pasa a `true`, así que ese botón nunca llega a renderizarse deshabilitado. No hace daño, pero sugiere una protección contra doble envío que en realidad no existe en ese punto (la protección real es que el panel desaparece al primer clic).",
+      "file": "src/app/pages/planificacion/planificacion.html",
+      "line_start": 202,
+      "line_end": 208,
+      "confidence": 0.75,
+      "recommendation": "Quitar el binding, o —si se quiere mantener el panel abierto mientras se asigna— cerrar el panel recién en el `next`/`error` de la suscripción y entonces el `disabled` pasa a tener sentido."
+    },
+    {
+      "severity": "low",
+      "title": "El spec de la directiva rompe la convención de ubicación del repo",
+      "body": "Todos los specs del backoffice están colocados junto al archivo que prueban (`planificacion.spec.ts` al lado de `planificacion.ts`, etc.). Este es el único que vive en un subdirectorio `__tests__/`, y `src/app/shared/` se estrena con esa excepción, que después se copia.",
+      "file": "src/app/shared/directives/__tests__/focus-trap.spec.ts",
+      "line_start": 1,
+      "line_end": 1,
+      "confidence": 0.85,
+      "recommendation": "Mover el archivo a `src/app/shared/directives/focus-trap.spec.ts`."
+    },
+    {
+      "severity": "low",
+      "title": "`minDate` se congela al construir el componente",
+      "body": "`minDate` es un campo calculado una sola vez en la construcción. La pantalla de planificación es de las que quedan abiertas: pasada la medianoche el `min` sigue apuntando al día anterior y el calendario vuelve a ofrecer una fecha ya vencida. La advertencia del criterio 3 sí se recalcula (`isPastDate` llama a `todayIso()` en cada evaluación), así que el riesgo real está contenido, pero el `min` queda mintiendo.",
+      "file": "src/app/pages/planificacion/planificacion.ts",
+      "line_start": 102,
+      "line_end": 109,
+      "confidence": 0.6,
+      "recommendation": "Si se quiere cerrar del todo, convertirlo en un getter o recalcularlo en `onDateChange`; el comentario ya reconoce la limitación, así que alcanza con dejarla asumida de forma explícita en el plan si se decide no tocarlo."
+    }
+  ],
+  "next_steps": [
+    "Arreglar la comparación de fechas del test del `min` (local contra local, o reloj congelado con `vi.setSystemTime`), que hoy pone el gate en rojo entre las 21:00 y la medianoche.",
+    "Hacer que el retorno de foco de `FocusTrap` tolere que el disparador quede deshabilitado al cerrarse el diálogo, y cubrirlo con un test sobre el camino de confirmar.",
+    "Disparar el Escape del test del visor desde un nodo profundo del contenido, para que el test pruebe lo que su nombre dice.",
+    "Mover `focus-trap.spec.ts` junto a la directiva y quitar el `[disabled]` muerto del botón de confirmar."
+  ]
+}

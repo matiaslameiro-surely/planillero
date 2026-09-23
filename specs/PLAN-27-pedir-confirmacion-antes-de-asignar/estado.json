@@ -1,0 +1,57 @@
+{
+  "issue": "PLAN-27",
+  "titulo": "Pedir confirmación antes de asignar trabajo a un operador, y no preseleccionar el destinatario",
+  "slug": "pedir-confirmacion-antes-de-asignar",
+  "rama": "PLAN-27-pedir-confirmacion-antes-de-asignar",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-23T13:06:20.446Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-23T13:06:20.505Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-23T13:08:21.473Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-23T13:22:00.346Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-23T13:30:09.115Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-23T14:15:59.843Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-23T14:15:59.902Z"
+    }
+  },
+  "commits": {
+    "backoffice": "c7e4cde,52dfb2c"
+  },
+  "revisiones": [],
+  "pr": {
+    "backoffice": "https://github.com/matiaslameiro-surely/planillero-backoffice/pull/18"
+  },
+  "jira": {
+    "transicionadoA": "En revisión",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "Claude Opus 5",
+    "ts": "2026-09-23T13:05:12.033Z",
+    "fin": "2026-09-23T14:15:59.843Z"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "ok": true,
+  "tarea": "PLAN-27",
+  "ts": "2026-09-23T13:29:43.766Z",
+  "repos": [
+    {
+      "repo": "backoffice",
+      "ok": true,
+      "herramienta": "npm",
+      "pasos": [
+        {
+          "nombre": "lint",
+          "cmd": "npm run lint",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 2058,
+          "salida": "\n> planillero-backoffice@0.1.0 lint\n> ng lint --max-warnings=0\n\n\nLinting \"planillero-backoffice\"...\n\nAll files pass linting."
+        },
+        {
+          "nombre": "tipos",
+          "cmd": "npm run build",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 3281,
+          "salida": "\n> planillero-backoffice@0.1.0 build\n> ng build\n\n❯ Building...\n✔ Building...\nInitial chunk files | Names                |  Raw size | Estimated transfer size\nmain-WAKIRBCW.js    | main                 | 300.38 kB |                82.07 kB\nstyles-LKC44D2S.css | styles               |  11.53 kB |                 2.49 kB\n\n                    | Initial total        | 311.91 kB |                84.56 kB\n\nLazy chunk files    | Names                |  Raw size | Estimated transfer size\nchunk-DeHOe7oc.js   | expediente-component | 161.16 kB |                41.47 kB\nchunk-DmBjOxS6.js   | -                    | 149.60 kB |                37.69 kB\nchunk-DaqvbJUb.js   | -                    |  48.25 kB |                10.21 kB\nchunk-BvOTAXNo.js   | planificacion        |  19.98 kB |                 5.57 kB\nchunk-D8LaN9re.js   | supervision          |  19.54 kB |                 5.58 kB\nchunk-CAKFBR3L.js   | evidence-viewer      |  14.00 kB |                 4.03 kB\nchunk-DExH_8fj.js   | auditoria            |  12.85 kB |                 3.79 kB\nchunk-WYsDriOZ.js   | home                 |   6.70 kB |                 2.34 kB\nchunk-ccR4soCK.js   | login                |   5.57 kB |                 1.87 kB\nchunk-DD6qrwY9.js   | -                    |   1.31 kB |               595 bytes\nchunk-CMtjjgXz.js   | access-denied        | 962 bytes |               962 bytes\n\nApplication bundle generation complete. [2.518 seconds] - 2026-09-23T13:29:37.944Z\n\nOutput location: C:\\workspace\\git\\planillero\\backoffice\\dist\\planillero-backoffice\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'leaflet' used by 'src/app/pages/planificacion/route-map/route-map.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m\n\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'ajv' used by 'src/app/forms/validation.service.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m\n\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'ajv-formats' used by 'src/app/forms/validation.service.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m"
+        },
+        {
+          "nombre": "tests",
+          "cmd": "npm test",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 5718,
+          "salida": "\n> planillero-backoffice@0.1.0 test\n> ng test\n\n❯ Building...\n✔ Building...\nApplication bundle generation complete. [1.753 seconds] - 2026-09-23T13:29:40.541Z\n\n\n\u001b[1m\u001b[30m\u001b[46m RUN \u001b[49m\u001b[39m\u001b[22m \u001b[36mv4.1.11 \u001b[39m\u001b[90mC:/workspace/git/planillero/backoffice\u001b[39m\n\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m16 passed\u001b[39m\u001b[22m\u001b[90m (16)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m89 passed\u001b[39m\u001b[22m\u001b[90m (89)\u001b[39m\n\u001b[2m   Start at \u001b[22m 10:29:40\n\u001b[2m   Duration \u001b[22m 2.91s\u001b[2m (transform 2.87s, setup 7.17s, import 3.77s, tests 2.23s, environment 18.95s)\u001b[22m"
+        }
+      ],
+      "avisos": []
+    }
+  ]
+}

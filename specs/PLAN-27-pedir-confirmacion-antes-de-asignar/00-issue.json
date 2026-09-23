@@ -1,0 +1,11 @@
+{
+  "key": "PLAN-27",
+  "id": "10091",
+  "summary": "Pedir confirmación antes de asignar trabajo a un operador, y no preseleccionar el destinatario",
+  "type": "Tarea",
+  "priority": "High",
+  "assignee": "Matías Lameiro",
+  "status": "En curso",
+  "origen": "Auditoría UX/UI de PLAN-18 — hallazgos H12, H13 y H15",
+  "url": "https://surely-sa.atlassian.net/browse/PLAN-27"
+}
