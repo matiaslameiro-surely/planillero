@@ -1,0 +1,14 @@
+{
+  "key": "PLAN-26",
+  "summary": "Dar navegación global al backoffice: hoy la aplicación no tiene esqueleto",
+  "issuetype": "Tarea",
+  "status": "Por hacer",
+  "priority": "Medium",
+  "assignee": {
+    "accountId": "624b08e6f813eb00692c670f",
+    "displayName": "Fernando Chamorro Goncalves"
+  },
+  "reporter": "Matías Lameiro",
+  "created": "2026-09-22T10:17:42.460-0300",
+  "description": "Detectado por la auditoría UX/UI de PLAN-18 (hallazgo H17, y con él H8, H33 y H35). Es la segunda de las tres acciones de mayor impacto del informe. El problema src/app/app.html:1\n es, completo, \n<router-outlet />\n. No hay barra superior, ni menú, ni rastro de navegación, ni indicación de la pantalla activa, ni identidad visual persistente. Consecuencias concretas: El supervisor no puede saber qué secciones existen sin haberlas memorizado. La única enumeración de destinos está en el home, condicionada por rol. Ir de supervisión a auditoría exige volver al home primero, pero \nsupervisión no tiene enlace de regreso\n: el único camino es el botón «atrás» del navegador. Lo mismo pasa con el expediente. Son callejones sin salida. Cada pantalla reimplementa por su cuenta su cabecera y su regreso, que es la causa raíz directa de los otros tres hallazgos de esta tarea. Hallazgos que cuelgan de este H8\n — El regreso tiene cuatro formas, una de ellas la ausencia: «Volver al inicio» en planificación, auditoría y acceso denegado; «← Volver al Panel» en evidencias; nada en supervisión ni en expediente. Además «Panel» e «inicio» nombran el mismo destino de dos maneras. H33\n — Cinco anchos máximos distintos para cinco pantallas de contenido (1400 px, 1280 px, 1280 px, 1200 px, 900 px), sin criterio común: al navegar entre ellas el bloque de contenido cambia de ancho en cada transición y nada queda anclado. H35\n — El home operativo se centra en una columna de 416 px con \nmin-height: 100vh\n, dejando el 78 % de un monitor de 1920x1080 en blanco y apilando los accesos uno debajo del otro. Criterios de aceptación Existe una navegación persistente que enumera las secciones disponibles según el rol de la sesión e indica cuál está activa. Ninguna pantalla autenticada es un callejón sin salida. El ancho del contenido responde a un conjunto acotado de anchos canónicos definidos como tokens, no a una decisión por pantalla. Los gates del backoffice quedan en verde."
+}

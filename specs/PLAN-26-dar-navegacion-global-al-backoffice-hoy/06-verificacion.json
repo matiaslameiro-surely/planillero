@@ -1,0 +1,39 @@
+{
+  "ok": true,
+  "tarea": "PLAN-26",
+  "ts": "2026-09-23T12:26:39.019Z",
+  "repos": [
+    {
+      "repo": "backoffice",
+      "ok": true,
+      "herramienta": "npm",
+      "pasos": [
+        {
+          "nombre": "lint",
+          "cmd": "npm run lint",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 2064,
+          "salida": "\n> planillero-backoffice@0.1.0 lint\n> ng lint --max-warnings=0\n\n\nLinting \"planillero-backoffice\"...\n\nAll files pass linting."
+        },
+        {
+          "nombre": "tipos",
+          "cmd": "npm run build",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 3126,
+          "salida": "\n> planillero-backoffice@0.1.0 build\n> ng build\n\n> Building...\n√ Building...\nInitial chunk files | Names                |  Raw size | Estimated transfer size\nmain-PSLPID4E.js    | main                 | 299.38 kB |                81.78 kB\nstyles-LKC44D2S.css | styles               |  11.53 kB |                 2.49 kB\n\n                    | Initial total        | 310.91 kB |                84.27 kB\n\nLazy chunk files    | Names                |  Raw size | Estimated transfer size\nchunk-_--HeokF.js   | expediente-component | 161.16 kB |                41.47 kB\nchunk-C_P7vipb.js   | -                    | 149.60 kB |                37.67 kB\nchunk-o8cknmsj.js   | -                    |  48.25 kB |                10.21 kB\nchunk-BUmImGeX.js   | supervision          |  19.53 kB |                 5.60 kB\nchunk-CoDZH_Sw.js   | planificacion        |  16.71 kB |                 4.78 kB\nchunk-CWZhMVbc.js   | evidence-viewer      |  13.87 kB |                 3.96 kB\nchunk-0y8oeiYP.js   | auditoria            |  12.84 kB |                 3.80 kB\nchunk-CCVBD5Od.js   | home                 |   6.70 kB |                 2.35 kB\nchunk-CdPvxFAa.js   | login                |   5.57 kB |                 1.87 kB\nchunk-aEwZciTn.js   | access-denied        | 962 bytes |               962 bytes\n\nApplication bundle generation complete. [2.302 seconds] - 2026-09-23T12:26:32.978Z\n\nOutput location: C:\\planillero\\backoffice\\dist\\planillero-backoffice\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'leaflet' used by 'src/app/pages/supervision/supervision-map/supervision-map.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m\n\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'ajv' used by 'src/app/forms/validation.service.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m\n\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'ajv-formats' used by 'src/app/forms/validation.service.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m"
+        },
+        {
+          "nombre": "tests",
+          "cmd": "npm test",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 5942,
+          "salida": "\n> planillero-backoffice@0.1.0 test\n> ng test\n\n> Building...\n√ Building...\nApplication bundle generation complete. [1.539 seconds] - 2026-09-23T12:26:35.392Z\n\n\n\u001b[1m\u001b[30m\u001b[46m RUN \u001b[49m\u001b[39m\u001b[22m \u001b[36mv4.1.11 \u001b[39m\u001b[90mC:/planillero/backoffice\u001b[39m\n\n \u001b[32m✓\u001b[39m \u001b[30m\u001b[42m planillero-backoffice \u001b[49m\u001b[39m src/app/core/services/__tests__/evidence.service.spec.ts \u001b[2m(\u001b[22m\u001b[2m4 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 30\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m✓\u001b[39m \u001b[30m\u001b[42m planillero-backoffice \u001b[49m\u001b[39m src/app/core/services/__tests__/planificacion.service.spec.ts \u001b[2m(\u001b[22m\u001b[2m6 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 39\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m✓\u001b[39m \u001b[30m\u001b[42m planillero-backoffice \u001b[49m\u001b[39m src/app/core/services/__tests__/audit.service.spec.ts \u001b[2m(\u001b[22m\u001b[2m4 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 39\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m✓\u001b[39m \u001b[30m\u001b[42m planillero-backoffice \u001b[49m\u001b[39m src/app/core/interceptors/__tests__/auth.interceptor.spec.ts \u001b[2m(\u001b[22m\u001b[2m4 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 40\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m✓\u001b[39m \u001b[30m\u001b[42m planillero-backoffice \u001b[49m\u001b[39m src/app/core/__tests__/api-origin.spec.ts \u001b[2m(\u001b[22m\u001b[2m3 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 2\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m✓\u001b[39m \u001b[30m\u001b[42m planillero-backoffice \u001b[49m\u001b[39m src/app/core/guards/__tests__/administrator.guard.spec.ts \u001b[2m(\u001b[22m\u001b[2m3 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 36\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m✓\u001b[39m \u001b[30m\u001b[42m planillero-backoffice \u001b[49m\u001b[39m src/app/core/services/__tests__/health.service.spec.ts \u001b[2m(\u001b[22m\u001b[2m5 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 50\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m✓\u001b[39m \u001b[30m\u001b[42m planillero-backoffice \u001b[49m\u001b[39m src/app/core/guards/__tests__/supervisor.guard.spec.ts \u001b[2m(\u001b[22m\u001b[2m3 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 38\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m✓\u001b[39m \u001b[30m\u001b[42m planillero-backoffice \u001b[49m\u001b[39m src/app/pages/planificacion/route-map/route-map.spec.ts \u001b[2m(\u001b[22m\u001b[2m4 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 116\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m✓\u001b[39m \u001b[30m\u001b[42m planillero-backoffice \u001b[49m\u001b[39m src/app/core/services/__tests__/auth.service.spec.ts \u001b[2m(\u001b[22m\u001b[2m9 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 106\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m✓\u001b[39m \u001b[30m\u001b[42m planillero-backoffice \u001b[49m\u001b[39m src/app/core/components/navbar/__tests__/navbar.spec.ts \u001b[2m(\u001b[22m\u001b[2m5 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[32m 252\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m✓\u001b[39m \u001b[30m\u001b[42m planillero-backoffice \u001b[49m\u001b[39m src/app/pages/auditoria/auditoria.spec.ts \u001b[2m(\u001b[22m\u001b[2m9 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[33m 323\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m✓\u001b[39m \u001b[30m\u001b[42m planillero-backoffice \u001b[49m\u001b[39m src/app/pages/supervision/supervision.spec.ts \u001b[2m(\u001b[22m\u001b[2m4 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[33m 365\u001b[2mms\u001b[22m\u001b[39m\n \u001b[32m✓\u001b[39m \u001b[30m\u001b[42m planillero-backoffice \u001b[49m\u001b[39m src/app/pages/planificacion/planificacion.spec.ts \u001b[2m(\u001b[22m\u001b[2m9 tests\u001b[22m\u001b[2m)\u001b[22m\u001b[33m 501\u001b[2mms\u001b[22m\u001b[39m\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m14 passed\u001b[39m\u001b[22m\u001b[90m (14)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m72 passed\u001b[39m\u001b[22m\u001b[90m (72)\u001b[39m\n\u001b[2m   Start at \u001b[22m 09:26:35\n\u001b[2m   Duration \u001b[22m 3.33s\u001b[2m (transform 2.23s, setup 7.95s, import 3.30s, tests 1.94s, environment 20.87s)\u001b[22m"
+        }
+      ],
+      "avisos": []
+    }
+  ]
+}

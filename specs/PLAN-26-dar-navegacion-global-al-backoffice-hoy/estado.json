@@ -1,0 +1,57 @@
+{
+  "issue": "PLAN-26",
+  "titulo": "Dar navegación global al backoffice: hoy la aplicación no tiene esqueleto",
+  "slug": "dar-navegacion-global-al-backoffice-hoy",
+  "rama": "PLAN-26-dar-navegacion-global-al-backoffice-hoy",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:13:37.832Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:17:55.950Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:19:10.706Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:26:09.251Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:27:25.177Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:37:24.627Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:37:43.576Z"
+    }
+  },
+  "commits": {
+    "backoffice": "0a7fa79"
+  },
+  "revisiones": [],
+  "pr": {
+    "backoffice": "https://github.com/matiaslameiro-surely/planillero-backoffice/pull/14"
+  },
+  "jira": {
+    "transicionadoA": "31",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.8 Flash (Medium)",
+    "ts": "2026-09-23T12:12:57.969Z",
+    "fin": "2026-09-23T12:37:24.627Z"
+  }
+}
