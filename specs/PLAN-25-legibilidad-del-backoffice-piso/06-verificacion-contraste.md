@@ -75,3 +75,35 @@ Las 6 que quedan no incumplen el umbral que les corresponde:
 
 Búsqueda de `font-size` por debajo de 0,75 rem, 12 px o 0,75 em en `.scss`, `.css` y estilos inline:
 sin resultados, porque todas las coincidencias son `0.75rem` = 12 px exactos.
+
+## Después del rebase sobre main (23/09, con PLAN-24, PLAN-26 y PLAN-30 mergeados)
+
+Al rebasear, el escaneo volvió a encontrar incumplimientos. Algunos los trajeron las tareas mergeadas
+y otros eran de esta misma tarea:
+
+- **PLAN-26:** el rol del usuario en la barra de navegación estaba a 11 px.
+- **PLAN-30:** etiqueta de prioridad del KPI a 9,3 px, textos de frescura a 10,9 y 11,5 px, «Cargando...»
+  a 4,10:1, y opacity en las tarjetas desactualizadas y de contexto.
+- **Omisión de la primera pasada:** la atenuación con opacity sobre texto seguía en Auditoría, Login y
+  Planificación. La primera versión sólo había revisado el home.
+
+Todo eso se corrigió en el commit `9c37917`. Escaneo final:
+
+```
+1.00	#fff / #ffffff (supuesto)		app\forms\fields\field-multiselect.component.ts:55	.chip-selected span
+1.00	#fff / #ffffff (supuesto)		app\pages\planificacion\planificacion.scss:235	&:hover
+1.00	#fff / #ffffff (supuesto)		app\pages\supervision\supervision.scss:138	&--count
+3.14	#d97706 / #fffdfa		app\pages\supervision\supervision.scss:82	&--demorado
+3.77	#059669 / #ffffff (supuesto)		app\pages\supervision\supervision.scss:85	&--completo
+4.10	#0284c7 / #ffffff (supuesto)		app\pages\supervision\supervision.scss:84	&--en-campo
+total pares con color: 107  fallan <4.5: 6
+```
+
+Quedan los mismos 6 casos justificados de la tabla de arriba: 3 fondos que el script no resuelve y
+3 KPI de texto grande. El KPI «Demorado» ahora está sobre `#fffdfa` y da 3,14:1, que sigue por encima
+de 3:1.
+
+La única `opacity` que queda es `0.9` en el hover del logo de la barra (`navbar.scss:37`). Es un
+efecto momentáneo mientras el cursor está encima, así que no se tocó.
+
+Tamaños: la búsqueda de `font-size` por debajo de 12 px no da resultados.
