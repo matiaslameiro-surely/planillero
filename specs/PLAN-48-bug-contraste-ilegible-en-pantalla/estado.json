@@ -1,0 +1,69 @@
+{
+  "issue": "PLAN-48",
+  "titulo": "Bug: contraste ilegible en pantalla principal del móvil con Modo Oscuro (texto negro sobre fondo negro)",
+  "slug": "bug-contraste-ilegible-en-pantalla",
+  "rama": "PLAN-48-bug-contraste-ilegible-en-pantalla",
+  "alcance": [
+    "frontend"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:17:08.129Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:18:46.945Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:35:06.349Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:40:19.290Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:41:33.066Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-24T18:11:52.171Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-24T18:12:00.810Z"
+    }
+  },
+  "commits": {
+    "frontend": "370347df4460512031f4b4ec79a2f654cad4a8af"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "frontend",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-frontend-1.json",
+      "sha": "370347df4460512031f4b4ec79a2f654cad4a8af",
+      "ts": "2026-09-24T16:41:18.509Z"
+    }
+  ],
+  "pr": {
+    "frontend": "https://github.com/matiaslameiro-surely/planillero-frontend/pull/15"
+  },
+  "jira": {
+    "transicionadoA": "En revisión",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.8 Flash",
+    "ts": "2026-09-24T16:16:41.404Z",
+    "fin": "2026-09-24T18:11:52.172Z"
+  }
+}

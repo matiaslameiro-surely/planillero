@@ -1,0 +1,14 @@
+{
+  "key": "PLAN-48",
+  "summary": "Bug: contraste ilegible en pantalla principal del móvil con Modo Oscuro (texto negro sobre fondo negro)",
+  "issuetype": "Tarea",
+  "priority": "High",
+  "status": "En curso",
+  "created": "2026-09-24T11:50:14.322-0300",
+  "updated": "2026-09-24T13:10:14.030-0300",
+  "duedate": null,
+  "assignee": "Fernando Chamorro Goncalves",
+  "reporter": "Fernando Chamorro Goncalves",
+  "project": "PLAN",
+  "description": "h3. Problema\nAl utilizar la aplicación móvil en un dispositivo con Modo Oscuro (Dark Mode) activado, la pantalla principal (frontend/src/app/index.tsx) resulta prácticamente ilegible. El fondo de la pantalla se renderiza negro (#000000) a través de DarkTheme en _layout.tsx, pero los textos (title, subtitle, label, statusText, reason, url) no definen una propiedad color y las tarjetas carecen de backgroundColor, provocando que se dibuje texto negro sobre fondo negro (severa falla de contraste y accesibilidad WCAG).\n\nh3. Causa\nEn frontend/src/app/index.tsx:\n* styles.card carece de backgroundColor y queda transparente sobre el fondo oscuro de ThemeProvider.\n* Las etiquetas de texto no tienen estilos de color dependientes del tema o colores explícitos con contraste adecuado.\n\nh3. Solución requerida\n# Definir paleta o tokens de colores compatibles con modo claro/oscuro (mediante useColorScheme() o colores con contraste asegurado).\n# Asignar fondo explícito a las tarjetas y color contrastante a todos los textos de la pantalla principal.\n# Revisar consistencia en el resto de las pantallas móviles (login, agenda, formularios)."
+}
