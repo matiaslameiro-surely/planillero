@@ -6,7 +6,7 @@
   "alcance": [
     "backoffice"
   ],
-  "fase": "cerrar",
+  "fase": "cerrada",
   "fases": {
     "preparacion": {
       "estado": "ok",
@@ -29,10 +29,12 @@
       "ts": "2026-09-24T20:09:39.664Z"
     },
     "cerrar": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-24T20:21:48.515Z"
     },
     "cerrada": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-24T20:21:48.580Z"
     }
   },
   "commits": {
@@ -51,15 +53,17 @@
       "ts": "2026-09-24T20:09:27.256Z"
     }
   ],
-  "pr": {},
+  "pr": {
+    "backoffice": "https://github.com/matiaslameiro-surely/planillero-backoffice/pull/26"
+  },
   "jira": {
-    "transicionadoA": null,
+    "transicionadoA": "En revisión",
     "creadoPorHarness": false
   },
   "ejecucion": {
     "herramienta": null,
     "modelo": "Gemini 3.8 Flash",
     "ts": "2026-09-24T20:02:07.851Z",
-    "fin": null
+    "fin": "2026-09-24T20:21:48.515Z"
   }
 }
