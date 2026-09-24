@@ -1,0 +1,12 @@
+{
+  "key": "PLAN-50",
+  "id": "10117",
+  "tipo": "Tarea",
+  "prioridad": "Medium",
+  "estado": "Por hacer",
+  "sprint": "Sprint 5 - Fix de bugs finales",
+  "asignado": "Matías Lameiro",
+  "creado": "2026-09-24T12:01:01.674-0300",
+  "titulo": "Bug: el heartbeat responde 500 si networkStatus no es ONLINE, OFFLINE o UNKNOWN",
+  "descripcion": "## Contexto\n\nSurgió de una prueba endpoint por endpoint del backend (`main` en `1f6be77`).\n\n`POST /api/v1/supervision/heartbeat` acepta `networkStatus` como texto libre (`HeartbeatRequest.networkStatus` es un `String` sin validación). La columna `visits.operator_shifts.network_status` tiene un `CHECK (network_status in ('ONLINE', 'OFFLINE', 'UNKNOWN'))` (`V13__supervision_and_shifts.sql`). Un valor fuera de esa lista llega hasta la base, que lo rechaza, y el backend responde **500**.\n\nLa app móvil hoy manda sólo `ONLINE` u `OFFLINE` (`frontend/src/status/useHeartbeat.ts`), así que no afecta a los clientes actuales. Pero es un 500 disparable desde afuera y un contrato implícito: el valor válido lo define un `CHECK` en la base, no la API.\n\n## Repro\n\n```bash\ncurl -X POST http://localhost:8080/api/v1/supervision/heartbeat \\n  -H \"Authorization: Bearer <jwt-operador>\" -H \"Content-Type: application/json\" \\n  -d '{\"batteryLevel\":0.8,\"networkStatus\":\"WIFI\",\"latitude\":-34.54,\"longitude\":-58.45}'\n# hoy: 500 (DataIntegrityViolationException: operator_shifts_network_status_check)\n# Esperado: 400\n```\n\nCon `\"ONLINE\"` u `\"OFFLINE\"` responde `200`, como corresponde.\n\n## Qué se espera\n\n* Validar `networkStatus` en la entrada: un enum en el DTO, o `@Pattern` con los tres valores. Un valor inválido responde `400` con el formato de error habitual del backend.\n* Documentar en el contrato de supervisión los valores admitidos.\n\n## Criterios de aceptación\n\n* `networkStatus: \"WIFI\"` → `400`, sin llegar a la base.\n* `ONLINE`, `OFFLINE`, `UNKNOWN` y ausente siguen respondiendo `200` (ausente sigue guardándose como `UNKNOWN`).\n* Test que cubra el valor inválido.\n"
+}

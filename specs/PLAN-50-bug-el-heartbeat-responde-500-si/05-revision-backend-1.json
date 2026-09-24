@@ -1,0 +1,47 @@
+{
+  "verdict": "approve",
+  "summary": "Revisé el diff del backend: el @Pattern sobre networkStatus en HeartbeatRequest, junto con el @Valid que ya existía y el manejador de MethodArgumentNotValidException, hace que un valor inválido responda 400 {\"error\":\"invalid_request\",\"message\":\"networkStatus: ...\"} antes de llegar al servicio y a la base. Deja pasar null y distingue mayúsculas. Se cumplen los criterios 1 a 5. Quedan sólo observaciones menores sobre la cobertura de los tests, y el criterio 6 no se puede verificar desde el diff.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "El caso «turno creado por un latido sin networkStatus» del criterio 4 no tiene test",
+      "body": "El criterio 4 pide que, si el turno se crea con un latido sin networkStatus, quede con el valor por defecto de la entidad (ONLINE). latidoGuardaNetworkStatusValidos sólo prueba latidos sin networkStatus (sin el campo y con null) sobre un turno que ya existe, porque el bucle anterior ya lo creó. El código cumple el criterio: el constructor de OperatorShift fija ONLINE y el servicio no llama a setNetworkStatus cuando llega null. Pero si mañana alguien cambia el servicio para que llame a setNetworkStatus(null), que convierte null en UNKNOWN, ese camino se rompería sin que falle ningún test.",
+      "file": "src/test/java/ar/com/planillero/supervision/SupervisionIntegrationTest.java",
+      "line_start": 148,
+      "line_end": 161,
+      "confidence": 0.7,
+      "recommendation": "Opcional: agregar un caso con un operador que no tenga turno hoy. Por ejemplo, otro usuario de datos de ejemplo de la misma clase, porque cada clase corre con su propia base. Mandarle un latido sin networkStatus y verificar que el turno nuevo quede en ONLINE."
+    },
+    {
+      "severity": "low",
+      "title": "El test del valor inválido no prueba que el turno no se cree",
+      "body": "El criterio 1 dice que ante un valor inválido «el turno del operador no se crea ni se modifica». El test manda antes un latido válido, así que el turno ya existe, y sólo verifica que no se modifique (networkStatus y lastHeartbeatAt). Nunca prueba que un latido inválido sin turno previo no cree el turno. Con la implementación actual la validación corta antes del servicio, así que no hay bug. Sólo falta cobertura para la parte «no se crea» del criterio.",
+      "file": "src/test/java/ar/com/planillero/supervision/SupervisionIntegrationTest.java",
+      "line_start": 128,
+      "line_end": 144,
+      "confidence": 0.6,
+      "recommendation": "Opcional: con un operador sin turno hoy, mandar un networkStatus inválido y verificar que findByOperatorIdAndShiftDate siga vacío."
+    },
+    {
+      "severity": "low",
+      "title": "El criterio 6 (03-contrato-api.md) no se puede verificar desde el diff del backend",
+      "body": "El criterio 6 pide documentar en el 03-contrato-api.md de esta tarea los valores admitidos de networkStatus y el 400 por valor inválido. Ese archivo va en el repo del harness, no en el diff del backend, y esta revisión no lee la carpeta de specs de la tarea más allá de la spec. No es un defecto del código: es un criterio que esta revisión no puede dar por cumplido.",
+      "file": "src/main/java/ar/com/planillero/supervision/dto/HeartbeatRequest.java",
+      "line_start": 17,
+      "line_end": 20,
+      "confidence": 0.4,
+      "recommendation": "Antes del cierre, confirmar que el contrato documente ONLINE|OFFLINE|UNKNOWN (con distinción de mayúsculas), que null o ausente no cambia el turno, y el 400 con {\"error\":\"invalid_request\",\"message\":\"networkStatus: debe ser ONLINE, OFFLINE o UNKNOWN\"}."
+    },
+    {
+      "severity": "low",
+      "title": "sendHeartbeat duplica el armado del request del test anterior",
+      "body": "El helper nuevo sendHeartbeat arma lo mismo que operadorRegistraLatido arma a mano (POST, Bearer y JSON), y su firma está cortada en dos líneas sin necesidad. Es sólo cosmético y no afecta el comportamiento.",
+      "file": "src/test/java/ar/com/planillero/supervision/SupervisionIntegrationTest.java",
+      "line_start": 184,
+      "line_end": 190,
+      "confidence": 0.5,
+      "recommendation": "Opcional: usar sendHeartbeat también en operadorRegistraLatido y dejar la firma en una sola línea."
+    }
+  ],
+  "next_steps": []
+}
