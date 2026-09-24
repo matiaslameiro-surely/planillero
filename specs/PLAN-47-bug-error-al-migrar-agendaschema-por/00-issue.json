@@ -1,0 +1,15 @@
+{
+  "key": "PLAN-47",
+  "summary": "Bug: error al migrar agendaSchema por columnas duplicadas en v2 y v4",
+  "description": "### Problema\nAl inicializar la aplicación móvil desde cero en un dispositivo limpio (versión de esquema SQLite 0), la apertura de la base de datos falla al iniciar sesión con el error:\n```\nCall to function 'NativeDatabase.execAsync' has been rejected.\n→ Caused by: duplicate column name: form_template_id\n```\n\n### Causa\nEn `frontend/src/db/agendaSchema.ts`, las columnas `form_template_id`, `form_template_version` y `form_submitted_at` fueron añadidas con `ALTER TABLE agenda_visits ADD COLUMN ...` tanto en el bloque `if (version < 2)` como en el bloque `if (version < 4)`. Al iniciar desde la versión 0, se intentan crear dos veces en la misma ejecución.\n\n### Solución requerida\n1. Remover las sentencias `ALTER TABLE` duplicadas del bloque `version < 2` en `frontend/src/db/agendaSchema.ts`.\n2. Agregar tests unitarios de migración incremental en `frontend/src/db/agendaSchema.test.ts` para validar que una base en versión 0 alcance la versión 4 sin errores.",
+  "priority": "High",
+  "assignee": {
+    "accountId": "61d33c409ee70a0068541939",
+    "displayName": "Juan Ignacio Urrutia"
+  },
+  "reporter": {
+    "accountId": "624b08e6f813eb00692c670f",
+    "displayName": "Fernando Chamorro Goncalves"
+  },
+  "status": "En curso"
+}

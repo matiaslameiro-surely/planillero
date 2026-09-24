@@ -1,0 +1,67 @@
+{
+  "issue": "PLAN-47",
+  "titulo": "Bug: error al migrar agendaSchema por columnas duplicadas en v2 y v4",
+  "slug": "bug-error-al-migrar-agendaschema-por",
+  "rama": "PLAN-47-bug-error-al-migrar-agendaschema-por",
+  "alcance": [
+    "frontend"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:23:30.973Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:23:51.498Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:28:23.698Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:30:15.201Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:35:40.379Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:39:09.820Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:39:09.870Z"
+    }
+  },
+  "commits": {
+    "frontend": "eca5ff7a9a8f254a77f831b18d3daeac7994c50e"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "frontend",
+      "motor": "anfitriona",
+      "motivo": null,
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-frontend-1.json",
+      "sha": "eca5ff7a9a8f254a77f831b18d3daeac7994c50e",
+      "ts": "2026-09-24T16:35:29.189Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "gemini-3.7-flash",
+    "ts": "2026-09-24T16:23:17.331Z",
+    "fin": "2026-09-24T16:39:09.821Z"
+  }
+}
