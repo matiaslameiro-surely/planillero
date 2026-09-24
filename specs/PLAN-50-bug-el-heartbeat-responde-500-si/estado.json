@@ -53,7 +53,9 @@
       "ts": "2026-09-24T22:49:22.148Z"
     }
   ],
-  "pr": {},
+  "pr": {
+    "backend": "https://github.com/matiaslameiro-surely/planillero-backend/pull/19"
+  },
   "jira": {
     "transicionadoA": "En revisión",
     "creadoPorHarness": false
