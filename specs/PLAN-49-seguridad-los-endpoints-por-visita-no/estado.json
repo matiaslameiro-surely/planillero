@@ -1,0 +1,65 @@
+{
+  "issue": "PLAN-49",
+  "titulo": "Seguridad: los endpoints por visita no controlan jurisdicción ni asignación (evidencias, formulario, sync)",
+  "slug": "seguridad-los-endpoints-por-visita-no",
+  "rama": "PLAN-49-seguridad-los-endpoints-por-visita-no",
+  "alcance": [
+    "backend"
+  ],
+  "fase": "cerrar",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-24T18:28:20.955Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-24T18:29:30.225Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-24T18:33:30.913Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-24T18:42:48.532Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-24T18:59:10.209Z"
+    },
+    "cerrar": {
+      "estado": "pendiente"
+    },
+    "cerrada": {
+      "estado": "pendiente"
+    }
+  },
+  "commits": {
+    "backend": "efe7dfa"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backend",
+      "motor": "anfitriona",
+      "motivo": "codex sin cuota (usage limit hasta 2026-10-15); revisó un agente nuevo con contexto limpio",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backend-1.json",
+      "sha": "55d793c2a7de4ad1e9e956968490bf1558a00757",
+      "ts": "2026-09-24T18:50:41.436Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "claude-opus-5-5",
+    "ts": "2026-09-24T18:25:41.070Z",
+    "fin": null
+  }
+}

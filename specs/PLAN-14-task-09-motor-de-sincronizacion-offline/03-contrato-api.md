@@ -1,5 +1,11 @@
 # PLAN-14 — Contrato de API
 
+> **Actualización PLAN-49.** Los endpoints de este contrato que reciben una visita ahora exigen que
+> la visita sea del usuario: el supervisor, de su jurisdicción (`403 outside_jurisdiction`); el
+> operador, en una hoja de ruta propia (`403 visit_not_assigned`); el administrador, cualquiera. En el
+> sync, esos rechazos vuelven como `FAILED` por operación. Detalle en
+> `specs/PLAN-49-seguridad-los-endpoints-por-visita-no/03-contrato-api.md`.
+
 Lo emite el backend. Es la entrada obligatoria de `frontend` y `backoffice`: ningún cliente declara
 nada que no esté acá.
 

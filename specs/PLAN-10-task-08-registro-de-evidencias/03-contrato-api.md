@@ -1,5 +1,11 @@
 # Contrato de API — PLAN-10 (Evidencias Digitales y Manifiesto Criptográfico)
 
+> **Actualización PLAN-49.** Los endpoints de este contrato que reciben una visita ahora exigen que
+> la visita sea del usuario: el supervisor, de su jurisdicción (`403 outside_jurisdiction`); el
+> operador, en una hoja de ruta propia (`403 visit_not_assigned`); el administrador, cualquiera. En el
+> sync, esos rechazos vuelven como `FAILED` por operación. Detalle en
+> `specs/PLAN-49-seguridad-los-endpoints-por-visita-no/03-contrato-api.md`.
+
 Contrato emitido por el backend para el consumo de `frontend` (móvil Expo) y `backoffice` (web Angular).
 
 ## General

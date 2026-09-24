@@ -1,0 +1,24 @@
+{
+  "key": "PLAN-49",
+  "summary": "Seguridad: los endpoints por visita no controlan jurisdicción ni asignación (evidencias, formulario, sync)",
+  "issueType": "Tarea",
+  "priority": "High",
+  "assignee": {
+    "accountId": "712020:20e9808d-40b0-42d5-ae58-a28b20f3fa5e",
+    "displayName": "Matías Lameiro"
+  },
+  "reporter": {
+    "displayName": "Matías Lameiro"
+  },
+  "sprint": "Sprint 5 - Fix de bugs finales",
+  "links": [
+    {
+      "tipo": "relates to",
+      "key": "PLAN-51",
+      "summary": "Bug: evidencias no respeta el 404 del contrato y acepta evidencia para visitas que no existen",
+      "status": "En revisión"
+    }
+  ],
+  "browse_url": "https://surely-sa.atlassian.net/browse/PLAN-49",
+  "description": "## Contexto\n\nSurgió de una prueba endpoint por endpoint del backend (`main` en `1f6be77`, base limpia con el seed de Flyway). Planificación (`/operators`, `/visits`, `/visits/assign`) e inicio de visita (`/visits/{id}/start`) sí validan la jurisdicción del usuario y la asignación de la visita. Los demás endpoints que reciben un `visitId` **no validan nada de eso**: cualquier usuario autenticado con el rol correcto puede leer o escribir sobre visitas de otra zona o que no le asignaron.\n\nEs un control de acceso horizontal roto (OWASP A01) sobre actas y evidencias que forman parte de un expediente. Ninguna spec lo exigía (PLAN-7, PLAN-10, PLAN-14), así que no rompe ningún contrato: es un hueco de diseño.\n\n## Qué se observó\n\nCon `supervisor.demo` y `operador.demo` (los dos de `ZONA_NORTE`) y la visita `V-2001` (`ZONA_SUR`) del seed:\n\n| Endpoint | Caso | Respuesta |\n| --- | --- | --- |\n| `POST /api/v1/visits/{visitId}/evidences` | operador del norte, visita de la zona sur | `201` |\n| `GET /api/v1/visits/{visitId}/evidences` | operador del norte, visita de la zona sur | `200` con las evidencias |\n| `GET /api/v1/visits/{visitId}/evidences` | supervisor del norte, visita de la zona sur | `200` |\n| `POST /api/v1/visitas/{id}/formulario` | operador, visita de la zona sur | `200` |\n| `POST /api/v1/visitas/{id}/formulario` | operador, visita de su zona que **no le asignaron** (`V-1003`) | `200` |\n| `GET /api/v1/visitas/{id}/formulario` | supervisor del norte, visita de la zona sur | `200` |\n| `POST /api/v1/sync/batch` (`VISIT_FORM`) | operador, visita de la zona sur | `APPLIED` |\n\nSin revisar todavía, pero con la misma forma: `GET .../evidences/{evidenceId}/file`, `POST|GET .../manifest` y `POST .../manifest/verify`.\n\n## Qué se espera\n\nDefinir en la spec la regla de acceso de cada endpoint por visita y aplicarla en el servicio, igual que ya lo hace `PlanningService` / `VisitStartService`. Propuesta a validar en la fase de spec:\n\n* **Operador:** sólo sobre visitas asignadas a él (tiene hoja de ruta con esa visita).\n* **Supervisor:** sólo sobre visitas de su jurisdicción.\n* **Administrador (**`GLOBAL`): sobre cualquiera.\n* Fuera de alcance: `403` con un código propio (por ejemplo `outside_jurisdiction` / `visit_not_assigned`, como en planificación).\n* En el lote de sync, la operación rechazada vuelve con su resultado de error, **sin hacer fallar el lote** (así funciona hoy el contrato de sync).\n\n## Criterios de aceptación\n\n* Cada caso de la tabla de arriba responde `403` (o el resultado de error por operación, en sync).\n* Los casos legítimos (operador sobre su visita asignada, supervisor sobre su zona, admin sobre cualquiera) siguen respondiendo igual que hoy.\n* Tests de integración que cubran el acceso cruzado entre zonas y el de una visita no asignada, para cada endpoint.\n* Se actualizan los contratos de API afectados con el `403` nuevo.\n\n## Repro\n\n```bash\n# token de operador.demo (ZONA_NORTE); V-2001 es de ZONA_SUR\ncurl -X POST http://localhost:8080/api/v1/visitas/a0000002-0000-4000-8000-000000000001/formulario \\\n  -H \"Authorization: Bearer <jwt-operador>\" -H \"Content-Type: application/json\" \\\n  -d '{\"templateKey\":\"mantenimiento-general\",\"responses\":{\"workedHours\":1,\"taskType\":\"CORRECTIVO\",\"observations\":\"x\"}}'\n# hoy: 200. Esperado: 403\n```\n"
+}

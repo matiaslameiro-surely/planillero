@@ -1,0 +1,37 @@
+{
+  "verdict": "approve",
+  "summary": "Se revisó el diff del backend de PLAN-49 contra la spec. VisitAccessGuard aplica la regla (administrador, supervisor por jurisdicción, operador por hoja de ruta, 404 antes que 403) en los nueve caminos de la tabla, siempre antes de cualquier validación o escritura, y en el sync rechaza sólo la operación afectada y antes de detectar repetidas. Los criterios 1 a 8 quedan cubiertos. Los hallazgos son menores y no bloquean.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "El camino de repetidas del sync todavía puede devolver la confirmación de un formulario de otra visita",
+      "body": "La guardia valida operation.visitId(), pero resolveIfAlreadyApplied busca por clientOperationId sin comparar la visita del registro con la de la operación. Un usuario con acceso a su visita V1 que manda una operación con visitId=V1 y el clientOperationId que otro dispositivo usó sobre V2 recibe DUPLICATE con describe(record) de V2: el id de V2, la plantilla, la versión y formSubmittedAt. Pasa por el camino rápido y también por el catch de DataIntegrityViolationException. Ya pasaba antes de este cambio, y explotarlo exige conocer un UUID v4 ajeno que nunca sale del dispositivo, así que el riesgo real es bajo. El comentario de la línea 117 («nunca devuelve el formulario de otro») promete más de lo que el código garantiza.",
+      "file": "src/main/java/ar/com/planillero/sync/SyncService.java",
+      "line_start": 115,
+      "line_end": 157,
+      "confidence": 0.8,
+      "recommendation": "En resolveIfAlreadyApplied, devolver DUPLICATE sólo si record.getId() coincide con operation.visitId() y, si no coincide, responder FAILED con operation_conflict. Si no, ajustar el comentario para que no afirme más de lo que el código hace. También puede quedar como seguimiento fuera de esta tarea."
+    },
+    {
+      "severity": "low",
+      "title": "El sync no tiene un caso legítimo del administrador",
+      "body": "El criterio 7 pide al menos un caso legítimo por rol en cada endpoint. POST /sync/batch tiene el caso legítimo del operador (syncRechazaSoloLasOperacionesSinAcceso) y el del supervisor (syncSupervisorFueraDeSuZona), pero no hay ninguno de admin.demo aplicando una operación VISIT_FORM sobre una visita de otra zona. El código del guardia cubre ese camino, pero ningún test lo ejercita.",
+      "file": "src/test/java/ar/com/planillero/security/VisitAccessIntegrationTest.java",
+      "line_start": 204,
+      "line_end": 221,
+      "confidence": 0.7,
+      "recommendation": "Agregar un test de sync con admin.demo sobre una visita de ZONA_SUR que espere APPLIED."
+    },
+    {
+      "severity": "low",
+      "title": "El Javadoc de fullCycle no coincide con lo que hace el helper",
+      "body": "El comentario dice «Sube dos evidencias», pero el helper sube una sola y después espera $.length() == 1 en el listado.",
+      "file": "src/test/java/ar/com/planillero/security/VisitAccessIntegrationTest.java",
+      "line_start": 245,
+      "line_end": 245,
+      "confidence": 0.95,
+      "recommendation": "Cambiar el comentario a «Sube una evidencia, …»."
+    }
+  ],
+  "next_steps": []
+}
