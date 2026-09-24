@@ -53,7 +53,9 @@
       "ts": "2026-09-24T19:52:25.282Z"
     }
   ],
-  "pr": {},
+  "pr": {
+    "backoffice": "https://github.com/matiaslameiro-surely/planillero-backoffice/pull/25"
+  },
   "jira": {
     "transicionadoA": "En revisión",
     "creadoPorHarness": false
