@@ -1,0 +1,17 @@
+{
+  "verdict": "approve",
+  "summary": "Revisión del diff contra 01-spec.md, que cubre los 6 criterios. El estado del expediente pasa a signals y el template los lee con alias (@if (visit(); as visit)), lo que mantiene el diff chico. La rama del formulario es equivalente a la anterior: sin formulario o sin respuestas sigue mostrando «no tiene formulario cargado». El spec nuevo usa autoDetectChanges para comportarse como el navegador, y se verificó que falla 3/4 contra el código anterior y pasa 4/4 con el arreglo. Gates en verde: lint, tipos y 122 tests. La revisión la hizo la misma sesión que implementó (motor anfitriona sin motores externos), así que no es independiente.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "La vista asigna formSchema antes que visit",
+      "body": "En loadExpediente(), formSchema se setea antes que visit. Como loading sigue en true hasta el final, no hay un estado intermedio visible, pero si en el futuro se muestra algo mientras carga, el orden podría importar.",
+      "file": "src/app/pages/expediente/expediente.component.ts",
+      "line_start": 120,
+      "line_end": 132,
+      "confidence": 0.6,
+      "recommendation": "Ninguna acción necesaria hoy; dejarlo presente si se agrega carga progresiva."
+    }
+  ],
+  "next_steps": []
+}

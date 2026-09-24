@@ -1,0 +1,71 @@
+{
+  "issue": "PLAN-41",
+  "titulo": "Bug: el expediente del backoffice queda para siempre en «Cargando expediente...»",
+  "slug": "bug-el-expediente-del-backoffice-queda",
+  "rama": "PLAN-41-bug-el-expediente-del-backoffice-queda",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:21:02.924Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:21:02.992Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:33:33.217Z",
+      "nota": "Plan aprobado por el usuario el 24/09"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:41:50.881Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:42:58.373Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:52:27.486Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:52:27.555Z"
+    }
+  },
+  "commits": {
+    "backoffice": "6f7dda5"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-1.json",
+      "sha": "6f7dda5effda4227b5440c4b8489420e31396817",
+      "ts": "2026-09-24T16:42:58.307Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "Claude Opus 5.5 (claude-opus-5-5)",
+    "ts": "2026-09-24T16:20:13.169Z",
+    "fin": "2026-09-24T16:52:27.488Z"
+  },
+  "prs": {
+    "backoffice": "https://github.com/matiaslameiro-surely/planillero-backoffice/pull/22"
+  }
+}
