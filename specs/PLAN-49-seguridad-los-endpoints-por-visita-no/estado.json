@@ -29,7 +29,8 @@
       "ts": "2026-09-24T18:59:10.209Z"
     },
     "cerrar": {
-      "estado": "pendiente"
+      "estado": "en_curso",
+      "ts": "2026-09-24T20:19:36.914Z"
     },
     "cerrada": {
       "estado": "pendiente"
