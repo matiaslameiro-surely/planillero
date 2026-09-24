@@ -1,0 +1,67 @@
+{
+  "issue": "PLAN-43",
+  "titulo": "Supervision la etiqueta Atencion requerida se superpone con el titulo de la tarjeta de KPI",
+  "slug": "supervision-la-etiqueta-atencion",
+  "rama": "PLAN-43-supervision-la-etiqueta-atencion",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-24T19:44:40.309Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-24T19:45:41.819Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-24T19:49:44.656Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-24T19:51:30.778Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-24T19:52:39.286Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-24T19:56:10.946Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-24T19:56:26.953Z"
+    }
+  },
+  "commits": {
+    "backoffice": "720114b"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": null,
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-1.json",
+      "sha": "720114b89ae3e224bce199ff1fb36d6a2f8cf156",
+      "ts": "2026-09-24T19:52:25.282Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": "En revisión",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.8 Flash",
+    "ts": "2026-09-24T19:44:20.416Z",
+    "fin": "2026-09-24T19:56:10.947Z"
+  }
+}

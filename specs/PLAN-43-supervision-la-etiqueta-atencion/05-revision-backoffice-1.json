@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "Se verificó la reestructuración de la tarjeta de KPI «Fuera de SLA / Demorados» en backoffice. La etiqueta de atención requerida ahora forma parte del flujo en una cabecera flex con wrap, previniendo la superposición con el título en cualquier ancho de pantalla, preservando el tamaño de 13 px y eliminando la redundancia en el subtítulo con pruebas unitarias asociadas.",
+  "findings": [],
+  "next_steps": []
+}
