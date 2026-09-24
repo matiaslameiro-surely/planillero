@@ -6,7 +6,7 @@
   "alcance": [
     "backoffice"
   ],
-  "fase": "cerrar",
+  "fase": "cerrada",
   "fases": {
     "preparacion": {
       "estado": "ok",
@@ -30,7 +30,8 @@
       "ts": "2026-09-23T12:36:21.191Z"
     },
     "cerrar": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-24T11:45:14.276Z"
     },
     "cerrada": {
       "estado": "ok",
@@ -40,7 +41,19 @@
   "commits": {
     "backoffice": "e2bdb49"
   },
-  "revisiones": [],
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos (registrada después, al mergear PLAN-31)",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-1.json",
+      "sha": "e2bdb49",
+      "ts": "2026-09-24T11:45:14.561Z"
+    }
+  ],
   "pr": {},
   "jira": {
     "transicionadoA": null,
@@ -50,7 +63,7 @@
     "herramienta": "Claude Code",
     "modelo": "Claude Opus 5.5 (claude-opus-5-5)",
     "ts": "2026-09-23T12:24:52.798Z",
-    "fin": null
+    "fin": "2026-09-24T11:45:14.276Z"
   },
   "prs": {
     "backoffice": "https://github.com/matiaslameiro-surely/planillero-backoffice/pull/15"

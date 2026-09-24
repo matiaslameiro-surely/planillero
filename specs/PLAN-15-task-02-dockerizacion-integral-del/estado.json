@@ -45,7 +45,74 @@
     "frontend": "474279235d31dcc14b7781f303c0db972ab7296a",
     "backoffice_2": "c581bf9df23be0184b492195587a7fb84e93e013"
   },
-  "revisiones": [],
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backend",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos (registrada después, al mergear PLAN-31)",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backend-1.json",
+      "sha": null,
+      "ts": "2026-09-24T11:45:14.563Z"
+    },
+    {
+      "n": 2,
+      "repo": "backend",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos (registrada después, al mergear PLAN-31)",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backend-2.json",
+      "sha": null,
+      "ts": "2026-09-24T11:45:14.563Z"
+    },
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos (registrada después, al mergear PLAN-31)",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-1.json",
+      "sha": null,
+      "ts": "2026-09-24T11:45:14.564Z"
+    },
+    {
+      "n": 2,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos (registrada después, al mergear PLAN-31)",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-2.json",
+      "sha": null,
+      "ts": "2026-09-24T11:45:14.564Z"
+    },
+    {
+      "n": 1,
+      "repo": "frontend",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos (registrada después, al mergear PLAN-31)",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-frontend-1.json",
+      "sha": null,
+      "ts": "2026-09-24T11:45:14.565Z"
+    },
+    {
+      "n": 2,
+      "repo": "frontend",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos (registrada después, al mergear PLAN-31)",
+      "verdict": "needs-attention",
+      "bloqueantes": 1,
+      "archivo": "05-revision-frontend-2.json",
+      "sha": null,
+      "ts": "2026-09-24T11:45:14.566Z"
+    }
+  ],
   "pr": {},
   "jira": {
     "transicionadoA": null,

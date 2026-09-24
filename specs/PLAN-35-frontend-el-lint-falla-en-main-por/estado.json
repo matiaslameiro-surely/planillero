@@ -6,7 +6,7 @@
   "alcance": [
     "frontend"
   ],
-  "fase": "cerrar",
+  "fase": "cerrada",
   "fases": {
     "preparacion": {
       "estado": "ok",
@@ -30,7 +30,8 @@
       "ts": "2026-09-23T12:16:02.478Z"
     },
     "cerrar": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-24T11:45:14.141Z"
     },
     "cerrada": {
       "estado": "ok",
@@ -40,7 +41,19 @@
   "commits": {
     "frontend": "042f74e"
   },
-  "revisiones": [],
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "frontend",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos (registrada después, al mergear PLAN-31)",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-frontend-1.json",
+      "sha": "042f74e",
+      "ts": "2026-09-24T11:45:14.559Z"
+    }
+  ],
   "pr": {},
   "jira": {
     "transicionadoA": null,
@@ -50,7 +63,7 @@
     "herramienta": "Claude Code",
     "modelo": "Claude Opus 5.5 (claude-opus-5-5)",
     "ts": "2026-09-23T11:36:58.913Z",
-    "fin": null
+    "fin": "2026-09-24T11:45:14.142Z"
   },
   "prs": {
     "frontend": "https://github.com/matiaslameiro-surely/planillero-frontend/pull/13"
