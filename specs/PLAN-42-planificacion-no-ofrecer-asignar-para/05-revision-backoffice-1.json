@@ -1,0 +1,17 @@
+{
+  "verdict": "approve",
+  "summary": "Revisión del diff contra 01-spec.md, que cubre los 5 criterios. currentSheetIds sólo considera la hoja que coincide con el operador y la fecha de la cabecera, así una hoja vieja no deshabilita nada. La fila muestra «Ya en su hoja» con tooltip y el checkbox queda deshabilitado. La selección efectiva excluye esas visitas sin borrarlas de `selected`. Tests: la hoja por defecto de los stubs pasa a vacía (los tests existentes asignaban justo la visita que venía en la hoja) y hay 4 casos nuevos; 3 fallan con el código anterior. Gates en verde: lint, tipos y 122 tests. La revisión la hizo la misma sesión que implementó (motor anfitriona sin motores externos), así que no es independiente.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "Un checkbox marcado de una visita que después queda «en su hoja» se ve desmarcado pero sigue en `selected`",
+      "body": "Es intencional: si se cambia a otro operador, la visita vuelve a contar sin tener que marcarla de nuevo. El efecto visible es que, al volver, el checkbox reaparece marcado. Es coherente, pero puede sorprender.",
+      "file": "src/app/pages/planificacion/planificacion.html",
+      "line_start": 90,
+      "line_end": 97,
+      "confidence": 0.7,
+      "recommendation": "Ninguna acción necesaria; si molesta en el uso, podar la selección al cambiar de operador."
+    }
+  ],
+  "next_steps": []
+}

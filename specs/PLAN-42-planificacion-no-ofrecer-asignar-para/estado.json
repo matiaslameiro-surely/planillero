@@ -1,0 +1,71 @@
+{
+  "issue": "PLAN-42",
+  "titulo": "Planificación: no ofrecer «Asignar» para visitas que el operador ya tiene en su hoja de ruta de esa fecha",
+  "slug": "planificacion-no-ofrecer-asignar-para",
+  "rama": "PLAN-42-planificacion-no-ofrecer-asignar-para",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:54:05.369Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:54:05.430Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:58:54.635Z",
+      "nota": "Plan aprobado por el usuario el 24/09"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-24T17:00:45.181Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-24T17:01:42.803Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-24T17:14:05.932Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-24T17:14:06.000Z"
+    }
+  },
+  "commits": {
+    "backoffice": "b1dc2b0"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-1.json",
+      "sha": "b1dc2b0bd72ba747f38901c6f769c63e8b1e8e9c",
+      "ts": "2026-09-24T17:01:42.713Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "Claude Opus 5.5 (claude-opus-5-5)",
+    "ts": "2026-09-24T16:53:17.462Z",
+    "fin": "2026-09-24T17:14:05.932Z"
+  },
+  "prs": {
+    "backoffice": "https://github.com/matiaslameiro-surely/planillero-backoffice/pull/23"
+  }
+}
