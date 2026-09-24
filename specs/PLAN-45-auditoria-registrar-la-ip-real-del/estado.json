@@ -6,7 +6,7 @@
   "alcance": [
     "backend"
   ],
-  "fase": "cerrar",
+  "fase": "cerrada",
   "fases": {
     "preparacion": {
       "estado": "ok",
@@ -29,7 +29,8 @@
       "ts": "2026-09-24T17:05:26.461Z"
     },
     "cerrar": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-24T17:10:47.501Z"
     },
     "cerrada": {
       "estado": "pendiente"
@@ -53,13 +54,13 @@
   ],
   "pr": {},
   "jira": {
-    "transicionadoA": null,
+    "transicionadoA": "en_revision",
     "creadoPorHarness": false
   },
   "ejecucion": {
     "herramienta": null,
     "modelo": "Gemini 3.7 Flash",
     "ts": "2026-09-24T16:44:41.825Z",
-    "fin": null
+    "fin": "2026-09-24T17:10:47.502Z"
   }
 }
