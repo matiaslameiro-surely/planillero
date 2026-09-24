@@ -1,0 +1,66 @@
+{
+  "issue": "PLAN-34",
+  "titulo": "Pruebas manuales: prueba de campo, APK en tablet y recorrido E2E",
+  "slug": "pruebas-manuales-prueba-de-campo-apk-en",
+  "rama": "PLAN-34-pruebas-manuales-prueba-de-campo-apk-en",
+  "alcance": [
+    "frontend"
+  ],
+  "fase": "cerrar",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-23T11:21:47.035Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-23T11:22:34.469Z",
+      "nota": "Spec con 1 NO-BLOQUEANTE (ubicación del registro E2E)"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-23T11:26:02.448Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-23T11:53:25.959Z",
+      "nota": "2 commits en frontend; APK 118,5MB; E2E 21/21 OK"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-23T11:58:19.950Z",
+      "nota": "Gates: lint+tipos+190 tests OK. Revisión anfitriona approve, 0 bloqueantes, 1 low (script reproducido ya agregado a la spec)"
+    },
+    "cerrar": {
+      "estado": "en_curso",
+      "ts": "2026-09-23T12:02:49.632Z",
+      "nota": "PR frontend 12 abierto; transicionada en Jira a En revisión; espera merge"
+    },
+    "cerrada": {
+      "estado": "pendiente"
+    }
+  },
+  "commits": {
+    "frontend": [
+      "9514f7b",
+      "0f27769"
+    ]
+  },
+  "revisiones": [],
+  "pr": {},
+  "jira": {
+    "transicionadoA": "En curso",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "opencode",
+    "modelo": "big-pickle",
+    "ts": "2026-09-23T11:20:44.028Z",
+    "fin": null
+  },
+  "notas": {
+    "e2e": "21/21 pasos OK contra el stack local (nivel API)",
+    "apk": "generado 118,5 MB contra http://192.168.0.118:8080; backend responde 200 en LAN; sin tablet/emulador disponible, instalación efectiva pendiente de dispositivo",
+    "campo": "AUDITORIA_UX_MOVIL.md §5 y conclusión 4 reescritas como protocolo pendiente"
+  }
+}

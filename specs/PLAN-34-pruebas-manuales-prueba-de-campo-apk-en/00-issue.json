@@ -1,0 +1,148 @@
+{
+  "key": "PLAN-34",
+  "fields": {
+    "summary": "Pruebas manuales: prueba de campo, APK en tablet y recorrido E2E",
+    "status": {
+      "name": "En curso"
+    },
+    "assignee": {
+      "displayName": "Juan Ignacio Urrutia"
+    },
+    "priority": {
+      "name": "High"
+    },
+    "issuetype": {
+      "name": "Tarea"
+    },
+    "description": {
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Pruebas hechas por personas que quedaron pendientes al cierre del Sprint 4. Hasta ahora cada tarea se verificó con tests automáticos y gates, pero nadie usó la aplicación de punta a punta. El objetivo del Sprint 4 incluía «pruebas E2E», y se decidió pasarlas a esta tarea para cerrar el sprint."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "1. Prueba de campo con un operador real (viene de PLAN-16)"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "La §5 de frontend/docs/AUDITORIA_UX_MOVIL.md registra una prueba con un usuario real que no se hizo. Hay que: (1) Hacer la prueba con una persona en una tablet siguiendo las 6 tareas del protocolo (T1-T6); (2) Reemplazar los resultados de la §5 y la conclusión 4 por los datos reales, anonimizados."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "2. APK instalado en una tablet (viene de PLAN-15)"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "El APK de release bloqueaba HTTP; se corrigió en docker/Dockerfile.apk (frontend, e04ff0e) y el build confirma que el manifest lo permite, pero no se probó en un dispositivo: (1) Generar el APK con sh scripts/build-apk.sh http://<IP>:8080; (2) Levantar el compose del backend publicando el 8080 en la red (docker-compose.override.yml temporal); (3) Instalar el APK y hacer login."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "3. Recorrido E2E antes de la demo"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Una persona recorre el ciclo completo con el compose levantado y anota lo que falle: móvil (login 2FA → agenda → inicio de visita con GPS → formulario → evidencias y firma → sincronización) y backoffice (planificación de rutas, tablero de supervisión, expediente y verificación de auditoría)."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Criterios de aceptación"
+            }
+          ]
+        },
+        {
+          "type": "taskList",
+          "content": [
+            {
+              "type": "taskItem",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "La §5 del informe UX móvil refleja una prueba real, o se reescribe como «protocolo pendiente de ejecución»."
+                }
+              ],
+              "attrs": {
+                "state": "TODO"
+              }
+            },
+            {
+              "type": "taskItem",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "El APK hace login contra el backend desde una tablet o un emulador."
+                }
+              ],
+              "attrs": {
+                "state": "TODO"
+              }
+            },
+            {
+              "type": "taskItem",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Hay un registro del recorrido E2E con los problemas encontrados, cada uno cargado como bug si corresponde."
+                }
+              ],
+              "attrs": {
+                "state": "TODO"
+              }
+            }
+          ],
+          "attrs": {}
+        }
+      ]
+    }
+  }
+}
