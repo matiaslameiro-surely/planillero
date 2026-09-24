@@ -1,0 +1,19 @@
+{
+  "verdict": "approve",
+  "summary": "Se revisó el diff del backoffice contra la spec y el contrato de PLAN-46: código de visita con UUID en el tooltip y botón copiar, validación previa de ID o código, mensaje del 404 en la sección y placeholder descriptivo. Cumple los criterios 5 a 7; el caso sin portapapeles (contexto no seguro) ya se contempla en 8d0bed4.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "La confirmación de copiado no se borra sola",
+      "body": "Después de copiar, el botón queda en ✓ hasta que se copie otra fila. Es un detalle visual, no confunde el dato.",
+      "file": "src/app/pages/auditoria/auditoria.html",
+      "line_start": 127,
+      "line_end": 134,
+      "confidence": 0.7,
+      "recommendation": "Si molesta, volver al ícono después de unos segundos."
+    }
+  ],
+  "next_steps": [
+    "Mergear después del PR del backend."
+  ]
+}

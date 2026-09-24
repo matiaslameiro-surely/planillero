@@ -1,0 +1,90 @@
+{
+  "issue": "PLAN-46",
+  "titulo": "Auditoría: identificar las visitas por su código, validar el ID, mensajes en español y placeholder del filtro",
+  "slug": "auditoria-identificar-las-visitas-por",
+  "rama": "PLAN-46-auditoria-identificar-las-visitas-por",
+  "alcance": [
+    "backend",
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-24T17:16:12.341Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-24T17:16:12.400Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-24T17:17:48.396Z",
+      "nota": "Plan aprobado por el usuario el 24/09"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-24T18:10:31.817Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-24T18:10:31.885Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-24T18:47:56.420Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-24T18:47:56.490Z",
+      "nota": "PRs backend #17 y backoffice #24; Jira En revisión"
+    }
+  },
+  "commits": {},
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backend",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backend-1.json",
+      "sha": "70f11efcdbe598fbcffb90cb7f799a9b00df7f21",
+      "ts": "2026-09-24T18:10:21.824Z"
+    },
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-1.json",
+      "sha": "8d0bed4d1d976cf8af77eea36ed7e806af5c3e8e",
+      "ts": "2026-09-24T18:10:21.969Z"
+    },
+    {
+      "n": 2,
+      "repo": "backend",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backend-2.json",
+      "sha": "a87f8663f09ab11fa9b185efec1007edf1848048",
+      "ts": "2026-09-24T18:25:39.517Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "Claude Opus 5.5 (claude-opus-5-5)",
+    "ts": "2026-09-24T17:15:01.424Z",
+    "fin": "2026-09-24T18:47:56.421Z"
+  }
+}
