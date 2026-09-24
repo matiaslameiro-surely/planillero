@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "Implementación completa y limpia en auth.interceptor.ts. Se excluyen adecuadamente los endpoints públicos de la cabecera Authorization y se realiza la renovación proactiva ante tokens por vencer (<= 30s) compartiendo el refresco en vuelo y manteniendo el respaldo ante 401.",
+  "findings": [],
+  "next_steps": []
+}

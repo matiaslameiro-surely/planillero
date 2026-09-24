@@ -1,0 +1,9 @@
+{
+  "key": "PLAN-44",
+  "summary": "Backoffice: no mandar el token a los endpoints públicos y renovar la sesión antes de que venza (sin 401 en la consola)",
+  "type": "Tarea",
+  "priority": "Medium",
+  "assignee": "Fernando Chamorro Goncalves",
+  "status": "En curso",
+  "url": "https://surely-sa.atlassian.net/browse/PLAN-44"
+}

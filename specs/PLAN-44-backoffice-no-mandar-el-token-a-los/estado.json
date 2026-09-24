@@ -1,0 +1,65 @@
+{
+  "issue": "PLAN-44",
+  "titulo": "Backoffice: no mandar el token a los endpoints públicos y renovar la sesión antes de que venza (sin 401 en la consola)",
+  "slug": "backoffice-no-mandar-el-token-a-los",
+  "rama": "PLAN-44-backoffice-no-mandar-el-token-a-los",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrar",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-24T20:02:49.589Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-24T20:03:11.562Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-24T20:05:43.820Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-24T20:08:46.759Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-24T20:09:39.664Z"
+    },
+    "cerrar": {
+      "estado": "pendiente"
+    },
+    "cerrada": {
+      "estado": "pendiente"
+    }
+  },
+  "commits": {
+    "backoffice": "533df8c"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": null,
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-1.json",
+      "sha": "533df8c6aee1728c376d6d78d480880a50cf4f6a",
+      "ts": "2026-09-24T20:09:27.256Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.8 Flash",
+    "ts": "2026-09-24T20:02:07.851Z",
+    "fin": null
+  }
+}
