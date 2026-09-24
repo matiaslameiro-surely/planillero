@@ -1,0 +1,71 @@
+{
+  "issue": "PLAN-13",
+  "titulo": "TASK-07 (Móvil): Renderizador Dinámico de Formularios Tipificados",
+  "slug": "renderizador-formularios",
+  "rama": "PLAN-13-renderizador-formularios",
+  "alcance": [
+    "backend",
+    "frontend",
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-21T08:45:00.000Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-21T11:45:09.119Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-21T12:05:51.463Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-21T18:30:00.000Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-21T18:45:00.000Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-21T19:15:00.000Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-21T20:00:00.000Z"
+    }
+  },
+  "commits": {
+    "backend": [
+      "df8f47f (PLAN-13-renderizador-formularios branch)"
+    ],
+    "frontend": [
+      "3be0230 (PLAN-13-renderizador-formularios branch)"
+    ],
+    "backoffice": [
+      "2aabf37 (PLAN-13-renderizador-formularios branch)"
+    ]
+  },
+  "revisiones": [
+    "specs/PLAN-13-renderizador-formularios/05-revision-backoffice-1.json"
+  ],
+  "pr": {
+    "backend": "https://github.com/matiaslameiro-surely/planillero-backend/pull/11",
+    "frontoffice": "https://github.com/matiaslameiro-surely/planillero-frontend/pull/8",
+    "backoffice": "https://github.com/matiaslameiro-surely/planillero-backoffice/pull/8"
+  },
+  "jira": {
+    "transicionadoA": "Finalizado",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "opencode",
+    "modelo": "nemotron-3-ultra-free",
+    "ts": "2026-09-21T08:45:00.000Z",
+    "fin": "2026-09-21T20:00:00.000Z"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "verdict": "approve",
+  "summary": "Backoffice implementa el visor de expediente con DynamicForm en modo readonly, ruta /expediente/:visitId protegida por supervisorGuard, tipos de campo completos (text, select, multiselect, number, boolean), validación AJV inline, y fix de class collision en planificacion. Un test preexistente falla en planificacion (no relacionado con PLAN-13). Faltan archivos de test en el commit.",
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "Test preexistente falla en planificacion",
+      "body": "Test 'carga operadores y visitas, y deja el primero seleccionado' falla porque getRouteSheet se llama con la fecha actual (2026-09-21) pero el mock espera 2026-09-18. Es un fallo preexistente de PLAN-8, no relacionado con los cambios de PLAN-13.",
+      "file": "src/app/pages/planificacion/planificacion.spec.ts",
+      "line_start": 118,
+      "line_end": 118,
+      "confidence": 0.95,
+      "recommendation": "Corregir en PLAN-8 o actualizar mock para usar fecha dinámica. No bloquea PLAN-13."
+    },
+    {
+      "severity": "medium",
+      "title": "Faltan archivos de test para nuevos componentes",
+      "body": "El commit agrega DynamicFormComponent, 5 field components, ValidationService, FormsApiService, VisitsApiService y ExpedienteComponent pero no incluye sus archivos *.spec.ts. El 04-tareas.md dice que los tests pasan (40/41) pero no están en el diff.",
+      "file": "src/app/forms/",
+      "line_start": 1,
+      "line_end": 1,
+      "confidence": 0.8,
+      "recommendation": "Agregar *.spec.ts para DynamicFormComponent, field components, ValidationService, expediente.component antes del merge, o confirmar que existen en el árbol de trabajo y están en .gitignore."
+    },
+    {
+      "severity": "low",
+      "title": "ajv y ajv-formats como dependencias de runtime",
+      "body": "ValidationService importa ajv y ajv-formats que están en dependencies (no devDependencies). Es aceptable para validación en runtime; revisar si se usan solo en tests para mover a devDependencies.",
+      "file": "package.json",
+      "line_start": 20,
+      "line_end": 21,
+      "confidence": 0.7,
+      "recommendation": "Evaluar mover a devDependencies si ValidationService solo se usa en build/test y no en bundle de producción."
+    }
+  ],
+  "next_steps": []
+}
