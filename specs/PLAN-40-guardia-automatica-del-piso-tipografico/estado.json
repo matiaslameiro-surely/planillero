@@ -1,0 +1,55 @@
+{
+  "issue": "PLAN-40",
+  "titulo": "Guardia automática del piso tipográfico y el contraste del backoffice",
+  "slug": "guardia-automatica-del-piso-tipografico",
+  "rama": "PLAN-40-guardia-automatica-del-piso-tipografico",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-23T21:28:46.675Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-23T21:29:58.376Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-23T21:31:08.789Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-23T21:41:23.814Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-23T21:45:50.231Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-23T21:47:28.037Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-23T21:47:28.106Z"
+    }
+  },
+  "commits": {
+    "backoffice": "fa2c605"
+  },
+  "revisiones": [],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.7 Flash",
+    "ts": "2026-09-23T21:28:27.405Z",
+    "fin": "2026-09-23T21:47:28.037Z"
+  }
+}

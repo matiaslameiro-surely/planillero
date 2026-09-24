@@ -1,0 +1,29 @@
+{
+  "id": "10107",
+  "key": "PLAN-40",
+  "summary": "Guardia automática del piso tipográfico y el contraste del backoffice",
+  "browse_url": "https://surely-sa.atlassian.net/browse/PLAN-40",
+  "description": "PLAN-25 fijó un piso tipográfico de 12 px y una escala de grises que cumple WCAG AA. Nada impide que eso se deshaga, y ya se deshizo una vez.\n\n*La evidencia*\n\nEntre la primera versión de PLAN-25 y su merge, dos tareas mergeadas en el medio reintrodujeron exactamente lo que esa tarea venía a corregir:\n\n- *PLAN-26* — el rol del usuario en la barra de navegación, a 11 px.\n- *PLAN-30* — etiqueta de prioridad a 9,3 px, textos de frescura a 10,9 y 11,5 px, un «Cargando…» a 4,10:1 y `opacity` sobre el texto de dos tipos de tarjeta.\n\nNadie actuó de mala fe: no hay forma de que quien escribe una pantalla nueva sepa que existe un piso, porque el piso no está escrito en ningún lado que el build lea. PLAN-25 tuvo que crecer de 14 a 16 archivos para limpiar lo que habían ensuciado dos tareas de la misma semana. Sin una guardia, la próxima tarea de UI vuelve a romperlo y hace falta otra tarea de limpieza.\n\n*Qué haría falta*\n\nUn test —o un paso de lint— que recorra las hojas de estilo y falle cuando encuentre:\n\n- un `font-size` por debajo de `$font-size-min`;\n- `opacity` aplicada a un elemento con texto (la atenuación va con colores explícitos de la paleta, porque el contraste de un `opacity` no se puede auditar leyendo el código).\n\nEl contraste es más difícil de verificar automáticamente, porque hay que saber sobre qué fondo cae cada texto y si califica como texto grande (umbral 3:1 en lugar de 4,5:1). Una primera versión razonable es cubrir el piso tipográfico y la `opacity`, que son mecánicos, y dejar el contraste para una segunda vuelta.\n\n*Criterios de aceptación*\n\n- El gate falla ante un `font-size` por debajo del piso en cualquier `.scss` o estilo embebido de `src/`.\n- El gate falla ante `opacity` sobre texto, con una forma explícita de marcar las excepciones justificadas.\n- Con el código actual de `main`, el gate pasa.\n- El mensaje de error dice qué archivo, qué línea y cuál es el piso, para que se pueda arreglar sin leer esta tarea.\n\nDetectado al revisar el PR #16 (PLAN-25), donde quedó anotado como pendiente.",
+  "status": {
+    "name": "En curso",
+    "category": "En curso",
+    "color": "yellow"
+  },
+  "issue_type": {
+    "name": "Tarea"
+  },
+  "priority": {
+    "name": "Medium"
+  },
+  "assignee": {
+    "account_id": "61d33c409ee70a0068541939",
+    "display_name": "Juan Ignacio Urrutia",
+    "name": "Juan Ignacio Urrutia",
+    "email": "juan.urrutia@surely-sa.com.ar"
+  },
+  "reporter": {
+    "account_id": "712020:20e9808d-40b0-42d5-ae58-a28b20f3fa5e",
+    "display_name": "Matías Lameiro",
+    "name": "Matías Lameiro"
+  }
+}
