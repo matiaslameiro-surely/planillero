@@ -1,0 +1,54 @@
+{
+  "issue": "PLAN-17",
+  "titulo": "Ciberseguridad y Demo: Matriz de Riesgos OWASP, Secretos y Video Demostrativo",
+  "slug": "ciberseguridad-y-demo-matriz-de-riesgos",
+  "rama": "PLAN-17-ciberseguridad-y-demo-matriz-de-riesgos",
+  "alcance": [
+    "backend",
+    "frontend",
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-22T00:38:11.783Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-22T00:47:41.651Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-22T00:54:51.035Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-22T01:13:42.788Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-22T01:17:14.164Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-22T01:17:37.125Z"
+    },
+    "cerrada": {
+      "estado": "pendiente"
+    }
+  },
+  "commits": {},
+  "revisiones": [],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "opencode",
+    "modelo": "auto",
+    "ts": "2026-09-22T00:38:04.241Z",
+    "fin": "2026-09-22T01:17:37.126Z"
+  }
+}

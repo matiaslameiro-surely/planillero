@@ -1,0 +1,96 @@
+{
+  "ok": false,
+  "tarea": "PLAN-17",
+  "ts": "2026-09-22T01:13:14.238Z",
+  "repos": [
+    {
+      "repo": "backend",
+      "ok": false,
+      "herramienta": "maven",
+      "pasos": [
+        {
+          "nombre": "compilar",
+          "cmd": "mvnw -B -q -DskipTests compile",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 2317,
+          "salida": ""
+        },
+        {
+          "nombre": "tests",
+          "cmd": "mvnw -B test",
+          "ok": false,
+          "codigo": 1,
+          "duracionMs": 27390,
+          "salida": "[…1802 líneas omitidas…]\n\t\tat org.springframework.boot.testcontainers.service.connection.ServiceConnectionContextCustomizerFactory.getFieldValue(ServiceConnectionContextCustomizerFactory.java:97)\n\t\tat org.springframework.boot.testcontainers.service.connection.ServiceConnectionContextCustomizerFactory.createSource(ServiceConnectionContextCustomizerFactory.java:82)\n\t\tat org.springframework.boot.testcontainers.service.connection.ServiceConnectionContextCustomizerFactory.lambda$collectSources$1(ServiceConnectionContextCustomizerFactory.java:65)\n\t\tat org.springframework.core.annotation.TypeMappedAnnotations$AggregatesSpliterator.tryAdvance(TypeMappedAnnotations.java:591)\n\t\tat org.springframework.core.annotation.TypeMappedAnnotations$AggregatesSpliterator.tryAdvance(TypeMappedAnnotations.java:558)\n\t\tat java.base/java.util.Spliterator.forEachRemaining(Spliterator.java:332)\n\t\tat java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)\n\t\tat org.springframework.boot.testcontainers.service.connection.ServiceConnectionContextCustomizerFactory.lambda$collectSources$0(ServiceConnectionContextCustomizerFactory.java:65)\n\t\tat org.springframework.util.ReflectionUtils.doWithLocalFields(ReflectionUtils.java:691)\n\t\tat org.springframework.boot.testcontainers.service.connection.ServiceConnectionContextCustomizerFactory.collectSources(ServiceConnectionContextCustomizerFactory.java:62)\n\t\tat org.springframework.boot.testcontainers.service.connection.ServiceConnectionContextCustomizerFactory.collectSources(ServiceConnectionContextCustomizerFactory.java:73)\n\t\tat org.springframework.boot.testcontainers.service.connection.ServiceConnectionContextCustomizerFactory.createContextCustomizer(ServiceConnectionContextCustomizerFactory.java:54)\n\t\tat org.springframework.test.context.support.AbstractTestContextBootstrapper.getContextCustomizers(AbstractTestContextBootstrapper.java:420)\n\t\tat org.springframework.test.context.support.AbstractTestContextBootstrapper.buildMergedContextConfiguration(AbstractTestContextBootstrapper.java:393)\n\t\tat org.springframework.test.context.support.AbstractTestContextBootstrapper.buildDefaultMergedContextConfiguration(AbstractTestContextBootstrapper.java:268)\n\t\tat org.springframework.test.context.support.AbstractTestContextBootstrapper.buildMergedContextConfiguration(AbstractTestContextBootstrapper.java:226)\n\t\tat org.springframework.test.context.support.AbstractTestContextBootstrapper.buildTestContext(AbstractTestContextBootstrapper.java:117)\n\t\tat org.springframework.boot.test.context.SpringBootTestContextBootstrapper.buildTestContext(SpringBootTestContextBootstrapper.java:102)\n\t\tat org.springframework.test.context.TestContextManager.<init>(TestContextManager.java:142)\n\t\tat org.springframework.test.context.TestContextManager.<init>(TestContextManager.java:126)\n\t\tat java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)\n\t\tat org.springframework.test.context.junit.jupiter.SpringExtension.getTestContextManager(SpringExtension.java:466)\n\t\tat org.springframework.test.context.junit.jupiter.SpringExtension.beforeAll(SpringExtension.java:209)\n\t\t... 1 more\nCaused by: java.lang.IllegalStateException: Could not find a valid Docker environment. Please see logs and check configuration\n\tat org.testcontainers.dockerclient.DockerClientProviderStrategy.lambda$getFirstValidStrategy$7(DockerClientProviderStrategy.java:274)\n\tat java.base/java.util.Optional.orElseThrow(Optional.java:403)\n\tat org.testcontainers.dockerclient.DockerClientProviderStrategy.getFirstValidStrategy(DockerClientProviderStrategy.java:265)\n\tat org.testcontainers.DockerClientFactory.getOrInitializeStrategy(DockerClientFactory.java:154)\n\tat org.testcontainers.DockerClientFactory.client(DockerClientFactory.java:196)\n\tat org.testcontainers.DockerClientFactory$1.getDockerClient(DockerClientFactory.java:108)\n\tat com.github.dockerjava.api.DockerClientDelegate.authConfig(DockerClientDelegate.java:109)\n\tat org.testcontainers.containers.GenericContainer.start(GenericContainer.java:321)\n\tat ar.com.planillero.AbstractIntegrationTest.<clinit>(AbstractIntegrationTest.java:29)\n\t... 30 more\n\n[INFO] \n[INFO] Results:\n[INFO] \n[ERROR] Errors: \n[ERROR]   PlanilleroBackendApplicationTests � ExceptionInInitializer\n[ERROR]   AuditAspectOrderIntegrationTest � ExceptionInInitializer\n[ERROR]   AuditIntegrationTest � ExceptionInInitializer\n[ERROR]   AuthIntegrationTest � ExceptionInInitializer\n[ERROR]   EvidenceIntegrationTest � ExceptionInInitializer\n[ERROR]   FormTemplateIntegrationTest � ExceptionInInitializer\n[ERROR]   DatabaseIntegrationTest � ExceptionInInitializer\n[ERROR]   PlanningIntegrationTest � ExceptionInInitializer\n[ERROR]   VisitStartIntegrationTest � ExceptionInInitializer\n[ERROR]   SupervisionIntegrationTest � ExceptionInInitializer\n[ERROR]   SyncAbandonedKeyIntegrationTest � ExceptionInInitializer\n[ERROR]   SyncBatchIntegrationTest � ExceptionInInitializer\n[ERROR]   SyncConcurrencyIntegrationTest � ExceptionInInitializer\n[ERROR]   VisitFormIntegrationTest � ExceptionInInitializer\n[INFO] \n[ERROR] Tests run: 55, Failures: 0, Errors: 14, Skipped: 0\n[INFO] \n[INFO] ------------------------------------------------------------------------\n[INFO] BUILD FAILURE\n[INFO] ------------------------------------------------------------------------\n[INFO] Total time:  26.080 s\n[INFO] Finished at: 2026-09-21T22:12:58-03:00\n[INFO] ------------------------------------------------------------------------\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.6:test (default-test) on project planillero-backend: \n[ERROR] \n[ERROR] See C:\\curso-ia\\planillero\\backend\\target\\surefire-reports for the individual test results.\n[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.\n[ERROR] -> [Help 1]\n[ERROR] \n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\n[ERROR] \n[ERROR] For more information about the errors and possible solutions, please read the following articles:\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\nMockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3\nWARNING: A Java agent has been loaded dynamically (C:\\Users\\Surely Desarrollo\\.m2\\repository\\net\\bytebuddy\\byte-buddy-agent\\1.18.11\\byte-buddy-agent-1.18.11.jar)\nWARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning\nWARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information\nWARNING: Dynamic loading of agents will be disallowed by default in a future release\nJava HotSpot(TM) 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended"
+        }
+      ],
+      "avisos": []
+    },
+    {
+      "repo": "frontend",
+      "ok": true,
+      "herramienta": "npm",
+      "pasos": [
+        {
+          "nombre": "lint",
+          "cmd": "npm run lint",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 1558,
+          "salida": "\n> planillero-frontend@0.1.0 lint\n> expo lint --max-warnings 0"
+        },
+        {
+          "nombre": "tipos",
+          "cmd": "npx tsc --noEmit",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 1635,
+          "salida": ""
+        },
+        {
+          "nombre": "tests",
+          "cmd": "npm test -- --watchAll=false",
+          "opcional": true,
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 3657,
+          "salida": "\n> planillero-frontend@0.1.0 test\n> jest --watchAll=false\n\nPASS src/audit/auditRepository.test.ts\nPASS src/sync/signOutGuard.test.ts\nPASS src/api/client.test.ts\nPASS src/sync/syncWorker.test.ts\nPASS src/status/useHeartbeat.test.tsx\nPASS src/db/encryptionKey.test.ts\nPASS src/status/useDeviceStatus.test.tsx\nPASS src/sync/syncQueue.test.ts\nPASS src/components/VisitCard.test.tsx\nPASS src/components/LocationSummary.test.tsx\nPASS src/components/DeviceStatusBar.test.tsx\nPASS src/api/__tests__/evidence.test.ts\nPASS src/components/SyncQueueBanner.test.tsx\nPASS src/api/visits.test.ts\nPASS src/db/database.test.ts\nPASS src/agenda/date.test.ts\nPASS src/visit/startVisit.test.ts\nPASS src/auth/tokenStore.test.ts\nPASS src/agenda/agendaRepository.test.ts\nPASS src/visit/location.test.ts\nPASS src/visit/accuracy.test.ts\nPASS src/sync/useSyncQueue.test.tsx\nPASS src/agenda/useAgenda.test.tsx\n\nTest Suites: 23 passed, 23 total\nTests:       179 passed, 179 total\nSnapshots:   0 total\nTime:        3.09 s, estimated 26 s\nRan all test suites."
+        }
+      ],
+      "avisos": []
+    },
+    {
+      "repo": "backoffice",
+      "ok": true,
+      "herramienta": "npm",
+      "pasos": [
+        {
+          "nombre": "lint",
+          "cmd": "npm run lint",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 1701,
+          "salida": "\n> planillero-backoffice@0.1.0 lint\n> ng lint --max-warnings=0\n\n\nLinting \"planillero-backoffice\"...\n\nAll files pass linting."
+        },
+        {
+          "nombre": "tipos",
+          "cmd": "npm run build",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 2726,
+          "salida": "\n> planillero-backoffice@0.1.0 build\n> ng build\n\n❯ Building...\n✔ Building...\nInitial chunk files | Names                |  Raw size | Estimated transfer size\nmain-ZOWKZMNI.js    | main                 | 284.31 kB |                77.84 kB\nstyles-LKC44D2S.css | styles               |  11.53 kB |                 2.49 kB\n\n                    | Initial total        | 295.84 kB |                80.33 kB\n\nLazy chunk files    | Names                |  Raw size | Estimated transfer size\nchunk-BH7T1aX7.js   | expediente-component | 160.83 kB |                41.40 kB\nchunk-BHH_TscI.js   | -                    | 149.60 kB |                37.69 kB\nchunk-BEd9zSmU.js   | -                    |  48.23 kB |                10.22 kB\nchunk-CfVKDYnW.js   | supervision          |  19.50 kB |                 5.58 kB\nchunk-DNjaZ2FW.js   | planificacion        |  16.68 kB |                 4.75 kB\nchunk-55vQovsn.js   | evidence-viewer      |  13.84 kB |                 3.95 kB\nchunk-fSSLdt4j.js   | auditoria            |  12.81 kB |                 3.78 kB\nchunk-CIfpNYsR.js   | login                |   5.56 kB |                 1.87 kB\nchunk-DhI93gJL.js   | home                 |   5.00 kB |                 1.83 kB\nchunk-OZqs1BfE.js   | access-denied        | 927 bytes |               927 bytes\n\nApplication bundle generation complete. [2.051 seconds] - 2026-09-22T01:13:09.927Z\n\nOutput location: C:\\curso-ia\\planillero\\backoffice\\dist\\planillero-backoffice\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'ajv' used by 'src/app/forms/validation.service.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m\n\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'ajv-formats' used by 'src/app/forms/validation.service.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m\n\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'leaflet' used by 'src/app/pages/supervision/supervision-map/supervision-map.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m"
+        },
+        {
+          "nombre": "tests",
+          "cmd": "npm test",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 4228,
+          "salida": "\n> planillero-backoffice@0.1.0 test\n> ng test\n\n❯ Building...\n✔ Building...\nApplication bundle generation complete. [1.314 seconds] - 2026-09-22T01:13:11.913Z\n\n\n\u001b[1m\u001b[30m\u001b[46m RUN \u001b[49m\u001b[39m\u001b[22m \u001b[36mv4.1.11 \u001b[39m\u001b[90mC:/curso-ia/planillero/backoffice\u001b[39m\n\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m12 passed\u001b[39m\u001b[22m\u001b[90m (12)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m64 passed\u001b[39m\u001b[22m\u001b[90m (64)\u001b[39m\n\u001b[2m   Start at \u001b[22m 22:13:12\n\u001b[2m   Duration \u001b[22m 2.09s\u001b[2m (transform 1.33s, setup 4.97s, import 2.28s, tests 995ms, environment 11.05s)\u001b[22m\n\n(node:19984) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.\n(Use `node --trace-warnings ...` to show where the warning was created)\n(node:31868) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+        }
+      ],
+      "avisos": []
+    }
+  ]
+}
