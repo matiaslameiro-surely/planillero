@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "Revisión del commit 44c5d74 en backoffice. Corrige el selector CSS inválido `:readonly` por el pseudo-selector válido `:read-only` en los únicos dos componentes que declaraban la regla (`field-text` y `field-number`), activando el fondo gris #f7fafc que distingue visualmente los campos de sólo lectura en el expediente. El diff es mínimo (2 líneas), coincide con el defecto descrito en la spec (PLAN-18, hallazgo H14) y los gates del repositorio quedaron en verde.",
+  "findings": [],
+  "next_steps": []
+}

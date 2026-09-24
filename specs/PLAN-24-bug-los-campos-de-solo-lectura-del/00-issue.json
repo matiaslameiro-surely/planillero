@@ -1,0 +1,235 @@
+{
+  "key": "PLAN-24",
+  "fields": {
+    "summary": "Bug: los campos de sólo lectura del expediente se ven idénticos a los editables",
+    "status": {
+      "name": "En curso"
+    },
+    "assignee": {
+      "accountId": "61d33c409ee70a0068541939",
+      "displayName": "Juan Ignacio Urrutia"
+    },
+    "priority": {
+      "name": "Medium"
+    },
+    "issuetype": {
+      "name": "Tarea"
+    },
+    "sprint": {
+      "name": "Sprint 5 - Fix de bugs",
+      "state": "active"
+    },
+    "reporter": {
+      "displayName": "Matías Lameiro"
+    },
+    "description": {
+      "type": "doc",
+      "version": 1,
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Detectado por la auditoría UX/UI de PLAN-18 (hallazgo H14). No es cosmético: es una regla de estilo que el navegador descarta al parsear, así que nunca se aplicó desde que se escribió."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "El defecto",
+              "marks": [{ "type": "em" }]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "src/app/forms/fields/field-text.component.ts:46"
+            },
+            {
+              "type": "text",
+              "text": " y "
+            },
+            {
+              "type": "text",
+              "text": "src/app/forms/fields/field-number.component.ts:48"
+            },
+            {
+              "type": "text",
+              "text": " declaran:"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "{code}\n.field-input:readonly { background: #f7fafc; }\n{code}"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": ":readonly"
+            },
+            {
+              "type": "text",
+              "text": " no es un selector CSS válido. El pseudo-selector que define la especificación es "
+            },
+            {
+              "type": "text",
+              "text": ":read-only"
+            },
+            {
+              "type": "text",
+              "text": ", con guion. La regla se descarta al parsear y nunca tiene efecto."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Por qué importa",
+              "marks": [{ "type": "em" }]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "El expediente digital renderiza el formulario de la visita en modo "
+            },
+            {
+              "type": "text",
+              "text": "readonly"
+            },
+            {
+              "type": "text",
+              "text": " ("
+            },
+            {
+              "type": "text",
+              "text": "src/app/pages/expediente/expediente.component.ts:51"
+            },
+            {
+              "type": "text",
+              "text": "), así que sus campos se ven "
+            },
+            {
+              "type": "text",
+              "text": "idénticos a campos editables"
+            },
+            {
+              "type": "text",
+              "text": ". El usuario descubre que no puede escribir recién cuando lo intenta."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "El atributo HTML sí está bien puesto ("
+            },
+            {
+              "type": "text",
+              "text": "field-text.component.ts:24"
+            },
+            {
+              "type": "text",
+              "text": "), así que el dato está protegido: lo que falla es exclusivamente el aviso visual."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Criterios de aceptación",
+              "marks": [{ "type": "em" }]
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Los campos en modo sólo lectura se distinguen visualmente de los editables en el expediente."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "La corrección cubre los componentes de campo que declaran la regla ("
+                    },
+                    {
+                      "type": "text",
+                      "text": "field-text"
+                    },
+                    {
+                      "type": "text",
+                      "text": " y "
+                    },
+                    {
+                      "type": "text",
+                      "text": "field-number"
+                    },
+                    {
+                      "type": "text",
+                      "text": ")."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Los gates del backoffice quedan en verde."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

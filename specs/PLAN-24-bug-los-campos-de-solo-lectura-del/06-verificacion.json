@@ -1,0 +1,39 @@
+{
+  "ok": true,
+  "tarea": "PLAN-24",
+  "ts": "2026-09-23T12:30:35.202Z",
+  "repos": [
+    {
+      "repo": "backoffice",
+      "ok": true,
+      "herramienta": "npm",
+      "pasos": [
+        {
+          "nombre": "lint",
+          "cmd": "npm run lint",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 1789,
+          "salida": "\n> planillero-backoffice@0.1.0 lint\n> ng lint --max-warnings=0\n\n\nLinting \"planillero-backoffice\"...\n\nAll files pass linting."
+        },
+        {
+          "nombre": "tipos",
+          "cmd": "npm run build",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 2834,
+          "salida": "\n> planillero-backoffice@0.1.0 build\n> ng build\n\n❯ Building...\n✔ Building...\nInitial chunk files | Names                |  Raw size | Estimated transfer size\nmain-QT7ORQT4.js    | main                 | 284.31 kB |                77.95 kB\nstyles-LKC44D2S.css | styles               |  11.53 kB |                 2.49 kB\n\n                    | Initial total        | 295.84 kB |                80.44 kB\n\nLazy chunk files    | Names                |  Raw size | Estimated transfer size\nchunk-CKPnYYzh.js   | expediente-component | 160.84 kB |                41.30 kB\nchunk-FyEnwIJk.js   | -                    | 149.60 kB |                37.67 kB\nchunk-DDKaOs7_.js   | -                    |  48.23 kB |                10.22 kB\nchunk-Dq431AWY.js   | supervision          |  19.50 kB |                 5.58 kB\nchunk-pnKfMuif.js   | planificacion        |  16.69 kB |                 4.75 kB\nchunk-BtFHfOSz.js   | evidence-viewer      |  13.84 kB |                 3.96 kB\nchunk-CPWdW6RX.js   | auditoria            |  12.81 kB |                 3.78 kB\nchunk-BBU5PxrK.js   | login                |   5.56 kB |                 1.87 kB\nchunk-Gve3yS72.js   | home                 |   5.04 kB |                 1.85 kB\nchunk-BqBDKE1M.js   | access-denied        | 927 bytes |               927 bytes\n\nApplication bundle generation complete. [2.135 seconds] - 2026-09-23T12:30:30.454Z\n\nOutput location: C:\\curso-ia\\planillero\\backoffice\\dist\\planillero-backoffice\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'ajv' used by 'src/app/forms/validation.service.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m\n\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'ajv-formats' used by 'src/app/forms/validation.service.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m\n\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'leaflet' used by 'src/app/pages/supervision/supervision-map/supervision-map.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m"
+        },
+        {
+          "nombre": "tests",
+          "cmd": "npm test",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 4644,
+          "salida": "\n> planillero-backoffice@0.1.0 test\n> ng test\n\n❯ Building...\n✔ Building...\nApplication bundle generation complete. [1.498 seconds] - 2026-09-23T12:30:32.688Z\n\n\n\u001b[1m\u001b[30m\u001b[46m RUN \u001b[49m\u001b[39m\u001b[22m \u001b[36mv4.1.11 \u001b[39m\u001b[90mC:/curso-ia/planillero/backoffice\u001b[39m\n\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m13 passed\u001b[39m\u001b[22m\u001b[90m (13)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m67 passed\u001b[39m\u001b[22m\u001b[90m (67)\u001b[39m\n\u001b[2m   Start at \u001b[22m 09:30:32\n\u001b[2m   Duration \u001b[22m 2.30s\u001b[2m (transform 1.27s, setup 5.90s, import 2.08s, tests 1.18s, environment 13.89s)\u001b[22m\n\n(node:17616) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.\n(Use `node --trace-warnings ...` to show where the warning was created)\n(node:7396) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+        }
+      ],
+      "avisos": []
+    }
+  ]
+}

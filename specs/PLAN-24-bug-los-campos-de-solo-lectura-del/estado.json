@@ -1,0 +1,59 @@
+{
+  "issue": "PLAN-24",
+  "titulo": "Bug: los campos de sólo lectura del expediente se ven idénticos a los editables",
+  "slug": "bug-los-campos-de-solo-lectura-del",
+  "rama": "PLAN-24-bug-los-campos-de-solo-lectura-del",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrar",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:22:01.895Z",
+      "nota": "Sprint 5 activo; repos al día; no existía spec previa; issue en curso"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:22:57.509Z",
+      "nota": "Defecto CSS :readonly inválido en field-text y field-number; fix de una línea por archivo"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:29:40.069Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:29:59.972Z",
+      "nota": "1 commit 44c5d74: :read-only en field-text y field-number"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-23T12:31:05.236Z",
+      "nota": "Gates ok (lint, build, 67 tests). Revisión anfitriona approve, 0 hallazgos"
+    },
+    "cerrar": {
+      "estado": "en_curso",
+      "ts": "2026-09-23T12:32:36.582Z",
+      "nota": "PR backoffice 13 abierto; issue en revisión"
+    },
+    "cerrada": {
+      "estado": "pendiente"
+    }
+  },
+  "commits": {
+    "backoffice": "44c5d74"
+  },
+  "revisiones": [],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "opencode",
+    "modelo": "big-pickle",
+    "ts": "2026-09-23T12:21:51.941Z",
+    "fin": null
+  }
+}
