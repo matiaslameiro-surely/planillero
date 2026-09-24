@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "Se configuró correctamente server.forward-headers-strategy=native en application.properties para delegar el procesamiento de cabeceras de reenvío al RemoteIpValve de Tomcat, y se agregó una suite completa de pruebas de integración con servidor web real que valida el registro de la IP del cliente detrás de proxy y en peticiones directas.",
+  "findings": [],
+  "next_steps": []
+}

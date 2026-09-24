@@ -1,0 +1,14 @@
+{
+  "key": "PLAN-45",
+  "summary": "Auditoría: registrar la IP real del cliente y no la del proxy NGINX",
+  "issueType": "Tarea",
+  "priority": "Medium",
+  "assignee": {
+    "accountId": "61d33c409ee70a0068541939",
+    "displayName": "Juan Ignacio Urrutia"
+  },
+  "reporter": {
+    "displayName": "Federico Morón"
+  },
+  "description": "Detectado el 24/09 al recorrer la Auditoría en el entorno local (compose de PLAN-15).\n\n## Qué se ve\n\nEn la bitácora, la columna **IP** de todos los eventos muestra `172.19.0.5`, que es la IP interna del contenedor de NGINX dentro de la red de Docker, y no la IP de quien hizo la acción.\n\n## Por qué pasa\n\n- `backend/.../audit/AuditRequestContext.java:32` toma la IP con `request.getRemoteAddr()`, que devuelve quién le habló directamente al backend. Detrás del proxy, siempre es NGINX.\n- NGINX **sí** manda la IP real (`backoffice/docker/nginx.conf:62-63`: `X-Real-IP` y `X-Forwarded-For`), pero Spring no está configurado para leerla. `application.properties` no tiene `server.forward-headers-strategy`.\n\nComo la bitácora es la cadena de custodia (PLAN-11), que todos los eventos tengan la misma IP le quita valor al dato del origen de cada acción.\n\n## Qué hacer\n\n- Configurar `server.forward-headers-strategy=native`, que activa el `RemoteIpValve` de Tomcat. Así `getRemoteAddr()` devuelve la IP del cliente cuando la petición llega por un proxy de confianza.\n- **Confiar sólo en el proxy interno.** `X-Forwarded-For` lo puede inventar cualquier cliente, así que sólo se debe honrar cuando viene del proxy. Revisar `server.tomcat.remoteip.internal-proxies`: el valor por defecto cubre las redes privadas, entre ellas la de Docker. Documentar la decisión.\n- Si se prefiere no depender del contenedor, leer el header en `AuditRequestContext` validando que la petición venga del proxy. Se prefiere la configuración de Tomcat.\n- Las llamadas directas al backend (puerto 8080, sin proxy) tienen que seguir registrando la IP de la conexión.\n\n## Criterios de aceptación\n\n- Con el compose levantado, una acción hecha desde el backoffice (`:8081`) queda en la auditoría con la IP del navegador (en local, la de la red de Docker hacia el host o `127.0.0.1`, no la del contenedor de NGINX).\n- Un `X-Forwarded-For` falso mandado **directo** al backend (sin pasar por NGINX) no cambia la IP registrada.\n- Test que cubre los dos casos, y gates del backend en verde."
+}

@@ -1,0 +1,65 @@
+{
+  "issue": "PLAN-45",
+  "titulo": "Auditoría: registrar la IP real del cliente y no la del proxy NGINX",
+  "slug": "auditoria-registrar-la-ip-real-del",
+  "rama": "PLAN-45-auditoria-registrar-la-ip-real-del",
+  "alcance": [
+    "backend"
+  ],
+  "fase": "cerrar",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:46:36.745Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:48:23.901Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-24T16:49:13.644Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-24T17:04:33.184Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-24T17:05:26.461Z"
+    },
+    "cerrar": {
+      "estado": "pendiente"
+    },
+    "cerrada": {
+      "estado": "pendiente"
+    }
+  },
+  "commits": {
+    "backend": "8af0826f9e5ba940149f39946b0ed14ab03cf66b"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backend",
+      "motor": "anfitriona",
+      "motivo": "motor externo opencode no disponible",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backend-1.json",
+      "sha": "8af0826f9e5ba940149f39946b0ed14ab03cf66b",
+      "ts": "2026-09-24T17:05:06.037Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.7 Flash",
+    "ts": "2026-09-24T16:44:41.825Z",
+    "fin": null
+  }
+}
