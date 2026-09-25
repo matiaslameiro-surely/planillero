@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "La implementación cumple todos los 7 criterios de aceptación de PLAN-60. Los cuatro derivados de schema() usan computed() reactivamente; los cinco componentes comparten un único contrato readonly (readonly-contract.ts) auditado por tests; el contraste AA se garantiza con color tokens y -webkit-text-fill-color; los handlers bloquean emisiones en readonly sin romper modo edit; select oculta placeholder y asterisco, muestra raya en vacío; el expediente expone role=group + aria-label; y los tests cubren comportamiento real (no tautologías). No hay regresiones en modo edit.",
+  "findings": [],
+  "next_steps": []
+}

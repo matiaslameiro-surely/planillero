@@ -1,0 +1,15 @@
+{
+  "key": "PLAN-60",
+  "summary": "Backoffice: Estandarizar presentación readonly y reactividad de enums en formulario dinámico",
+  "issuetype": "Tarea",
+  "priority": "Medium",
+  "status": "En curso",
+  "created": "2026-09-25T11:38:11.095-0300",
+  "updated": "2026-09-25T13:08:35.420-0300",
+  "duedate": null,
+  "assignee": "Juan Ignacio Urrutia",
+  "reporter": "Juan Ignacio Urrutia",
+  "project": "PLAN",
+  "sprint": "Sprint 6 - Nuevas pruebas",
+  "description": "En la pantalla de Expediente digital (mode=\"readonly\"), existe inconsistencia visual y de interacción entre controles:\n\n- Los campos de texto (<input>) usan [readonly] permitiendo recibir foco y cursor.\n- Los desplegables (<select>) usan [disabled] bloqueando la interacción.\n\nEsto genera confusión sobre si el formulario es editable o un registro histórico inmutable.\n\nAdicionalmente, en FieldSelectComponent y FieldMultiSelectComponent, las opciones enumValues se leen en el ciclo ngOnInit en lugar de calcularse reactivamente con un computed ante cambios en el signal de entrada schema().\n\nCriterios de Aceptación:\n\n1. En FieldSelectComponent y FieldMultiSelectComponent, derivar enumValues de forma reactiva (computed(() => (this.schema()['enum'] as string[]) ?? [])).\n2. Estandarizar el diseño visual, consistencia y accesibilidad de los controles de formulario en modo readonly para reflejar claramente que es un visor de solo lectura.\n3. Pruebas unitarias actualizadas y aprobadas."
+}

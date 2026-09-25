@@ -1,0 +1,92 @@
+{
+  "issue": "PLAN-60",
+  "titulo": "Backoffice: Estandarizar presentacion readonly y reactividad de enums en formulario dinamico",
+  "slug": "backoffice-estandarizar-presentacion",
+  "rama": "PLAN-60-backoffice-estandarizar-presentacion",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-25T17:17:30.007Z",
+      "nota": "Entorno OK (Node 26, git, gh, JDK 21). Harness actualizado a 6cd4b56. Issue PLAN-60 transicionado a En curso."
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-25T17:17:33.516Z",
+      "nota": "Sin preguntas BLOQUEANTES. 7 criterios de aceptacion verificables, 5 decisiones de diseno resueltas con el usuario."
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-25T17:19:25.668Z",
+      "nota": "10 archivos de codigo, 9 tareas de implementacion. Sin supuestos RIESGO. Checkpoint de plan obligatorio (flujo.checkpoints)."
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-25T18:01:07.215Z",
+      "nota": "11 archivos, commit 4bf7ccf. Build, lint y 201 tests en verde."
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-25T18:35:10.988Z",
+      "nota": "Gates backoffice OK: lint, build, 217 tests. Revisiones aprobadas (05-revision-backoffice-2.json)."
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-25T18:37:31.439Z",
+      "nota": "PR creado: https://github.com/matiaslameiro-surely/planillero-backoffice/pull/29. Jira en En revisión (31). Pendiente merge y cierre."
+    },
+    "cerrada": {
+      "estado": "pendiente"
+    }
+  },
+  "commits": {},
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": null,
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-1.json",
+      "sha": "4bf7ccf4ac36cc98cd6250cf3d0367fd779b649d",
+      "ts": "2026-09-25T18:05:35.484Z"
+    },
+    {
+      "n": 2,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": null,
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-2.json",
+      "sha": "e90db10c5d38925c0e293235227f4f09e465d8b0",
+      "ts": "2026-09-25T18:34:37.993Z"
+    },
+    {
+      "n": 3,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": null,
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-3.json",
+      "sha": "68b24d6f7343f54d560cbfa071d310f6b9bf25b4",
+      "ts": "2026-09-25T19:55:47.571Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "opencode",
+    "modelo": "opencode/big-pickle",
+    "ts": "2026-09-25T17:15:15.928Z",
+    "fin": "2026-09-25T18:37:31.440Z"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "verdict": "approve",
+  "summary": "Se revisó el diff de PLAN-60 contra los siete criterios de aceptación de la spec. Los cuatro derivados de schema() pasaron a computed() y están probados con setInput sin recrear el componente, el contrato de presentación está aplicado en los cinco campos y auditado, los guards readonly() en los handlers quedan correctamente detrás de la condición y el camino de edición no cambia. No se encontraron regresiones en modo edición ni criterios incumplidos: quedan dos observaciones de baja severidad, una sobre un comentario que no coincide con lo que hace el código y una sospecha sobre la flecha del select.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "El comentario atribuye al contrato compartido la superficie del chip, que el contrato no aplica",
+      "body": "El comentario afirma que al chip el contrato \"le pone la superficie y le quita el cursor\". La segunda mitad es cierta ([data-readonly] label { cursor: default } alcanza al chip), la primera no: READONLY_STYLES sólo aplica background a input, select y textarea, nunca a label. La superficie del chip en solo lectura la define justamente la regla local [data-readonly] .chip:not(.chip-selected), que la repite. Hoy no hay impacto funcional, pero el comentario invita a tratar ese background local como duplicado del contrato: si alguien lo borra por redundante, el chip no seleccionado queda con el relleno deprimido de opción elegible, que es exactamente el problema que la spec describe en la columna del multiselect. El mismo criterio sí es correcto en field-boolean y field-select, donde la superficie visible está en elementos que el contrato no alcanza.",
+      "file": "src/app/forms/fields/field-multiselect.component.ts",
+      "line_start": 61,
+      "line_end": 73,
+      "confidence": 0.6,
+      "recommendation": "Corregir el comentario para que diga que el contrato no alcanza al label y que la superficie y el borde los pone la regla local."
+    },
+    {
+      "severity": "low",
+      "title": "Sospecha: la flecha del <select> puede seguir visible en solo lectura",
+      "body": "No se puede confirmar leyendo sólo el diff, así que se reporta como sospecha. El select declara appearance: none en .field-select, o sea que la flecha nativa está anulada: si el control se viera con una flecha en modo edición, sería un pseudo-elemento dibujado por el componente. La regla de solo lectura es [data-readonly] .select-wrapper { border-color: transparent; background: var(--color-surface-muted) }, que neutraliza el borde y la superficie de la caja pero no tocaría un ::after. Si ese pseudo-elemento existiera, en el expediente el select de solo lectura mostraría una flecha desplegable, o sea una insinuación de acción pendiente, que es lo que el criterio 5 manda a quitar. Ningún test cubre esto: los casos de solo lectura del select verifican la lista de option y la ausencia de \"Seleccionar...\", nunca el contenido visual de la caja.",
+      "file": "src/app/forms/fields/field-select.component.ts",
+      "line_start": 60,
+      "line_end": 72,
+      "confidence": 0.35,
+      "recommendation": "Revisar los estilos completos de field-select: si la flecha se dibuja con ::after, ocultarla bajo [data-readonly] y agregar un caso de test que la descarte en solo lectura."
+    }
+  ],
+  "next_steps": []
+}
