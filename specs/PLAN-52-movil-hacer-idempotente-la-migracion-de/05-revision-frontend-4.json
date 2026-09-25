@@ -1,0 +1,17 @@
+{
+  "verdict": "approve",
+  "summary": "Se revisó el diff de frontend (agendaSchema.ts y sus tests unitarios y de integración) contra los seis criterios de la spec de PLAN-52. El paso v4 consulta PRAGMA table_info(agenda_visits) y agrega sólo las columnas de formulario faltantes, una base en v4 no ejecuta nada, y los tests (47 en src/db), tsc y eslint pasan en verde localmente con Node 24.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "La suite contra SQLite real se saltea con el Node mínimo del equipo",
+      "body": "agendaSchema.sqlite.test.ts depende de node:sqlite, que llega con Node 22.13+, mientras que el entorno del equipo pide Node 20+. En una máquina o CI con Node 20 la suite queda en describe.skip y la única prueba de que SQLite acepta el SQL generado (el origen real del bug de «duplicate column name») desaparece sin que falle nada; sólo quedan los tests unitarios con un doble que no valida SQL. El nombre de la suite lo avisa, así que no es un defecto, pero la cobertura depende de la versión de Node de quien corre los gates.",
+      "file": "src/db/agendaSchema.sqlite.test.ts",
+      "line_start": 19,
+      "line_end": 29,
+      "confidence": 0.6,
+      "recommendation": "Mencionarlo en el cuerpo del PR y, si se quiere garantizar la cobertura, fijar Node 22.13+ para los gates del frontend (engines o .nvmrc) en una tarea aparte."
+    }
+  ],
+  "next_steps": []
+}
