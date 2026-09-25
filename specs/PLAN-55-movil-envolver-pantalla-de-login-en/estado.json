@@ -33,7 +33,8 @@
       "ts": "2026-09-25T16:35:13.202Z"
     },
     "cerrada": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-25T17:37:39.247Z"
     }
   },
   "commits": {},
