@@ -1,0 +1,13 @@
+{
+  "key": "PLAN-55",
+  "summary": "Móvil: envolver pantalla de Login en KeyboardAvoidingView / ScrollView para no tapar el botón Entrar",
+  "description": "En la pantalla de Login (`src/app/login.tsx`), el contenedor principal está definido como un `View` con `justifyContent: 'center'` fijo sin soporte para desplazamiento ni ajuste por teclado.\n\nAl hacer foco sobre el campo de texto de usuario o contraseña, el teclado virtual de Android se despliega y cubre casi la totalidad del botón azul de \"Entrar\" y el área donde se muestran los mensajes de error en caso de fallo de autenticación.\n\nCriterios de aceptación:\n1. Envolver la pantalla de login con `KeyboardAvoidingView` (ajustado según la plataforma) y `ScrollView` con `keyboardShouldPersistTaps=\"handled\"`.\n2. Asegurar que al abrirse el teclado, el formulario y el botón de acción principal (\"Entrar\" / \"Verificar\") permanezcan visibles o puedan ser desplazados cómodamente con el dedo.\n3. Verificar que los mensajes de error de autenticación no queden ocultos detrás del teclado.",
+  "status": "Por hacer",
+  "priority": "Medium",
+  "assignee": "Juan Ignacio Urrutia",
+  "reporter": "Fernando Chamorro Goncalves",
+  "sprint": "Sprint 6 - Nuevas pruebas",
+  "adjuntos": [
+    "teclado_tapa_boton_login.png"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "verdict": "approve",
+  "summary": "Se revisó el diff de PLAN-55 contra 01-spec.md. Los seis criterios de aceptación están implementados: la raíz pasa a ser un KeyboardAvoidingView con behavior condicional por plataforma, envuelve un ScrollView con keyboardShouldPersistTaps=\"handled\", el centrado se movió al contentContainerStyle con flexGrow: 1, y Keyboard.dismiss() cierra el teclado al terminar cada envío. Los gates del repo pasan (lint, tsc y 210 tests en 28 suites). Quedan dos observaciones de severidad baja, ninguna bloqueante.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "La rama Android de `behavior` no queda ejercitada por los tests",
+      "body": "El preset `jest-expo` corre en una sola plataforma por corrida, y la aserción es `expect(avoiding.props.behavior).toBe(Platform.OS === 'ios' ? 'padding' : undefined)`. Eso sí ata el mapeo (una inversión de la condición se rompería en iOS), pero la rama Android nunca llega a ejecutarse: si el día de mañana alguien tocara el comportamiento en Android, ningún test lo detectaría. El repo tampoco tiene una configuración de jest por plataforma.",
+      "file": "src/app/login.test.tsx",
+      "line_start": 55,
+      "line_end": 62,
+      "confidence": 0.9,
+      "recommendation": "Opcional y fuera del alcance de esta tarea: agregar un proyecto de jest con preset `jest-expo/android` para correr la misma suite en Android, o un test dedicado que fije el valor esperado para cada `Platform.OS` simulado."
+    },
+    {
+      "severity": "low",
+      "title": "Cerrar el teclado en el camino de error agrega un toque al reintentar",
+      "body": "`Keyboard.dismiss()` está en el `finally`, así que también se ejecuta cuando `signIn` rechaza. El mensaje de error queda visible, que es lo que pedía el criterio 3 del issue, pero el usuario que corrigió el usuario o la contraseña tiene que volver a tocar un campo para recuperar el teclado. Es el trade-off explícito que el issue pedía resolver, y el `finally` es lo que lo cubre también para el paso de 2FA, pero conviene que la revisión humana lo confirme contra el uso real en campo.",
+      "file": "src/app/login.tsx",
+      "line_start": 50,
+      "line_end": 56,
+      "confidence": 0.75,
+      "recommendation": "Sin cambio de código: verificar en la prueba de campo. Si molesta al operador, mover la llamada al `catch` y dejar el 2FA resuelto por el desmontaje del campo de contraseña."
+    }
+  ],
+  "next_steps": []
+}

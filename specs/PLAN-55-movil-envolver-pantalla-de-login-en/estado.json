@@ -1,0 +1,63 @@
+{
+  "issue": "PLAN-55",
+  "titulo": "Movil: envolver pantalla de Login en KeyboardAvoidingView / ScrollView para no tapar el boton Entrar",
+  "slug": "movil-envolver-pantalla-de-login-en",
+  "rama": "PLAN-55-movil-envolver-pantalla-de-login-en",
+  "alcance": [
+    "frontend"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-25T16:28:48.084Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-25T16:29:17.507Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-25T16:29:49.753Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-25T16:31:35.062Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-25T16:32:40.289Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-25T16:35:13.202Z"
+    },
+    "cerrada": {
+      "estado": "pendiente"
+    }
+  },
+  "commits": {},
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "frontend",
+      "motor": "anfitriona",
+      "motivo": "El motor 'opencode' fallo con 'Cannot find module': workspace.local.json resuelve la ruta del script contra el repo revisado (frontend/.agents/scripts/motor-opencode.mjs) en vez de la raiz del harness. Reviso con el motor anfitriona, leyendo solo el diff y la spec.",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-frontend-1.json",
+      "sha": "7ec72f601ebdec7a2077c8acf60b9761b651e5e4",
+      "ts": "2026-09-25T16:32:26.409Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "opencode",
+    "modelo": "big-pickle (opencode/big-pickle)",
+    "ts": "2026-09-25T16:28:27.341Z",
+    "fin": "2026-09-25T16:35:13.202Z"
+  }
+}
