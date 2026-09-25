@@ -38,7 +38,7 @@
     }
   },
   "commits": {
-    "backoffice": "78f94f8"
+    "backoffice": "7f12109"
   },
   "revisiones": [
     {
@@ -62,6 +62,17 @@
       "archivo": "05-revision-backoffice-2.json",
       "sha": "78f94f805892d9c4ab170712790596784a445b37",
       "ts": "2026-09-25T11:35:37.553Z"
+    },
+    {
+      "n": 3,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": null,
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-3.json",
+      "sha": "7f121092a75ea91629abd9db8f37cac4f0735cc9",
+      "ts": "2026-09-25T12:24:31.923Z"
     }
   ],
   "pr": {

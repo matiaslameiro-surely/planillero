@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "Se eliminó el método getExpiresAt() sin uso y se limitó la visibilidad de JwtPayload y parseJwt removiendo su export. Gates y 134 tests pasan en verde.",
+  "findings": [],
+  "next_steps": []
+}
