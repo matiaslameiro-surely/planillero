@@ -1,0 +1,14 @@
+{
+  "key": "PLAN-53",
+  "summary": "Móvil: aplicar SafeAreaView / insets superiores en Hoja de Ruta para evitar solapamiento con la barra de estado",
+  "issuetype": "Tarea",
+  "priority": "Medium",
+  "status": "En curso",
+  "created": "2026-09-25T11:10:59.844-0300",
+  "updated": "2026-09-25T13:17:12.000-0300",
+  "duedate": null,
+  "assignee": "Fernando Chamorro Goncalves",
+  "reporter": "Fernando Chamorro Goncalves",
+  "project": "PLAN",
+  "description": "En la pantalla de Hoja de Ruta (`src/app/agenda.tsx`), el encabezado `DeviceStatusBar` se renderiza pegado al borde superior de la pantalla física (`y=0`), colisionando directamente con la barra de notificaciones y estado de Android (reloj, nivel de batería, iconos de Wi-Fi y red móvil).\n\nCausa:\nEn `src/app/_layout.tsx` se configuró `headerShown: false`, pero `agenda.tsx` no utiliza `SafeAreaView` (de `react-native-safe-area-context`) ni `useSafeAreaInsets()` para aplicar el margen correspondiente a la barra de estado y notch/cámara del dispositivo.\n\nCriterios de aceptación:\n1. Incorporar el safe area padding superior en la pantalla de agenda o envolver el layout con `SafeAreaView` con bordes configurados.\n2. Comprobar que en dispositivos físicos con cámara frontal integrada o notch, los componentes de `DeviceStatusBar` (\"Modo conectado\", batería, GPS) no colisionen con los indicadores del sistema.\n3. Asegurar que los temas claro y oscuro mantengan el color de fondo adecuado en la zona segura."
+}

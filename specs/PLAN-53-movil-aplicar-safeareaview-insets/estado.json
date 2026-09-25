@@ -1,0 +1,67 @@
+{
+  "issue": "PLAN-53",
+  "titulo": "Móvil: aplicar SafeAreaView / insets superiores en Hoja de Ruta para evitar solapamiento con la barra de estado",
+  "slug": "movil-aplicar-safeareaview-insets",
+  "rama": "PLAN-53-movil-aplicar-safeareaview-insets",
+  "alcance": [
+    "frontend"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-25T16:17:20.260Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-25T16:18:37.436Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-25T17:00:26.925Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-25T17:02:56.245Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-25T17:04:12.390Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-25T17:08:54.711Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-25T17:08:59.506Z"
+    }
+  },
+  "commits": {
+    "frontend": "d565fe7fae3502859d8519e8ffeb7dac4cd4416a"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "frontend",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-frontend-1.json",
+      "sha": "d565fe7fae3502859d8519e8ffeb7dac4cd4416a",
+      "ts": "2026-09-25T17:04:00.005Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.8 Flash",
+    "ts": "2026-09-25T16:16:35.952Z",
+    "fin": "2026-09-25T17:08:54.712Z"
+  }
+}
