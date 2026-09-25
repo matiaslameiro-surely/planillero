@@ -4,9 +4,10 @@
   "slug": "movil-hacer-idempotente-la-migracion-de",
   "rama": "PLAN-52-movil-hacer-idempotente-la-migracion-de",
   "alcance": [
-    "frontend"
+    "frontend",
+    "harness"
   ],
-  "fase": "cerrar",
+  "fase": "verificar",
   "fases": {
     "preparacion": {
       "estado": "ok",
@@ -22,11 +23,12 @@
     },
     "implementar": {
       "estado": "ok",
-      "ts": "2026-09-25T21:59:09.922Z"
+      "ts": "2026-09-25T22:19:45.777Z",
+      "nota": "Se suma el harness al alcance: subir el Node mínimo a 22.13 para que los tests contra SQLite real no se salteen"
     },
     "verificar": {
-      "estado": "ok",
-      "ts": "2026-09-25T22:13:16.793Z"
+      "estado": "en_curso",
+      "ts": "2026-09-25T22:19:46.004Z"
     },
     "cerrar": {
       "estado": "en_curso",
@@ -37,7 +39,8 @@
     }
   },
   "commits": {
-    "frontend": "90aa3cd"
+    "frontend": "24f88fc",
+    "harness": "002eb17"
   },
   "revisiones": [
     {
@@ -83,6 +86,28 @@
       "archivo": "05-revision-frontend-4.json",
       "sha": "90aa3cd2964c93fed4a95692a65488a9464ff59e",
       "ts": "2026-09-25T22:12:46.592Z"
+    },
+    {
+      "n": 5,
+      "repo": "frontend",
+      "motor": "anfitriona",
+      "motivo": "codex sin cuota (usage limit hasta 2026-10-15); revisó un agente nuevo con contexto limpio",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-frontend-5.json",
+      "sha": "22e8f9876be6a3be63c806028a0ef48479277765",
+      "ts": "2026-09-25T22:23:32.299Z"
+    },
+    {
+      "n": 1,
+      "repo": "harness",
+      "motor": "anfitriona",
+      "motivo": "codex sin cuota (usage limit hasta 2026-10-15); revisó un agente nuevo con contexto limpio",
+      "verdict": "needs-attention",
+      "bloqueantes": 0,
+      "archivo": "05-revision-harness-1.json",
+      "sha": "6f8d3551953ee4f95ed3b33ae83794873f9ae000",
+      "ts": "2026-09-25T22:23:32.729Z"
     }
   ],
   "pr": {},

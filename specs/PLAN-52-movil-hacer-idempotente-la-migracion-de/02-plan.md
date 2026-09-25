@@ -24,6 +24,18 @@ v4 revienta antes. El comentario del paso deja asentada esta excepción.
 |---|---|---|
 | `src/db/agendaSchema.ts` | modificar | Paso v4 idempotente con `PRAGMA table_info` |
 | `src/db/agendaSchema.test.ts` | modificar | El doble de la base suma `getAllAsync`, más los casos «ya tiene todas» y «ya tiene algunas» |
+| `src/db/agendaSchema.sqlite.test.ts` | crear | La migración contra SQLite real en memoria (`node:sqlite`) |
+| `package.json`, `package-lock.json`, `.nvmrc` | modificar / crear | Declarar Node 22.13+ |
+
+### harness (`.`)
+
+| Archivo | Acción | Para qué |
+|---|---|---|
+| `.agents/scripts/init.mjs` | modificar | `--check` valida el rango del equipo: `^22.22.3 || ^24.15.0 || >=26` |
+| `AGENTS.md` | modificar | Requisito de entorno alineado con el `README.md` |
+
+> Agregado durante la verificación, a pedido del usuario, para resolver los hallazgos `low` de las
+> revisiones 3 y 4: los tests usaban sólo un doble, y después la suite real se salteaba con Node 20.
 
 ## Decisiones técnicas
 
@@ -37,6 +49,14 @@ v4 revienta antes. El comentario del paso deja asentada esta excepción.
   apertura.
 - **Constante `FORM_COLUMNS` con nombre y tipo.** Se descartó dejar los nombres repetidos en el SQL
   y en el filtro, porque un cambio en uno solo reintroduce el bug sin que nada lo avise.
+
+- **Tests contra SQLite real con `node:sqlite` y Node mínimo 22.13.** Se descartó `sql.js` (SQLite en
+  WebAssembly) porque suma una dependencia sólo para tests. También se descartó saltear la suite
+  con Node 20, porque dejaría sin cobertura real el caso del bug sin que nadie se entere. Node 20 no
+  tiene soporte desde abril de 2026, y React Native 0.86 ya acepta `^22.13.0`. El rango de `engines`
+  del frontend replica el de React Native sin la rama 20. En el harness no se inventa un mínimo
+  nuevo: se usa el del equipo, que el `README.md` ya fijaba por Angular 22 (22.22.3+ o 24.15+) y
+  que incluye `node:sqlite`. `AGENTS.md` e `init.mjs` estaban desalineados con él.
 
 ## Supuestos
 
