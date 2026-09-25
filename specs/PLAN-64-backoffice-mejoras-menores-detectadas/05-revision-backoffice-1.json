@@ -1,0 +1,29 @@
+{
+  "verdict": "approve",
+  "summary": "Se revisó el diff del backoffice contra la spec de PLAN-64: tipografía global, main único, aviso para el operador, jurisdicción traducida y fecha del aviso de asignación. Cumple los criterios 1 a 6; 5 tests fallan con el código anterior (uno por punto) y la prueba en local lo confirma en seis pantallas.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "Posible conflicto con PLAN-63 en el expediente",
+      "body": "PLAN-63 (backoffice #31, en revisión) también modifica expediente.component.ts, en otras líneas (el catch y el estado de error). Git debería integrarlo solo; si no, el conflicto es de una línea.",
+      "file": "src/app/pages/expediente/expediente.component.ts",
+      "line_start": 39,
+      "line_end": 39,
+      "confidence": 0.6,
+      "recommendation": "Si PLAN-63 entra primero, integrar main en esta rama antes de mergear."
+    },
+    {
+      "severity": "low",
+      "title": "El operador sigue pudiendo iniciar sesión",
+      "body": "Se eligió avisarle en Inicio en lugar de bloquear el login (fuera de alcance en la spec). Las demás rutas ya lo mandan a Acceso denegado.",
+      "file": "src/app/pages/home/home.html",
+      "line_start": 70,
+      "line_end": 78,
+      "confidence": 0.9,
+      "recommendation": "Si el equipo prefiere bloquearlo, va en otra tarea."
+    }
+  ],
+  "next_steps": [
+    "Probado en local: fuente system-ui y un solo main en Inicio, Supervisión, Planificación, Expediente, Evidencias y Auditoría; Zona Norte en los tres lugares; aviso de asignación con 25/09/2026; aviso del operador."
+  ]
+}

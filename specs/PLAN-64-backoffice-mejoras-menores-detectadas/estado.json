@@ -1,0 +1,67 @@
+{
+  "issue": "PLAN-64",
+  "titulo": "Backoffice: mejoras menores detectadas en la prueba del 25/09",
+  "slug": "backoffice-mejoras-menores-detectadas",
+  "rama": "PLAN-64-backoffice-mejoras-menores-detectadas",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-25T21:40:07.953Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-25T21:40:08.022Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-25T21:46:28.981Z",
+      "nota": "Plan aprobado por el usuario el 25/09"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-25T21:52:21.608Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-25T21:52:21.675Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-25T21:54:30.446Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-25T21:54:30.511Z",
+      "nota": "PR backoffice #32; Jira En revisión"
+    }
+  },
+  "commits": {},
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-1.json",
+      "sha": "13da2df18b17298fad768f4671214a2d6eaae8d3",
+      "ts": "2026-09-25T21:52:21.513Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "Claude Opus 5.5",
+    "ts": "2026-09-25T21:38:59.720Z",
+    "fin": "2026-09-25T21:54:30.447Z"
+  }
+}
