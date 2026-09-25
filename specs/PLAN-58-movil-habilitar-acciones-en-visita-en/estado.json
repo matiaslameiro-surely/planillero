@@ -1,0 +1,79 @@
+{
+  "issue": "PLAN-58",
+  "titulo": "Móvil: habilitar acciones en visita En Curso (botón a Evidencias, formulario y finalización)",
+  "slug": "movil-habilitar-acciones-en-visita-en",
+  "rama": "PLAN-58-movil-habilitar-acciones-en-visita-en",
+  "alcance": [
+    "backend",
+    "frontend"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-25T17:48:05.959Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-25T17:48:34.345Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-25T17:53:42.966Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-25T18:02:26.692Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-25T18:10:47.526Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-25T18:14:51.485Z"
+    },
+    "cerrada": {
+      "estado": "pendiente"
+    }
+  },
+  "commits": {
+    "backend": "5f1ffea",
+    "frontend": "c4e3446"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backend",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backend-1.json",
+      "sha": "5f1ffea3313d84ec590fa5d1bf461d28db33c406",
+      "ts": "2026-09-25T18:09:36.557Z"
+    },
+    {
+      "n": 1,
+      "repo": "frontend",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-frontend-1.json",
+      "sha": "c4e3446f8aacfdd7ab829a21729003e20850e17f",
+      "ts": "2026-09-25T18:10:06.501Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": "En revisión",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.8 Flash",
+    "ts": "2026-09-25T17:47:46.607Z",
+    "fin": "2026-09-25T18:14:51.485Z"
+  }
+}

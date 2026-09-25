@@ -1,0 +1,18 @@
+{
+  "key": "PLAN-58",
+  "summary": "Móvil: habilitar acciones en visita En Curso (botón a Evidencias, formulario y finalización)",
+  "issuetype": "Tarea",
+  "components": [],
+  "created": "2026-09-25T11:13:09.210-0300",
+  "description": "Al iniciar una visita asignada desde la app móvil (`src/components/VisitCard.tsx`), su estado pasa a `IN_PROGRESS` (\"En curso\") con la captura GPS confirmada.\n\nSin embargo, una vez iniciada la visita, la tarjeta queda completamente desprovista de acciones:\n1. El botón \"Completar formulario\" está condicionado a `hasFormTemplate = !!visit.formTemplateId`, pero la API de asignación del backend devuelve `formTemplateId: null`, impidiendo abrir formularios dinámicos.\n2. No existe ningún botón o enlace para acceder a la pantalla de captura de evidencias fotográficas y firmas ológrafas (`/evidence/[visitId]`), a pesar de estar ya programada en la aplicación móvil.\n3. No existe ningún mecanismo o botón para marcar la visita como finalizada o completada una vez concluida la labor.\n\nConsecuencia:\nEl operador de campo queda en un callejón sin salida dentro de la tarjeta de la visita iniciada, sin poder documentar evidencias, completar el formulario ni cerrar la tarea.\n\nCriterios de aceptación:\n1. Agregar en la tarjeta de visita en estado `IN_PROGRESS` un botón directo de \"Evidencias / Fotos y Firma\" que navegue a `/evidence/${visit.visitId}`.\n2. Permitir completar formulario cuando la visita tenga plantilla asignada o proveer una plantilla por defecto si amerita.\n3. Incorporar la acción para finalizar/completar la visita y actualizar su estado en SQLite y en el backend.\n4. Cumplir con los estándares de diseño y accesibilidad táctil.",
+  "project": "PLAN",
+  "reporter": "Fernando Chamorro Goncalves",
+  "fixVersions": [],
+  "priority": "Medium",
+  "resolution": null,
+  "labels": [],
+  "duedate": null,
+  "assignee": "Fernando Chamorro Goncalves",
+  "updated": "2026-09-25T14:44:33.000-0300",
+  "status": "En curso"
+}
