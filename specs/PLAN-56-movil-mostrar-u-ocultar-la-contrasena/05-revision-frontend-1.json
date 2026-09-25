@@ -1,0 +1,29 @@
+{
+  "verdict": "approve",
+  "summary": "Se revisó el diff del frontend contra la spec de PLAN-56: estado showPassword, botón «Mostrar»/«Ocultar» dentro del borde del campo, accesibilidad y área táctil. Cumple los criterios 1 a 7; 4 tests fallan con el código anterior.",
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "No se pudo probar en pantalla",
+      "body": "La versión web de Expo no compila por un problema previo a esta tarea: Metro no resuelve `expo-sqlite/web/wa-sqlite.wasm` (falta `wasm` en los assets de la config de Metro). La tarea se verificó con tests de react-test-renderer, que miran props y estilos pero no el render real en un dispositivo.",
+      "file": "src/app/login.tsx",
+      "line_start": 123,
+      "line_end": 153,
+      "confidence": 0.9,
+      "recommendation": "Que el revisor (o Federico) la mire en un emulador o en el APK antes de mergear, y cargar aparte el arreglo de Expo web si se quiere usar para probar."
+    },
+    {
+      "severity": "low",
+      "title": "autoCorrect desactivado en la contraseña",
+      "body": "Se sumó `autoCorrect={false}` al campo: con `secureTextEntry` el teclado no corrige, pero al mostrar la contraseña podría hacerlo y alterar lo escrito.",
+      "file": "src/app/login.tsx",
+      "line_start": 138,
+      "line_end": 138,
+      "confidence": 0.8,
+      "recommendation": "Dejarlo; está explicado en el commit."
+    }
+  ],
+  "next_steps": [
+    "Probar en emulador o APK: el botón queda a la derecha del campo y alterna la visibilidad."
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "issue": "PLAN-56",
+  "titulo": "Móvil: mostrar u ocultar la contraseña en el Login",
+  "slug": "movil-mostrar-u-ocultar-la-contrasena",
+  "rama": "PLAN-56-movil-mostrar-u-ocultar-la-contrasena",
+  "alcance": [
+    "frontend"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-25T19:04:31.925Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-25T19:04:31.993Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-25T19:05:26.876Z",
+      "nota": "Plan aprobado por el usuario el 25/09"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-25T19:12:22.284Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-25T19:12:22.348Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-25T19:15:28.257Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-25T19:15:28.327Z",
+      "nota": "PR frontend #20; Jira En revisión"
+    }
+  },
+  "commits": {},
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "frontend",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-frontend-1.json",
+      "sha": "52a3536832ad2324922b967aafb56acbf3a47474",
+      "ts": "2026-09-25T19:12:22.128Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "Claude Opus 5.5",
+    "ts": "2026-09-25T19:03:46.695Z",
+    "fin": "2026-09-25T19:15:28.257Z"
+  }
+}

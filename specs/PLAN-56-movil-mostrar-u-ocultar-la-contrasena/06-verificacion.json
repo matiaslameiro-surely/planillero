@@ -1,0 +1,40 @@
+{
+  "ok": true,
+  "tarea": "PLAN-56",
+  "ts": "2026-09-25T19:07:24.862Z",
+  "repos": [
+    {
+      "repo": "frontend",
+      "ok": true,
+      "herramienta": "npm",
+      "pasos": [
+        {
+          "nombre": "lint",
+          "cmd": "npm run lint",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 10986,
+          "salida": "\n> planillero-frontend@0.1.0 lint\n> expo lint --max-warnings 0 --no-cache"
+        },
+        {
+          "nombre": "tipos",
+          "cmd": "npx tsc --noEmit",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 7238,
+          "salida": ""
+        },
+        {
+          "nombre": "tests",
+          "cmd": "npm test -- --watchAll=false",
+          "opcional": true,
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 46696,
+          "salida": "\n> planillero-frontend@0.1.0 test\n> jest --watchAll=false\n\nPASS src/app/login.test.tsx (9.253 s)\nPASS src/status/useHeartbeat.test.tsx (9.109 s)\nPASS src/constants/layout.test.ts\nPASS src/sync/syncWorker.test.ts (11.622 s)\nPASS src/components/SyncQueueBanner.test.tsx (12.006 s)\nPASS src/db/agendaSchema.test.ts\nPASS src/components/VisitCard.test.tsx (12.584 s)\nPASS src/api/__tests__/evidence.test.ts\nPASS src/api/visits.test.ts\nPASS src/api/client.test.ts\nPASS src/components/LocationSummary.test.tsx (13.08 s)\nPASS src/status/useDeviceStatus.test.tsx\nPASS src/components/DeviceStatusBar.test.tsx (13.34 s)\nPASS src/agenda/agendaRepository.test.ts\nPASS src/sync/syncQueue.test.ts (5.71 s)\nPASS src/sync/signOutGuard.test.ts (13.415 s)\nPASS src/components/__tests__/themeContrast.test.tsx (14.778 s)\nPASS src/visit/accuracy.test.ts\nPASS src/audit/auditRepository.test.ts\nPASS src/agenda/date.test.ts\nPASS src/db/database.test.ts\nPASS src/db/encryptionKey.test.ts\nPASS src/auth/tokenStore.test.ts\nPASS src/visit/location.test.ts\nPASS src/sync/useSyncQueue.test.tsx (19.463 s)\nPASS src/visit/startVisit.test.ts (18.596 s)\nPASS src/components/__tests__/ergonomics.test.tsx (24.846 s)\nPASS src/agenda/useAgenda.test.tsx (42.981 s)\n\nTest Suites: 28 passed, 28 total\nTests:       214 passed, 214 total\nSnapshots:   0 total\nTime:        45.214 s\nRan all test suites."
+        }
+      ],
+      "avisos": []
+    }
+  ]
+}
