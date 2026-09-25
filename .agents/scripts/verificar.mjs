@@ -127,8 +127,15 @@ function verificarRepo(nombre, repo) {
       detalle: `./${repo.ruta} todavía no tiene proyecto: no hay nada que verificar.`, pasos: [] };
   }
 
-  const { env, aviso } = repo.tipo === 'spring-boot' ? entornoJava(repo) : { env: process.env, aviso: null };
-  const avisos = aviso ? [aviso] : [];
+  let env = process.env;
+  let avisos = [];
+  if (repo.tipo === 'spring-boot') {
+    const res = entornoJava(repo);
+    env = res.env;
+    if (res.aviso) avisos.push(res.aviso);
+  } else if (repo.env?.PATH) {
+    env = { ...process.env, PATH: `${repo.env.PATH}${path.delimiter}${process.env.PATH}` };
+  }
 
   if (repo.tipo === 'spring-boot' && repo.javaVersion) {
     const java = verificarVersionJava(env, repo.javaVersion);
