@@ -1,0 +1,39 @@
+{
+  "ok": true,
+  "tarea": "PLAN-62",
+  "ts": "2026-09-25T18:40:32.382Z",
+  "repos": [
+    {
+      "repo": "backoffice",
+      "ok": true,
+      "herramienta": "npm",
+      "pasos": [
+        {
+          "nombre": "lint",
+          "cmd": "npm run lint",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 2570,
+          "salida": "\n> planillero-backoffice@0.1.0 lint\n> ng lint --max-warnings=0\n\n\nLinting \"planillero-backoffice\"...\n\nAll files pass linting."
+        },
+        {
+          "nombre": "tipos",
+          "cmd": "npm run build",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 7076,
+          "salida": "\n> planillero-backoffice@0.1.0 build\n> ng build\n\n❯ Building...\n✔ Building...\nInitial chunk files | Names                |  Raw size | Estimated transfer size\nmain-7TCHJEQB.js    | main                 | 301.26 kB |                82.34 kB\nstyles-CIB5STRC.css | styles               |  13.43 kB |                 2.91 kB\n\n                    | Initial total        | 314.69 kB |                85.25 kB\n\nLazy chunk files    | Names                |  Raw size | Estimated transfer size\nchunk-G3w9kjiO.js   | expediente-component | 163.51 kB |                41.76 kB\nchunk-Cel4Y8Ov.js   | -                    | 149.60 kB |                37.69 kB\nchunk-BwXJcLmA.js   | -                    |  48.19 kB |                10.22 kB\nchunk-ngysmqmC.js   | supervision          |  25.78 kB |                 6.41 kB\nchunk-BvfoAPAR.js   | planificacion        |  22.00 kB |                 5.94 kB\nchunk-OkrsY6_x.js   | evidence-viewer      |  19.71 kB |                 5.07 kB\nchunk-nHxLSO3O.js   | auditoria            |  15.37 kB |                 4.40 kB\nchunk-qVxE0LGx.js   | home                 |   7.09 kB |                 2.33 kB\nchunk-BIGitatl.js   | login                |   5.78 kB |                 1.90 kB\nchunk-DRcetmAb.js   | -                    |   1.66 kB |               717 bytes\nchunk-C-Ryu18f.js   | -                    |   1.31 kB |               593 bytes\nchunk-DcU3gdwT.js   | access-denied        | 998 bytes |               998 bytes\nchunk-C_h_32Vy.js   | -                    | 331 bytes |               331 bytes\n\nApplication bundle generation complete. [6.016 seconds] - 2026-09-25T18:40:14.733Z\n\nOutput location: C:\\Users\\Personal\\Proyectos\\planillero\\backoffice\\dist\\planillero-backoffice\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'leaflet' used by 'src/app/pages/planificacion/route-map/route-map.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m\n\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'ajv' used by 'src/app/forms/validation.service.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m\n\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'ajv-formats' used by 'src/app/forms/validation.service.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m"
+        },
+        {
+          "nombre": "tests",
+          "cmd": "npm test",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 17488,
+          "salida": "\n> planillero-backoffice@0.1.0 test\n> ng test\n\n❯ Building...\n✔ Building...\nApplication bundle generation complete. [4.426 seconds] - 2026-09-25T18:40:20.661Z\n\n\n\u001b[1m\u001b[30m\u001b[46m RUN \u001b[49m\u001b[39m\u001b[22m \u001b[36mv4.1.11 \u001b[39m\u001b[90mC:/Users/Personal/Proyectos/planillero/backoffice\u001b[39m\n\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m20 passed\u001b[39m\u001b[22m\u001b[90m (20)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m154 passed\u001b[39m\u001b[22m\u001b[90m (154)\u001b[39m\n\u001b[2m   Start at \u001b[22m 15:40:20\n\u001b[2m   Duration \u001b[22m 11.21s\u001b[2m (transform 5.24s, setup 27.79s, import 10.39s, tests 12.96s, environment 87.30s)\u001b[22m"
+        }
+      ],
+      "avisos": []
+    }
+  ]
+}

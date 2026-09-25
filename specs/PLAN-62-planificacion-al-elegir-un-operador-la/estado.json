@@ -1,0 +1,67 @@
+{
+  "issue": "PLAN-62",
+  "titulo": "Planificación: al elegir un operador, la grilla oculta las visitas pendientes",
+  "slug": "planificacion-al-elegir-un-operador-la",
+  "rama": "PLAN-62-planificacion-al-elegir-un-operador-la",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-25T16:19:15.983Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-25T16:19:16.049Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-25T18:40:05.166Z",
+      "nota": "Plan aprobado por el usuario el 25/09"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-25T18:42:50.003Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-25T18:42:50.067Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-25T18:51:33.347Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-25T18:51:33.649Z",
+      "nota": "PR backoffice #30; Jira En revisión"
+    }
+  },
+  "commits": {},
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-1.json",
+      "sha": "aa7b9ba2f90a0ffc73ebca3fcbaf43afa838d23f",
+      "ts": "2026-09-25T18:42:49.904Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "Claude Opus 5.5",
+    "ts": "2026-09-25T16:18:21.677Z",
+    "fin": "2026-09-25T18:51:33.350Z"
+  }
+}
