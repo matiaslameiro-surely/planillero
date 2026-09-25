@@ -1,0 +1,67 @@
+{
+  "issue": "PLAN-51",
+  "titulo": "Bug: evidencias no respeta el 404 del contrato y acepta evidencia para visitas que no existen",
+  "slug": "bug-evidencias-no-respeta-el-404-del",
+  "rama": "PLAN-51-bug-evidencias-no-respeta-el-404-del",
+  "alcance": [
+    "backend"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-24T17:27:59.872Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-24T17:38:06.826Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-24T17:39:27.975Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-24T17:46:23.610Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-24T17:51:45.922Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-24T17:54:05.569Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-24T17:54:05.634Z"
+    }
+  },
+  "commits": {
+    "backend": "3e92eece76a54efbe234c7e02e575c079216aa32"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backend",
+      "motor": "anfitriona",
+      "motivo": "motor configurado opencode no disponible",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backend-1.json",
+      "sha": "3e92eece76a54efbe234c7e02e575c079216aa32",
+      "ts": "2026-09-24T17:51:21.331Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": "En revisión",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.7 Flash",
+    "ts": "2026-09-24T17:18:05.500Z",
+    "fin": "2026-09-24T17:54:05.570Z"
+  }
+}
