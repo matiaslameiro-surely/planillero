@@ -7,7 +7,7 @@
     "frontend",
     "harness"
   ],
-  "fase": "cerrar",
+  "fase": "cerrada",
   "fases": {
     "preparacion": {
       "estado": "ok",
@@ -31,11 +31,12 @@
       "ts": "2026-09-25T22:29:37.825Z"
     },
     "cerrar": {
-      "estado": "en_curso",
-      "ts": "2026-09-25T22:02:43.790Z"
+      "estado": "ok",
+      "ts": "2026-09-25T22:32:53.762Z"
     },
     "cerrada": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-25T22:32:53.917Z"
     }
   },
   "commits": {
@@ -148,13 +149,13 @@
     "harness": "https://github.com/matiaslameiro-surely/planillero/pull/2"
   },
   "jira": {
-    "transicionadoA": "En curso",
+    "transicionadoA": "En revisión",
     "creadoPorHarness": false
   },
   "ejecucion": {
     "herramienta": "Claude Code",
     "modelo": "Claude Opus 5.5",
     "ts": "2026-09-25T17:58:07.398Z",
-    "fin": null
+    "fin": "2026-09-25T22:32:53.763Z"
   }
 }
