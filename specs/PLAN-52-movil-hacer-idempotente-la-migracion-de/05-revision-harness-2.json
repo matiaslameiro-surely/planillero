@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "AGENTS.md e init.mjs --check pasan de Node 20+ al rango del equipo que ya fija el README (22.22.3+ o 24.15+, y 26 en adelante), que coincide con el engines de Angular 22 del backoffice y cubre node:sqlite. Probé nodeSoportado con versiones de borde (22.22.2/22.22.3, 23.x, 24.14/24.15, 25, 26) y responde bien; init.mjs --check da ok con Node 24.15 y no quedan menciones a Node 20 en el harness. Se cumple la parte del criterio 7 que toca al harness.",
+  "findings": [],
+  "next_steps": []
+}

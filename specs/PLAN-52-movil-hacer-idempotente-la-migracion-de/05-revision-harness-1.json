@@ -1,0 +1,30 @@
+{
+  "verdict": "needs-attention",
+  "summary": "El harness sube el Node mínimo de 20 a 22.13 en init.mjs y en AGENTS.md, y así cumple la parte del criterio 7 que le corresponde (init.mjs --check corre sin problemas con Node 24.15). Pero el nuevo mínimo contradice el README de main, que ya exige Node 22.22.3+ o 24.15+ por Angular 22, y el chequeo acepta versiones que el propio proyecto declara que no sirven.",
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "El nuevo mínimo de Node contradice el README y deja pasar versiones que no sirven",
+      "body": "AGENTS.md pasa a decir «Node 22.13+» e init.mjs sólo marca como problema un Node menor a 22.13. El README de main, en cambio, dice que Node tiene que ser 22.22.3+ o 24.15+: es el rango de Angular 22, y «un Node 23, o un 22 o 24 anterior a esos, no puede construir el backoffice». Tampoco coincide con el engines del frontend (^22.13.0 || ^24.3.0 || >=25.0.0). Un ejemplo concreto: con Node 23.1 o 22.14, `init.mjs --check` no informa ningún problema, pero el backoffice no compila, y en 23.0 a 23.3 node:sqlite ni siquiera se puede usar sin flag, así que los tests del frontend fallan. El PR toca justo esta línea y este chequeo, y en lugar de alinearlos deja dos mínimos distintos en la documentación, siendo que AGENTS.md es la fuente de verdad.",
+      "file": ".agents/scripts/init.mjs",
+      "line_start": 110,
+      "line_end": 114,
+      "confidence": 0.8,
+      "recommendation": "Alinear AGENTS.md e init.mjs con el rango real del equipo, que es la intersección de los tres repos (22.22.3+ o 24.15+, sin Node 23). Que init.mjs lo chequee por rango y no sólo por un piso, y que el texto de AGENTS.md coincida con el del README."
+    },
+    {
+      "severity": "low",
+      "title": "AGENTS.md declara un mínimo distinto del README",
+      "body": "La tabla de requisitos de AGENTS.md dice «Node 22.13+», pero la de README.md dice «Node 22.22.3+ o 24.15+». Quien lea uno solo de los dos va a instalar una versión distinta según cuál haya leído.",
+      "file": "AGENTS.md",
+      "line_start": 189,
+      "line_end": 189,
+      "confidence": 0.9,
+      "recommendation": "Poner en AGENTS.md el mismo rango que en README.md, y mencionar node:sqlite como uno de los motivos."
+    }
+  ],
+  "next_steps": [
+    "Cambiar el chequeo de init.mjs para que exija el rango 22.22.3+ o 24.15+ y marque Node 23 como problema, igual que el README.",
+    "Actualizar la fila de Node en AGENTS.md para que coincida con README.md."
+  ]
+}

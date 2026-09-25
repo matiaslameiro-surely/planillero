@@ -22,7 +22,10 @@ faltan.
 
 ## Alcance
 
-**Repos que toca:** `frontend` (móvil)
+**Repos que toca:** `frontend` (móvil) y `harness`
+
+El harness se sumó durante la revisión: los tests contra SQLite real usan `node:sqlite`, que
+necesita Node 22.13+, y `AGENTS.md` e `init.mjs` todavía aceptaban Node 20 (ver criterio 7).
 
 ## Criterios de aceptación
 
@@ -36,6 +39,10 @@ faltan.
 5. `src/db/agendaSchema.test.ts` sigue en verde e incluye casos para las columnas ya existentes (todas
    y algunas).
 6. Los gates del frontend (`lint`, `tipos`, `tests`) pasan en verde.
+7. La migración se prueba también contra SQLite real, y esa prueba no se puede saltear: el frontend
+   declara un rango de Node con `node:sqlite` (`engines` y `.nvmrc`) y la suite falla con un mensaje
+   claro si falta el módulo. En el harness, `AGENTS.md` e `init.mjs --check` usan el rango del equipo
+   que ya fija el `README.md`: 22.22.3+ o 24.15+, que incluye `node:sqlite`.
 
 ## Fuera de alcance
 
@@ -43,6 +50,7 @@ faltan.
 - Cambiar el mecanismo de versionado (`PRAGMA user_version`) o sumar un paso v5.
 - Reparar datos de las columnas existentes: sólo se garantiza que existan.
 - Cambios en `backend` o `backoffice`.
+- Un CI para el frontend: hoy no existe y armarlo es otra tarea.
 
 ## Preguntas abiertas
 

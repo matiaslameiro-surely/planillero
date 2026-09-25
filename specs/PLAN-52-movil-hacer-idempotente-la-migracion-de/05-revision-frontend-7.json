@@ -1,0 +1,17 @@
+{
+  "verdict": "approve",
+  "summary": "El paso v4 de agendaSchema ahora consulta PRAGMA table_info(agenda_visits) y agrega sólo las columnas de formulario que faltan; cumple los criterios 1 a 7 en el frontend, con tests unitarios parametrizados y tests contra SQLite real que no se pueden saltear. Los 47 tests de src/db, tsc y eslint pasan en verde con Node 24.15; queda sólo un desajuste menor de documentación.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "El README del frontend sigue pidiendo Node 20+",
+      "body": "package.json declara ahora engines ^22.13.0 || ^24.3.0 || >=25.0.0 y .nvmrc fija 24.15.0, pero la sección Requisitos de README.md sigue diciendo «Node 20+». Quien arme el entorno siguiendo el README con Node 20 o 22.12 recibe un aviso de engines en npm ci y la suite agendaSchema.sqlite.test.ts falla al cargar node:sqlite. El mensaje de error es claro y remite a engines, así que no bloquea, pero el README contradice el requisito que introduce esta tarea.",
+      "file": "README.md",
+      "line_start": 7,
+      "line_end": 7,
+      "confidence": 0.9,
+      "recommendation": "Actualizar la línea de requisitos al rango de engines (o al rango del equipo, 22.22.3+ o 24.15+) y mencionar .nvmrc, en este mismo PR."
+    }
+  ],
+  "next_steps": []
+}

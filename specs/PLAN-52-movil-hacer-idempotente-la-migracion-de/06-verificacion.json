@@ -1,7 +1,7 @@
 {
   "ok": true,
   "tarea": "PLAN-52",
-  "ts": "2026-09-25T22:11:14.483Z",
+  "ts": "2026-09-25T22:27:31.135Z",
   "repos": [
     {
       "repo": "frontend",
@@ -13,7 +13,7 @@
           "cmd": "npm run lint",
           "ok": true,
           "codigo": 0,
-          "duracionMs": 9213,
+          "duracionMs": 8561,
           "salida": "\n> planillero-frontend@0.1.0 lint\n> expo lint --max-warnings 0 --no-cache"
         },
         {
@@ -21,7 +21,7 @@
           "cmd": "npx tsc --noEmit",
           "ok": true,
           "codigo": 0,
-          "duracionMs": 5878,
+          "duracionMs": 5818,
           "salida": ""
         },
         {
@@ -30,10 +30,18 @@
           "opcional": true,
           "ok": true,
           "codigo": 0,
-          "duracionMs": 12077,
-          "salida": "\n> planillero-frontend@0.1.0 test\n> jest --watchAll=false\n\nPASS src/db/agendaSchema.sqlite.test.ts\nPASS src/api/visits.test.ts\nPASS src/status/useHeartbeat.test.tsx\nPASS src/components/SyncQueueBanner.test.tsx\nPASS src/db/agendaSchema.test.ts\nPASS src/constants/layout.test.ts\nPASS src/components/DeviceStatusBar.test.tsx\nPASS src/status/useDeviceStatus.test.tsx\nPASS src/components/LocationSummary.test.tsx\nPASS src/components/VisitCard.test.tsx\nPASS src/components/__tests__/themeContrast.test.tsx\nPASS src/api/__tests__/evidence.test.ts\nPASS src/sync/useSyncQueue.test.tsx (5.127 s)\nPASS src/sync/signOutGuard.test.ts\nPASS src/visit/startVisit.test.ts (5.149 s)\nPASS src/sync/syncWorker.test.ts\nPASS src/api/client.test.ts\nPASS src/visit/location.test.ts\nPASS src/visit/accuracy.test.ts\nPASS src/agenda/agendaRepository.test.ts\nPASS src/db/encryptionKey.test.ts\nPASS src/sync/syncQueue.test.ts\nPASS src/auth/tokenStore.test.ts\nPASS src/app/login.test.tsx (5.265 s)\nPASS src/audit/auditRepository.test.ts\nPASS src/agenda/date.test.ts\nPASS src/db/database.test.ts\nPASS src/components/__tests__/ergonomics.test.tsx (6.231 s)\nPASS src/agenda/useAgenda.test.tsx (8.279 s)\n\nTest Suites: 29 passed, 29 total\nTests:       239 passed, 239 total\nSnapshots:   0 total\nTime:        9.985 s\nRan all test suites."
+          "duracionMs": 13137,
+          "salida": "\n> planillero-frontend@0.1.0 test\n> jest --watchAll=false\n\nPASS src/status/useHeartbeat.test.tsx\nPASS src/api/visits.test.ts\nPASS src/db/encryptionKey.test.ts\nPASS src/components/SyncQueueBanner.test.tsx\nPASS src/db/database.test.ts\nPASS src/components/VisitCard.test.tsx\nPASS src/components/__tests__/themeContrast.test.tsx\nPASS src/components/LocationSummary.test.tsx\nPASS src/visit/startVisit.test.ts (5.003 s)\nPASS src/db/agendaSchema.test.ts\nPASS src/db/agendaSchema.sqlite.test.ts\nPASS src/api/client.test.ts\nPASS src/components/DeviceStatusBar.test.tsx\nPASS src/visit/location.test.ts\nPASS src/api/__tests__/evidence.test.ts\nPASS src/sync/syncWorker.test.ts\nPASS src/agenda/agendaRepository.test.ts\nPASS src/sync/syncQueue.test.ts\nPASS src/auth/tokenStore.test.ts\nPASS src/agenda/date.test.ts\nPASS src/visit/accuracy.test.ts\nPASS src/sync/signOutGuard.test.ts\nPASS src/sync/useSyncQueue.test.tsx (6.019 s)\nPASS src/audit/auditRepository.test.ts\nPASS src/status/useDeviceStatus.test.tsx\nPASS src/constants/layout.test.ts\nPASS src/components/__tests__/ergonomics.test.tsx (6.932 s)\nPASS src/app/login.test.tsx (6.499 s)\nPASS src/agenda/useAgenda.test.tsx (9.398 s)\n\nTest Suites: 29 passed, 29 total\nTests:       239 passed, 239 total\nSnapshots:   0 total\nTime:        11.364 s\nRan all test suites."
         }
       ],
+      "avisos": []
+    },
+    {
+      "repo": "harness",
+      "ok": true,
+      "motivo": "sin_gates",
+      "detalle": "No se detectó con qué construir ./..",
+      "pasos": [],
       "avisos": []
     }
   ]

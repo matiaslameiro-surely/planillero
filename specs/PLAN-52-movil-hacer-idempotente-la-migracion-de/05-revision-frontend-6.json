@@ -1,0 +1,17 @@
+{
+  "verdict": "approve",
+  "summary": "El paso v4 de agendaSchema consulta PRAGMA table_info(agenda_visits) y agrega sólo las columnas de formulario que faltan, con tests unitarios para todas y algunas columnas presentes (versiones 1 a 3) y tests contra SQLite real vía node:sqlite que fallan con un mensaje claro si el módulo no está. Se cumplen los criterios 1 a 7: los 47 tests de src/db, tsc y expo lint pasan en verde con Node 24.15; queda sólo una observación menor sobre el .nvmrc.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "El .nvmrc del frontend fija sólo el mayor 24, menos preciso que el del backoffice",
+      "body": "El .nvmrc nuevo contiene «24». Con nvm, `nvm use` elige el 24.x más nuevo que esté instalado, que puede ser, por ejemplo, un 24.10: cumple el engines del frontend (^24.3.0) pero queda fuera del rango del equipo que ahora exige init.mjs (24.15+). El backoffice fija «24.15.0». No rompe nada del frontend, porque node:sqlite está en todo el 24, pero las dos guías de versión del equipo no dicen lo mismo.",
+      "file": ".nvmrc",
+      "line_start": 1,
+      "line_end": 1,
+      "confidence": 0.6,
+      "recommendation": "Fijar el .nvmrc en 24.15.0, como el backoffice, para que `nvm use` en el frontend deje un Node que también pase init.mjs --check."
+    }
+  ],
+  "next_steps": []
+}

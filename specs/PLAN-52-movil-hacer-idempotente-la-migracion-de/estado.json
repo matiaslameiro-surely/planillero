@@ -4,9 +4,10 @@
   "slug": "movil-hacer-idempotente-la-migracion-de",
   "rama": "PLAN-52-movil-hacer-idempotente-la-migracion-de",
   "alcance": [
-    "frontend"
+    "frontend",
+    "harness"
   ],
-  "fase": "cerrar",
+  "fase": "cerrada",
   "fases": {
     "preparacion": {
       "estado": "ok",
@@ -22,22 +23,25 @@
     },
     "implementar": {
       "estado": "ok",
-      "ts": "2026-09-25T21:59:09.922Z"
+      "ts": "2026-09-25T22:19:45.777Z",
+      "nota": "Se suma el harness al alcance: subir el Node mínimo a 22.13 para que los tests contra SQLite real no se salteen"
     },
     "verificar": {
       "estado": "ok",
-      "ts": "2026-09-25T22:13:16.793Z"
+      "ts": "2026-09-25T22:29:37.825Z"
     },
     "cerrar": {
-      "estado": "en_curso",
-      "ts": "2026-09-25T22:02:43.790Z"
+      "estado": "ok",
+      "ts": "2026-09-25T22:32:53.762Z"
     },
     "cerrada": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-25T22:32:53.917Z"
     }
   },
   "commits": {
-    "frontend": "90aa3cd"
+    "frontend": "26b978a",
+    "harness": "002eb17"
   },
   "revisiones": [
     {
@@ -83,17 +87,75 @@
       "archivo": "05-revision-frontend-4.json",
       "sha": "90aa3cd2964c93fed4a95692a65488a9464ff59e",
       "ts": "2026-09-25T22:12:46.592Z"
+    },
+    {
+      "n": 5,
+      "repo": "frontend",
+      "motor": "anfitriona",
+      "motivo": "codex sin cuota (usage limit hasta 2026-10-15); revisó un agente nuevo con contexto limpio",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-frontend-5.json",
+      "sha": "22e8f9876be6a3be63c806028a0ef48479277765",
+      "ts": "2026-09-25T22:23:32.299Z"
+    },
+    {
+      "n": 1,
+      "repo": "harness",
+      "motor": "anfitriona",
+      "motivo": "codex sin cuota (usage limit hasta 2026-10-15); revisó un agente nuevo con contexto limpio",
+      "verdict": "needs-attention",
+      "bloqueantes": 0,
+      "archivo": "05-revision-harness-1.json",
+      "sha": "6f8d3551953ee4f95ed3b33ae83794873f9ae000",
+      "ts": "2026-09-25T22:23:32.729Z"
+    },
+    {
+      "n": 6,
+      "repo": "frontend",
+      "motor": "anfitriona",
+      "motivo": "codex sin cuota (usage limit hasta 2026-10-15); revisó un agente nuevo con contexto limpio",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-frontend-6.json",
+      "sha": "24f88fc3ff41243173b8817b27ab4b9d7319dece",
+      "ts": "2026-09-25T22:26:49.587Z"
+    },
+    {
+      "n": 2,
+      "repo": "harness",
+      "motor": "anfitriona",
+      "motivo": "codex sin cuota (usage limit hasta 2026-10-15); revisó un agente nuevo con contexto limpio",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-harness-2.json",
+      "sha": "e1a6f793d00a06a53d3843b6a2f7f661e59b1810",
+      "ts": "2026-09-25T22:26:49.916Z"
+    },
+    {
+      "n": 7,
+      "repo": "frontend",
+      "motor": "anfitriona",
+      "motivo": "codex sin cuota (usage limit hasta 2026-10-15); revisó un agente nuevo con contexto limpio",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-frontend-7.json",
+      "sha": "16b9adbe36e7df82e900222098436cd4de3999b5",
+      "ts": "2026-09-25T22:29:13.890Z"
     }
   ],
-  "pr": {},
+  "pr": {
+    "frontend": "https://github.com/matiaslameiro-surely/planillero-frontend/pull/21",
+    "harness": "https://github.com/matiaslameiro-surely/planillero/pull/2"
+  },
   "jira": {
-    "transicionadoA": "En curso",
+    "transicionadoA": "En revisión",
     "creadoPorHarness": false
   },
   "ejecucion": {
     "herramienta": "Claude Code",
     "modelo": "Claude Opus 5.5",
     "ts": "2026-09-25T17:58:07.398Z",
-    "fin": null
+    "fin": "2026-09-25T22:32:53.763Z"
   }
 }
