@@ -1,0 +1,29 @@
+{
+  "verdict": "approve",
+  "summary": "Se revisó el diff del backoffice contra la spec de PLAN-63: función común visitAccessMessage, expediente con mensaje según el status y link para volver, y visor de evidencias que decide el acceso por /evidences y reserva «pendiente de sellado» para manifest_not_found. Cumple los criterios 1 a 8; 6 tests fallan con el código anterior y la prueba en local cubre supervisor y operador.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "El visor muestra el UUID abreviado cuando no hay acceso",
+      "body": "Sin acceso no se puede leer el código de la visita, así que el encabezado dice «Visita: a0000002…». Está fuera de alcance en la spec.",
+      "file": "src/app/pages/evidence-viewer/evidence-viewer.html",
+      "line_start": 6,
+      "line_end": 6,
+      "confidence": 0.9,
+      "recommendation": "Dejarlo así; no hay forma de obtener el código sin acceso."
+    },
+    {
+      "severity": "low",
+      "title": "El expediente conserva un Router inyectado sin uso",
+      "body": "`private router = inject(Router)` ya estaba sin uso antes de esta tarea; no se tocó para no agrandar el diff.",
+      "file": "src/app/pages/expediente/expediente.component.ts",
+      "line_start": 111,
+      "line_end": 111,
+      "confidence": 0.8,
+      "recommendation": "Se puede quitar cuando se toque el expediente por PLAN-64."
+    }
+  ],
+  "next_steps": [
+    "Probado en local como supervisor (V-2001, inexistente, V-1006 y V-1001) y como operador (V-1001 asignada y V-1006 no asignada)."
+  ]
+}

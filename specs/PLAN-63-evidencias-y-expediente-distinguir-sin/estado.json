@@ -1,0 +1,67 @@
+{
+  "issue": "PLAN-63",
+  "titulo": "Evidencias y expediente: distinguir sin acceso y no existe",
+  "slug": "evidencias-y-expediente-distinguir-sin",
+  "rama": "PLAN-63-evidencias-y-expediente-distinguir-sin",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-25T18:53:30.547Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-25T18:53:30.642Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-25T18:55:50.036Z",
+      "nota": "Plan aprobado por el usuario el 25/09"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-25T19:00:46.499Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-25T19:00:46.561Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-25T19:02:50.814Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-25T19:02:50.887Z",
+      "nota": "PR backoffice #31; Jira En revisión"
+    }
+  },
+  "commits": {},
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-1.json",
+      "sha": "0b3d5d2142d8fa57ddee66fabb262ef47849ae57",
+      "ts": "2026-09-25T19:00:46.398Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "Claude Opus 5.5",
+    "ts": "2026-09-25T18:52:29.048Z",
+    "fin": "2026-09-25T19:02:50.814Z"
+  }
+}
