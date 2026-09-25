@@ -103,14 +103,23 @@ function detectarMotores() {
 
 // ─── Diagnóstico ──────────────────────────────────────────────────────────
 
+/** `^22.22.3 || ^24.15.0 || >=26.0.0`, sin depender de un parser de semver. */
+function nodeSoportado(version) {
+  const [mayor, menor, parche] = version.split('.').map(Number);
+  if (mayor === 22) return menor > 22 || (menor === 22 && parche >= 3);
+  if (mayor === 24) return menor >= 15;
+  return mayor >= 26;
+}
+
 function diagnosticar(cfg) {
   const problemas = [];
   const avisos = [];
 
-  // 22.13 y no 20: los tests del frontend usan `node:sqlite`, que llega recién en esa versión.
-  const [nodeMayor, nodeMenor] = process.versions.node.split('.').map(Number);
-  if (nodeMayor < 22 || (nodeMayor === 22 && nodeMenor < 13)) {
-    problemas.push(`Node ${process.versions.node}: el harness y los tests del frontend necesitan 22.13 o superior.`);
+  // El rango es el de `engines` de Angular 22 (^22.22.3 || ^24.15.0 || >=26), el más estricto de los
+  // tres repos: con un Node fuera de él no se construye el backoffice. Cubre también `node:sqlite`,
+  // que usan los tests del frontend.
+  if (!nodeSoportado(process.versions.node)) {
+    problemas.push(`Node ${process.versions.node}: el harness y los repos necesitan 22.22.3+ o 24.15+ (Node 23 no sirve).`);
   }
 
   const git = buscarEnPath('git');

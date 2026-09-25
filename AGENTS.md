@@ -186,7 +186,7 @@ implementó, y respondé únicamente con el JSON del schema.
 
 | Requisito | Para qué |
 |---|---|
-| Node 22.13+ | Los scripts del harness, el toolchain de Expo y los tests del frontend, que usan `node:sqlite` |
+| Node 22.22.3+ o 24.15+ | Los scripts del harness y los tres toolchains. Es el rango de Angular 22, el más estricto (Node 23 no sirve), y cubre `node:sqlite`, que usan los tests del frontend |
 | JDK 21 | Compilar y testear el backend. Se configura en `workspace.local.json`, porque varía por máquina |
 | `gh` (GitHub CLI) autenticado | Crear los PRs |
 | MCP de Atlassian | Leer y actualizar Jira |
