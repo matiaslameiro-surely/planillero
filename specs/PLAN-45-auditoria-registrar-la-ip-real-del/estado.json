@@ -38,8 +38,8 @@
     }
   },
   "commits": {
-    "backend": "1248146e09b15b76c726ac6689d6a34c3fc381a9",
-    "backoffice": "74f5414615622814d3a7138aba5c7fe106b39822"
+    "backend": "574daec17a876e11b8a7cc868ae87862119b134e",
+    "backoffice": "4a5aae23bb5b9e78f4a111226b07b1668b07d1e0"
   },
   "revisiones": [
     {
@@ -74,6 +74,28 @@
       "archivo": "05-revision-backoffice-1.json",
       "sha": "74f5414615622814d3a7138aba5c7fe106b39822",
       "ts": "2026-09-25T12:12:56.594Z"
+    },
+    {
+      "n": 3,
+      "repo": "backend",
+      "motor": "anfitriona",
+      "motivo": "motor externo opencode no disponible",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backend-3.json",
+      "sha": "574daec17a876e11b8a7cc868ae87862119b134e",
+      "ts": "2026-09-25T12:59:24.751Z"
+    },
+    {
+      "n": 2,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "motor externo opencode no disponible",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-2.json",
+      "sha": "4a5aae23bb5b9e78f4a111226b07b1668b07d1e0",
+      "ts": "2026-09-25T12:59:24.833Z"
     }
   ],
   "pr": {

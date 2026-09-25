@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "Se implementó el test appendedForgedHeaderIsTrustedSoTheEdgeProxyMustOverwriteIt en AuditRemoteIpIntegrationTest, verificando que ante cabeceras compuestas (6.6.6.6, 172.18.0.1) Tomcat saltea la IP privada y registra 6.6.6.6, documentando formalmente por qué la protección de sobreescritura en el proxy NGINX es obligatoria.",
+  "findings": [],
+  "next_steps": []
+}
