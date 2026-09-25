@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "Se revisó la implementación de las acciones para visitas en curso en el repositorio frontend. Cumple con todos los criterios de aceptación de PLAN-58: navegación a evidencias periciales, apertura de formulario con fallback a 'control-de-acceso' v1, finalización con confirmación modal y sincronización local en SQLite y trazas de auditoría, respetando accesibilidad y ergonomía táctil.",
+  "findings": [],
+  "next_steps": []
+}

@@ -19,7 +19,7 @@ Sin embargo, una vez en curso, la tarjeta de la visita en la hoja de ruta quedab
 ## Criterios de aceptación
 
 1. **Acceso directo a Evidencias:** En toda tarjeta de visita con estado `IN_PROGRESS`, se muestra un botón destacado «Evidencias / Firma» que navega a la ruta `/evidence/${visit.visitId}`.
-2. **Acceso a Formulario con fallback:** En estado `IN_PROGRESS`, se muestra el botón «Completar formulario». Si la visita cuenta con `formTemplateId` y `formTemplateVersion`, se invocan con dichos parámetros; si no tiene plantilla asignada, se utiliza por defecto la clave `ACTA_CONSTATACION` (versión 1).
+2. **Acceso a Formulario con fallback:** En estado `IN_PROGRESS`, se muestra el botón «Completar formulario». Si la visita cuenta con `formTemplateId` y `formTemplateVersion`, se invocan con dichos parámetros; si no tiene plantilla asignada, se utiliza por defecto la clave `control-de-acceso` (versión 1).
 3. **Endpoint de finalización en Backend:**
    - `POST /api/v1/visits/{id}/complete` accesible para usuarios con rol `OPERATOR`.
    - Valida pertenencia de la visita al operador autenticado vía `VisitAccessGuard`.

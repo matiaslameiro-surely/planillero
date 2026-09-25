@@ -39,7 +39,7 @@
   },
   "commits": {
     "backend": "5f1ffea",
-    "frontend": "c4e3446"
+    "frontend": "8f5610f"
   },
   "revisiones": [
     {
@@ -63,6 +63,17 @@
       "archivo": "05-revision-frontend-1.json",
       "sha": "c4e3446f8aacfdd7ab829a21729003e20850e17f",
       "ts": "2026-09-25T18:10:06.501Z"
+    },
+    {
+      "n": 2,
+      "repo": "frontend",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-frontend-2.json",
+      "sha": "8f5610f2f9f9a02496ab39b7b8d6d86aa636fbdc",
+      "ts": "2026-09-25T20:29:32.957Z"
     }
   ],
   "pr": {},
