@@ -1,0 +1,27 @@
+{
+  "verdict": "approve",
+  "summary": "El paso v4 de agendaSchema ahora consulta PRAGMA table_info(agenda_visits) y agrega sólo las columnas de formulario que faltan, con lo que se destraban los dispositivos que quedaron en v2/v3 con las columnas ya creadas; cumple los criterios 1 a 5 y los 10 tests del archivo pasan. Sólo quedan observaciones menores sobre la cobertura de los tests.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "La cobertura de columnas parciales es de un solo caso (una columna, versión 3)",
+      "body": "El criterio 3 pide que una base en versión 1, 2 o 3 con una, dos o las tres columnas llegue a user_version 4 sin error. Los tests cubren las tres columnas en v2 y v3, y una sola columna existente en v3. No hay caso con dos columnas existentes ni ninguno que parta de v1 con columnas preexistentes. La lógica (filtrar por un Set) es la misma para todas las combinaciones, así que el riesgo real es bajo, pero un it.each sobre (versión, columnas existentes) documentaría el criterio completo y protegería contra una regresión futura.",
+      "file": "src/db/agendaSchema.test.ts",
+      "line_start": 125,
+      "line_end": 148,
+      "confidence": 0.7,
+      "recommendation": "Parametrizar el test de columnas parciales con it.each sobre versiones 1, 2 y 3 y combinaciones de una y dos columnas existentes, verificando las ADD COLUMN esperadas y el PRAGMA user_version = 4."
+    },
+    {
+      "severity": "low",
+      "title": "El caso de las tres columnas existentes sólo mira el último execAsync",
+      "body": "El test «no agrega columnas si agenda_visits ya tiene las tres» verifica que el último statement no contenga 'ALTER TABLE', pero no fija cuántos execAsync hubo ni que ningún otro paso toque agenda_visits. Como los pasos 2 y 3 ya tienen sus propias aserciones en otros tests, no es un hueco real hoy, pero la aserción es más débil que la del criterio 2 («no ejecuta ningún ALTER TABLE»).",
+      "file": "src/db/agendaSchema.test.ts",
+      "line_start": 125,
+      "line_end": 136,
+      "confidence": 0.6,
+      "recommendation": "Afirmar que ningún statement ejecutado contenga 'ALTER TABLE agenda_visits' (por ejemplo, executedStatements.every(...)) y la cantidad esperada de llamadas a execAsync."
+    }
+  ],
+  "next_steps": []
+}

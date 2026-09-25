@@ -1,0 +1,17 @@
+{
+  "verdict": "approve",
+  "summary": "Se revisó el paso v4 de agendaSchema.ts y sus tests contra los seis criterios de la spec: el paso consulta PRAGMA table_info(agenda_visits), agrega sólo las columnas de formulario que faltan y siempre sube a user_version 4, y una base en v4 no ejecuta nada. Los 28 tests del archivo pasan y cubren los casos de todas y de algunas columnas existentes desde v1, v2 y v3; sólo queda una observación menor sobre el alcance de los tests.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "Los tests usan un table_info fijo y no reflejan el estado real de la tabla",
+      "body": "El doble de prueba devuelve siempre la misma lista de columnas en getAllAsync, sin importar qué sentencias corrieron antes. Desde la versión 0, por ejemplo, el mock devuelve BASE_COLUMNS aunque el paso 1 sólo haya quedado registrado como string. Los tests verifican bien la lógica de filtrado, pero no ejercitan SQLite real: no detectarían, por ejemplo, que PRAGMA table_info devuelva otra forma de fila o que el ALTER falle dentro de execAsync. El riesgo es bajo porque expo-sqlite devuelve filas con la propiedad name y el SQL generado es trivial.",
+      "file": "src/db/agendaSchema.test.ts",
+      "line_start": 39,
+      "line_end": 55,
+      "confidence": 0.6,
+      "recommendation": "Opcional: si más adelante hay infraestructura para correr SQLite en los tests (por ejemplo, con better-sqlite3 o un adaptador), sumar un test de integración que cree una base en v2 con las columnas de formulario y compruebe que ensureAgendaSchema llega a v4 sin error. No bloquea este PR."
+    }
+  ],
+  "next_steps": []
+}

@@ -1,0 +1,12 @@
+{
+  "key": "PLAN-52",
+  "summary": "Móvil: hacer idempotente la migración de agendaSchema a v4 para evitar error de columna duplicada",
+  "issuetype": "Tarea",
+  "priority": "Medium",
+  "status": "En curso",
+  "assignee": "Matías Lameiro",
+  "reporter": "Fernando Chamorro Goncalves",
+  "sprint": "Sprint 6 - Nuevas pruebas",
+  "created": "2026-09-25T11:10:27.264-0300",
+  "description": "Al actualizar o migrar la aplicación móvil sobre bases de datos locales previas, el paso de migración a la versión 4 (`if (version < 4)`) en `src/db/agendaSchema.ts` ejecuta sentencias directas de `ALTER TABLE agenda_visits ADD COLUMN ...`.\n\nSi la columna `form_template_id` ya existía en la base (por migraciones intermedias o ejecuciones parciales), SQLite lanza el error:\n`Call to function 'NativeDatabase.execAsync' has been rejected. -> Caused by: duplicate column name: form_template_id`\n\nEsto deja la base de datos en estado de error y bloquea el acceso a la agenda.\n\nCriterios de aceptación:\n1. Inspeccionar las columnas existentes en `agenda_visits` mediante `PRAGMA table_info(agenda_visits)` antes de ejecutar `ALTER TABLE`.\n2. Ejecutar la adición de columnas sólo si no existen previamente, garantizando idempotencia.\n3. Verificar que la base alcance `PRAGMA user_version = 4` limpiamente tanto en bases nuevas como en bases que ya posean alguna de las columnas.\n4. Mantener las pruebas unitarias en `src/db/agendaSchema.test.ts` en verde."
+}
