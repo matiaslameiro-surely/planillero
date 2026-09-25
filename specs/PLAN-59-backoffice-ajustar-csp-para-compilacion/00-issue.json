@@ -1,0 +1,9 @@
+{
+  "key": "PLAN-59",
+  "summary": "Backoffice: Ajustar CSP para compilación JIT de Ajv y omitir validación en blur en modo readonly",
+  "type": "Tarea",
+  "priority": "Medium",
+  "assignee": "Juan Ignacio Urrutia",
+  "status": "En curso",
+  "url": "https://surely-sa.atlassian.net/browse/PLAN-59"
+}

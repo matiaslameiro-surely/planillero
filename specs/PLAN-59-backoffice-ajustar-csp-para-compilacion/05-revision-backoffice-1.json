@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "Se incorporó 'unsafe-eval' a la directiva script-src en la cabecera CSP de NGINX y se añadió la salida temprana en onBlur() de DynamicFormComponent cuando isReadonly() es verdadero. Se agregaron tests unitarios y guardias correspondientes con todos los gates en verde.",
+  "findings": [],
+  "next_steps": []
+}

@@ -1,0 +1,67 @@
+{
+  "issue": "PLAN-59",
+  "titulo": "Backoffice: Ajustar CSP para compilación JIT de Ajv y omitir validación en blur en modo readonly",
+  "slug": "backoffice-ajustar-csp-para-compilacion",
+  "rama": "PLAN-59-backoffice-ajustar-csp-para-compilacion",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-25T16:49:11.281Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-25T16:50:40.119Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-25T16:51:25.721Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-25T16:53:54.710Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-25T16:55:33.036Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-25T16:59:08.637Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-25T16:59:21.394Z"
+    }
+  },
+  "commits": {
+    "backoffice": "30f705e"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "motor externo no disponible en entorno local",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-1.json",
+      "sha": "30f705e608d2db737739fb689bd97968072909be",
+      "ts": "2026-09-25T16:55:18.789Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": "En revisión",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.7 Flash",
+    "ts": "2026-09-25T16:48:11.700Z",
+    "fin": "2026-09-25T16:59:08.638Z"
+  }
+}
