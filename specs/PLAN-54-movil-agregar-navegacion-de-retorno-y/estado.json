@@ -1,0 +1,67 @@
+{
+  "issue": "PLAN-54",
+  "titulo": "Móvil: agregar navegación de retorno y cierre de sesión en la pantalla de Hoja de Ruta",
+  "slug": "movil-agregar-navegacion-de-retorno-y",
+  "rama": "PLAN-54-movil-agregar-navegacion-de-retorno-y",
+  "alcance": [
+    "frontend"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-25T17:14:42.004Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-25T17:16:18.896Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-25T17:19:48.057Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-25T17:22:06.364Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-25T17:23:15.420Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-25T17:31:20.286Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-25T17:31:25.659Z"
+    }
+  },
+  "commits": {
+    "frontend": "6722d70"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "frontend",
+      "motor": "anfitriona",
+      "motivo": null,
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-frontend-1.json",
+      "sha": "6722d7081d50c84114337f3ab196f96d9f2335e2",
+      "ts": "2026-09-25T17:23:04.793Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": "En revisión",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.8 Flash",
+    "ts": "2026-09-25T17:14:20.540Z",
+    "fin": "2026-09-25T17:31:20.286Z"
+  }
+}

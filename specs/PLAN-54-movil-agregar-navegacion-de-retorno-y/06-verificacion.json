@@ -1,0 +1,40 @@
+{
+  "ok": true,
+  "tarea": "PLAN-54",
+  "ts": "2026-09-25T17:22:31.270Z",
+  "repos": [
+    {
+      "repo": "frontend",
+      "ok": true,
+      "herramienta": "npm",
+      "pasos": [
+        {
+          "nombre": "lint",
+          "cmd": "npm run lint",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 3398,
+          "salida": "\n> planillero-frontend@0.1.0 lint\n> expo lint --max-warnings 0 --no-cache\n\nenv: load .env\nenv: export EXPO_PUBLIC_API_URL"
+        },
+        {
+          "nombre": "tipos",
+          "cmd": "npx tsc --noEmit",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 2352,
+          "salida": ""
+        },
+        {
+          "nombre": "tests",
+          "cmd": "npm test -- --watchAll=false",
+          "opcional": true,
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 5585,
+          "salida": "\n> planillero-frontend@0.1.0 test\n> jest --watchAll=false\n\nPASS src/sync/syncWorker.test.ts\nPASS src/components/SyncQueueBanner.test.tsx\nPASS src/components/LocationSummary.test.tsx\nPASS src/components/DeviceStatusBar.test.tsx\nPASS src/api/__tests__/evidence.test.ts\nPASS src/components/__tests__/themeContrast.test.tsx\nPASS src/visit/startVisit.test.ts\nPASS src/api/client.test.ts\nPASS src/db/database.test.ts\nPASS src/agenda/agendaRepository.test.ts\nPASS src/constants/layout.test.ts\nPASS src/api/visits.test.ts\nPASS src/status/useHeartbeat.test.tsx\nPASS src/visit/location.test.ts\nPASS src/status/useDeviceStatus.test.tsx\nPASS src/components/VisitCard.test.tsx\nPASS src/sync/syncQueue.test.ts\nPASS src/sync/signOutGuard.test.ts\nPASS src/visit/accuracy.test.ts\nPASS src/agenda/date.test.ts\nPASS src/db/agendaSchema.test.ts\nPASS src/audit/auditRepository.test.ts\nPASS src/db/encryptionKey.test.ts\nPASS src/auth/tokenStore.test.ts\nPASS src/sync/useSyncQueue.test.tsx\nPASS src/app/__tests__/agenda.test.tsx\nPASS src/components/__tests__/ergonomics.test.tsx\nPASS src/agenda/useAgenda.test.tsx\n\nTest Suites: 28 passed, 28 total\nTests:       210 passed, 210 total\nSnapshots:   0 total\nTime:        4.896 s\nRan all test suites."
+        }
+      ],
+      "avisos": []
+    }
+  ]
+}

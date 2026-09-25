@@ -1,0 +1,18 @@
+{
+  "key": "PLAN-54",
+  "summary": "Móvil: agregar navegación de retorno y cierre de sesión en la pantalla de Hoja de Ruta",
+  "issuetype": "Tarea",
+  "components": [],
+  "created": "2026-09-25T11:11:27.392-0300",
+  "description": "En la pantalla de Hoja de Ruta (`src/app/agenda.tsx`), el operador no dispone de ningún botón o elemento de navegación para regresar a la pantalla principal de diagnóstico/sesión (`/`) ni para cerrar sesión.\n\nAl tener `headerShown: false`, la barra nativa no provee botón de atrás, dependiendo exclusivamente de los gestos o botones del sistema operativo Android.\n\nCriterios de aceptación:\n1. Proveer un botón o cabecera con acción de retorno a la pantalla principal (`/`).\n2. Permitir el acceso a la acción de cierre de sesión (respetando la guardia de actas pendientes de sincronización `confirmSignOut`).\n3. Cumplir con la accesibilidad y el área táctil mínima (48 dp).",
+  "project": "PLAN",
+  "reporter": "Fernando Chamorro Goncalves",
+  "fixVersions": [],
+  "priority": "Medium",
+  "resolution": null,
+  "labels": [],
+  "duedate": null,
+  "assignee": "Fernando Chamorro Goncalves",
+  "updated": "2026-09-25T14:14:28.408-0300",
+  "status": "En curso"
+}
