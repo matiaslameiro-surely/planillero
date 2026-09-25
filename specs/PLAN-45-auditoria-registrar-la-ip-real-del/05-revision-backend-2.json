@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "Se amplió la documentación en application.properties para detallar el funcionamiento de RemoteIpValve, la prevención de spoofing y el registro de la IP del gateway en Docker Compose local. Se agregó el test del Criterio 3 en AuditRemoteIpIntegrationTest verificando que las cabeceras pisadas por el proxy de borde registran la IP real del cliente.",
+  "findings": [],
+  "next_steps": []
+}

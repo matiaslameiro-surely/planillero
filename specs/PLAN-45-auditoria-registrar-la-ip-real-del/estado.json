@@ -4,7 +4,8 @@
   "slug": "auditoria-registrar-la-ip-real-del",
   "rama": "PLAN-45-auditoria-registrar-la-ip-real-del",
   "alcance": [
-    "backend"
+    "backend",
+    "backoffice"
   ],
   "fase": "cerrada",
   "fases": {
@@ -22,11 +23,11 @@
     },
     "implementar": {
       "estado": "ok",
-      "ts": "2026-09-24T17:04:33.184Z"
+      "ts": "2026-09-25T12:12:02.328Z"
     },
     "verificar": {
       "estado": "ok",
-      "ts": "2026-09-24T17:05:26.461Z"
+      "ts": "2026-09-25T12:13:08.945Z"
     },
     "cerrar": {
       "estado": "ok",
@@ -37,7 +38,8 @@
     }
   },
   "commits": {
-    "backend": "8af0826f9e5ba940149f39946b0ed14ab03cf66b"
+    "backend": "1248146e09b15b76c726ac6689d6a34c3fc381a9",
+    "backoffice": "74f5414615622814d3a7138aba5c7fe106b39822"
   },
   "revisiones": [
     {
@@ -50,9 +52,34 @@
       "archivo": "05-revision-backend-1.json",
       "sha": "8af0826f9e5ba940149f39946b0ed14ab03cf66b",
       "ts": "2026-09-24T17:05:06.037Z"
+    },
+    {
+      "n": 2,
+      "repo": "backend",
+      "motor": "anfitriona",
+      "motivo": "motor externo opencode no disponible",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backend-2.json",
+      "sha": "1248146e09b15b76c726ac6689d6a34c3fc381a9",
+      "ts": "2026-09-25T12:12:56.502Z"
+    },
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "motor externo opencode no disponible",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-1.json",
+      "sha": "74f5414615622814d3a7138aba5c7fe106b39822",
+      "ts": "2026-09-25T12:12:56.594Z"
     }
   ],
-  "pr": {},
+  "pr": {
+    "backend": "https://github.com/matiaslameiro-surely/planillero-backend/pull/15",
+    "backoffice": "https://github.com/matiaslameiro-surely/planillero-backoffice/pull/27"
+  },
   "jira": {
     "transicionadoA": "en_revision",
     "creadoPorHarness": false

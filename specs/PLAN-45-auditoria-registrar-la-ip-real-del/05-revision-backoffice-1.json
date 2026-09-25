@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "Se configuró correctamente proxy_set_header X-Forwarded-For $remote_addr en docker/nginx.conf, asegurando que el proxy de borde pise cualquier cabecera previa del cliente para prevenir ataques de spoofing en la auditoría.",
+  "findings": [],
+  "next_steps": []
+}

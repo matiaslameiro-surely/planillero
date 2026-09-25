@@ -3,7 +3,12 @@
 ## backend
 
 - [x] `[backend]` Configurar `server.forward-headers-strategy=native` en `application.properties`
-- [x] `[backend]` Crear `AuditRemoteIpIntegrationTest` para validar resolución de IP con `X-Forwarded-For` y conexión directa
+- [x] `[backend]` Documentar comportamiento de RemoteIpValve y Docker local en `application.properties`
+- [x] `[backend]` Crear `AuditRemoteIpIntegrationTest` para validar resolución de IP con `X-Forwarded-For`, conexión directa y Criterio 3 (spoofing)
+
+## backoffice *(web)*
+
+- [x] `[backoffice]` Configurar `proxy_set_header X-Forwarded-For $remote_addr` en `docker/nginx.conf` para evitar spoofing
 
 ## Verificación
 
