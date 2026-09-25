@@ -107,8 +107,11 @@ function diagnosticar(cfg) {
   const problemas = [];
   const avisos = [];
 
-  const nodeMayor = Number(process.versions.node.split('.')[0]);
-  if (nodeMayor < 20) problemas.push(`Node ${process.versions.node}: el harness necesita 20 o superior.`);
+  // 22.13 y no 20: los tests del frontend usan `node:sqlite`, que llega recién en esa versión.
+  const [nodeMayor, nodeMenor] = process.versions.node.split('.').map(Number);
+  if (nodeMayor < 22 || (nodeMayor === 22 && nodeMenor < 13)) {
+    problemas.push(`Node ${process.versions.node}: el harness y los tests del frontend necesitan 22.13 o superior.`);
+  }
 
   const git = buscarEnPath('git');
   if (!git) problemas.push('No se encontró `git` en el PATH.');

@@ -186,7 +186,7 @@ implementó, y respondé únicamente con el JSON del schema.
 
 | Requisito | Para qué |
 |---|---|
-| Node 20+ | Los scripts del harness y el toolchain de Expo |
+| Node 22.13+ | Los scripts del harness, el toolchain de Expo y los tests del frontend, que usan `node:sqlite` |
 | JDK 21 | Compilar y testear el backend. Se configura en `workspace.local.json`, porque varía por máquina |
 | `gh` (GitHub CLI) autenticado | Crear los PRs |
 | MCP de Atlassian | Leer y actualizar Jira |
