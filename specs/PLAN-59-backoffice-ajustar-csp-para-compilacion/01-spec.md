@@ -14,9 +14,9 @@ Adicionalmente, en la pantalla de Expediente digital (`mode="readonly"`), cuando
 
 ## Criterios de aceptación
 
-1. En `backoffice/docker/nginx.conf`, incorporar `'unsafe-eval'` a la directiva `script-src` de la cabecera `Content-Security-Policy`.
+1. En `backoffice/docker/nginx.conf`, asegurar que la cabecera `Content-Security-Policy` **no incluya** `'unsafe-eval'` en la directiva `script-src`, manteniendo solo `'self'`. Al omitir la compilación de esquemas en modo readonly, esto ya no es necesario.
 2. En `DynamicFormComponent.onBlur()`, verificar si `this.isReadonly()` es verdadero para salir inmediatamente sin invocar la validación de campo (`ValidationService.validateField`) ni mutar señales de error ni de campos tocados.
-3. Actualizar la guardia de configuración de NGINX (`nginx-guard.spec.ts`) y agregar pruebas unitarias para `DynamicFormComponent` que garanticen que en modo `readonly` los eventos de blur no ejecutan validaciones ni modifican señales de error / tocados.
+3. Actualizar la guardia de configuración de NGINX (`nginx-guard.spec.ts`) para verificar que `script-src` no incluye `'unsafe-eval'`. En `dynamic-form.component.spec.ts`, renderizar el formulario en modo `readonly`, disparar el blur desde el template y verificar que `ValidationService` no es invocado y que no existe botón de envío.
 4. Mantener todos los gates determinísticos de verificación en verde (`npm test`, `npm run lint`, `npm run build` en `backoffice`).
 
 ## Fuera de alcance
