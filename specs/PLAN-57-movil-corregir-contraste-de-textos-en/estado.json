@@ -6,7 +6,7 @@
   "alcance": [
     "frontend"
   ],
-  "fase": "cerrar",
+  "fase": "cerrada",
   "fases": {
     "preparacion": {
       "estado": "ok",
@@ -29,11 +29,12 @@
       "ts": "2026-09-25T23:10:00.166Z"
     },
     "cerrar": {
-      "estado": "en_curso",
-      "ts": "2026-09-26T01:43:43.649Z"
+      "estado": "ok",
+      "ts": "2026-09-26T01:47:42.251Z"
     },
     "cerrada": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-26T01:47:42.321Z"
     }
   },
   "commits": {
@@ -67,13 +68,13 @@
     "frontend": "https://github.com/matiaslameiro-surely/planillero-frontend/pull/22"
   },
   "jira": {
-    "transicionadoA": "En curso",
+    "transicionadoA": "En revisión",
     "creadoPorHarness": false
   },
   "ejecucion": {
     "herramienta": "Claude Code",
     "modelo": "Claude Opus 5.5",
     "ts": "2026-09-25T22:35:52.627Z",
-    "fin": null
+    "fin": "2026-09-26T01:47:42.251Z"
   }
 }
