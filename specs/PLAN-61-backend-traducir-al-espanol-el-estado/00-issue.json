@@ -1,0 +1,12 @@
+{
+  "key": "PLAN-61",
+  "summary": "Backend: Traducir al español el estado de la visita en mensaje de error de asignación no permitida",
+  "issuetype": "Tarea",
+  "priority": "Medium",
+  "status": "En curso",
+  "assignee": "Matías Lameiro",
+  "reporter": "Juan Ignacio Urrutia",
+  "sprint": "Sprint 6 - Nuevas pruebas",
+  "created": "2026-09-25T12:01:40.717-0300",
+  "description": "### Descripción\n\nAl intentar asignar una visita cuyo estado no permite asignación (`IN_PROGRESS`, `COMPLETED`, `CANCELLED`), `PlanningService.java` genera un mensaje de error concatenando el nombre del enum en minúsculas:\n\n`\"La visita \" + visit.getCode() + \" no se puede asignar (estado \" + visit.getStatus().name().toLowerCase() + \").\"`\n\nEsto produce mensajes dirigidos al usuario con estados en inglés, tales como:\n\n`La visita V-1001 no se puede asignar (estado in_progress).`\n\n### Criterios de Aceptación\n\n1. En `PlanningService.java`, traducir el estado de la visita al español en el mensaje de error (`en curso`, `completada`, `cancelada`).\n2. Mantener intacto el código de error programático (`visit_not_assignable`) para compatibilidad con clientes.\n3. Actualizar o agregar pruebas de integración en `PlanningIntegrationTest.java` verificando el mensaje en español."
+}

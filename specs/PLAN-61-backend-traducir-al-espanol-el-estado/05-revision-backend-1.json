@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "Se revisó el diff del backend de PLAN-61 contra la spec. VisitStatus ahora tiene un nombre en español para cada estado («pendiente», «asignada», «en curso», «completada», «cancelada»), que coinciden en minúscula con las etiquetas de labels.ts y VisitCard.tsx. Los tres mensajes (visit_not_assignable, visit_not_startable, visit_not_in_progress) lo usan sin cambiar el código de error ni el status HTTP, y la serialización JSON/JPA sigue usando name() porque no hay @JsonValue y las entidades usan @Enumerated(STRING). Los criterios 1 a 6 se cumplen: el constructor obligatorio hace que un estado nuevo sin nombre no compile, VisitStatusTest valida el nombre de cada estado y hay tests de integración sobre message en los tres casos.",
+  "findings": [],
+  "next_steps": []
+}
