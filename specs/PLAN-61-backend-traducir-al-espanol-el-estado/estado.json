@@ -6,7 +6,7 @@
   "alcance": [
     "backend"
   ],
-  "fase": "cerrar",
+  "fase": "cerrada",
   "fases": {
     "preparacion": {
       "estado": "ok",
@@ -29,11 +29,12 @@
       "ts": "2026-09-26T02:09:57.382Z"
     },
     "cerrar": {
-      "estado": "en_curso",
-      "ts": "2026-09-26T02:13:27.900Z"
+      "estado": "ok",
+      "ts": "2026-09-26T02:15:41.311Z"
     },
     "cerrada": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-26T02:15:41.378Z"
     }
   },
   "commits": {
@@ -56,13 +57,13 @@
     "backend": "https://github.com/matiaslameiro-surely/planillero-backend/pull/21"
   },
   "jira": {
-    "transicionadoA": "En curso",
+    "transicionadoA": "En revisión",
     "creadoPorHarness": false
   },
   "ejecucion": {
     "herramienta": "Claude Code",
     "modelo": "Claude Opus 5.5",
     "ts": "2026-09-26T01:53:00.723Z",
-    "fin": null
+    "fin": "2026-09-26T02:15:41.312Z"
   }
 }
