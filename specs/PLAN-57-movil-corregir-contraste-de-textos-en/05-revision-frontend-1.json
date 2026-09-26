@@ -1,0 +1,37 @@
+{
+  "verdict": "approve",
+  "summary": "Se revisó el diff de frontend (DeviceStatusBar y su test) contra los 7 criterios de la spec. Todos se cumplen: los textos toman textSecondary/danger del tema, la barra declara fondo y borde propios, y los contrastes reales son 9.90:1 y 6.18:1 (claro), 12.02:1 y 4.74:1 (oscuro), y 5.02:1 / 5.44:1 en los chips; los 27 tests, tsc y eslint pasan. Quedan sólo observaciones menores de mantenibilidad.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "El verde del chip «Modo conectado» duplica el literal de LIGHT_THEME.success",
+      "body": "modeOnline usa '#15803d' copiado a mano, y el comentario aclara que es el `success` del tema claro. Si alguien ajusta LIGHT_THEME.success (por ejemplo a un verde más claro), el chip no acompaña y el comentario queda desactualizado; a la inversa, nada impide que el literal cambie sin que se note la relación. El test sí protege el contraste, así que no hay riesgo funcional inmediato.",
+      "file": "src/components/DeviceStatusBar.tsx",
+      "line_start": 69,
+      "line_end": 73,
+      "confidence": 0.6,
+      "recommendation": "Referenciar LIGHT_THEME.success (y LIGHT_THEME.textInverse para el blanco) en lugar de repetir los literales, manteniendo que el chip sea fijo en los dos temas."
+    },
+    {
+      "severity": "low",
+      "title": "Helpers de contraste WCAG duplicados entre tests",
+      "body": "relativeLuminance y contrastRatio se reimplementan en DeviceStatusBar.test.tsx, cuando src/components/__tests__/themeContrast.test.tsx ya tiene su propia versión equivalente. Dos implementaciones del mismo cálculo pueden divergir (por ejemplo, una sin soporte para `#fff`, que es lo que obliga a agregar expandHex acá).",
+      "file": "src/components/DeviceStatusBar.test.tsx",
+      "line_start": 62,
+      "line_end": 79,
+      "confidence": 0.7,
+      "recommendation": "En una próxima tarea que toque estos tests, extraer relativeLuminance/contrastRatio (con normalización de hex corto) a un helper de test compartido y usarlo desde ambos archivos."
+    },
+    {
+      "severity": "low",
+      "title": "chipBackground depende de la forma interna del árbol de react-test-renderer",
+      "body": "Para encontrar el fondo del chip se sube dos niveles con text.parent!.parent. Funciona hoy (y el expect(chip.type).toBe(View) evita falsos positivos), pero cualquier envoltorio intermedio en el componente o un cambio en cómo react-native expone Text rompe el test por estructura y no por contraste.",
+      "file": "src/components/DeviceStatusBar.test.tsx",
+      "line_start": 91,
+      "line_end": 96,
+      "confidence": 0.5,
+      "recommendation": "Opcional: dar al chip un testID o accessibilityLabel y buscarlo con findByProps, en lugar de navegar por parent."
+    }
+  ],
+  "next_steps": []
+}

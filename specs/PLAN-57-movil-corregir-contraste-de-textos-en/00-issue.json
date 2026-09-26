@@ -1,0 +1,12 @@
+{
+  "key": "PLAN-57",
+  "summary": "Móvil: corregir contraste de textos en DeviceStatusBar para tema oscuro (texto negro ilegible)",
+  "issuetype": "Tarea",
+  "priority": "Medium",
+  "status": "En curso",
+  "assignee": "Matías Lameiro",
+  "reporter": "Fernando Chamorro Goncalves",
+  "sprint": "Sprint 6 - Nuevas pruebas",
+  "created": "2026-09-25T11:12:43.845-0300",
+  "description": "En el componente `src/components/DeviceStatusBar.tsx`, los textos informativos (\"Batería XX%\" y \"X visitas pendientes\") se renderizan a través del estilo `styles.item`.\n\nDicho estilo define únicamente `item: { fontSize: 14 }` y omite especificar un color de texto (`color`). Cuando la aplicación se ejecuta con tema oscuro o sobre el fondo oscuro (`#0f172a`), el motor de Android aplica el color por defecto del sistema (negro `#000000`).\n\nEsto produce texto negro sobre fondo azul oscuro casi negro, resultando prácticamente invisible para el operador e incumpliendo de forma crítica las pautas de accesibilidad y contraste mínimo de WCAG.\n\nCriterios de aceptación:\n1. Asignar un color explícito adecuado a `styles.item` (obtenido de `useThemeColors()` o un tono de alto contraste compatible tanto con fondo claro como oscuro).\n2. Verificar que los textos \"Batería XX%\" y \"X visitas pendientes\" tengan una relación de contraste superior a 4.5:1 contra el fondo de la barra en todos los modos."
+}
