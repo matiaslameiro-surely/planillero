@@ -17,7 +17,7 @@
 | **Repositorio GitHub (Backoffice Web)** | [https://github.com/matiaslameiro-surely/planillero-backoffice](https://github.com/matiaslameiro-surely/planillero-backoffice) | Portal de supervisión y planificación en Angular 22. |
 | **Aplicación Web en Producción** | [https://planillero.ferchamorro.cloud](https://planillero.ferchamorro.cloud) | Desplegada en Hostinger VPS bajo Docker y proxy inverso Traefik con SSL automático. |
 | **Credenciales de Demostración** | *Usuario / Contraseña:*<br>• `operador.demo` / `Operador123!` (Operador de campo)<br>• `supervisor.demo` / `Supervisor123!` (Supervisor)<br>• `admin.demo` / `Admin123!` (Administrador) | Usuarios precargados automáticamente mediante migraciones Flyway para evaluación docente. |
-| **Instalador APK Móvil (Android)** | Descarga directa / Build de producción en distribución | Generado con `scripts/build-apk.sh` apuntando al backend en producción. |
+| **Instalador APK Móvil (Android)** | [Descargar APK (Google Drive)](https://drive.google.com/file/d/1TDwhOGGgGW5ZR_RBZGopK7OO3cfLWWyQ/view?usp=drive_link) | Paquete binario listo para instalar en dispositivos Android, configurado contra el backend en producción. |
 
 ---
 
