@@ -1,0 +1,67 @@
+{
+  "issue": "PLAN-37",
+  "titulo": "Entrega final informe PDF y tabla de links",
+  "slug": "entrega-final-informe-pdf-y-tabla-de",
+  "rama": "PLAN-37-entrega-final-informe-pdf-y-tabla-de",
+  "alcance": [
+    "harness"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-27T20:48:28.770Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-27T20:48:50.301Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-27T20:49:21.494Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-27T20:50:24.346Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-27T20:51:20.585Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-27T21:47:39.043Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-27T21:47:39.108Z"
+    }
+  },
+  "commits": {
+    "harness": "7b4fc5d"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "harness",
+      "motor": "anfitriona",
+      "motivo": null,
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-harness-1.json",
+      "sha": "7b4fc5d0d0b1f2a7b218f046bceb125a1ef751a6",
+      "ts": "2026-09-27T20:51:05.073Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.8 Flash",
+    "ts": "2026-09-27T20:47:43.142Z",
+    "fin": "2026-09-27T21:47:39.044Z"
+  }
+}
