@@ -11,11 +11,11 @@
 
 | Recurso | URL / Acceso | Estado / Observación |
 |---|---|---|
-| **Repositorio GitHub (Harness / Monorepo)** | [https://github.com/matiaslameiro-surely/planillero](https://github.com/matiaslameiro-surely/planillero) | Repositorio raíz con harness agéntico, protocolo SDD y specs ([PLAN-1](file:///c:/planillero/specs) gestiona visibilidad pública). |
+| **Repositorio GitHub (Harness / Monorepo)** | [https://github.com/matiaslameiro-surely/planillero](https://github.com/matiaslameiro-surely/planillero) | Repositorio raíz con harness agéntico, protocolo SDD y especificaciones del proyecto. |
 | **Repositorio GitHub (Backend)** | [https://github.com/matiaslameiro-surely/planillero-backend](https://github.com/matiaslameiro-surely/planillero-backend) | API Spring Boot 4 + PostgreSQL + Docker. |
 | **Repositorio GitHub (Frontend Móvil)** | [https://github.com/matiaslameiro-surely/planillero-frontend](https://github.com/matiaslameiro-surely/planillero-frontend) | App móvil React Native + Expo (offline-first). |
 | **Repositorio GitHub (Backoffice Web)** | [https://github.com/matiaslameiro-surely/planillero-backoffice](https://github.com/matiaslameiro-surely/planillero-backoffice) | Portal de supervisión y planificación en Angular 22. |
-| **Aplicación Web en Producción** | [https://planillero.ferchamorro.cloud](https://planillero.ferchamorro.cloud) | Desplegada en Hostinger VPS bajo Docker y proxy inverso Traefik con SSL automático ([PLAN-36](file:///c:/planillero/specs)). |
+| **Aplicación Web en Producción** | [https://planillero.ferchamorro.cloud](https://planillero.ferchamorro.cloud) | Desplegada en Hostinger VPS bajo Docker y proxy inverso Traefik con SSL automático. |
 | **Credenciales de Demostración** | *Usuario / Contraseña:*<br>• `operador.demo` / `Operador123!` (Operador de campo)<br>• `supervisor.demo` / `Supervisor123!` (Supervisor)<br>• `admin.demo` / `Admin123!` (Administrador) | Usuarios precargados automáticamente mediante migraciones Flyway para evaluación docente. |
 | **Instalador APK Móvil (Android)** | Descarga directa / Build de producción en distribución | Generado con `scripts/build-apk.sh` apuntando al backend en producción. |
 
@@ -110,7 +110,7 @@ flowchart TD
 * **Persistencia en el Dispositivo (Cliente Offline):** Base de datos embebida **SQLite** (`expo-sqlite`) en la app móvil. Mantiene una réplica local de la hoja de ruta y una cola de salida (*outbox*) que encola mutaciones y archivos en base64 hasta detectar conectividad disponible.
 * **Componentes Tradicionales vs. Inteligencia Artificial:**
   * *Lógica Tradicional (MVP):* Autenticación criptográfica mediante pares de claves asimétricas RSA-2048, verificación determinística de integridad por hash, validadores JSON Schema para formularios dinámicos y persistencia transaccional con auditoría estricta.
-  * *Componente de IA (Enfoque del Proyecto):* Durante el MVP, por priorización y definición estratégica docente, la inteligencia artificial se implementó en el **eje metodológico de co-work y desarrollo autónomo (SDD)**. La incorporación del modelo inteligente dentro de la app ([PLAN-21](file:///c:/planillero/specs): asistente de sugerencias semánticas y detección de ambigüedades en campo mediante SLM local) quedó planificada como extensión Post-MVP para no comprometer la estabilidad probatoria inicial.
+  * *Componente de IA (Enfoque del Proyecto):* Durante el MVP, por priorización y definición estratégica docente, la inteligencia artificial se implementó en el **eje metodológico de co-work y desarrollo autónomo (SDD)**. La incorporación del modelo inteligente dentro de la app (asistente de sugerencias semánticas y detección de ambigüedades en campo mediante SLM local) quedó planificada como extensión Post-MVP para no comprometer la estabilidad probatoria inicial.
 
 ### 2.3 Diagrama UML: Secuencia de Sincronización y Cadena de Custodia
 
@@ -201,7 +201,7 @@ El supervisor accede al expediente digital de la visita (`/expedientes/{id}`):
 ### 4.2 Posicionamiento del Módulo de IA en el MVP
 
 > **Nota de transparencia técnica sobre el output de IA:**
-> La consigna del curso consulta por el *«resultado u output de la IA visible para el usuario»*. En concordancia con las pautas de priorización fijadas junto al equipo docente, **el componente de IA generativa dentro de la aplicación móvil ([PLAN-21](file:///c:/planillero/specs): asistente conversacional y normalizador semántico de campo) fue categorizado formalmente como Post-MVP**.
+> La consigna del curso consulta por el *«resultado u output de la IA visible para el usuario»*. En concordancia con las pautas de priorización fijadas junto al equipo docente, **el componente de IA generativa dentro de la aplicación móvil (asistente conversacional y normalizador semántico de campo) fue categorizado formalmente como Post-MVP**.
 > 
 > Esta decisión se fundamentó en dos principios de ingeniería:
 > 1. **Prioridad de la integridad probatoria:** En una herramienta con valor legal/judicial de supervisión, la prioridad absoluta del MVP radicó en garantizar la confiabilidad del motor *offline-first*, la validación estricta de formularios y la inmutabilidad de la cadena de custodia.
@@ -213,7 +213,7 @@ El supervisor accede al expediente digital de la visita (`/expedientes/{id}`):
 
 ### 4.3 Log de Sesión Real y Verificación E2E
 
-A continuación se transcribe un extracto de ejecución real obtenido durante la prueba de extremo a extremo automatizada (PLAN-34), validando la creación de la visita, la firma criptográfica y el registro en el log de auditoría inmutable:
+A continuación se transcribe un extracto de ejecución real obtenido durante la prueba de extremo a extremo automatizada de integración, validando la creación de la visita, la firma criptográfica y el registro en el log de auditoría inmutable:
 
 ```text
 [2026-09-25T14:22:01.104Z] [AUTH] Usuario 'operador.demo' autenticado exitosamente. JWT emitido con ID de clave: 8f9b2c
@@ -237,14 +237,14 @@ A continuación se transcribe un extracto de ejecución real obtenido durante la
 
 ### 5.1 Heurísticas de Nielsen aplicadas al proyecto
 
-El sistema fue evaluado contra las heurísticas de usabilidad para interfaces de software, considerando las auditorías ergonómicas de campo de PLAN-16 (`frontend/docs/AUDITORIA_UX_MOVIL.md`) y la evaluación web de PLAN-18 (`backoffice/docs/auditoria-ux-ui.md`):
+El sistema fue evaluado contra las heurísticas de usabilidad para interfaces de software, considerando la auditoría ergonómica de campo móvil (`frontend/docs/AUDITORIA_UX_MOVIL.md`) y la evaluación web (`backoffice/docs/auditoria-ux-ui.md`):
 
 | Heurística | ¿Cumple? | Evidencia / Observación en Planillero |
 |---|:---:|---|
 | **1. Visibilidad del estado del sistema** | **Sí** | La app móvil cuenta con el componente persistente `SyncQueueBanner` que informa en tiempo real si el sistema está operando en modo Offline, si hay elementos pendientes en cola de salida o si la sincronización está en curso. En la web, el tablero clasifica visualmente los estados de visita mediante insignias cromáticas accesibles (`Pendiente`, `En Curso`, `Completada`). |
 | **2. Coincidencia con el mundo real** | **Sí** | Toda la terminología refleja el vocabulario cotidiano del supervisor de campo: «Hoja de ruta», «Legajo», «Visita», «Observaciones» y «Acta de cierre». Se eliminó jerga informática en pantallas de operador y se adoptó orden secuencial cronológico coincidente con la jornada laboral real. |
 | **3. Control y libertad del usuario** | **Sí** | En la app móvil, el operador dispone de navegación de retorno clara (`Stack.Screen` con botón Volver estándar) y la posibilidad de pausar y retomar un formulario sin perder datos previos. En el backoffice web, se incorporaron modales de confirmación previa para acciones irreversibles como reasignar una visita ya en curso. |
-| **4. Consistencia y estándares** | **Sí** | Se unificaron los tokens de diseño visual (PLAN-28) tanto en web como en móvil: tipografía sans-serif de alta legibilidad, pisos mínimos de tamaño tipográfico (12px/14px) para evitar ilegibilidad bajo luz solar y esquemas de color con contraste superior a 4.5:1 conforme a WCAG AA. |
+| **4. Consistencia y estándares** | **Sí** | Se unificaron los tokens de diseño visual tanto en web como en móvil: tipografía sans-serif de alta legibilidad, pisos mínimos de tamaño tipográfico (12px/14px) para evitar ilegibilidad bajo luz solar y esquemas de color con contraste superior a 4.5:1 conforme a WCAG AA. |
 | **5. Prevención de errores** | **Sí** | Los formularios dinámicos validan tipos de datos campo por campo (numéricos, fechas lógicas, campos obligatorios) antes de permitir el cierre. La cola outbox implementa claves de idempotencia (`Idempotency-Key` UUID v4): si el operador pierde señal y reintenta la subida, es imposible duplicar el registro o pisar evidencia existente. |
 
 ### 5.2 Evaluación orientada al público objetivo
@@ -252,9 +252,9 @@ El sistema fue evaluado contra las heurísticas de usabilidad para interfaces de
 * **¿El diseño es apropiado para el nivel técnico del usuario final?**
   * *Sí.* Los operadores en campo no requieren capacitación técnica avanzada. La interfaz móvil se redujo a tres acciones básicas por pantalla, con botones táctiles de gran tamaño (mínimo 48x48 dp) para ser accionados cómodamente mientras se camina o con una sola mano.
 * **¿El lenguaje visual y textual es comprensible para ese usuario?**
-  * *Sí.* El lenguaje está completamente localizado al español rioplatense institucional. Se corrigieron expresamente en revisiones intermedias los textos residuales en inglés o entidades HTML crudas (ej. PLAN-61 y PLAN-77 tradujeron códigos de estado internos y corrigieron tildes/acentos escapados).
+  * *Sí.* El lenguaje está completamente localizado al español rioplatense institucional. Se corrigieron expresamente en revisiones intermedias los textos residuales en inglés o entidades HTML crudas (traducción de códigos de estado internos al español y normalización de tildes/acentos escapados).
 * **¿Se hizo alguna prueba con un usuario real?**
-  * *Honestidad técnica (PLAN-34):* Inicialmente se había planteado una auditoría preliminar en papel, pero el equipo reconoció que una prueba con operadores reales en territorio requiere equipamiento físico en campo y aprobaciones institucionales. Por tal motivo, se formalizó el **Protocolo de Pruebas de Campo T1–T6** (`frontend/docs/AUDITORIA_UX_MOVIL.md`), el cual quedó completamente redactado con criterios de medición objetivos (tiempo de tarea, tasa de error y escala SUS) para su aplicación en el despliegue piloto formal. Las pruebas del MVP se completaron como pruebas de recorrido integral E2E y pruebas heurísticas de laboratorio.
+  * *Honestidad técnica:* Inicialmente se había planteado una auditoría preliminar en papel, pero el equipo reconoció que una prueba con operadores reales en territorio requiere equipamiento físico en campo y aprobaciones institucionales. Por tal motivo, se formalizó el **Protocolo de Pruebas de Campo T1–T6** (`frontend/docs/AUDITORIA_UX_MOVIL.md`), el cual quedó completamente redactado con criterios de medición objetivos (tiempo de tarea, tasa de error y escala SUS) para su aplicación en el despliegue piloto formal. Las pruebas del MVP se completaron como pruebas de recorrido integral E2E y pruebas heurísticas de laboratorio.
 
 ---
 
@@ -264,11 +264,11 @@ El diseño de Planillero incorporó consideraciones de seguridad desde la concep
 
 | Riesgo identificado | Tipo de riesgo | Medida implementada o decisión tomada |
 |---|---|---|
-| **Inyección de contenido en formularios / Inyección de Prompt** | Integridad / OWASP Injection | Validación estricta de tipos de datos mediante JSON Schema en backend y clientes (Ajv y motor Java). Se sanitizan todas las cadenas de texto ingresadas en observaciones y se descartan campos no especificados. Para la futura integración de IA (PLAN-21), se definió arquitectura con plantillas de sistema cerradas (*system prompts*) donde el input del usuario solo se inserta como variable de datos tipificada, sin capacidad de redefinir instrucciones. |
+| **Inyección de contenido en formularios / Inyección de Prompt** | Integridad / OWASP Injection | Validación estricta de tipos de datos mediante JSON Schema en backend y clientes (Ajv y motor Java). Se sanitizan todas las cadenas de texto ingresadas en observaciones y se descartan campos no especificados. Para la futura integración de IA, se definió arquitectura con plantillas de sistema cerradas (*system prompts*) donde el input del usuario solo se inserta como variable de datos tipificada, sin capacidad de redefinir instrucciones. |
 | **Exposición de credenciales y secretos en código** | Fuga de Secretos | Se creó una política estricta de exclusión en `.gitignore` para archivos `.env`, claves privadas y certificados. La configuración de producción se basa en `.env.production.example` con variables inyectadas en tiempo de despliegue en el VPS. Las claves JWT RSA-2048 se generan mediante scripts criptográficos independientes y nunca se versionan en git. |
 | **Adulteración de evidencias fotográficas en tránsito o reposo** | Integridad y Cadena de Custodia | Cada fotografía o firma digital es hasheada en el cliente móvil utilizando SHA-256 al momento de la captura. Al sincronizar con el backend, el servidor recalcula de forma independiente el hash del archivo recibido; si no coincide exactamente, la petición es rechazada (error 400). El archivo se persiste bajo el nombre de su hash, garantizando inmutabilidad forense. |
 | **Acceso no autorizado y escalamiento de privilegios** | Autenticación y Autorización (RBAC) | Implementación de seguridad basada en Spring Security con tokens JWT firmados asimétricamente (RSA-2048). Se definieron roles estrictos (`ROLE_ADMIN`, `ROLE_SUPERVISOR`, `ROLE_OPERADOR`). Los endpoints de visitas y expedientes validan que el operador solo pueda consultar o alterar las visitas expresamente asignadas a su legajo. |
-| **Suplantación de identidad en peticiones web detrás de Proxy** | Spoofing de Red | Se configuró el reverse proxy Traefik y NGINX con pasaje seguro de cabeceras `X-Forwarded-For` y `X-Forwarded-Proto`, integradas con la válvula `RemoteIpValve` de Spring Boot (PLAN-45), garantizando que el log de auditoría registre la IP pública real del cliente y no la IP interna del contenedor Docker. |
+| **Suplantación de identidad en peticiones web detrás de Proxy** | Spoofing de Red | Se configuró el reverse proxy Traefik y NGINX con pasaje seguro de cabeceras `X-Forwarded-For` y `X-Forwarded-Proto`, integradas con la válvula `RemoteIpValve` de Spring Boot, garantizando que el log de auditoría registre la IP pública real del cliente y no la IP interna del contenedor Docker. |
 
 ---
 
