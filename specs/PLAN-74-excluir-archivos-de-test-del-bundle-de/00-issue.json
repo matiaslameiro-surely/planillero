@@ -1,0 +1,13 @@
+{
+  "issue": {
+    "key": "PLAN-74",
+    "titulo": "Excluir archivos de test del bundle de Expo Router",
+    "descripcion": "Expo Router bundlea todo lo que hay en src/app/, incluidos los .test.tsx y las carpetas __tests__/. Eso causa ReferenceError: Property 'jest' doesn't exist al abrir la app. El issue propone ignoredRouteFiles en el plugin expo-router de app.json.",
+    "prioridad": "Medium",
+    "tipo": "Tarea",
+    "estado": "En curso",
+    "sprint": "Sprint 7 - Pruebas Finales",
+    "url": "https://surely-sa.atlassian.net/browse/PLAN-74"
+  },
+  "consultado": "2026-09-27"
+}
