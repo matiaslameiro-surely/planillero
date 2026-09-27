@@ -1,0 +1,11 @@
+{
+  "clave": "PLAN-70",
+  "titulo": "Backoffice: traducir el evento de auditoría VISIT_COMPLETED («Visita finalizada»)",
+  "tipo": "Tarea",
+  "prioridad": "Low",
+  "estado": "En curso",
+  "asignado": "Federico Morón",
+  "sprint": "Sprint 7 - Pruebas Finales",
+  "url": "https://surely-sa.atlassian.net/browse/PLAN-70",
+  "descripcion": "PLAN-58 agregó en el backend el evento VISIT_COMPLETED, pero el backoffice no lo tiene en src/app/core/models/audit-event-types.ts: en Auditoría el badge muestra el código crudo en gris, el tooltip dice «Tipo de evento sin descripción registrada» y no aparece en el filtro. Criterios: badge «Visita finalizada» con descripción y color acorde; aparece en el filtro y filtra; tests; gates en verde."
+}

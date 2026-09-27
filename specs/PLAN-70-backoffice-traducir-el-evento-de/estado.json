@@ -1,0 +1,67 @@
+{
+  "issue": "PLAN-70",
+  "titulo": "Backoffice: traducir el evento de auditoría VISIT_COMPLETED («Visita finalizada»)",
+  "slug": "backoffice-traducir-el-evento-de",
+  "rama": "PLAN-70-backoffice-traducir-el-evento-de",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:16:58.820Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:16:58.887Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:26:50.967Z",
+      "nota": "Plan aprobado; texto «Visita completada»"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:29:32.022Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:29:43.321Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:30:59.319Z",
+      "nota": "PR backoffice #35 abierto; Jira En revisión"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:30:59.397Z"
+    }
+  },
+  "commits": {},
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-1.json",
+      "sha": "c080b97433e9760a6034ab9760b3f430d9e06605",
+      "ts": "2026-09-27T14:29:43.224Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "Claude Opus 5.5",
+    "ts": "2026-09-27T14:16:08.700Z",
+    "fin": "2026-09-27T14:30:59.320Z"
+  }
+}

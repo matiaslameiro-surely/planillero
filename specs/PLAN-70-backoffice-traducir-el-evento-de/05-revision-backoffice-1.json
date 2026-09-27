@@ -1,0 +1,19 @@
+{
+  "verdict": "approve",
+  "summary": "Se revisó el diff del backoffice contra la spec de PLAN-70: VISIT_COMPLETED entra al catálogo como «Visita completada», tono success, entre «Evidencia guardada» y «Manifiesto firmado». Cumple los criterios 1 a 4; el test del badge y el de las opciones del filtro fallan sin la entrada nueva, y en local el filtro trae el evento traducido.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "El texto difiere del título del issue",
+      "body": "El issue pedía «Visita finalizada»; se usó «Visita completada» por decisión del usuario, para coincidir con el estado «Completada» del resto del backoffice. Queda registrado en la spec y conviene mencionarlo en el PR para que el revisor no lo tome como un error.",
+      "file": "src/app/core/models/audit-event-types.ts",
+      "line_start": 42,
+      "line_end": 42,
+      "confidence": 0.9,
+      "recommendation": "Aclararlo en la descripción del PR y en el comentario de Jira."
+    }
+  ],
+  "next_steps": [
+    "Probado en local: el filtro «Tipo de evento» incluye «Visita completada» y al elegirlo la grilla muestra el badge verde con su descripción, sin el código crudo."
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "ok": true,
+  "tarea": "PLAN-70",
+  "ts": "2026-09-27T14:27:51.326Z",
+  "repos": [
+    {
+      "repo": "backoffice",
+      "ok": true,
+      "herramienta": "npm",
+      "pasos": [
+        {
+          "nombre": "lint",
+          "cmd": "npm run lint",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 8535,
+          "salida": "\n> planillero-backoffice@0.1.0 lint\n> ng lint --max-warnings=0\n\n\nLinting \"planillero-backoffice\"...\n\nAll files pass linting."
+        },
+        {
+          "nombre": "tipos",
+          "cmd": "npm run build",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 8142,
+          "salida": "\n> planillero-backoffice@0.1.0 build\n> ng build\n\n❯ Building...\n✔ Building...\nInitial chunk files | Names                |  Raw size | Estimated transfer size\nmain-QS7YX44X.js    | main                 | 301.88 kB |                82.52 kB\nstyles-UXNV6KJM.css | styles               |  13.50 kB |                 2.94 kB\n\n                    | Initial total        | 315.38 kB |                85.46 kB\n\nLazy chunk files    | Names                |  Raw size | Estimated transfer size\nchunk-2zv_sKto.js   | expediente-component | 168.39 kB |                42.10 kB\nchunk-BrLZy-_j.js   | -                    | 149.60 kB |                37.70 kB\nchunk-LL4DmKlg.js   | -                    |  48.19 kB |                10.21 kB\nchunk-BHjEICs0.js   | supervision          |  25.82 kB |                 6.40 kB\nchunk-0n8ecje-.js   | planificacion        |  22.05 kB |                 5.97 kB\nchunk-D16xmLnn.js   | evidence-viewer      |  21.34 kB |                 5.40 kB\nchunk-CAEAQlhD.js   | auditoria            |  15.49 kB |                 4.41 kB\nchunk-C0QBuuFs.js   | home                 |   7.77 kB |                 2.53 kB\nchunk-BoTEDtVK.js   | login                |   5.78 kB |                 1.90 kB\nchunk-Dba8d8O2.js   | server-unavailable   |   2.28 kB |               984 bytes\nchunk-h-3rWV3y.js   | -                    |   1.75 kB |               758 bytes\nchunk-sMtE1EBF.js   | -                    |   1.31 kB |               593 bytes\nchunk-D8N0tVLE.js   | access-denied        | 997 bytes |               997 bytes\nchunk-DEY-Qr-H.js   | -                    | 596 bytes |               596 bytes\n\nApplication bundle generation complete. [6.703 seconds] - 2026-09-27T14:27:25.484Z\n\nOutput location: C:\\Users\\Personal\\Proyectos\\planillero\\backoffice\\dist\\planillero-backoffice\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'leaflet' used by 'src/app/pages/planificacion/route-map/route-map.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m\n\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'ajv' used by 'src/app/forms/validation.service.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m\n\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'ajv-formats' used by 'src/app/forms/validation.service.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m"
+        },
+        {
+          "nombre": "tests",
+          "cmd": "npm test",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 25623,
+          "salida": "\n> planillero-backoffice@0.1.0 test\n> ng test\n\n❯ Building...\n✔ Building...\nApplication bundle generation complete. [7.283 seconds] - 2026-09-27T14:27:34.457Z\n\n\n\u001b[1m\u001b[30m\u001b[46m RUN \u001b[49m\u001b[39m\u001b[22m \u001b[36mv4.1.11 \u001b[39m\u001b[90mC:/Users/Personal/Proyectos/planillero/backoffice\u001b[39m\n\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m28 passed\u001b[39m\u001b[22m\u001b[90m (28)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m274 passed\u001b[39m\u001b[22m\u001b[90m (274)\u001b[39m\n\u001b[2m   Start at \u001b[22m 11:27:34\n\u001b[2m   Duration \u001b[22m 16.12s\u001b[2m (transform 8.95s, setup 39.68s, import 16.18s, tests 25.92s, environment 124.82s)\u001b[22m"
+        }
+      ],
+      "avisos": []
+    }
+  ]
+}
