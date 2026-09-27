@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "Se implementó la descarga autenticada de binarios de evidencias con HttpClient (responseType blob), generación y revocación de object URLs en el ciclo de vida del componente, manejo de estados de carga/error en tarjeta y modal, y habilitación de blob: en la CSP de Nginx, con cobertura completa de tests unitarios y guardias.",
+  "findings": [],
+  "next_steps": []
+}

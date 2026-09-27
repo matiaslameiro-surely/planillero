@@ -1,0 +1,10 @@
+{
+  "key": "PLAN-80",
+  "id": "10179",
+  "summary": "Backoffice: las fotos del visor de evidencias no se muestran (401 al pedir la imagen)",
+  "description": "## Qué pasa\n\nEn el visor de evidencias (`/evidence/:visitId`) las tarjetas muestran sólo el nombre del archivo: la imagen no carga, ni en la tarjeta ni en la vista ampliada. En la consola aparece un `Failed to load resource: the server responded with a status of 401` por cada evidencia.\n\nSe detectó en la prueba local del 27/09 con datos ficticios (V-1001: 2 fotos y 1 firma). No es una regresión del sprint 6: pasa desde que existe el visor y no se había visto porque nunca hubo evidencias cargadas.\n\n## Causa\n\nEl visor arma la URL del archivo (GET /api/v1/visits/{visitId}/evidences/{evidenceId}/file) y la pone directo en `<img [src]>` (`evidence-viewer.html`, tarjeta y vista ampliada). El navegador pide esas imágenes sin pasar por `HttpClient`, así que el interceptor no agrega el `Authorization: Bearer …` y el backend responde 401.\n\nComprobado con el mismo archivo: sin token → 401; con token → 200 image/png. Los archivos están bien guardados.\n\n## Propuesta\n\nPedir cada archivo con `HttpClient` (`responseType: 'blob'`), mostrarlo con `URL.createObjectURL` y liberarlo con `URL.revokeObjectURL` al destruir el componente o cambiar de visita. Hace falta agregar `blob:` a `img-src` en la CSP de `backoffice/docker/nginx.conf`.\n\nAlternativa descartable por costo: URLs firmadas de corta duración emitidas por el backend.\n\n## Criterios de aceptación\n\n- Las fotos y la firma se ven en las tarjetas y en la vista ampliada.\n- No hay errores 401 en la consola al abrir el visor.\n- Si un archivo no se puede cargar, la tarjeta muestra un aviso en lugar de una imagen rota.\n- Las URLs `blob:` se liberan al salir de la pantalla.\n- La CSP sigue sin `unsafe-*` nuevos; sólo se suma `blob:` en `img-src`.\n- Test del componente que cubre la carga con token y el caso de error.",
+  "status": "Por hacer",
+  "priority": "High",
+  "assignee": "Juan Ignacio Urrutia",
+  "reporter": "Federico Morón"
+}

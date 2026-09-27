@@ -1,0 +1,67 @@
+{
+  "issue": "PLAN-80",
+  "titulo": "Backoffice: las fotos del visor de evidencias no se muestran (401 al pedir la imagen)",
+  "slug": "backoffice-las-fotos-del-visor-de",
+  "rama": "PLAN-80-backoffice-las-fotos-del-visor-de",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:06:08.319Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:07:58.742Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:09:20.082Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:13:23.881Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:16:34.298Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:18:35.724Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:18:49.228Z"
+    }
+  },
+  "commits": {
+    "backoffice": "61ffa50"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "motor externo opencode no disponible en entorno local",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-1.json",
+      "sha": "61ffa507efc76b89fc1badab6e2d76279e05127c",
+      "ts": "2026-09-27T14:16:19.645Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.7 Flash",
+    "ts": "2026-09-27T14:03:20.771Z",
+    "fin": "2026-09-27T14:18:35.725Z"
+  }
+}
