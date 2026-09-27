@@ -1,0 +1,239 @@
+#!/usr/bin/env node
+import fs from 'node:fs';
+import path from 'node:path';
+import { execSync } from 'node:child_process';
+
+const RAIZ = path.resolve('.');
+const mdPath = path.join(RAIZ, 'docs', 'INFORME_FINAL_ENTREGA.md');
+const htmlPath = path.join(RAIZ, 'docs', 'INFORME_FINAL_ENTREGA.html');
+const pdfPath = path.join(RAIZ, 'docs', 'INFORME_FINAL_ENTREGA.pdf');
+
+console.log('1. Leyendo markdown...');
+const mdContent = fs.readFileSync(mdPath, 'utf8');
+
+console.log('2. Parseando markdown con marked...');
+const markedHtml = execSync('npx --yes marked --gfm', {
+  input: mdContent,
+  encoding: 'utf8',
+  maxBuffer: 10 * 1024 * 1024,
+});
+
+// Convertir imágenes relativas a URLs absolutas o data URIs
+const htmlWithImages = markedHtml.replace(/<img\s+src="([^"]+)"/g, (match, src) => {
+  if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('data:')) {
+    return match;
+  }
+  const imgFullPath = path.resolve(RAIZ, 'docs', src);
+  if (fs.existsSync(imgFullPath)) {
+    const ext = path.extname(imgFullPath).slice(1).toLowerCase();
+    const mime = ext === 'png' ? 'image/png' : ext === 'jpg' || ext === 'jpeg' ? 'image/jpeg' : 'image/svg+xml';
+    const base64 = fs.readFileSync(imgFullPath).toString('base64');
+    return `<img src="data:${mime};base64,${base64}"`;
+  }
+  return match;
+});
+
+// Reemplazar bloques mermaid
+const htmlWithMermaid = htmlWithImages.replace(
+  /<pre><code class="language-mermaid">([\s\S]*?)<\/code><\/pre>/g,
+  (match, code) => {
+    // Decodificar entidades HTML si las hay
+    const decoded = code
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&amp;/g, '&')
+      .replace(/&quot;/g, '"');
+    return `<div class="mermaid">${decoded}</div>`;
+  }
+);
+
+const fullHtml = `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Informe Final de Proyecto - Planillero</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 16mm 20mm 16mm;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 10pt;
+      line-height: 1.45;
+      color: #1f2937;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      font-size: 19pt;
+      color: #0f172a;
+      border-bottom: 2.5px solid #2563eb;
+      padding-bottom: 4px;
+      margin-top: 0;
+      margin-bottom: 6pt;
+    }
+    h2 {
+      font-size: 14pt;
+      color: #1e40af;
+      border-bottom: 1px solid #cbd5e1;
+      padding-bottom: 3px;
+      margin-top: 18pt;
+      margin-bottom: 8pt;
+      page-break-after: avoid;
+    }
+    h3 {
+      font-size: 11.5pt;
+      color: #0f172a;
+      margin-top: 13pt;
+      margin-bottom: 6pt;
+      page-break-after: avoid;
+    }
+    h4 {
+      font-size: 10.5pt;
+      color: #334155;
+      margin-top: 10pt;
+      margin-bottom: 4pt;
+      page-break-after: avoid;
+    }
+    p, ul, ol {
+      margin-top: 4pt;
+      margin-bottom: 7pt;
+    }
+    li {
+      margin-bottom: 3pt;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10pt 0 14pt 0;
+      font-size: 8.5pt;
+      line-height: 1.35;
+      page-break-inside: auto;
+    }
+    tr {
+      page-break-inside: avoid;
+      page-break-after: auto;
+    }
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 5.5pt 7pt;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background-color: #f1f5f9;
+      font-weight: 600;
+      color: #0f172a;
+    }
+    tr:nth-child(even) td {
+      background-color: #f8fafc;
+    }
+    img {
+      max-width: 88%;
+      max-height: 380px;
+      display: block;
+      margin: 10pt auto;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+      page-break-inside: avoid;
+    }
+    blockquote {
+      margin: 8pt 0;
+      padding: 6pt 10pt;
+      background: #eff6ff;
+      border-left: 3.5px solid #3b82f6;
+      border-radius: 0 4px 4px 0;
+      font-size: 9.5pt;
+      color: #1e3a8a;
+    }
+    blockquote p {
+      margin: 0;
+    }
+    pre {
+      background: #0f172a;
+      color: #f8fafc;
+      border-radius: 6px;
+      padding: 8pt 10pt;
+      font-size: 8pt;
+      line-height: 1.35;
+      overflow-x: auto;
+      page-break-inside: avoid;
+      margin: 8pt 0;
+    }
+    code {
+      font-family: Consolas, "Fira Code", Monaco, monospace;
+      font-size: 8.5pt;
+      background: #f1f5f9;
+      padding: 1.5pt 3pt;
+      border-radius: 3px;
+      color: #0f172a;
+    }
+    pre code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
+    a {
+      color: #2563eb;
+      text-decoration: underline;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #e2e8f0;
+      margin: 14pt 0;
+    }
+    .mermaid {
+      display: flex;
+      justify-content: center;
+      margin: 12pt 0;
+      page-break-inside: avoid;
+      background: #ffffff;
+      padding: 8pt;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+    }
+    .mermaid svg {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+${htmlWithMermaid}
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'neutral',
+    flowchart: { useMaxWidth: true, htmlLabels: true },
+    sequence: { useMaxWidth: true }
+  });
+</script>
+</body>
+</html>`;
+
+fs.writeFileSync(htmlPath, fullHtml, 'utf8');
+console.log('3. HTML estructurado generado en:', htmlPath);
+
+console.log('4. Generando PDF con Microsoft Edge Headless...');
+const edgePath = 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
+const chromePath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+const browserExe = fs.existsSync(edgePath) ? edgePath : chromePath;
+
+const cmd = `"${browserExe}" --headless=new --no-sandbox --disable-gpu --run-all-compositor-stages-before-draw --virtual-time-budget=6000 --no-pdf-header-footer --print-to-pdf="${pdfPath}" "file:///${htmlPath.replace(/\\/g, '/')}"`;
+
+execSync(cmd, { stdio: 'inherit' });
+
+if (fs.existsSync(pdfPath)) {
+  const stats = fs.statSync(pdfPath);
+  console.log(`✓ PDF generado exitosamente: ${pdfPath} (${(stats.size / 1024).toFixed(1)} KB)`);
+} else {
+  console.error('Error: el PDF no se generó.');
+  process.exit(1);
+}
