@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "El mapeo de X-Forwarded-Proto en NGINX permite una integración transparente con Traefik preservando el protocolo seguro HTTPS sin vulnerar las restricciones de seguridad ni la guardia de PLAN-45.",
+  "findings": [],
+  "next_steps": []
+}

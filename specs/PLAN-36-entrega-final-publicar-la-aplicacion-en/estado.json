@@ -1,0 +1,80 @@
+{
+  "issue": "PLAN-36",
+  "titulo": "Entrega final: publicar la aplicación en un entorno accesible por URL",
+  "slug": "entrega-final-publicar-la-aplicacion-en",
+  "rama": "PLAN-36-entrega-final-publicar-la-aplicacion-en",
+  "alcance": [
+    "backend",
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-27T17:09:12.799Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-27T17:11:05.841Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-27T19:08:04.519Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-27T19:20:42.029Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-27T19:29:30.668Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-27T19:33:29.907Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-27T19:33:36.845Z"
+    }
+  },
+  "commits": {
+    "backend": "768669bb690691a0bb3fc5299bf2d093b69255a7",
+    "backoffice": "72467e2f7bfa85558d1dcd93ba7a2954ebd140e4"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backend",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backend-1.json",
+      "sha": "768669bb690691a0bb3fc5299bf2d093b69255a7",
+      "ts": "2026-09-27T19:28:32.086Z"
+    },
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-1.json",
+      "sha": "72467e2f7bfa85558d1dcd93ba7a2954ebd140e4",
+      "ts": "2026-09-27T19:29:10.852Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.8 Flash",
+    "ts": "2026-09-27T17:08:58.217Z",
+    "fin": "2026-09-27T19:33:29.908Z"
+  }
+}
