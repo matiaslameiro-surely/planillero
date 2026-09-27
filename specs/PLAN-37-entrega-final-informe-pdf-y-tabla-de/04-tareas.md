@@ -15,6 +15,6 @@ Checklist en orden de dependencia para la elaboración y verificación del infor
 
 ## Verificación
 
-- [ ] Gates en verde en los repos del alcance (`node .agents/scripts/verificar.mjs --tarea PLAN-37`).
-- [ ] Revisión independiente con motor configurado (`node .agents/scripts/revisar.mjs --tarea PLAN-37 --repo harness`).
-- [ ] Cobertura completa de los 8 criterios de aceptación de `01-spec.md`.
+- [x] Gates en verde en los repos del alcance (`node .agents/scripts/verificar.mjs --tarea PLAN-37`).
+- [x] Revisión independiente con motor configurado (`node .agents/scripts/revisar.mjs --tarea PLAN-37 --repo harness`).
+- [x] Cobertura completa de los 8 criterios de aceptación de `01-spec.md`.

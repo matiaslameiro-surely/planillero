@@ -6,7 +6,7 @@
   "alcance": [
     "harness"
   ],
-  "fase": "implementar",
+  "fase": "cerrar",
   "fases": {
     "preparacion": {
       "estado": "ok",
@@ -21,11 +21,12 @@
       "ts": "2026-09-27T20:49:21.494Z"
     },
     "implementar": {
-      "estado": "en_curso",
-      "ts": "2026-09-27T20:49:24.954Z"
+      "estado": "ok",
+      "ts": "2026-09-27T20:50:24.346Z"
     },
     "verificar": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-27T20:51:20.585Z"
     },
     "cerrar": {
       "estado": "pendiente"
@@ -34,8 +35,22 @@
       "estado": "pendiente"
     }
   },
-  "commits": {},
-  "revisiones": [],
+  "commits": {
+    "harness": "7b4fc5d"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "harness",
+      "motor": "anfitriona",
+      "motivo": null,
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-harness-1.json",
+      "sha": "7b4fc5d0d0b1f2a7b218f046bceb125a1ef751a6",
+      "ts": "2026-09-27T20:51:05.073Z"
+    }
+  ],
   "pr": {},
   "jira": {
     "transicionadoA": null,
