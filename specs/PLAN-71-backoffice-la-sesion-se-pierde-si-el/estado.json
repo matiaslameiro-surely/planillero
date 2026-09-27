@@ -1,0 +1,67 @@
+{
+  "issue": "PLAN-71",
+  "titulo": "Backoffice: la sesión se pierde si el backend no responde al recargar la página",
+  "slug": "backoffice-la-sesion-se-pierde-si-el",
+  "rama": "PLAN-71-backoffice-la-sesion-se-pierde-si-el",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:02:19.173Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:02:19.243Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:03:36.745Z",
+      "nota": "Plan aprobado por el usuario el 27/09"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:10:04.824Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:10:42.411Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:14:55.958Z",
+      "nota": "PR backoffice #33 abierto; Jira En revisión"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:14:56.024Z"
+    }
+  },
+  "commits": {},
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-1.json",
+      "sha": "a9c8026630e8c122a7e708cbf36b46fe9cc07aa8",
+      "ts": "2026-09-27T14:10:42.302Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "Claude Opus 5.5",
+    "ts": "2026-09-27T14:01:00.168Z",
+    "fin": "2026-09-27T14:14:55.959Z"
+  }
+}

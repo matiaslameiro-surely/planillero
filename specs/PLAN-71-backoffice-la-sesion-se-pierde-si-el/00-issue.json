@@ -1,0 +1,11 @@
+{
+  "clave": "PLAN-71",
+  "titulo": "Backoffice: la sesión se pierde si el backend no responde al recargar la página",
+  "tipo": "Tarea",
+  "prioridad": "Medium",
+  "estado": "En curso",
+  "asignado": "Federico Morón",
+  "sprint": "Sprint 7 - Pruebas Finales",
+  "url": "https://surely-sa.atlassian.net/browse/PLAN-71",
+  "descripcion": "Con el backend caído o respondiendo 5xx, al recargar la página (F5) el backoffice llama a POST /api/v1/auth/refresh y recibe 502. ensureSession() y refresh() de src/app/core/services/auth.service.ts hacen clearSession() ante cualquier error y borran planillero.refresh de localStorage. Cuando el backend vuelve, el supervisor sigue deslogueado.\n\nCriterios: la sesión se descarta sólo si el backend dice que es inválida (401/400 en /auth/refresh); ante error de red o 5xx se conserva el refresh token y se muestra un aviso de «sin conexión con el servidor»; cuando el backend vuelve, la sesión sigue activa sin volver a iniciar sesión. Tests: 401 descarta la sesión; 502 y error de red la conservan. Gates del backoffice en verde."
+}

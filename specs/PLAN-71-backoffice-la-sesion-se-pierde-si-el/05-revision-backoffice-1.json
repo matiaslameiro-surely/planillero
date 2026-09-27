@@ -1,0 +1,39 @@
+{
+  "verdict": "approve",
+  "summary": "Se revisó el diff del backoffice contra la spec de PLAN-71: la sesión sólo se descarta ante 4xx; ante red o 5xx se conserva el refresh token, las guardas mandan a /sin-conexion con la ruta pedida y la pantalla permite reintentar. Cumple los criterios 1 a 8, con tests de servicio, guardas y pantalla, y la prueba E2E con el backend detenido lo confirma.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "La pantalla no ofrece cerrar sesión mientras el servidor no responde",
+      "body": "Si el backend queda caído mucho tiempo, desde /sin-conexion sólo se puede reintentar: no hay forma de descartar la sesión guardada (por ejemplo, en una PC compartida). Con el servidor caído tampoco se podría iniciar otra sesión, así que el impacto es bajo.",
+      "file": "src/app/pages/server-unavailable/server-unavailable.html",
+      "line_start": 7,
+      "line_end": 9,
+      "confidence": 0.7,
+      "recommendation": "Si el equipo lo pide, sumar un link «Cerrar sesión en este equipo» que borre el token local. Otra tarea."
+    },
+    {
+      "severity": "low",
+      "title": "El reintento con el backend caído tarda lo que tarde nginx en responder 504",
+      "body": "Con el contenedor del backend detenido, nginx responde 504 a los ~5 s, y recién ahí aparece «El servidor sigue sin responder». Mientras tanto el botón muestra «Reintentando…» y queda deshabilitado, así que no es un cuelgue, pero la espera se nota.",
+      "file": "src/app/pages/server-unavailable/server-unavailable.ts",
+      "line_start": 30,
+      "line_end": 45,
+      "confidence": 0.8,
+      "recommendation": "Aceptable para esta tarea. Si molesta, bajar proxy_connect_timeout en nginx en otra tarea."
+    },
+    {
+      "severity": "low",
+      "title": "Entrar a /sin-conexion a mano muestra el aviso aunque no haga falta",
+      "body": "La ruta no tiene guarda, así que un usuario con sesión activa o sin sesión que la abra directamente ve «Tu sesión sigue guardada». Al reintentar lo resuelve bien (vuelve a la ruta o al login), sólo el texto inicial es impreciso.",
+      "file": "src/app/app.routes.ts",
+      "line_start": 47,
+      "line_end": 52,
+      "confidence": 0.6,
+      "recommendation": "No bloquea. Se puede ignorar: sólo se llega ahí por la guarda."
+    }
+  ],
+  "next_steps": [
+    "Probado en local con docker: F5 con backend caído → /sin-conexion?volver=/supervision con el refresh token conservado; Reintentar caído → aviso; Reintentar con backend arriba → /supervision sin login; refresh token inválido → 401 → login y token borrado."
+  ]
+}
