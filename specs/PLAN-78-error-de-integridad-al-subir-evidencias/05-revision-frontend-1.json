@@ -1,0 +1,17 @@
+{
+  "verdict": "approve",
+  "summary": "El cambio hace que se hashee y se suba el mismo markup SVG, sin data URI, con tipo image/svg+xml y nombre .svg. Revisé en node_modules el camino que sigue en el dispositivo: el Blob de RN se arma desde un string, el nativo lo codifica en UTF-8 y el fetch de Expo lo lee con FileReader.readAsArrayBuffer, así que los bytes coinciden con los de TextEncoder. Se corrigió la pérdida del último trazo en SignaturePad; la suite completa (298 tests), tsc y eslint pasan.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "La coincidencia de bytes en el dispositivo solo está verificada por análisis, no por un test",
+      "body": "Los tests de evidence.test.ts leen la parte `file` con el FormData/File de Node, donde `file.arrayBuffer()` existe y la codificación es la de Node. En el dispositivo el camino es otro: `new Blob([string])` va a BlobManager.createFromParts, el nativo convierte el string con NSUTF8StringEncoding en iOS o Charset UTF-8 en Android, y expo/src/winter/fetch/convertFormData.ts lo lee con blobToArrayBufferAsync, que recurre a FileReader.readAsArrayBuffer (implementado en RN 0.86 vía readAsDataURL + base64). Con el markup que se genera (ASCII, sin surrogates sueltos) los bytes son idénticos a los de TextEncoder, así que hoy no falla ningún caso. Aun así, el criterio 1 en el dispositivo depende de ese razonamiento y no lo cubre ningún test. Además, el caso 'firma' del it.each sube el SVG de la foto, no uno generado por SignaturePad. La cobertura de la firma se logra combinando signaturePad.test.tsx (hash del contenido) con este test (subida), y el mapeo onSave -> setSignatureData -> uploadSvgEvidence de la pantalla no tiene test.",
+      "file": "src/api/__tests__/evidence.test.ts",
+      "line_start": 158,
+      "line_end": 174,
+      "confidence": 0.6,
+      "recommendation": "Opcional: hacer una prueba manual en un emulador Android o iOS, subiendo una foto y una firma contra el backend, y dejar constancia. Si se quiere un test, armar el body con convertFormDataAsync de expo/src/winter/fetch sobre el FormData de uploadSvgEvidence y hashear la parte `file` extraída del multipart."
+    }
+  ],
+  "next_steps": []
+}

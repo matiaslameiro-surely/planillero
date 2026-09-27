@@ -1,0 +1,12 @@
+{
+  "key": "PLAN-78",
+  "summary": "Error de integridad al subir evidencias: hash SHA-256 del cliente no coincide con el del servidor",
+  "issuetype": "Tarea",
+  "priority": "Medium",
+  "status": "En curso",
+  "assignee": "Matías Lameiro",
+  "reporter": "Juan Ignacio Urrutia",
+  "sprint": "Sprint 7 - Pruebas Finales",
+  "created": "2026-09-27T10:43:25.326-0300",
+  "description": "Al presionar \"Subir y Almacenar Evidencias (WORM)\" la app muestra:\n\n  Error de subida\n\n  Discrepancia de integridad: el hash SHA-256 declarado por el cliente (...) no coincide con el calculado por el servidor (...)\n\n_Causa raiz_\n\nEn `src/app/evidence/[visitId].tsx`, el hash SHA-256 se calcula sobre el data URI completo incluyendo su prefijo:\n\n  const fakeContent = `data:image/svg+xml;utf8,...`;\n\n  const hash = await computeSha256(fakeContent);  // hashea el string entero\n\nLuego al subir, se crea un Blob con ese mismo string:\n\n  const blob = new Blob([photo.dataUri], { type: 'image/svg+xml' });\n\nEl hash que declara el cliente (`X-Content-SHA256`) es el del string completo (incluyendo el encabezado `data:image/svg+xml;utf8,`), pero el servidor recibe el Blob tal cual y calcula el SHA-256 sobre esos mismos bytes. Como el Blob incluye el prefijo del data URI en sus bytes, el hash deberia coincidir, PERO en la practica el cliente usa `computeSha256(dataUri)` que codifica el string con `TextEncoder` mientras el servidor recibe los bytes del multipart como bytes crudos del Blob: la discrepancia ocurre porque la codificacion de caracteres especiales del SVG difiere entre lo que `TextEncoder` produce y lo que el Blob serializa.\n\n_Solucion propuesta_\n\nCalcular el hash SHA-256 **sobre los mismos bytes que se suben**, es decir, leer los bytes del Blob con `blob.arrayBuffer()` y luego pasarlos a `computeSha256` como `Uint8Array`:\n\n  const blob = new Blob([photo.dataUri], { type: 'image/svg+xml' });\n\n  const bytes = new Uint8Array(await blob.arrayBuffer());\n\n  const hash = await computeSha256(bytes);\n\nEsto garantiza que cliente y servidor hashean exactamente los mismos bytes.\n\nRepo afectado: frontend\n\nArchivo: src/app/evidence/[visitId].tsx (lineas ~69-83 y ~102-108)"
+}
