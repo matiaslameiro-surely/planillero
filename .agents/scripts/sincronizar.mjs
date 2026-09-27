@@ -31,6 +31,30 @@ function contar(dir, rango) {
   return r.ok ? Number(r.salida) : null;
 }
 
+// Qué haría la sincronización real en un repo que --solo-revisar no marca para atención. Tiene que
+// anticiparlo bien: si dice «se actualizaría», el pull --ff-only tiene que poder hacerlo.
+function detalleSoloRevisar({ ramaActual, base, detras, adelante }) {
+  const partes = [];
+  if (ramaActual === 'HEAD') {
+    partes.push(`Con HEAD desacoplado y sin commits propios: sin --solo-revisar volvería a ${base}.`);
+  } else if (ramaActual !== base) {
+    partes.push(`En "${ramaActual}", sin commits propios: sin --solo-revisar volvería a ${base}.`);
+  }
+
+  // En la base con commits locales: el pull --ff-only no puede integrarlos.
+  if (ramaActual === base && adelante > 0) {
+    partes.push(detras > 0
+      ? `Tiene ${adelante} commit(s) locales en ${base} sin publicar y está ${detras} detrás de ` +
+        `origin/${base}: la sincronización fallaría (el pull no avanza en línea recta).`
+      : `Tiene ${adelante} commit(s) locales en ${base} sin publicar.`);
+  } else if (detras > 0) {
+    partes.push(`Está ${detras} commit(s) detrás de origin/${base}. Sin --solo-revisar se actualizaría.`);
+  } else {
+    partes.push(`Al día con origin/${base}.`);
+  }
+  return partes.join(' ');
+}
+
 function sincronizarRepo(nombre, repo, soloRevisar) {
   const dir = path.join(RAIZ, repo.ruta);
   const base = repo.ramaBase;
@@ -50,6 +74,16 @@ function sincronizarRepo(nombre, repo, soloRevisar) {
   const adelante = contar(dir, `origin/${base}..HEAD`);
 
   const comun = { repo: nombre, ramaActual, ramaBase: base, detras, adelante, limpio: sucio === '' };
+
+  // Sin poder comparar con la base remota no se puede afirmar nada sobre el repo: ni que está al día ni
+  // que no tiene trabajo propio. Pasa si `ramaBase` está mal configurada o no está publicada.
+  if (detras === null || adelante === null) {
+    return {
+      ...comun, ok: false, motivo: 'rama_base_no_disponible',
+      detalle: `No se pudo comparar con origin/${base}. Revisá que la rama base exista en el remoto ` +
+               `y que \`ramaBase\` esté bien en workspace.json.`,
+    };
+  }
 
   // Con cambios sin commitear no se toca nada: podrían perderse.
   if (sucio) {
@@ -71,12 +105,7 @@ function sincronizarRepo(nombre, repo, soloRevisar) {
   if (soloRevisar) {
     return {
       ...comun, ok: true, accion: 'ninguna', motivo: 'solo_revisar',
-      detalle: [
-        ramaActual !== base ? `En "${ramaActual}", sin commits propios: sin --solo-revisar volvería a ${base}.` : null,
-        detras > 0
-          ? `Está ${detras} commit(s) detrás de origin/${base}. Sin --solo-revisar se actualizaría.`
-          : `Al día con origin/${base}.`,
-      ].filter(Boolean).join(' '),
+      detalle: detalleSoloRevisar({ ramaActual, base, detras, adelante }),
     };
   }
 

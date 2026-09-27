@@ -57,3 +57,19 @@ Dos escenarios más, armados sobre el backend y deshechos al terminar (quedó en
    `--solo-revisar`: harness, frontend y backoffice. ✔
 3. Ninguna entrada dice `undefined`. ✔
 4. El `detalle` de `--solo-revisar` dice si el repo está al día o cuántos commits le faltan. ✔
+
+## Después de atender la revisión 1
+
+La revisión marcó dos `medium` y un `low` (los mensajes de `--solo-revisar` anticipaban mal lo que haría la
+sincronización real). Se probaron sobre el backend, con `--solo-revisar --repo backend`, y se dejó en
+`main...origin/main` al terminar:
+
+| Escenario | Resultado |
+|---|---|
+| HEAD desacoplado (`switch --detach HEAD~1`) | `solo_revisar` — «Con HEAD desacoplado y sin commits propios: sin --solo-revisar volvería a main. Está 2 commit(s) detrás de origin/main. Sin --solo-revisar se actualizaría.» |
+| `main` con 1 commit local y 2 detrás | `solo_revisar` — «Tiene 1 commit(s) locales en main sin publicar y está 2 detrás de origin/main: la sincronización fallaría (el pull no avanza en línea recta).» |
+| `main` con 1 commit local, al día | `solo_revisar` — «Tiene 1 commit(s) locales en main sin publicar.» |
+| `ramaBase` inexistente (`no-existe`, cambio temporal en workspace.json) | `ok: false`, `rama_base_no_disponible`, `detras`/`adelante` null — «No se pudo comparar con origin/no-existe. …»; el script sale con `ok: false` |
+| Limpio en `main` | `solo_revisar` — «Al día con origin/main.» |
+
+En ninguno aparece `undefined` y ninguno de los repos sanos entra en `requierenAtencion`.

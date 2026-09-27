@@ -1,0 +1,15 @@
+{
+  "ok": true,
+  "tarea": "PLAN-68",
+  "ts": "2026-09-27T16:54:59.023Z",
+  "repos": [
+    {
+      "repo": "harness",
+      "ok": true,
+      "motivo": "sin_gates",
+      "detalle": "No se detectó con qué construir ./..",
+      "pasos": [],
+      "avisos": []
+    }
+  ]
+}

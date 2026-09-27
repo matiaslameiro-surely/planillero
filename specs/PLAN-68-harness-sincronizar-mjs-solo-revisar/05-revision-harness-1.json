@@ -1,0 +1,37 @@
+{
+  "verdict": "approve",
+  "summary": "El cambio cumple los cuatro criterios: `requierenAtencion` se arma con una lista explícita de motivos, ya no aparece `undefined` y con --solo-revisar el `detalle` dice si el repo está atrasado. Lo confirmé corriendo --solo-revisar: backend, backoffice (rama sin commits propios, 3 atrás) y los repos sanos quedan fuera de la lista. Hay dos casos borde en los que el nuevo `detalle` anticipa mal lo que haría la sincronización real.",
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "Si rev-list falla (detras/adelante null), --solo-revisar dice 'Al día' y 'sin commits propios'",
+      "body": "`contar()` devuelve null cuando `rev-list` falla, por ejemplo si `origin/<ramaBase>` no existe porque `ramaBase` está mal configurada o la rama no está publicada. En ese caso `adelante > 0` es falso y el repo cae en la rama solo_revisar. Ahí `detras > 0` también es falso y el `detalle` dice `Al día con origin/<base>.`, y además `sin commits propios` si no está en la base. El resultado sale con ok:true y fuera de `requierenAtencion`. La sincronización real en el mismo repo termina en `checkout_fallido` o en un pull fallido, con ok:false. Antes del cambio este caso igual entraba en `requierenAtencion` (con `undefined`) y frenaba el flujo. Ahora pasa en silencio con un mensaje falso.",
+      "file": ".agents/scripts/sincronizar.mjs",
+      "line_start": 71,
+      "line_end": 81,
+      "confidence": 0.8,
+      "recommendation": "Si `detras === null` o `adelante === null`, no afirmar que el repo está al día. Se puede devolver un motivo propio, como `rama_base_no_disponible` con ok:false, o al menos un `detalle` que diga que no se pudo comparar con origin/<base>."
+    },
+    {
+      "severity": "medium",
+      "title": "En la rama base con commits locales, el detalle anticipa mal lo que haría la sincronización real",
+      "body": "Con `ramaActual === base` y `adelante > 0` (commits sin pushear en main), la condición de `rama_con_trabajo` no aplica porque exige `ramaActual !== base`, así que el repo llega a solo_revisar. Si además `detras > 0`, el `detalle` dice `Sin --solo-revisar se actualizaría.`, pero la sincronización real hace `pull --ff-only`, falla y devuelve `pull_no_fast_forward` con ok:false. Si `detras === 0`, dice `Al día con origin/main.` y no menciona los commits locales. El criterio 4 pide que el detalle permita saber qué haría la sincronización real, y en este caso no lo cumple. Que el caso no se clasifique como `rama_con_trabajo` ya pasaba antes y está fuera de alcance. El texto engañoso sí es nuevo.",
+      "file": ".agents/scripts/sincronizar.mjs",
+      "line_start": 76,
+      "line_end": 78,
+      "confidence": 0.85,
+      "recommendation": "Usar `adelante` al armar el detalle. Si hay `adelante > 0` y `detras > 0`, avisar que hay divergencia y que el pull fast-forward fallaría. Si hay `adelante > 0` y `detras === 0`, decir que tiene N commits locales sin publicar en lugar de 'Al día'."
+    },
+    {
+      "severity": "low",
+      "title": "Con HEAD desacoplado el mensaje dice En \"HEAD\"",
+      "body": "Con HEAD desacoplado, `rev-parse --abbrev-ref HEAD` devuelve `HEAD` y el detalle queda `En \"HEAD\", sin commits propios: ...`, como se ve en 06-verificacion-manual.md. Es correcto, pero no dice que el HEAD está desacoplado y puede confundir.",
+      "file": ".agents/scripts/sincronizar.mjs",
+      "line_start": 75,
+      "line_end": 75,
+      "confidence": 0.6,
+      "recommendation": "Si `ramaActual === 'HEAD'`, escribir 'Con HEAD desacoplado' en lugar de `En \"HEAD\"`."
+    }
+  ],
+  "next_steps": []
+}
