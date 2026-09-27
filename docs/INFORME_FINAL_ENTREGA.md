@@ -303,7 +303,7 @@ A través del sistema de instrumentación y trazabilidad propio del proyecto (`n
 
 * **Tareas totales procesadas:** 70 tareas estructuradas en el ciclo SDD.
 * **Tasa de éxito:** 68 tareas cerradas y verificadas con gates automatizados en verde (compilación, suite de tests unitarios, lint y comprobación estricta de tipos).
-* **Distribución de implementación 100% ejecutada por IA:** El 100% del código de la plataforma (backend, móvil, web, infraestructura, migraciones y tests) fue generado íntegramente por asistentes de inteligencia artificial; el equipo humano no escribió código manualmente, actuando exclusivamente como director de requerimientos, evaluador de arquitectura y supervisor de calidad. La auditoría exhaustiva de los metadatos de las tareas del ciclo SDD arroja una trazabilidad total: **Claude Code (Anthropic Claude Opus 5.5 / Sonnet 5)** con **34 tareas** (48%), **Google Antigravity (Gemini 3.8 Flash / Gemini 3.7 Flash)** con **27 tareas** (38%) y **OpenCode (modelos Big Pickle / Nemotron)** con **10 tareas** (14%). En ningún caso existió desarrollo manual humano.
+* **Distribución de tareas por herramienta y modelo:** Trazabilidad consolidada sobre las tareas del ciclo SDD: **Claude Code (Anthropic Claude Opus 5.5 / Sonnet 5)** con **34 tareas** (48%), **Google Antigravity (Gemini 3.8 Flash / Gemini 3.7 Flash)** con **27 tareas** (38%) y **OpenCode (modelos Big Pickle / Nemotron)** con **10 tareas** (14%).
 * **Calidad y Hallazgos:** Se detectaron y subsanaron **13 hallazgos bloqueantes** y más de 30 observaciones de criticidad media/baja durante las revisiones cruzadas antes del push a producción, demostrando la eficacia de la doble revisión agéntica.
 
 ### 7.3 Reflexión obligatoria sobre el Co-work con IA (1 Párrafo)
