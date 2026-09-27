@@ -189,7 +189,9 @@ El recorrido habitual del operador en campo:
 3. Adjunto de evidencia fotográfica del domicilio y firma digitalizada del entrevistado.
 4. Cierre de visita y confirmación de guardado en la cola local de sincronización.
 
-> *(Insertar aquí imagen: `captura-02-flujo-visita-formulario.png` mostrando el formulario dinámico con captura fotográfica y firma)*
+* **Expediente Digital y Formulario Completado en Producción (`/expediente/{id}`):** Visualización del expediente consolidado de la visita `V-1001` tras su sincronización desde la app móvil. Muestra los detalles de la intervención (dirección, coordenadas GPS, jurisdicción, estado `Completada` y nivel de urgencia) junto con el formulario dinámico tipificado renderizado en modo de solo lectura con los datos recolectados en campo (horas de ingreso y egreso, cantidad de personas censadas y fecha/hora exacta de envío al servidor), con acceso directo al visor pericial de evidencias.
+
+![Expediente Digital y Formulario Completado en Backoffice](img/captura-backoffice-expediente-formulario.png)
 
 #### 3. Cadena de Custodia, Evidencias Criptográficas e Integridad Pericial
 El sistema garantiza la inalterabilidad de la prueba tanto en el punto de captura como en la auditoría central:
