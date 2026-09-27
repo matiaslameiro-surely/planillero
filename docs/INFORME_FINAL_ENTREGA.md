@@ -301,8 +301,8 @@ El diseño de Planillero incorporó consideraciones de seguridad desde la concep
 
 A través del sistema de instrumentación y trazabilidad propio del proyecto (`node .agents/scripts/informe.mjs`), se obtuvieron las siguientes métricas cuantitativas sobre el proceso de construcción con IA:
 
-* **Tareas totales procesadas:** 70 tareas estructuradas en el ciclo SDD.
-* **Tasa de éxito:** 68 tareas cerradas y verificadas con gates automatizados en verde (compilación, suite de tests unitarios, lint y comprobación estricta de tipos).
+* **Tareas totales procesadas:** 71 tareas estructuradas en el ciclo SDD.
+* **Tasa de éxito en desarrollo:** 100% de las tareas de software resueltas y verificadas con gates automatizados en verde (compilación, tests unitarios, lint y comprobación de tipos). La única tarea pendiente corresponde al ajuste administrativo manual de visibilidad pública del repositorio en la configuración de GitHub por parte del propietario de la cuenta.
 * **Distribución de tareas por herramienta y modelo:** Trazabilidad consolidada sobre las tareas del ciclo SDD: **Claude Code (Anthropic Claude Opus 5.5 / Sonnet 5)** con **34 tareas** (48%), **Google Antigravity (Gemini 3.8 Flash / Gemini 3.7 Flash)** con **27 tareas** (38%) y **OpenCode (modelos Big Pickle / Nemotron)** con **10 tareas** (14%).
 * **Calidad y Hallazgos:** Se detectaron y subsanaron **13 hallazgos bloqueantes** y más de 30 observaciones de criticidad media/baja durante las revisiones cruzadas antes del push a producción, demostrando la eficacia de la doble revisión agéntica.
 
