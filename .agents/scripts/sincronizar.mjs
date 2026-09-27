@@ -17,6 +17,10 @@ import path from 'node:path';
 import { RAIZ, cargarConfig, leerJson, parsearArgs, emitir } from './lib/config.mjs';
 import { correr } from './lib/proceso.mjs';
 
+// Motivos que piden una decisión humana antes de seguir: son los únicos que van a `requierenAtencion`.
+// La lista es explícita a propósito: un motivo nuevo no entra ahí salvo que alguien lo decida.
+const MOTIVOS_QUE_REQUIEREN_ATENCION = new Set(['working_tree_sucio', 'rama_con_trabajo']);
+
 function git(dir, args) {
   const r = correr('git', args, { cwd: dir });
   return { ok: r.status === 0, salida: (r.salida || '').trim() };
@@ -65,7 +69,15 @@ function sincronizarRepo(nombre, repo, soloRevisar) {
   }
 
   if (soloRevisar) {
-    return { ...comun, ok: true, accion: 'ninguna', motivo: 'solo_revisar' };
+    return {
+      ...comun, ok: true, accion: 'ninguna', motivo: 'solo_revisar',
+      detalle: [
+        ramaActual !== base ? `En "${ramaActual}", sin commits propios: sin --solo-revisar volvería a ${base}.` : null,
+        detras > 0
+          ? `Está ${detras} commit(s) detrás de origin/${base}. Sin --solo-revisar se actualizaría.`
+          : `Al día con origin/${base}.`,
+      ].filter(Boolean).join(' '),
+    };
   }
 
   // Rama de tarea ya integrada (o sin commits propios): volver a la base es el punto de partida sano.
@@ -122,14 +134,14 @@ try {
 
   const repos = alcance.map((n) => sincronizarRepo(n, cfg.repos[n], Boolean(args['solo-revisar'])));
   const conProblema = repos.filter((r) => !r.ok);
-  const requierenAtencion = repos.filter((r) => r.ok && r.motivo && r.accion === 'ninguna');
+  const requierenAtencion = repos.filter((r) => r.ok && MOTIVOS_QUE_REQUIEREN_ATENCION.has(r.motivo));
 
   emitir(
     {
       ok: conProblema.length === 0,
       soloRevisar: Boolean(args['solo-revisar']),
       repos,
-      requierenAtencion: requierenAtencion.map((r) => `${r.repo}: ${r.detalle}`),
+      requierenAtencion: requierenAtencion.map((r) => `${r.repo}: ${r.detalle ?? r.motivo}`),
     },
     conProblema.length === 0 ? 0 : 1,
   );
