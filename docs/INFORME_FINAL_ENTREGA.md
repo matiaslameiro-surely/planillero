@@ -191,13 +191,13 @@ El recorrido habitual del operador en campo:
 
 > *(Insertar aquí imagen: `captura-02-flujo-visita-formulario.png` mostrando el formulario dinámico con captura fotográfica y firma)*
 
-#### 3. Supervisión, Auditoría y Evidencia Pericial
-El supervisor accede al expediente digital de la visita (`/expedientes/{id}`):
-* Observa el formulario renderizado en modo solo lectura con los datos completados en campo.
-* Accede al visor pericial de evidencias (`/evidencias`), donde visualiza las fotos y firmas con su correspondiente digest SHA-256 verificado.
-* Traza de auditoría inmutable que exhibe la IP de origen, timestamps cruzados (dispositivo vs. servidor) y estado de entrega.
+#### 3. Cadena de Custodia, Evidencias Criptográficas e Integridad Pericial
+Muestra el módulo pericial de custodia de evidencias en ejecución sobre el dispositivo móvil:
+* **Captura probatoria:** Módulos dedicados para la toma de fotografías de ambiente y lienzo táctil para firma ológrafa de las partes entrevistadas.
+* **Custodia en Servidor y Hasheo:** Visualización de los archivos custodiados (`PHOTO`, `SIGNATURE`) con su correspondiente digest criptográfico **SHA-256** generado en el dispositivo y validado por el backend.
+* **Manifiesto Criptográfico con HMAC:** Sellado de la visita mediante HMAC (`Estado: VERIFIED`) y auditoría de integridad en tiempo real (*✓ INTEGRIDAD VERIFICADA - Manifiesto y evidencias periciales verificadas íntegramente*), garantizando que ningún dato o archivo fue alterado tras su recolección.
 
-> *(Insertar aquí imagen: `captura-03-expediente-auditoria.png` con el visor de evidencias fotográficas y la traza de auditoría)*
+![Custodia de Evidencias y Verificación Criptográfica](img/captura-custodia-evidencias.png)
 
 ---
 
