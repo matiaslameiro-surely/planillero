@@ -73,3 +73,23 @@ sincronización real). Se probaron sobre el backend, con `--solo-revisar --repo 
 | Limpio en `main` | `solo_revisar` — «Al día con origin/main.» |
 
 En ninguno aparece `undefined` y ninguno de los repos sanos entra en `requierenAtencion`.
+
+## Después de atender la revisión 2
+
+La revisión 2 marcó que, en una rama de tarea, el detalle medía HEAD y no la `main` local (que es la que
+actualiza el pull), y que una base divergente sólo se avisaba en el texto. Ahora se mide la base local y
+la divergencia es el motivo `base_divergente`, que entra en `requierenAtencion`. Pruebas sobre el backend
+con `--solo-revisar --repo backend`, dejándolo en `main...origin/main` y sin la rama temporal al final:
+
+| Escenario | Motivo | ¿En `requierenAtencion`? | Detalle |
+|---|---|---|---|
+| Rama de tarea al día; `main` local 2 atrás | `solo_revisar` | no | «… volvería a main. main está 2 commit(s) detrás de origin/main. Sin --solo-revisar se actualizaría.» |
+| Rama de tarea al día; `main` local divergente | `base_divergente` | sí | «main tiene 1 commit(s) locales sin publicar y está 2 detrás de origin/main: la sincronización fallaría …» |
+| En `main` divergente | `base_divergente` | sí | ídem |
+| En `main` con 1 commit local, al día | `solo_revisar` | no | «main tiene 1 commit(s) locales sin publicar.» |
+| HEAD desacoplado; `main` local al día | `solo_revisar` | no | «Con HEAD desacoplado y sin commits propios: sin --solo-revisar volvería a main. main está al día con origin/main.» |
+| `ramaBase` inexistente | `rama_base_no_disponible`, `ok: false` | no (es un error) | «No se pudo comparar con origin/no-existe: fatal: ambiguous argument 'HEAD..origin/no-existe' … Revisá que la rama base exista …» |
+| Limpio en `main` | `solo_revisar` | no | «main está al día con origin/main.» |
+
+Sobre el workspace real, el backoffice (en la rama de PLAN-75, ya mergeada) dice ahora «main está 5
+commit(s) detrás de origin/main», que es lo que el pull traería; antes decía 3, medido contra HEAD.

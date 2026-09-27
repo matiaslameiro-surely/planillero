@@ -19,7 +19,7 @@ import { correr } from './lib/proceso.mjs';
 
 // Motivos que piden una decisión humana antes de seguir: son los únicos que van a `requierenAtencion`.
 // La lista es explícita a propósito: un motivo nuevo no entra ahí salvo que alguien lo decida.
-const MOTIVOS_QUE_REQUIEREN_ATENCION = new Set(['working_tree_sucio', 'rama_con_trabajo']);
+const MOTIVOS_QUE_REQUIEREN_ATENCION = new Set(['working_tree_sucio', 'rama_con_trabajo', 'base_divergente']);
 
 function git(dir, args) {
   const r = correr('git', args, { cwd: dir });
@@ -31,8 +31,22 @@ function contar(dir, rango) {
   return r.ok ? Number(r.salida) : null;
 }
 
+// Cómo está la rama base LOCAL respecto de origin. Es lo que decide la sincronización real, que vuelve
+// a la base y hace `pull --ff-only` sobre ella, aunque ahora se esté parado en otra rama. Si la base
+// local no existe, el checkout la crea desde origin y queda al día.
+function estadoDeLaBaseLocal(dir, base) {
+  const existe = git(dir, ['rev-parse', '--verify', '--quiet', `refs/heads/${base}`]).ok;
+  if (!existe) return { detras: 0, adelante: 0 };
+  return {
+    detras: contar(dir, `${base}..origin/${base}`),
+    adelante: contar(dir, `origin/${base}..${base}`),
+  };
+}
+
 // Qué haría la sincronización real en un repo que --solo-revisar no marca para atención. Tiene que
-// anticiparlo bien: si dice «se actualizaría», el pull --ff-only tiene que poder hacerlo.
+// anticiparlo bien: si dice «se actualizaría», el pull --ff-only tiene que poder hacerlo. `detras` y
+// `adelante` son los de la base local (ver `estadoDeLaBaseLocal`), y nunca divergentes: ese caso es
+// `base_divergente`.
 function detalleSoloRevisar({ ramaActual, base, detras, adelante }) {
   const partes = [];
   if (ramaActual === 'HEAD') {
@@ -41,16 +55,12 @@ function detalleSoloRevisar({ ramaActual, base, detras, adelante }) {
     partes.push(`En "${ramaActual}", sin commits propios: sin --solo-revisar volvería a ${base}.`);
   }
 
-  // En la base con commits locales: el pull --ff-only no puede integrarlos.
-  if (ramaActual === base && adelante > 0) {
-    partes.push(detras > 0
-      ? `Tiene ${adelante} commit(s) locales en ${base} sin publicar y está ${detras} detrás de ` +
-        `origin/${base}: la sincronización fallaría (el pull no avanza en línea recta).`
-      : `Tiene ${adelante} commit(s) locales en ${base} sin publicar.`);
+  if (adelante > 0) {
+    partes.push(`${base} tiene ${adelante} commit(s) locales sin publicar.`);
   } else if (detras > 0) {
-    partes.push(`Está ${detras} commit(s) detrás de origin/${base}. Sin --solo-revisar se actualizaría.`);
+    partes.push(`${base} está ${detras} commit(s) detrás de origin/${base}. Sin --solo-revisar se actualizaría.`);
   } else {
-    partes.push(`Al día con origin/${base}.`);
+    partes.push(`${base} está al día con origin/${base}.`);
   }
   return partes.join(' ');
 }
@@ -76,12 +86,15 @@ function sincronizarRepo(nombre, repo, soloRevisar) {
   const comun = { repo: nombre, ramaActual, ramaBase: base, detras, adelante, limpio: sucio === '' };
 
   // Sin poder comparar con la base remota no se puede afirmar nada sobre el repo: ni que está al día ni
-  // que no tiene trabajo propio. Pasa si `ramaBase` está mal configurada o no está publicada.
+  // que no tiene trabajo propio. Vale también sin --solo-revisar, a propósito: antes se intentaba el
+  // checkout o el pull igual y fallaba más adelante, a veces después de cambiar de rama.
   if (detras === null || adelante === null) {
+    const error = git(dir, ['rev-list', '--count', `HEAD..origin/${base}`]).salida.split('\n')[0];
     return {
       ...comun, ok: false, motivo: 'rama_base_no_disponible',
-      detalle: `No se pudo comparar con origin/${base}. Revisá que la rama base exista en el remoto ` +
-               `y que \`ramaBase\` esté bien en workspace.json.`,
+      detalle: `No se pudo comparar con origin/${base}: ${error || 'git no dio detalle'}. ` +
+               `Revisá que la rama base exista en el remoto, que \`ramaBase\` esté bien en ` +
+               `workspace.json y que el repo tenga al menos un commit.`,
     };
   }
 
@@ -103,9 +116,20 @@ function sincronizarRepo(nombre, repo, soloRevisar) {
   }
 
   if (soloRevisar) {
+    const baseLocal = estadoDeLaBaseLocal(dir, base);
+    // La base local divergió de origin: la sincronización real terminaría en `pull_no_fast_forward`.
+    // Se marca para atención en vez de dejarlo escrito sólo en el detalle.
+    if (baseLocal.detras > 0 && baseLocal.adelante > 0) {
+      return {
+        ...comun, ok: true, accion: 'ninguna', motivo: 'base_divergente',
+        detalle: `${base} tiene ${baseLocal.adelante} commit(s) locales sin publicar y está ` +
+                 `${baseLocal.detras} detrás de origin/${base}: la sincronización fallaría ` +
+                 `(el pull no avanza en línea recta). Revisalo a mano.`,
+      };
+    }
     return {
       ...comun, ok: true, accion: 'ninguna', motivo: 'solo_revisar',
-      detalle: detalleSoloRevisar({ ramaActual, base, detras, adelante }),
+      detalle: detalleSoloRevisar({ ramaActual, base, ...baseLocal }),
     };
   }
 
