@@ -1,0 +1,67 @@
+{
+  "issue": "PLAN-69",
+  "titulo": "Backoffice: tests de planificación fallan entre las 21:00 y la medianoche por zona horaria",
+  "slug": "backoffice-tests-de-planificacion",
+  "rama": "PLAN-69-backoffice-tests-de-planificacion",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-27T16:22:35.023Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-27T16:22:58.571Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-27T16:28:31.331Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-27T16:32:59.673Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-27T16:37:03.298Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-27T16:39:14.884Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-27T16:39:15.277Z"
+    }
+  },
+  "commits": {
+    "backoffice": "9bc36ee"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": null,
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-1.json",
+      "sha": "9bc36eed7ba7f29bee63d5f714cb5b65f02fd529",
+      "ts": "2026-09-27T16:36:47.168Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": "En revisión",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.8 Flash",
+    "ts": "2026-09-27T16:21:58.001Z",
+    "fin": "2026-09-27T16:39:15.017Z"
+  }
+}

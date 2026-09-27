@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "Se revisó el diff de backoffice contra la especificación PLAN-69. Los tests de planificación ahora calculan «hoy» con fecha local mediante el helper todayIso() y stubs dinámicos, y se agregó una prueba con timers simulados para verificar el comportamiento entre las 21:00 y la medianoche. Cumple con todos los criterios de aceptación sin introducir defectos.",
+  "findings": [],
+  "next_steps": []
+}

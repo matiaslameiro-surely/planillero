@@ -1,0 +1,13 @@
+{
+  "key": "PLAN-69",
+  "summary": "Backoffice: tests de planificación fallan entre las 21:00 y la medianoche por zona horaria",
+  "issuetype": "Tarea",
+  "priority": "Medium",
+  "status": "En curso",
+  "created": "2026-09-25T23:32:28.724-0300",
+  "updated": "2026-09-27T13:22:17.244-0300",
+  "assignee": "Fernando Chamorro Goncalves",
+  "reporter": "Matías Lameiro",
+  "project": "PLAN",
+  "description": "Detectado al revisar los PRs de PLAN-59 y PLAN-63 (25/09, 23:27 hora local). En main, 5 tests de src/app/pages/planificacion/planificacion.spec.ts fallan cuando la fecha local y la UTC son distintas. En Argentina (UTC−3) eso pasa todos los días entre las 21:00 y la medianoche. Con TZ=UTC pasan los 29 tests. Causa probable: el test arma la fecha de «hoy» con new Date().toISOString().slice(0, 10) (línea 83), que es la fecha UTC, y el componente trabaja con la fecha local del supervisor. El mismo archivo ya advierte sobre esto en otro test (línea 321), pero el helper de la línea 83 no lo aplica. Tests que fallan: «el operador es el destinatario, no un filtro de la grilla (PLAN-62)» › las que ya están en su hoja se ven en la grilla completa como «Ya en su hoja» «el operador es el destinatario, no un filtro de la grilla (PLAN-62)» › «Asignar seleccionadas» cuenta y manda lo marcado que se ve, sin lo que ya está en su hoja «visitas que el operador ya tiene en su hoja de esa fecha (PLAN-42)» › no ofrece «Asignar» ni deja marcarla, y dice por qué «visitas que el operador ya tiene en su hoja de esa fecha (PLAN-42)» › lo marcado antes de elegir el operador no cuenta ni se manda si ya está en su hoja «visitas que el operador ya tiene en su hoja de esa fecha (PLAN-42)» › con otro operador que no la tiene, «Asignar» vuelve a estar disponible Criterios de aceptación: Los tests de planificación calculan «hoy» con la fecha local, igual que el componente. npm test pasa en verde a cualquier hora, incluso entre las 21:00 y la medianoche con la zona horaria de Argentina. Hay una forma reproducible de probarlo, por ejemplo fijando el reloj del test con vi.setSystemTime a una hora en la que la fecha local y la UTC difieren."
+}
