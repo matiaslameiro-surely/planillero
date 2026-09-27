@@ -1,0 +1,17 @@
+{
+  "verdict": "approve",
+  "summary": "El cambio a `ajv/dist/2020` corrige el defecto. Verifiqué que `new Ajv()` de 'ajv' 8.20.0 falla con `no schema with key or ref` y que Ajv2020 compila el schema. Los 4 tests nuevos pasan, `tsc --noEmit` queda limpio, las suites de src/forms y src/components pasan (71 tests), y las plantillas del seed sólo usan keywords que significan lo mismo en Draft-07 y en 2020-12.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "El tipo JsonSchema sigue aceptando `items` en forma de tupla (Draft-07), que Ajv2020 rechaza al compilar",
+      "body": "`types.ts` declara `items?: JsonSchema | JsonSchema[]`. En 2020-12 la forma de arreglo pasó a `prefixItems`, y Ajv2020 lanza `schema is invalid: data/items must be object,boolean` al compilar `{type:'array', items:[{type:'string'}]}`. Lo verifiqué con node sobre el ajv instalado. Hoy no hay regresión: ninguna plantilla de V10__forms_seed.sql usa `items`, y FieldMultiSelect sólo usa `items` como objeto. Pero el tipo permite escribir un schema que ahora rompe la validación completa. `dependencies` sigue soportado en Ajv2020, así que ahí no hay problema.",
+      "file": "src/forms/types.ts",
+      "line_start": 17,
+      "line_end": 17,
+      "confidence": 0.6,
+      "recommendation": "Opcional, en otra tarea: restringir el tipo a `items?: JsonSchema` (y agregar `prefixItems` si alguna vez se necesita) para alinearlo con 2020-12."
+    }
+  ],
+  "next_steps": []
+}

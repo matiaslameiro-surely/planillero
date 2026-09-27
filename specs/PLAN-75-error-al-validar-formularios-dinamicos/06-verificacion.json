@@ -1,0 +1,72 @@
+{
+  "ok": true,
+  "tarea": "PLAN-75",
+  "ts": "2026-09-27T16:49:21.689Z",
+  "repos": [
+    {
+      "repo": "frontend",
+      "ok": true,
+      "herramienta": "npm",
+      "pasos": [
+        {
+          "nombre": "lint",
+          "cmd": "npm run lint",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 3175,
+          "salida": "\n> planillero-frontend@0.1.0 lint\n> expo lint --max-warnings 0 --no-cache"
+        },
+        {
+          "nombre": "tipos",
+          "cmd": "npx tsc --noEmit",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 2470,
+          "salida": ""
+        },
+        {
+          "nombre": "tests",
+          "cmd": "npm test -- --watchAll=false",
+          "opcional": true,
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 6715,
+          "salida": "\n> planillero-frontend@0.1.0 test\n> jest --watchAll=false\n\nPASS src/visit/completeVisit.test.ts\nPASS src/__tests__/app/routerDirectory.test.ts\nPASS src/components/DeviceStatusBar.test.tsx\nPASS src/components/__tests__/themeContrast.test.tsx\nPASS src/sync/useSyncQueue.test.tsx\nPASS src/components/LocationSummary.test.tsx\nPASS src/components/VisitCard.test.tsx\nPASS src/status/useDeviceStatus.test.tsx\nPASS src/visit/startVisit.test.ts\nPASS src/components/SyncQueueBanner.test.tsx\nPASS src/db/database.test.ts\nPASS src/auth/tokenStore.test.ts\nPASS src/api/visits.test.ts\nPASS src/visit/accuracy.test.ts\nPASS src/forms/validation.test.ts\nPASS src/api/client.test.ts\nPASS src/agenda/date.test.ts\nPASS src/audit/auditRepository.test.ts\nPASS src/constants/layout.test.ts\nPASS src/api/__tests__/evidence.test.ts\nPASS src/__tests__/app/login.test.tsx\nPASS src/constants/contrast.test.ts\nPASS src/db/agendaSchema.test.ts\nPASS src/visit/location.test.ts\nPASS src/status/useHeartbeat.test.tsx\nPASS src/db/encryptionKey.test.ts\nPASS src/db/agendaSchema.sqlite.test.ts\nPASS src/sync/syncQueue.test.ts\nPASS src/agenda/agendaRepository.test.ts\nPASS src/sync/signOutGuard.test.ts\nPASS src/sync/syncWorker.test.ts\nPASS src/__tests__/app/agendaSafeArea.test.tsx\nPASS src/components/__tests__/ergonomics.test.tsx\nPASS src/__tests__/app/agenda.test.tsx\nPASS src/agenda/useAgenda.test.tsx (5.196 s)\n\nTest Suites: 35 passed, 35 total\nTests:       293 passed, 293 total\nSnapshots:   0 total\nTime:        6.01 s, estimated 7 s\nRan all test suites."
+        }
+      ],
+      "avisos": []
+    },
+    {
+      "repo": "backoffice",
+      "ok": true,
+      "herramienta": "npm",
+      "pasos": [
+        {
+          "nombre": "lint",
+          "cmd": "npm run lint",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 2191,
+          "salida": "\n> planillero-backoffice@0.1.0 lint\n> ng lint --max-warnings=0\n\n\nLinting \"planillero-backoffice\"...\n\nAll files pass linting."
+        },
+        {
+          "nombre": "tipos",
+          "cmd": "npm run build",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 3357,
+          "salida": "\n> planillero-backoffice@0.1.0 build\n> ng build\n\n❯ Building...\n✔ Building...\nInitial chunk files | Names                |  Raw size | Estimated transfer size\nmain-PIFEN3W2.js    | main                 | 301.88 kB |                82.46 kB\nstyles-UXNV6KJM.css | styles               |  13.50 kB |                 2.94 kB\n\n                    | Initial total        | 315.38 kB |                85.40 kB\n\nLazy chunk files    | Names                |  Raw size | Estimated transfer size\nchunk-Cb8Guc41.js   | expediente-component | 183.58 kB |                44.58 kB\nchunk-BwCYbstP.js   | -                    | 149.76 kB |                37.75 kB\nchunk-B-HgyClb.js   | -                    |  48.19 kB |                10.22 kB\nchunk-CHIHIaQz.js   | supervision          |  25.85 kB |                 6.40 kB\nchunk-Cj1uoL0d.js   | evidence-viewer      |  24.23 kB |                 6.00 kB\nchunk-Bf-kQzAE.js   | planificacion        |  22.14 kB |                 5.99 kB\nchunk-Dz5KrsRb.js   | auditoria            |  15.63 kB |                 4.46 kB\nchunk-DSSs-Epm.js   | home                 |   7.77 kB |                 2.52 kB\nchunk-C00cO3lk.js   | login                |   5.94 kB |                 1.96 kB\nchunk-CtHxflGJ.js   | server-unavailable   |   2.28 kB |               985 bytes\nchunk-Dfi7R-GA.js   | -                    |   1.75 kB |               757 bytes\nchunk-7Rlx-5aU.js   | -                    |   1.31 kB |               596 bytes\nchunk-CoPLOofX.js   | access-denied        | 997 bytes |               997 bytes\nchunk-DLcyN_eq.js   | -                    | 596 bytes |               596 bytes\n\nApplication bundle generation complete. [2.560 seconds] - 2026-09-27T16:49:14.528Z\n\nOutput location: C:\\workspace\\git\\planillero\\backoffice\\dist\\planillero-backoffice\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'leaflet' used by 'src/app/pages/planificacion/route-map/route-map.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m\n\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'ajv/dist/2020' used by 'src/app/forms/validation.service.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m\n\n\n\u001b[33m▲ \u001b[43;33m[\u001b[43;30mWARNING\u001b[43;33m]\u001b[0m \u001b[1mModule 'ajv-formats' used by 'src/app/forms/validation.service.ts' is not ESM\u001b[0m\n\n  CommonJS or AMD dependencies can cause optimization bailouts.\n  For more information see: \u001b[4mhttps://angular.dev/tools/cli/build#configuring-commonjs-dependencies\u001b[0m"
+        },
+        {
+          "nombre": "tests",
+          "cmd": "npm test",
+          "ok": true,
+          "codigo": 0,
+          "duracionMs": 7058,
+          "salida": "\n> planillero-backoffice@0.1.0 test\n> ng test\n\n❯ Building...\n✔ Building...\nApplication bundle generation complete. [2.206 seconds] - 2026-09-27T16:49:17.498Z\n\n\n\u001b[1m\u001b[30m\u001b[46m RUN \u001b[49m\u001b[39m\u001b[22m \u001b[36mv4.1.11 \u001b[39m\u001b[90mC:/workspace/git/planillero/backoffice\u001b[39m\n\n\n\u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m32 passed\u001b[39m\u001b[22m\u001b[90m (32)\u001b[39m\n\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m306 passed\u001b[39m\u001b[22m\u001b[90m (306)\u001b[39m\n\u001b[2m   Start at \u001b[22m 13:49:17\n\u001b[2m   Duration \u001b[22m 3.85s\u001b[2m (transform 5.24s, setup 6.81s, import 7.64s, tests 7.30s, environment 37.57s)\u001b[22m"
+        }
+      ],
+      "avisos": []
+    }
+  ]
+}

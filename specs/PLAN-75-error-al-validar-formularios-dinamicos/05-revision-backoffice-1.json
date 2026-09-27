@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "El servicio ahora importa Ajv y los tipos `ErrorObject` y `ValidateFunction` desde `ajv/dist/2020`. Verifiqué en node_modules (ajv 8.20.0) que esa ruta los exporta. El spec nuevo con TestBed cubre los criterios 1 a 3 (4 tests que pasan), las suites de forms y expediente siguen pasando (88 tests) y `tsc` de app y specs queda limpio. Los mensajes, `ValidationResult` y la API del servicio no cambian, y las plantillas del seed no usan keywords que cambien de semántica entre drafts.",
+  "findings": [],
+  "next_steps": []
+}

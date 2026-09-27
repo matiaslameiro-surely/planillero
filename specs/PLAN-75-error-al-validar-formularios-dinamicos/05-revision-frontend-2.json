@@ -1,0 +1,27 @@
+{
+  "verdict": "approve",
+  "summary": "El cambio a 'ajv/dist/2020' cumple los criterios 1, 2, 3 y 5 del lado del móvil. Los tests nuevos pasan (4/4), la suite completa pasa (292/292) y tsc no da errores. Con la construcción anterior falla la compilación con 'no schema with key or ref', así que los tests detectan la regresión. El ajuste del tipo `items` no rompe nada: tsc da limpio y el único otro uso (FieldMultiSelect) ya casteaba a JsonSchema.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "Se quitó una guarda en tiempo de ejecución apoyándose sólo en el tipo",
+      "body": "En isStringArraySchema se eliminó `!Array.isArray(schema.items)` porque el tipo ahora es `items?: JsonSchema`. El schema llega del backend como JSON en tiempo de ejecución, y el tipo no impide que llegue un `items` con forma de tupla (array). Hoy no rompe: si `items` es un array, `schema.items.type` es undefined, la función devuelve false y se usa FieldText. Además, AJV 2020 rechaza ese schema al compilar ('items must be object,boolean'), igual que se esperaría con 2020-12. Queda como observación: la protección ahora depende de ese comportamiento implícito y no de una comprobación explícita.",
+      "file": "src/forms/fields/index.tsx",
+      "line_start": 18,
+      "line_end": 22,
+      "confidence": 0.5,
+      "recommendation": "Opcional: mantener `!Array.isArray(schema.items)` como defensa ante datos de red. Con el tipo nuevo tsc la tomaría como redundante, pero no como error. O dejarlo como está sabiendo que el caso degrada a FieldText."
+    },
+    {
+      "severity": "low",
+      "title": "Los tests no cubren `format` (ajv-formats) con la instancia 2020",
+      "body": "El schema de prueba cubre required, maximum, enum, additionalProperties y pattern, pero ningún campo con `format`. addFormats se aplica ahora sobre una instancia Ajv2020. Verifiqué que funciona porque Ajv2020 extiende Ajv y ajv-formats 3.0.1 lo acepta, pero ningún test lo ejercita con un schema 2020-12.",
+      "file": "src/forms/validation.test.ts",
+      "line_start": 8,
+      "line_end": 19,
+      "confidence": 0.4,
+      "recommendation": "Opcional: agregar al schema ficticio un campo con `format` (por ejemplo 'date') y un caso inválido que verifique el mensaje 'no tiene un formato válido (date)'."
+    }
+  ],
+  "next_steps": []
+}

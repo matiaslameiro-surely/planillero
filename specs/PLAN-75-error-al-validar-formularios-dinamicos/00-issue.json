@@ -1,0 +1,12 @@
+{
+  "key": "PLAN-75",
+  "summary": "Error al validar formularios dinámicos: AJV no reconoce el meta-schema Draft 2020-12",
+  "issuetype": "Tarea",
+  "priority": "Medium",
+  "status": "En curso",
+  "assignee": "Matías Lameiro",
+  "reporter": "Juan Ignacio Urrutia",
+  "sprint": "Sprint 7 - Pruebas Finales",
+  "created": "2026-09-27T10:30:49.433-0300",
+  "description": "Al navegar a una pantalla con formulario dinámico la app lanza:\n\n  Error: no schema with key or ref \"https://json-schema.org/draft/2020-12/schema\"\n\nCall stack:\n\n  getValidator (src/forms/validation.ts:25)\n\n  validateSchema (src/forms/validation.ts:89)\n\n  DynamicForm useEffect (src/forms/DynamicForm.tsx:49)\n\n  FormularioScreen (src/app/formulario.tsx:104)\n\n_Causa raíz_\n\nEn `src/forms/validation.ts` la instancia de AJV se construye con `new Ajv()` (importado desde `'ajv'`), que por defecto opera en modo Draft-07 y no reconoce el meta-schema de Draft 2020-12. El backend emite schemas con `\"$schema\": \"https://json-schema.org/draft/2020-12/schema\"`, lo que dispara el error al compilarlos.\n\n_Solución propuesta_\n\nReemplazar el import por `import Ajv from 'ajv/dist/2020'` (o `ajv/dist/2020.js`), que es la clase que trae soporte nativo para Draft 2020-12. La API pública es idéntica: no requiere cambios en el resto del código.\n\nRepo afectado: frontend"
+}

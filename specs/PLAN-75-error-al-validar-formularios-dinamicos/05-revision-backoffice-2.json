@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "`ValidationService` usa ahora `ajv/dist/2020` para la clase y los tipos, y compila schemas que declaran Draft 2020-12. La spec nueva cubre los criterios 1 a 5 (datos válidos, requerido faltante, rango, enum, propiedad no declarada, validación por campo y formatos) y pasa, igual que el resto de las specs de `src/app/forms`.",
+  "findings": [],
+  "next_steps": []
+}

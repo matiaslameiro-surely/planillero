@@ -1,0 +1,17 @@
+{
+  "verdict": "approve",
+  "summary": "El cambio a `ajv/dist/2020` corrige el error de compilación con `$schema` 2020-12 y cumple los criterios 1, 2, 3 y 5; los tests fallarían con `new Ajv()` de 'ajv' y pasan con la clase nueva. El ajuste de `items` en `JsonSchema` es coherente con 2020-12 y `tsc` no da errores.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "`JsonSchema` no declara `$schema` y el test lo tapa con un cast",
+      "body": "Las plantillas del backend traen `$schema`, pero el tipo `JsonSchema` de `src/forms/types.ts` no lo declara. Por eso el fixture del test usa `} as JsonSchema;`. La aserción `as` desactiva la verificación de exceso de propiedades: si alguien escribe mal una keyword en el fixture (por ejemplo `maximun`), no aparece ningún error de tipos. No afecta el runtime.",
+      "file": "src/forms/validation.test.ts",
+      "line_start": 8,
+      "line_end": 20,
+      "confidence": 0.6,
+      "recommendation": "Agregar `$schema?: string` a `JsonSchema` y tipar el fixture con `const schema: JsonSchema = {...}` (o `satisfies JsonSchema`) en lugar de `as JsonSchema`."
+    }
+  ],
+  "next_steps": []
+}
