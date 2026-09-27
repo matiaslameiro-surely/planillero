@@ -174,10 +174,13 @@ A continuación se detalla la tabla obligatoria de componentes seleccionados, co
 A continuación se documentan los tres puntos clave de evidencia exigidos por la consigna:
 
 #### 1. Pantalla Principal / Home
-* **Backoffice Web (Supervisión Central):** Vista panorámica del tablero operativo (`/supervision`). Muestra el estado consolidado de la jornada: cantidad de visitas planificadas, en curso, completadas o con anomalías, permitiendo a los coordinadores detectar atrasos de un vistazo.
+* **Backoffice Web (Supervisión Central en Producción):** Vista panorámica del tablero operativo desplegado en `https://planillero.ferchamorro.cloud/supervision`. Muestra el estado consolidado de la jornada operativa en tiempo real: métricas de cumplimiento de SLA, desvíos operativos, monitoreo de excepciones (alertas de operadores sin latidos o con batería baja), detalle de operadores en turno y el mapa interactivo de cobertura geográfica con los puntos de despliegue en territorio.
+
+![Tablero Central de Supervisión en Producción](img/captura-tablero-supervision.png)
+
 * **App Móvil (Agenda del Operador):** Vista principal con la hoja de ruta asignada para el día. Cada tarjeta indica dirección, horario pactado, estado (Pendiente, En curso, Sincronizada) y un indicador visual claro del estado de la conexión (Online / Offline).
 
-> *(Insertar aquí imagen: `captura-01-home-movil-web.png` con la grilla de ruta del operador y el panel de supervisión)*
+> *(Insertar aquí imagen: `captura-01-home-movil.png` con la grilla de ruta del operador en la app)*
 
 #### 2. Flujo Principal de Uso (Desde inicio hasta obtención de valor)
 El recorrido habitual del operador en campo:
