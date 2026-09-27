@@ -1,8 +1,12 @@
 <div class="portada-academica">
+  <div class="portada-banner-wrap">
+    <img class="banner-institucional" src="img/banner-utn-frba.png" alt="UTN.BA - Centro de e-Learning - Curso de Inteligencia Artificial para Programadores" />
+  </div>
+
   <div class="portada-membrete">
     <div class="institucion-header">UNIVERSIDAD TECNOLÓGICA NACIONAL</div>
     <div class="facultad-header">FACULTAD REGIONAL BUENOS AIRES</div>
-    <div class="catedra-header">Curso de Inteligencia Artificial para Programadores</div>
+    <div class="catedra-header">Secretaría de Cultura y Extensión Universitaria · Centro de e-Learning</div>
     <div class="sub-header">Trabajo de Fin de Ciclo — Evaluación Práctica Integradora</div>
     <div class="divisor-institucional"></div>
   </div>
@@ -25,7 +29,11 @@
       </thead>
       <tbody>
         <tr>
-          <td style="width: 32%; font-weight: bold; background: #f8fafc;">Integrantes del Equipo:</td>
+          <td style="width: 32%; font-weight: bold; background: #f8fafc;">Docente de Cátedra:</td>
+          <td><strong>Prof. Ariel García Traba</strong></td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; background: #f8fafc;">Integrantes del Equipo:</td>
           <td>
             <strong>• Federico Moron</strong><br>
             <strong>• José Fernando Chamorro Goncalves</strong><br>
@@ -77,10 +85,12 @@
 
 ### 1.1 Integrantes del equipo y modalidad de trabajo
 
-* **Federico Moron**
-* **José Fernando Chamorro Goncalves**
-* **Juan Ignacio Urrutia**
-* **Matías Lameiro**
+* **Docente de Cátedra:** Prof. Ariel García Traba
+* **Integrantes del Equipo (Alumnos):**
+  * **Federico Moron**
+  * **José Fernando Chamorro Goncalves**
+  * **Juan Ignacio Urrutia**
+  * **Matías Lameiro**
 
 **Modalidad de trabajo cruzado e interdisciplinario:**
 A diferencia de esquemas rígidos con divisiones estancas, el equipo adoptó un modelo de **co-work y trabajo cruzado**. Todos los integrantes intervinieron activamente en los distintos niveles de la solución: diseño arquitectónico, backend Spring Boot, frontend móvil React Native, backoffice Angular, infraestructura Docker/Traefik y auditorías de seguridad y UX. Cada cambio se gestionó bajo el protocolo de desarrollo guiado por especificación (SDD) del harness, donde los roles de analista, implementador y revisor se alternaron colaborativamente entre los miembros con asistencia de herramientas de IA.
