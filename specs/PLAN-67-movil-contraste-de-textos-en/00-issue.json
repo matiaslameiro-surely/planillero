@@ -1,0 +1,13 @@
+{
+  "key": "PLAN-67",
+  "summary": "Móvil: contraste de textos en LocationSummary y SyncQueueBanner",
+  "issuetype": "Tarea",
+  "priority": "Medium",
+  "status": "En curso",
+  "created": "2026-09-25T22:51:52.034-0300",
+  "updated": "2026-09-27T10:57:57.022-0300",
+  "assignee": "Fernando Chamorro Goncalves",
+  "reporter": "Matías Lameiro",
+  "project": "PLAN",
+  "description": "Detectado durante PLAN-57, que corrigió el mismo problema en DeviceStatusBar. src/components/LocationSummary.tsx: los textos (latitud, longitud, precisión e inicio) usan styles.row, que sólo define fontSize: 15 y ningún color. Android los pinta en negro, así que sobre la tarjeta de visita en tema oscuro (bgSurface #1e293b, en VisitCard) quedan ilegibles. El borde usa un gris fijo (#8888). src/components/SyncQueueBanner.tsx: el mensaje «✓ Todo sincronizado» es blanco sobre #1a9e5c, con un contraste de 3.45:1, por debajo del mínimo AA de 4.5:1. PLAN-57 resolvió lo mismo en el chip «Modo conectado» usando LIGHT_THEME.success (#15803d), que da 5.02:1. Criterios de aceptación: Los textos de LocationSummary toman su color de useThemeColors() y tienen un contraste de al menos 4.5:1 contra el fondo de la tarjeta, en tema claro y en tema oscuro. «✓ Todo sincronizado» tiene un contraste de al menos 4.5:1 entre el texto y su fondo. Hay tests por tema que verifican los colores y el contraste, usando src/constants/contrast.ts (agregado en PLAN-57)."
+}

@@ -1,0 +1,67 @@
+{
+  "issue": "PLAN-67",
+  "titulo": "Móvil: contraste de textos en LocationSummary y SyncQueueBanner",
+  "slug": "movil-contraste-de-textos-en",
+  "rama": "PLAN-67-movil-contraste-de-textos-en",
+  "alcance": [
+    "frontend"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-27T16:04:05.731Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-27T16:06:09.564Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-27T16:06:55.340Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-27T16:10:57.933Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-27T16:13:04.174Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-27T16:16:45.725Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-27T16:16:59.525Z"
+    }
+  },
+  "commits": {
+    "frontend": "06b5c1b"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "frontend",
+      "motor": "anfitriona",
+      "motivo": null,
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-frontend-1.json",
+      "sha": "06b5c1b75e3fcde9aa5585fbd5b874a39345fc1f",
+      "ts": "2026-09-27T16:12:42.158Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": "En revisión",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.8 Flash",
+    "ts": "2026-09-27T16:03:11.503Z",
+    "fin": "2026-09-27T16:16:45.727Z"
+  }
+}
