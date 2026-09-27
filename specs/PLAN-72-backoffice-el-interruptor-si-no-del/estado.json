@@ -1,0 +1,67 @@
+{
+  "issue": "PLAN-72",
+  "titulo": "Backoffice: el interruptor sí/no del formulario no tiene nombre accesible",
+  "slug": "backoffice-el-interruptor-si-no-del",
+  "rama": "PLAN-72-backoffice-el-interruptor-si-no-del",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:38:05.451Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:38:05.519Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:38:22.527Z",
+      "nota": "Plan aprobado por el usuario el 27/09"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:40:33.675Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:40:47.272Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:42:24.366Z",
+      "nota": "PR backoffice #36 abierto; Jira En revisión"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-27T14:42:24.453Z"
+    }
+  },
+  "commits": {},
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-1.json",
+      "sha": "c644be9860fcd6c1e46c1e9d6dcd8b790a4ff889",
+      "ts": "2026-09-27T14:40:47.193Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "Claude Opus 5.5",
+    "ts": "2026-09-27T14:37:26.535Z",
+    "fin": "2026-09-27T14:42:24.366Z"
+  }
+}

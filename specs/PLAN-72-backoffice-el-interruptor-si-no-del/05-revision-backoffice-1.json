@@ -1,0 +1,29 @@
+{
+  "verdict": "approve",
+  "summary": "Se revisó el diff del backoffice contra la spec de PLAN-72: el checkbox del interruptor se vincula al texto del campo con aria-labelledby, a la descripción con aria-describedby, y la obligatoriedad va por aria-required con el asterisco oculto al lector. Cumple los criterios 1 a 6; axe-core pasó de 1 violación crítica a ninguna en el expediente y el árbol expone «Requiere seguimiento».",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "El mensaje de error no queda asociado al checkbox",
+      "body": "Cuando el campo es obligatorio y queda sin completar, el div.field-error se muestra debajo pero no entra en aria-describedby, así que el lector no lo anuncia al enfocar el interruptor. Los otros campos del formulario dinámico tienen el mismo comportamiento, por eso no se tocó acá.",
+      "file": "src/app/forms/fields/field-boolean.component.ts",
+      "line_start": 43,
+      "line_end": 45,
+      "confidence": 0.7,
+      "recommendation": "Si se quiere, resolverlo para los cinco campos juntos en otra tarea (aria-describedby al error y aria-invalid)."
+    },
+    {
+      "severity": "low",
+      "title": "Hacer click en el texto no cambia el interruptor",
+      "body": "El texto sigue siendo un span y no un label, así que el área clickeable es sólo el interruptor, como antes del cambio. No es una regresión: la spec deja la maqueta igual a propósito.",
+      "file": "src/app/forms/fields/field-boolean.component.ts",
+      "line_start": 17,
+      "line_end": 22,
+      "confidence": 0.8,
+      "recommendation": "Ninguna en esta tarea."
+    }
+  ],
+  "next_steps": [
+    "Probado en local: axe-core (WCAG 2.1 A/AA) sin violaciones en /expediente/V-1001 y el interruptor anunciado como «Requiere seguimiento»."
+  ]
+}

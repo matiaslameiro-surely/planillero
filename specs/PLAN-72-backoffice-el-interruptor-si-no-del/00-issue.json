@@ -1,0 +1,11 @@
+{
+  "clave": "PLAN-72",
+  "titulo": "Backoffice: el interruptor sí/no del formulario no tiene nombre accesible",
+  "tipo": "Tarea",
+  "prioridad": "Low",
+  "estado": "En curso",
+  "asignado": "Federico Morón",
+  "sprint": "Sprint 7 - Pruebas Finales",
+  "url": "https://surely-sa.atlassian.net/browse/PLAN-72",
+  "descripcion": "En field-boolean.component.ts el <label class=\"switch-label\"> que envuelve el checkbox no tiene texto; el texto visible del campo está en un span.field-label no vinculado al control. axe-core lo marca como violación crítica (regla label, WCAG 1.3.1 y 4.1.2) en el expediente con formulario. Criterios: el checkbox tiene como nombre accesible el texto del campo; axe-core sin violaciones en el expediente; test del nombre accesible; gates en verde."
+}
