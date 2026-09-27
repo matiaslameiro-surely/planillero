@@ -1,0 +1,67 @@
+{
+  "issue": "PLAN-73",
+  "titulo": "Backoffice: mejoras menores detectadas en la prueba del 27/09",
+  "slug": "backoffice-mejoras-menores-detectadas",
+  "rama": "PLAN-73-backoffice-mejoras-menores-detectadas",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-27T15:41:58.345Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-27T15:43:24.730Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-27T15:43:56.635Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-27T15:46:55.972Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-27T15:47:57.203Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-27T15:49:33.483Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-27T15:49:25.326Z"
+    }
+  },
+  "commits": {
+    "backoffice": "67f51f9cf906bc7ac44034132a2e708d4d14ed81"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "Fallback anfitriona por ausencia de módulo de motor externo",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-1.json",
+      "sha": "67f51f9cf906bc7ac44034132a2e708d4d14ed81",
+      "ts": "2026-09-27T15:47:48.321Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.7 Flash",
+    "ts": "2026-09-27T15:40:57.662Z",
+    "fin": "2026-09-27T15:49:33.483Z"
+  }
+}

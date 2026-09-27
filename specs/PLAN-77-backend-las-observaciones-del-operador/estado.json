@@ -1,0 +1,80 @@
+{
+  "issue": "PLAN-77",
+  "titulo": "Backend: las observaciones del operador se ven con códigos HTML en Supervisión («tr&aacute;nsito»)",
+  "slug": "backend-las-observaciones-del-operador",
+  "rama": "PLAN-77-backend-las-observaciones-del-operador",
+  "alcance": [
+    "backend",
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-27T15:24:23.381Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-27T15:24:45.073Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-27T15:25:15.745Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-27T15:55:43.833Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-27T15:56:52.832Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-27T15:58:46.451Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-27T15:58:46.507Z"
+    }
+  },
+  "commits": {
+    "backend": "3664cd0",
+    "backoffice": "fae34df"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backend",
+      "motor": "anfitriona",
+      "motivo": "motor externo no disponible en entorno local",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backend-1.json",
+      "sha": "3664cd05ed7e5321bca6c8ff2858054948c771d3",
+      "ts": "2026-09-27T15:36:45.197Z"
+    },
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "motor externo no disponible en entorno local",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-1.json",
+      "sha": "fae34df05a7b6b2a0e7b716dab808b6801f343c7",
+      "ts": "2026-09-27T15:56:40.424Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": "En revisión",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.7 Flash",
+    "ts": "2026-09-27T15:24:01.149Z",
+    "fin": "2026-09-27T15:58:46.451Z"
+  }
+}

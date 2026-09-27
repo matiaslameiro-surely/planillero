@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "Se implementó el helper escapeHtml y se aplicó en supervision-map y route-map para escapar valores dinámicos interpolados en popups de Leaflet. Se agregaron tests unitarios que verifican la protección contra inyecciones de HTML.",
+  "findings": [],
+  "next_steps": []
+}

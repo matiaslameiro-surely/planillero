@@ -1,0 +1,6 @@
+{
+  "verdict": "approve",
+  "summary": "Se eliminó el escape HTML redundante en SupervisionService y se validó con un test de integración que las observaciones con acentos, comillas y etiquetas HTML se persisten y devuelven en texto plano sin alterar.",
+  "findings": [],
+  "next_steps": []
+}

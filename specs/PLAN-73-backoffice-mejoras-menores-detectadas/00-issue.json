@@ -1,0 +1,29 @@
+{
+  "id": "10172",
+  "key": "PLAN-73",
+  "summary": "Backoffice: mejoras menores detectadas en la prueba del 27/09",
+  "browse_url": "https://surely-sa.atlassian.net/browse/PLAN-73",
+  "description": "Detectadas el 27/09 en las pruebas de teclado, tamaños de pantalla y resiliencia del backoffice. Ninguna rompe funcionalidad.\n\n**Alcance:** backoffice.\n\n## Mejoras\n\n1. **Mensaje técnico en el login con el backend caído.** Muestra «No se pudo completar la operación (502).». Cambiarlo por un mensaje para personas, por ejemplo «No se puede conectar con el servidor. Probá de nuevo en unos minutos.».\n1. **Enter no verifica en Auditoría.** En «Auditar Integridad de Visita», apretar Enter en el campo «ID o código de visita» no hace nada; hay que hacer clic en el botón. Que Enter también verifique.\n1. **Tablas que desbordan en celular.** A 390 px de ancho, las tablas de Planificación y de Auditoría se salen de la pantalla hacia los costados (292 px y 132 px). Que tengan su propio desplazamiento horizontal. En notebook (1280) y tablet (1024 y 768) se ven bien.\n\n## Criterios de aceptación\n\n- El login sin backend muestra un mensaje sin códigos técnicos.\n- Enter en el campo de verificación de Auditoría verifica igual que el botón.\n- A 390 px, Planificación y Auditoría no generan desplazamiento horizontal de la página.\n- Tests donde aplique y gates del backoffice en verde.",
+  "status": {
+    "name": "En curso",
+    "category": "En curso",
+    "color": "yellow"
+  },
+  "issue_type": {
+    "name": "Tarea"
+  },
+  "priority": {
+    "name": "Low"
+  },
+  "assignee": {
+    "account_id": "61d33c409ee70a0068541939",
+    "display_name": "Juan Ignacio Urrutia",
+    "email": "juan.urrutia@surely-sa.com.ar"
+  },
+  "reporter": {
+    "account_id": "712020:3be96757-16a9-4a18-9fec-e730ba9c71b7",
+    "display_name": "Federico Morón"
+  },
+  "created": "2026-09-27 10:10:22 Hora estándar de Argentina",
+  "updated": "2026-09-27 12:41:13 Hora estándar de Argentina"
+}
