@@ -16,9 +16,8 @@
 | **Repositorio GitHub (Frontend Móvil)** | [https://github.com/matiaslameiro-surely/planillero-frontend](https://github.com/matiaslameiro-surely/planillero-frontend) | App móvil React Native + Expo (offline-first). |
 | **Repositorio GitHub (Backoffice Web)** | [https://github.com/matiaslameiro-surely/planillero-backoffice](https://github.com/matiaslameiro-surely/planillero-backoffice) | Portal de supervisión y planificación en Angular 22. |
 | **Aplicación Web en Producción** | [https://planillero.ferchamorro.cloud](https://planillero.ferchamorro.cloud) | Desplegada en Hostinger VPS bajo Docker y proxy inverso Traefik con SSL automático ([PLAN-36](file:///c:/planillero/specs)). |
-| **Credenciales de Demostración** | *Usuario:* `supervisor.demo` / `admin.demo` / `operador.demo`<br>*Contraseña:* `Demo1234!` | Usuarios precargados automáticamente mediante migraciones Flyway para evaluación docente. |
+| **Credenciales de Demostración** | *Usuario / Contraseña:*<br>• `operador.demo` / `Operador123!` (Operador de campo)<br>• `supervisor.demo` / `Supervisor123!` (Supervisor)<br>• `admin.demo` / `Admin123!` (Administrador) | Usuarios precargados automáticamente mediante migraciones Flyway para evaluación docente. |
 | **Instalador APK Móvil (Android)** | Descarga directa / Build de producción en distribución | Generado con `scripts/build-apk.sh` apuntando al backend en producción. |
-| **Video de Demostración (PLAN-32)** | *No incluido en esta entrega* | Diferido para instancia complementaria por priorización de alcance acordada con el equipo. |
 
 ---
 
