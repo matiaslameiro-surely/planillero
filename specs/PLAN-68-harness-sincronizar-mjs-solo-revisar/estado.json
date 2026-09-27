@@ -6,7 +6,7 @@
   "alcance": [
     "harness"
   ],
-  "fase": "cerrar",
+  "fase": "cerrada",
   "fases": {
     "preparacion": {
       "estado": "ok",
@@ -30,10 +30,12 @@
       "ts": "2026-09-27T17:05:55.026Z"
     },
     "cerrar": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-27T17:06:32.692Z"
     },
     "cerrada": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-27T17:06:32.744Z"
     }
   },
   "commits": {
@@ -76,13 +78,13 @@
   ],
   "pr": {},
   "jira": {
-    "transicionadoA": "En curso",
+    "transicionadoA": "En revisión",
     "creadoPorHarness": false
   },
   "ejecucion": {
     "herramienta": "Claude Code",
     "modelo": "claude-opus-5-5",
     "ts": "2026-09-27T16:36:36.038Z",
-    "fin": null
+    "fin": "2026-09-27T17:06:32.693Z"
   }
 }
