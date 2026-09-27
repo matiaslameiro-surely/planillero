@@ -1,9 +1,59 @@
-# INFORME FINAL DE PROYECTO
-## Inteligencia Artificial Aplicada a Organizaciones
-### Universidad Tecnológica Nacional · Facultad Regional Buenos Aires
-**Curso de Inteligencia Artificial para Programadores — Trabajo de Fin de Ciclo**
+<div class="portada-academica">
+  <div class="portada-membrete">
+    <div class="institucion-header">UNIVERSIDAD TECNOLÓGICA NACIONAL</div>
+    <div class="facultad-header">FACULTAD REGIONAL BUENOS AIRES</div>
+    <div class="catedra-header">Curso de Inteligencia Artificial para Programadores</div>
+    <div class="sub-header">Trabajo de Fin de Ciclo — Evaluación Práctica Integradora</div>
+    <div class="divisor-institucional"></div>
+  </div>
 
----
+  <div class="portada-cuerpo">
+    <div class="proyecto-materia">INTELIGENCIA ARTIFICIAL APLICADA A ORGANIZACIONES</div>
+    <h1 class="proyecto-titulo">PLANILLERO</h1>
+    <div class="proyecto-subtitulo">Plataforma Integral de Digitalización, Verificación Probatoria y Supervisión de Personas en Territorio</div>
+    <div class="proyecto-resumen">
+      Solución integral de supervisión y control territorial con arquitectura de monolito modular, capacidad 100% offline-first con SQLite y outbox móvil, backoffice de gestión operativa y cadena de custodia forense append-only con firmas criptográficas SHA-256. Desarrollada bajo el protocolo SDD con co-work agéntico multi-modelo.
+    </div>
+  </div>
+
+  <div class="portada-ficha">
+    <table class="tabla-ficha">
+      <thead>
+        <tr>
+          <th colspan="2">FICHA TÉCNICA Y ACADÉMICA DEL PROYECTO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="width: 32%; font-weight: bold; background: #f8fafc;">Integrantes del Equipo:</td>
+          <td>
+            <strong>• Federico Moron</strong><br>
+            <strong>• José Fernando Chamorro Goncalves</strong><br>
+            <strong>• Juan Ignacio Urrutia</strong><br>
+            <strong>• Matías Lameiro</strong>
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; background: #f8fafc;">Metodología y Co-Work:</td>
+          <td>Desarrollo Guiado por Especificación (SDD) · Orquestación Agéntica Multi-Modelo (Claude Code, Antigravity, Opencode, Codex) con revisión cruzada de código.</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; background: #f8fafc;">Stack Tecnológico:</td>
+          <td>Spring Boot 4 (Java 21) · PostgreSQL 16 · React Native / Expo · Angular 22 · Docker &amp; Traefik</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; background: #f8fafc;">Repositorio Matriz:</td>
+          <td><code>https://github.com/matiaslameiro-surely/planillero</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="portada-pie">
+    <div>Ciudad Autónoma de Buenos Aires · República Argentina</div>
+    <div class="fecha-pie">Ciclo Lectivo 2026 — Septiembre de 2026</div>
+  </div>
+</div>
 
 ## TABLA DE LINKS DE ACCESO DIRECTO (Obligatoria)
 

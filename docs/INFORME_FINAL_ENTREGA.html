@@ -20,6 +20,155 @@
       margin: 0;
       padding: 0;
     }
+    /* Estilos de Portada Universitaria Formal (Página 1) */
+    .portada-academica {
+      box-sizing: border-box;
+      height: 254mm;
+      max-height: 254mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 2.5px solid #1e3a8a;
+      border-radius: 6px;
+      padding: 12mm 12mm 10mm 12mm;
+      background: #ffffff;
+      position: relative;
+      page-break-after: always;
+      break-after: page;
+      text-align: center;
+    }
+    .portada-academica::before {
+      content: "";
+      position: absolute;
+      top: 3mm;
+      left: 3mm;
+      right: 3mm;
+      bottom: 3mm;
+      border: 1px solid #93c5fd;
+      border-radius: 4px;
+      pointer-events: none;
+    }
+    .portada-membrete {
+      margin-bottom: 2mm;
+    }
+    .institucion-header {
+      font-size: 13.5pt;
+      font-weight: 800;
+      color: #1e3a8a;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+    .facultad-header {
+      font-size: 10.5pt;
+      font-weight: 600;
+      color: #334155;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
+    .catedra-header {
+      font-size: 9.5pt;
+      font-weight: 600;
+      color: #2563eb;
+      margin-top: 4px;
+    }
+    .sub-header {
+      font-size: 8.5pt;
+      color: #64748b;
+      font-style: italic;
+      margin-top: 2px;
+    }
+    .divisor-institucional {
+      width: 60%;
+      height: 1.5px;
+      background: linear-gradient(to right, transparent, #2563eb, transparent);
+      margin: 6px auto 0 auto;
+    }
+    .portada-cuerpo {
+      margin: 3mm 0;
+    }
+    .proyecto-materia {
+      font-size: 8.5pt;
+      font-weight: 700;
+      color: #2563eb;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .proyecto-titulo {
+      font-size: 28pt !important;
+      font-weight: 900 !important;
+      color: #0f172a !important;
+      letter-spacing: 4px;
+      margin: 2px 0 5px 0 !important;
+      border-bottom: none !important;
+      padding-bottom: 0 !important;
+    }
+    .proyecto-subtitulo {
+      font-size: 10.5pt;
+      font-weight: 600;
+      color: #1e40af;
+      line-height: 1.35;
+      max-width: 92%;
+      margin: 0 auto 6px auto;
+    }
+    .proyecto-resumen {
+      font-size: 8pt;
+      color: #475569;
+      line-height: 1.4;
+      max-width: 94%;
+      margin: 0 auto;
+      background: #f8fafc;
+      border-left: 3px solid #2563eb;
+      padding: 5pt 8pt;
+      border-radius: 0 4px 4px 0;
+      text-align: justify;
+    }
+    .portada-ficha {
+      margin: 3mm 0;
+    }
+    .tabla-ficha {
+      width: 100% !important;
+      border-collapse: collapse !important;
+      font-size: 8pt !important;
+      margin: 0 !important;
+      background: #ffffff;
+      text-align: left;
+    }
+    .tabla-ficha th {
+      background: #1e3a8a !important;
+      color: #ffffff !important;
+      font-size: 8pt !important;
+      letter-spacing: 1px;
+      padding: 4pt 6pt !important;
+      text-align: center !important;
+      text-transform: uppercase;
+    }
+    .tabla-ficha td {
+      border: 1px solid #cbd5e1 !important;
+      padding: 4pt 6pt !important;
+      vertical-align: middle !important;
+      line-height: 1.3;
+    }
+    .portada-pie {
+      border-top: 1px solid #cbd5e1;
+      padding-top: 3mm;
+      font-size: 8pt;
+      color: #64748b;
+    }
+    .portada-pie .fecha-pie {
+      font-weight: 600;
+      color: #1e293b;
+      margin-top: 2px;
+    }
+    .salto-pagina {
+      page-break-after: always;
+      break-after: page;
+      height: 0;
+      margin: 0;
+      padding: 0;
+    }
     h1 {
       font-size: 19pt;
       color: #0f172a;
@@ -156,12 +305,56 @@
   </style>
 </head>
 <body>
-<h1>INFORME FINAL DE PROYECTO</h1>
-<h2>Inteligencia Artificial Aplicada a Organizaciones</h2>
-<h3>Universidad Tecnológica Nacional · Facultad Regional Buenos Aires</h3>
-<p><strong>Curso de Inteligencia Artificial para Programadores — Trabajo de Fin de Ciclo</strong></p>
-<hr>
-<h2>TABLA DE LINKS DE ACCESO DIRECTO (Obligatoria)</h2>
+<div class="portada-academica">
+  <div class="portada-membrete">
+    <div class="institucion-header">UNIVERSIDAD TECNOLÓGICA NACIONAL</div>
+    <div class="facultad-header">FACULTAD REGIONAL BUENOS AIRES</div>
+    <div class="catedra-header">Curso de Inteligencia Artificial para Programadores</div>
+    <div class="sub-header">Trabajo de Fin de Ciclo — Evaluación Práctica Integradora</div>
+    <div class="divisor-institucional"></div>
+  </div>  <div class="portada-cuerpo">
+    <div class="proyecto-materia">INTELIGENCIA ARTIFICIAL APLICADA A ORGANIZACIONES</div>
+    <h1 class="proyecto-titulo">PLANILLERO</h1>
+    <div class="proyecto-subtitulo">Plataforma Integral de Digitalización, Verificación Probatoria y Supervisión de Personas en Territorio</div>
+    <div class="proyecto-resumen">
+      Solución integral de supervisión y control territorial con arquitectura de monolito modular, capacidad 100% offline-first con SQLite y outbox móvil, backoffice de gestión operativa y cadena de custodia forense append-only con firmas criptográficas SHA-256. Desarrollada bajo el protocolo SDD con co-work agéntico multi-modelo.
+    </div>
+  </div>  <div class="portada-ficha">
+    <table class="tabla-ficha">
+      <thead>
+        <tr>
+          <th colspan="2">FICHA TÉCNICA Y ACADÉMICA DEL PROYECTO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="width: 32%; font-weight: bold; background: #f8fafc;">Integrantes del Equipo:</td>
+          <td>
+            <strong>• Federico Moron</strong><br>
+            <strong>• José Fernando Chamorro Goncalves</strong><br>
+            <strong>• Juan Ignacio Urrutia</strong><br>
+            <strong>• Matías Lameiro</strong>
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; background: #f8fafc;">Metodología y Co-Work:</td>
+          <td>Desarrollo Guiado por Especificación (SDD) · Orquestación Agéntica Multi-Modelo (Claude Code, Antigravity, Opencode, Codex) con revisión cruzada de código.</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; background: #f8fafc;">Stack Tecnológico:</td>
+          <td>Spring Boot 4 (Java 21) · PostgreSQL 16 · React Native / Expo · Angular 22 · Docker &amp; Traefik</td>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; background: #f8fafc;">Repositorio Matriz:</td>
+          <td><code>https://github.com/matiaslameiro-surely/planillero</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>  <div class="portada-pie">
+    <div>Ciudad Autónoma de Buenos Aires · República Argentina</div>
+    <div class="fecha-pie">Ciclo Lectivo 2026 — Septiembre de 2026</div>
+  </div>
+</div><h2>TABLA DE LINKS DE ACCESO DIRECTO (Obligatoria)</h2>
 <blockquote>
 <p><em>El informe actúa como índice que guía hacia el trabajo publicado y verificable en producción y en el repositorio.</em></p>
 </blockquote>

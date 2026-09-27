@@ -69,6 +69,155 @@ const fullHtml = `<!DOCTYPE html>
       margin: 0;
       padding: 0;
     }
+    /* Estilos de Portada Universitaria Formal (Página 1) */
+    .portada-academica {
+      box-sizing: border-box;
+      height: 254mm;
+      max-height: 254mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 2.5px solid #1e3a8a;
+      border-radius: 6px;
+      padding: 12mm 12mm 10mm 12mm;
+      background: #ffffff;
+      position: relative;
+      page-break-after: always;
+      break-after: page;
+      text-align: center;
+    }
+    .portada-academica::before {
+      content: "";
+      position: absolute;
+      top: 3mm;
+      left: 3mm;
+      right: 3mm;
+      bottom: 3mm;
+      border: 1px solid #93c5fd;
+      border-radius: 4px;
+      pointer-events: none;
+    }
+    .portada-membrete {
+      margin-bottom: 2mm;
+    }
+    .institucion-header {
+      font-size: 13.5pt;
+      font-weight: 800;
+      color: #1e3a8a;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+    .facultad-header {
+      font-size: 10.5pt;
+      font-weight: 600;
+      color: #334155;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
+    .catedra-header {
+      font-size: 9.5pt;
+      font-weight: 600;
+      color: #2563eb;
+      margin-top: 4px;
+    }
+    .sub-header {
+      font-size: 8.5pt;
+      color: #64748b;
+      font-style: italic;
+      margin-top: 2px;
+    }
+    .divisor-institucional {
+      width: 60%;
+      height: 1.5px;
+      background: linear-gradient(to right, transparent, #2563eb, transparent);
+      margin: 6px auto 0 auto;
+    }
+    .portada-cuerpo {
+      margin: 3mm 0;
+    }
+    .proyecto-materia {
+      font-size: 8.5pt;
+      font-weight: 700;
+      color: #2563eb;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .proyecto-titulo {
+      font-size: 28pt !important;
+      font-weight: 900 !important;
+      color: #0f172a !important;
+      letter-spacing: 4px;
+      margin: 2px 0 5px 0 !important;
+      border-bottom: none !important;
+      padding-bottom: 0 !important;
+    }
+    .proyecto-subtitulo {
+      font-size: 10.5pt;
+      font-weight: 600;
+      color: #1e40af;
+      line-height: 1.35;
+      max-width: 92%;
+      margin: 0 auto 6px auto;
+    }
+    .proyecto-resumen {
+      font-size: 8pt;
+      color: #475569;
+      line-height: 1.4;
+      max-width: 94%;
+      margin: 0 auto;
+      background: #f8fafc;
+      border-left: 3px solid #2563eb;
+      padding: 5pt 8pt;
+      border-radius: 0 4px 4px 0;
+      text-align: justify;
+    }
+    .portada-ficha {
+      margin: 3mm 0;
+    }
+    .tabla-ficha {
+      width: 100% !important;
+      border-collapse: collapse !important;
+      font-size: 8pt !important;
+      margin: 0 !important;
+      background: #ffffff;
+      text-align: left;
+    }
+    .tabla-ficha th {
+      background: #1e3a8a !important;
+      color: #ffffff !important;
+      font-size: 8pt !important;
+      letter-spacing: 1px;
+      padding: 4pt 6pt !important;
+      text-align: center !important;
+      text-transform: uppercase;
+    }
+    .tabla-ficha td {
+      border: 1px solid #cbd5e1 !important;
+      padding: 4pt 6pt !important;
+      vertical-align: middle !important;
+      line-height: 1.3;
+    }
+    .portada-pie {
+      border-top: 1px solid #cbd5e1;
+      padding-top: 3mm;
+      font-size: 8pt;
+      color: #64748b;
+    }
+    .portada-pie .fecha-pie {
+      font-weight: 600;
+      color: #1e293b;
+      margin-top: 2px;
+    }
+    .salto-pagina {
+      page-break-after: always;
+      break-after: page;
+      height: 0;
+      margin: 0;
+      padding: 0;
+    }
     h1 {
       font-size: 19pt;
       color: #0f172a;
