@@ -1,0 +1,68 @@
+{
+  "issue": "PLAN-66",
+  "titulo": "Móvil: la versión web de Expo no compila por el .wasm de expo-sqlite",
+  "slug": "movil-la-version-web-de-expo-no-compila",
+  "rama": "PLAN-66-movil-la-version-web-de-expo-no-compila",
+  "alcance": [
+    "frontend"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-27T16:43:54.407Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-27T16:44:22.991Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-27T16:50:33.179Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-27T16:52:58.348Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-27T16:54:28.736Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-27T16:56:46.086Z"
+    },
+    "cerrada": {
+      "estado": "pendiente"
+    }
+  },
+  "commits": {
+    "frontend": "ba943f55b817d332ff7c0ed3029bf2bdbd44a00c"
+  },
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "frontend",
+      "motor": "anfitriona",
+      "motivo": null,
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-frontend-1.json",
+      "sha": "ba943f55b817d332ff7c0ed3029bf2bdbd44a00c",
+      "ts": "2026-09-27T16:54:06.209Z"
+    }
+  ],
+  "pr": {
+    "frontend": "https://github.com/matiaslameiro-surely/planillero-frontend/pull/26"
+  },
+  "jira": {
+    "transicionadoA": "En revisión",
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.8 Flash",
+    "ts": "2026-09-27T16:43:29.450Z",
+    "fin": "2026-09-27T16:56:46.086Z"
+  }
+}

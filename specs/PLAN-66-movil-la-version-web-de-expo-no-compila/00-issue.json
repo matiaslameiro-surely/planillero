@@ -1,0 +1,13 @@
+{
+  "key": "PLAN-66",
+  "summary": "Móvil: la versión web de Expo no compila por el .wasm de expo-sqlite",
+  "issuetype": "Tarea",
+  "priority": "Low",
+  "status": "Por hacer",
+  "created": "2026-09-25T16:15:19.434-0300",
+  "updated": "2026-09-27T10:57:53.904-0300",
+  "assignee": "Fernando Chamorro Goncalves",
+  "reporter": "Federico Morón",
+  "project": "PLAN",
+  "description": "Detectado el 25/09 al querer probar PLAN-56 en Chrome. Alcance:\n frontend (configuración del build). Qué pasa npm run web\n (\nexpo start --web\n) levanta el servidor pero toda página responde \n500\n. Metro no puede empaquetar el worker web de \nexpo-sqlite\n: Metro error: Unable to resolve module ./wa-sqlite/wa-sqlite.wasm\n  from node_modules/expo-sqlite/web/worker.ts\nAssertionError: Worker chunk not found for: node_modules/expo-sqlite/web/worker.ts Probablemente falta \nwasm\n en \nresolver.assetExts\n de la configuración de Metro (y, según la versión de \nexpo-sqlite\n, los headers COOP/COEP que pide SharedArrayBuffer en web). Por qué importa Sin la versión web no hay forma de ver una pantalla del móvil sin emulador ni APK. Los tests con \nreact-test-renderer\n miran props y estilos, pero no el render real (pasó con PLAN-56). Criterios de aceptación npm run web\n levanta la app y el Login se ve en el navegador. La app nativa (Android) sigue compilando igual. Documentar en el README del frontend cómo probar en web y qué no funciona ahí (por ejemplo, la base cifrada), si aplica. Gates del frontend en verde."
+}
