@@ -178,9 +178,9 @@ A continuación se documentan los tres puntos clave de evidencia exigidos por la
 
 ![Tablero Central de Supervisión en Producción](img/captura-tablero-supervision.png)
 
-* **App Móvil (Agenda del Operador):** Vista principal con la hoja de ruta asignada para el día. Cada tarjeta indica dirección, horario pactado, estado (Pendiente, En curso, Sincronizada) y un indicador visual claro del estado de la conexión (Online / Offline).
+* **App Móvil (Agenda y Hoja de Ruta del Operador en Dispositivo Real):** Vista principal de la aplicación móvil en ejecución sobre dispositivo físico Android. Exhibe el banner de telemetría superior (*Modo conectado*, nivel de batería 81%, estado del sensor GPS y visitas pendientes), botón de retorno y cierre de sesión, y las tarjetas de la hoja de ruta con georreferenciación de alta precisión (latitud, longitud, precisión en metros), estado operativo (*En curso*, *Asignada*) y accesos directos de acción ergonómicos (*Evidencias / Fotos y Firma*, *Completar formulario*, *Finalizar visita* e *Iniciar visita*).
 
-> *(Insertar aquí imagen: `captura-01-home-movil.png` con la grilla de ruta del operador en la app)*
+![Hoja de Ruta y Visitas del Operador en App Móvil](img/captura-movil-hoja-de-ruta.png)
 
 #### 2. Flujo Principal de Uso (Desde inicio hasta obtención de valor)
 El recorrido habitual del operador en campo:
