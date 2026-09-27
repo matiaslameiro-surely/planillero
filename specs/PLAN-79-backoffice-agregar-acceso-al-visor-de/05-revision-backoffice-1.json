@@ -1,0 +1,19 @@
+{
+  "verdict": "approve",
+  "summary": "Se revisó el diff del backoffice contra la spec de PLAN-79: el expediente ofrece «Ver evidencias» hacia /evidence/<id> sólo cuando la visita cargó, y el visor vuelve al expediente para supervisores y al Panel para administrador y operador. Cumple los criterios 1 a 7, con tests de las dos pantallas y la prueba en el navegador con V-1001, V-1002 y V-1004.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "El supervisor vuelve al expediente aunque haya llegado al visor por otro camino",
+      "body": "Si un supervisor abre el visor escribiendo la URL (o desde un link futuro en Supervisión), «Volver al expediente» lo lleva al expediente y no a donde estaba. Hoy el único camino al visor es el expediente, así que coincide.",
+      "file": "src/app/pages/evidence-viewer/evidence-viewer.ts",
+      "line_start": 74,
+      "line_end": 80,
+      "confidence": 0.6,
+      "recommendation": "Si se agregan links al visor desde otras pantallas, pasar el origen (por ejemplo con history.back o un query param)."
+    }
+  ],
+  "next_steps": [
+    "Probado en local: expediente → «Ver evidencias» → visor → «← Volver al expediente» con V-1001 (3 imágenes, sello «Íntegro»), V-1002 (2 imágenes, pendiente de sellado) y V-1004 (sin evidencias); expediente sin acceso sin el botón; admin en el visor con «← Volver al Panel»."
+  ]
+}

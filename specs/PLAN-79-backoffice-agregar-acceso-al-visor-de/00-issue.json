@@ -1,0 +1,11 @@
+{
+  "clave": "PLAN-79",
+  "titulo": "Backoffice: agregar acceso al visor de evidencias desde el expediente",
+  "tipo": "Tarea",
+  "prioridad": "Medium",
+  "estado": "En curso",
+  "asignado": "Federico Morón",
+  "sprint": "Sprint 7 - Pruebas Finales",
+  "url": "https://surely-sa.atlassian.net/browse/PLAN-79",
+  "descripcion": "El visor de evidencias (/evidence/:visitId) no es alcanzable desde ninguna pantalla. Criterios: el expediente muestra «Ver evidencias» que lleva a /evidence/<id>; el visor permite volver al expediente de esa visita; funciona con manifiesto sellado, evidencias sin sellar y sin evidencias; si no hay acceso, el expediente muestra el aviso de PLAN-63 y no aparece el botón; test de presencia y destino del link. Depende de PLAN-80 (mergeada)."
+}

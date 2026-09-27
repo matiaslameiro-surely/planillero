@@ -1,0 +1,67 @@
+{
+  "issue": "PLAN-79",
+  "titulo": "Backoffice: agregar acceso al visor de evidencias desde el expediente",
+  "slug": "backoffice-agregar-acceso-al-visor-de",
+  "rama": "PLAN-79-backoffice-agregar-acceso-al-visor-de",
+  "alcance": [
+    "backoffice"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-27T15:00:35.236Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-27T15:00:35.303Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-27T15:01:10.407Z",
+      "nota": "Plan aprobado por el usuario el 27/09"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-27T15:04:11.466Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-27T15:04:22.011Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-27T15:04:58.326Z",
+      "nota": "PR backoffice #37 abierto; Jira En revisión"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-27T15:04:58.484Z"
+    }
+  },
+  "commits": {},
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "backoffice",
+      "motor": "anfitriona",
+      "motivo": "sin_motores_externos",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-backoffice-1.json",
+      "sha": "b83694bb8c984779fb4a2f80ac29ab4c0351b7bc",
+      "ts": "2026-09-27T15:04:21.928Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": "Claude Code",
+    "modelo": "Claude Opus 5.5",
+    "ts": "2026-09-27T14:59:57.320Z",
+    "fin": "2026-09-27T15:04:58.328Z"
+  }
+}
