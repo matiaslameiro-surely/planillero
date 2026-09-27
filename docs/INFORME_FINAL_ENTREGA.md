@@ -192,12 +192,21 @@ El recorrido habitual del operador en campo:
 > *(Insertar aquí imagen: `captura-02-flujo-visita-formulario.png` mostrando el formulario dinámico con captura fotográfica y firma)*
 
 #### 3. Cadena de Custodia, Evidencias Criptográficas e Integridad Pericial
-Muestra el módulo pericial de custodia de evidencias en ejecución sobre el dispositivo móvil:
-* **Captura probatoria:** Módulos dedicados para la toma de fotografías de ambiente y lienzo táctil para firma ológrafa de las partes entrevistadas.
-* **Custodia en Servidor y Hasheo:** Visualización de los archivos custodiados (`PHOTO`, `SIGNATURE`) con su correspondiente digest criptográfico **SHA-256** generado en el dispositivo y validado por el backend.
-* **Manifiesto Criptográfico con HMAC:** Sellado de la visita mediante HMAC (`Estado: VERIFIED`) y auditoría de integridad en tiempo real (*✓ INTEGRIDAD VERIFICADA - Manifiesto y evidencias periciales verificadas íntegramente*), garantizando que ningún dato o archivo fue alterado tras su recolección.
+El sistema garantiza la inalterabilidad de la prueba tanto en el punto de captura como en la auditoría central:
 
-![Custodia de Evidencias y Verificación Criptográfica](img/captura-custodia-evidencias.png)
+* **Punto de Captura (App Móvil en Territorio):**
+  * Módulos dedicados para la toma de fotografías de ambiente y lienzo táctil para firma ológrafa de las partes entrevistadas.
+  * Visualización de las evidencias custodiadas (`PHOTO`, `SIGNATURE`) con su correspondiente digest criptográfico **SHA-256** generado localmente en el dispositivo.
+  * Sellado de la visita mediante HMAC (`Estado: VERIFIED`) y auditoría de integridad en tiempo real (*✓ INTEGRIDAD VERIFICADA - Manifiesto y evidencias periciales verificadas íntegramente*).
+
+![Custodia de Evidencias en App Móvil](img/captura-custodia-evidencias.png)
+
+* **Supervisión y Peritaje Forense (Backoffice Web en Producción):**
+  * Desplegado en `https://planillero.ferchamorro.cloud/evidence/{id}` para la visita auditada (`V-1001`).
+  * Muestra el estado pericial consolidado con insignia de **`✓ Íntegro`** y banner de verificación (*EVIDENCIA SELLADA Y VERIFICADA*).
+  * Inspección visual de las evidencias custodiadas (fotografía pericial y trazo de firma ológrafa digitalizada) vinculadas a sus respectivos hashes SHA-256 inmutables (`c19b6e5...` y `2b244b6...`), permitiendo al supervisor auditar en vivo contra los archivos del almacenamiento.
+
+![Supervisión de Evidencias Digitales en Backoffice Web](img/captura-backoffice-visor-evidencias.png)
 
 ---
 
