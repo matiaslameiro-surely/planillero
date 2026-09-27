@@ -1,0 +1,50 @@
+{
+  "issue": "PLAN-37",
+  "titulo": "Entrega final informe PDF y tabla de links",
+  "slug": "entrega-final-informe-pdf-y-tabla-de",
+  "rama": "PLAN-37-entrega-final-informe-pdf-y-tabla-de",
+  "alcance": [
+    "harness"
+  ],
+  "fase": "implementar",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-27T20:48:28.770Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-27T20:48:50.301Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-27T20:49:21.494Z"
+    },
+    "implementar": {
+      "estado": "en_curso",
+      "ts": "2026-09-27T20:49:24.954Z"
+    },
+    "verificar": {
+      "estado": "pendiente"
+    },
+    "cerrar": {
+      "estado": "pendiente"
+    },
+    "cerrada": {
+      "estado": "pendiente"
+    }
+  },
+  "commits": {},
+  "revisiones": [],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.8 Flash",
+    "ts": "2026-09-27T20:47:43.142Z",
+    "fin": null
+  }
+}
