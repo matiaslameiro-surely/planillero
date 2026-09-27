@@ -93,3 +93,25 @@ con `--solo-revisar --repo backend`, dejándolo en `main...origin/main` y sin la
 
 Sobre el workspace real, el backoffice (en la rama de PLAN-75, ya mergeada) dice ahora «main está 5
 commit(s) detrás de origin/main», que es lo que el pull traería; antes decía 3, medido contra HEAD.
+
+## Después de atender la revisión 3
+
+Dos `low`: el JSON de `--solo-revisar` mostraba sólo los contadores medidos desde HEAD, y `contar` podía
+devolver `NaN` si git mezclaba un warning en la salida (por ejemplo, un tag llamado igual que la rama).
+
+- Los resultados de `--solo-revisar` exponen `baseLocal: { detras, adelante }`, y si no se puede medir
+  la base local el repo sale con `rama_base_no_disponible` en vez de «al día».
+- `contar` devuelve `null` si la salida no es un entero, y la base local se mide con refs completas
+  (`refs/heads/…`, `refs/remotes/origin/…`), que no son ambiguas.
+- `commitsTraidos` de la sincronización real cuenta `antes..despues` en vez de reusar `detras`.
+- Al probar el tag ambiguo apareció que `rev-parse --abbrev-ref HEAD` devuelve `heads/main` en ese caso;
+  la rama actual se toma ahora de `git branch --show-current`.
+
+| Escenario (backend) | Resultado |
+|---|---|
+| Tag local `main` + rama `main` al día, `--solo-revisar` | `main`, `baseLocal {0,0}`, «main está al día con origin/main.» (antes: rama `heads/main`) |
+| Rama de tarea al día, `main` local 2 atrás, `--solo-revisar` | `detras 0` (HEAD), `baseLocal {detras 2}`, «… main está 2 commit(s) detrás …» |
+| La misma situación, **sin** `--solo-revisar` | `actualizado`, `commitsTraidos: 2` (antes habría informado 0, el `detras` de HEAD) |
+| HEAD desacoplado | «Con HEAD desacoplado y sin commits propios: …» |
+
+El backend quedó en `main...origin/main`, sin el tag ni la rama temporal.
