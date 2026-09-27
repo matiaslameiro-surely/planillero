@@ -1,0 +1,27 @@
+{
+  "verdict": "approve",
+  "summary": "El diff cumple los criterios 1 a 5 y respeta la excepción declarada en «Fuera de alcance». Con --solo-revisar, los repos sanos ya no entran en requierenAtencion, ninguna entrada sale undefined, y el detalle mide la base local, que es la que actualiza el pull, con base_divergente y rama_base_no_disponible bien encaminados. Lo que queda son dos observaciones menores de coherencia y robustez, ninguna bloqueante.",
+  "findings": [
+    {
+      "severity": "low",
+      "title": "El JSON de --solo-revisar muestra dos cuentas distintas de «detrás» y commitsTraidos subestima lo que se trae",
+      "body": "Con el backoffice en una rama de tarea sin commits propios, la corrida real de --solo-revisar muestra `detras: 3`, calculado sobre HEAD en `comun`, y a la vez el detalle dice «main está 5 commit(s) detrás de origin/main», calculado sobre la base local. Un agente que lea el campo numérico y no el texto se lleva otra cifra. Además, sin --solo-revisar, la sincronización real hace checkout de main, trae los 5 commits y reporta `commitsTraidos: detras`, o sea 3. El detalle anticipa bien lo que pasaría (5), pero el resultado real informa otra cantidad. Esa línea no cambió en el diff y el cambio sin --solo-revisar está fuera de alcance, pero la incoherencia queda a la vista justo en el caso que este PLAN buscaba anticipar.",
+      "file": ".agents/scripts/sincronizar.mjs",
+      "line_start": 86,
+      "line_end": 161,
+      "confidence": 0.85,
+      "recommendation": "En el resultado de --solo-revisar, exponer también los contadores de la base local, por ejemplo `baseLocal: { detras, adelante }`, o aclarar que `detras`/`adelante` se miden sobre HEAD. En otra tarea, calcular `commitsTraidos` como `rev-list --count antes..despues` en vez de reutilizar `detras`."
+    },
+    {
+      "severity": "low",
+      "title": "estadoDeLaBaseLocal da «al día» si rev-list falla o su salida no es un número",
+      "body": "`contar` devuelve null cuando rev-list falla. Y como `correr` concatena stdout y stderr, cualquier warning que git mande a stderr vuelve la cuenta NaN: pasa por ejemplo con un tag que se llama igual que la rama base, porque `main..origin/main` emite «warning: refname 'main' is ambiguous.». En `estadoDeLaBaseLocal`, un null o un NaN hace que `detras > 0` y `adelante > 0` den falso, así que `detalleSoloRevisar` dice «main está al día con origin/main» sin haber podido medirlo. Es justo lo que el criterio 5 quiere evitar («en vez de afirmar que está al día»). El chequeo de `rama_base_no_disponible` sólo mira `=== null` sobre los contadores de HEAD, así que tampoco atrapa un NaN. Es un escenario raro.",
+      "file": ".agents/scripts/sincronizar.mjs",
+      "line_start": 29,
+      "line_end": 44,
+      "confidence": 0.5,
+      "recommendation": "En `contar`, parsear sólo la primera línea de la salida y devolver null si el resultado no es un entero finito, por ejemplo con `Number.isInteger`. En `estadoDeLaBaseLocal`, si algún contador queda null, devolver un motivo explícito (rama_base_no_disponible o similar) en vez de caer en «al día»."
+    }
+  ],
+  "next_steps": []
+}

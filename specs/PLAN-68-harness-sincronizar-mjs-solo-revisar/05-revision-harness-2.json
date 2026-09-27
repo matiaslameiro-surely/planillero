@@ -1,0 +1,37 @@
+{
+  "verdict": "approve",
+  "summary": "Los cuatro criterios de aceptación se cumplen: los repos sanos ya no entran en `requierenAtencion`, desapareció el `undefined` y el `detalle` de --solo-revisar dice qué haría la sincronización real. Lo comprobé corriendo --solo-revisar sobre el workspace real. Quedan dos observaciones de severidad medium sobre qué tan bien --solo-revisar anticipa la sincronización real, y ninguna bloquea.",
+  "findings": [
+    {
+      "severity": "medium",
+      "title": "En una rama de tarea, el detalle se calcula contra HEAD, pero la sincronización real hace pull sobre la rama base local",
+      "body": "En el caso `ramaActual !== base` sin commits propios, `detras` sale de `HEAD..origin/<base>`. La sincronización real, en cambio, hace `checkout <base>` y después `pull --ff-only`, así que lo que importa es cómo está la rama base local respecto de origin, no HEAD. El workspace actual ya lo muestra: backoffice está en PLAN-75 y el detalle dice «Está 3 commit(s) detrás de origin/main. Sin --solo-revisar se actualizaría», pero la `main` local está 5 detrás de origin/main (`git rev-list --count main..origin/main` = 5). El caso peor: si la `main` local tiene commits sin publicar que divergen de origin/main y la rama de tarea está al día con origin/main, el detalle dice «volvería a main. Al día con origin/main.», pero la sincronización real termina en `pull_no_fast_forward` con ok:false. Eso contradice lo que promete el comentario de la línea 35: «si dice \"se actualizaría\", el pull --ff-only tiene que poder hacerlo».",
+      "file": ".agents/scripts/sincronizar.mjs",
+      "line_start": 36,
+      "line_end": 56,
+      "confidence": 0.8,
+      "recommendation": "Cuando `ramaActual !== base`, calcular detrás/adelante sobre la rama base local (`<base>..origin/<base>` y `origin/<base>..<base>`, si existe) para armar la parte del detalle sobre el pull. Reusar la misma rama de mensajes que hoy se usa para la base con commits locales."
+    },
+    {
+      "severity": "medium",
+      "title": "Con --solo-revisar, un fallo seguro de la sincronización real se informa como ok:true y no entra en requierenAtencion",
+      "body": "Si el repo está en la rama base con commits locales y además detrás de origin (adelante>0 y detras>0), sin --solo-revisar el pull --ff-only falla, el resultado es ok:false y el script sale con código 1. Con --solo-revisar, el mismo repo queda en ok:true con motivo `solo_revisar`, no entra en `requierenAtencion` y el script sale con 0. La única señal es el texto «la sincronización fallaría» dentro de `repos[].detalle`. Antes del cambio este repo sí aparecía en `requierenAtencion`, aunque con el texto `undefined`. Quien use --solo-revisar para decidir si puede seguir, y según el protocolo mire sólo `requierenAtencion`/`ok`, sigue adelante aunque la sincronización real se va a frenar ahí. El mismo detalle ya anticipa ese fallo, pero el resultado no lo refleja.",
+      "file": ".agents/scripts/sincronizar.mjs",
+      "line_start": 105,
+      "line_end": 110,
+      "confidence": 0.7,
+      "recommendation": "Con --solo-revisar, cuando la base tiene commits locales y está detrás, devolver un motivo propio (por ejemplo `base_divergente`) que esté en `MOTIVOS_QUE_REQUIEREN_ATENCION`, o marcarlo ok:false igual que la sincronización real, para que la señal no dependa de leer el texto del detalle."
+    },
+    {
+      "severity": "low",
+      "title": "La nueva verificación de rama base no disponible también cambia el comportamiento sin --solo-revisar",
+      "body": "El chequeo `detras === null || adelante === null` corre antes que el de repo sucio y aplica también sin --solo-revisar. Antes, un repo con `ramaBase` inexistente en el remoto terminaba en `checkout_fallido` o `pull_no_fast_forward`, a veces después de cambiar de rama. Un repo sucio con esa configuración salía como `working_tree_sucio` (ok:true). Ahora ambos casos dan `rama_base_no_disponible` con ok:false, sin efectos laterales. Es una mejora razonable y más segura, pero toca el comportamiento sin --solo-revisar, que la spec deja fuera de alcance. El mensaje, además, siempre culpa a `ramaBase`, aunque rev-list también falla por otras causas, por ejemplo un repo recién inicializado sin commits (HEAD sin nacer).",
+      "file": ".agents/scripts/sincronizar.mjs",
+      "line_start": 78,
+      "line_end": 86,
+      "confidence": 0.6,
+      "recommendation": "Dejar constancia en la spec o en la verificación de que se cambia a propósito el comportamiento sin --solo-revisar para este caso. Opcionalmente, agregar al detalle la salida de git de rev-list, para no atribuir siempre el fallo a `ramaBase`."
+    }
+  ],
+  "next_steps": []
+}

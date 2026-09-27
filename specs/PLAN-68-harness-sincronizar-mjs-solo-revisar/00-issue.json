@@ -1,0 +1,12 @@
+{
+  "key": "PLAN-68",
+  "summary": "Harness: sincronizar.mjs --solo-revisar marca repos sanos en requierenAtencion",
+  "issuetype": "Tarea",
+  "priority": "Low",
+  "status": "En curso",
+  "assignee": "Matías Lameiro",
+  "reporter": "Matías Lameiro",
+  "sprint": "Sprint 7 - Pruebas Finales",
+  "created": "2026-09-25T22:51:53.103-0300",
+  "description": "Con `node .agents/scripts/sincronizar.mjs --solo-revisar`, todo repo limpio y al día aparece en `requierenAtencion` como `\"<repo>: undefined\"`.\n\nLa causa está en la condición que arma esa lista: filtra los repos con `r.ok && r.motivo && r.accion === 'ninguna'`. En modo `--solo-revisar`, todos los repos quedan con `accion: 'ninguna'` y `motivo: 'solo_revisar'`, así que entran aunque estén bien, y como no tienen `detalle`, el texto sale `undefined`.\n\nVisto al preparar PLAN-57: los cuatro repos estaban en `main`, limpios y al día, y los cuatro aparecieron en `requierenAtencion`.\n\nCriterios de aceptación:\n\n1. Con `--solo-revisar`, un repo limpio y al día no aparece en `requierenAtencion`.\n2. Un repo con cambios sin commitear o en una rama con commits propios sí aparece, con su detalle.\n3. Ninguna entrada de `requierenAtencion` dice `undefined`."
+}
