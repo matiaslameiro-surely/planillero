@@ -6,7 +6,7 @@
   "alcance": [
     "harness"
   ],
-  "fase": "cerrar",
+  "fase": "cerrada",
   "fases": {
     "preparacion": {
       "estado": "ok",
@@ -29,10 +29,12 @@
       "ts": "2026-09-27T20:51:20.585Z"
     },
     "cerrar": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-27T21:47:39.043Z"
     },
     "cerrada": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-27T21:47:39.108Z"
     }
   },
   "commits": {
@@ -60,6 +62,6 @@
     "herramienta": null,
     "modelo": "Gemini 3.8 Flash",
     "ts": "2026-09-27T20:47:43.142Z",
-    "fin": null
+    "fin": "2026-09-27T21:47:39.044Z"
   }
 }
