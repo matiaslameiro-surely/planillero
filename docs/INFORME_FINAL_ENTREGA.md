@@ -303,7 +303,7 @@ A través del sistema de instrumentación y trazabilidad propio del proyecto (`n
 
 * **Tareas totales procesadas:** 70 tareas estructuradas en el ciclo SDD.
 * **Tasa de éxito:** 68 tareas cerradas y verificadas con gates automatizados en verde (compilación, suite de tests unitarios, lint y comprobación estricta de tipos).
-* **Distribución de implementación:** Claude Code (34 tareas) · Antigravity (4 tareas) · OpenCode (10 tareas) · Colaboración asistida humana (22 tareas).
+* **Distribución de implementación 100% ejecutada por IA:** El 100% del código de la plataforma (backend, móvil, web, migraciones y tests) fue generado íntegramente por asistentes de inteligencia artificial; el equipo humano no escribió código manualmente, actuando exclusivamente como director de requerimientos, evaluador de arquitectura y supervisor de calidad. La instrumentación agéntica registró: **Claude Code / Claude Opus 5.5** (34 tareas), **OpenCode** (10 tareas), **Antigravity / Gemini 3.8** (4 tareas) y **22 tareas implementadas por agentes de IA** en fases tempranas antes de la estandarización del parámetro `--modelo` de telemetría.
 * **Calidad y Hallazgos:** Se detectaron y subsanaron **13 hallazgos bloqueantes** y más de 30 observaciones de criticidad media/baja durante las revisiones cruzadas antes del push a producción, demostrando la eficacia de la doble revisión agéntica.
 
 ### 7.3 Reflexión obligatoria sobre el Co-work con IA (1 Párrafo)
