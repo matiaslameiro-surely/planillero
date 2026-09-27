@@ -6,7 +6,7 @@
   "alcance": [
     "harness"
   ],
-  "fase": "verificar",
+  "fase": "cerrar",
   "fases": {
     "preparacion": {
       "estado": "ok",
@@ -26,7 +26,8 @@
       "ts": "2026-09-27T16:54:58.956Z"
     },
     "verificar": {
-      "estado": "pendiente"
+      "estado": "ok",
+      "ts": "2026-09-27T17:05:55.026Z"
     },
     "cerrar": {
       "estado": "pendiente"
@@ -36,7 +37,7 @@
     }
   },
   "commits": {
-    "harness": "d004e32"
+    "harness": "3df6d38"
   },
   "revisiones": [
     {
