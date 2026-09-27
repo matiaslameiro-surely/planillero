@@ -1,0 +1,12 @@
+{
+  "key": "PLAN-81",
+  "summary": "Móvil: corrección en envío de formulario dinámico, Safe Area y estilo de etiquetas",
+  "issuetype": "Tarea",
+  "priority": "Medium",
+  "status": "En curso",
+  "assignee": "Juan Ignacio Urrutia",
+  "reporter": "Juan Ignacio Urrutia",
+  "sprint": "Sprint 7 - Pruebas Finales",
+  "created": "2026-09-27T16:28:35.000-0300",
+  "description": "Qué pasa\n\n1. En la app móvil (frontend/src/app/formulario.tsx), el envío/actualización del formulario dinámico queda bloqueado porque useForm valida su estado interno vacío en lugar de los valores capturados por DynamicForm, impidiendo el envío al backend.\n2. La pantalla carece de contenedor seguro (SafeAreaView) y barra de navegación/volver, lo que provoca que la primera etiqueta quede oculta debajo del notch/barra de estado y el último campo sufra solapamiento al pie.\n3. En los campos obligatorios, toda la etiqueta se renderiza en color rojo (#b91c1c) en lugar de mantener la tipografía estándar y colorear únicamente el asterisco.\n\nAlcance\n\nfrontend\n\nCriterios de aceptación\n\n- [ ] El botón de envío despacha correctamente los valores ingresados a submitForm(visitId, ...) y regresa tras la confirmación.\n- [ ] FormularioScreen incorpora SafeAreaView e incluye botón para volver a la pantalla anterior, asegurando visibilidad completa del primer y último campo.\n- [ ] Las etiquetas de todos los campos (FieldText, FieldNumber, FieldSelect, FieldMultiSelect, FieldBoolean) se muestran en color principal legible (#0f172a), reservando el color rojo únicamente para el indicador asterisco *.\n- [ ] Los tests unitarios cubren el envío, la visibilidad de etiquetas y el estilo accesible."
+}

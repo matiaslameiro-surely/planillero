@@ -1,0 +1,65 @@
+{
+  "issue": "PLAN-81",
+  "titulo": "Móvil: corrección en envío de formulario dinámico, Safe Area y estilo de etiquetas",
+  "slug": "movil-correccion-en-envio-de-formulario",
+  "rama": "PLAN-81-movil-correccion-en-envio-de-formulario",
+  "alcance": [
+    "frontend"
+  ],
+  "fase": "cerrada",
+  "fases": {
+    "preparacion": {
+      "estado": "ok",
+      "ts": "2026-09-27T19:30:09.305Z"
+    },
+    "spec": {
+      "estado": "ok",
+      "ts": "2026-09-27T19:30:44.705Z"
+    },
+    "plan": {
+      "estado": "ok",
+      "ts": "2026-09-27T19:31:15.910Z"
+    },
+    "implementar": {
+      "estado": "ok",
+      "ts": "2026-09-27T19:38:45.563Z"
+    },
+    "verificar": {
+      "estado": "ok",
+      "ts": "2026-09-27T19:42:25.458Z"
+    },
+    "cerrar": {
+      "estado": "ok",
+      "ts": "2026-09-27T19:44:09.904Z"
+    },
+    "cerrada": {
+      "estado": "ok",
+      "ts": "2026-09-27T19:44:09.954Z"
+    }
+  },
+  "commits": {},
+  "revisiones": [
+    {
+      "n": 1,
+      "repo": "frontend",
+      "motor": "anfitriona",
+      "motivo": "anfitriona ejecutado con contexto limpio",
+      "verdict": "approve",
+      "bloqueantes": 0,
+      "archivo": "05-revision-frontend-1.json",
+      "sha": "0f3af79ef09bfe6cca552c568f75cb43b2cb6b3b",
+      "ts": "2026-09-27T19:42:15.966Z"
+    }
+  ],
+  "pr": {},
+  "jira": {
+    "transicionadoA": null,
+    "creadoPorHarness": false
+  },
+  "ejecucion": {
+    "herramienta": null,
+    "modelo": "Gemini 3.7 Flash",
+    "ts": "2026-09-27T19:29:52.821Z",
+    "fin": "2026-09-27T19:44:09.904Z"
+  }
+}
